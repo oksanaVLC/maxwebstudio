@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import weImage from "../../assets/images/we.jpg";
 import { getLocale, useTranslations } from "../../i18n";
 
 const lang = getLocale(Astro.currentLocale);
@@ -17,11 +19,14 @@ const t = useTranslations(lang);
     </div>
 
     <div class="process__feature">
-      <img
-        src="/images/team.jpg"
-        alt={t.process.feature.imageAlt}
-        loading="lazy"
-      />
+<Image
+  src={weImage}
+  alt={t.process.feature.imageAlt}
+  loading="lazy"
+  width={1200}
+  quality={80}
+  format="webp"
+/>
 
       <div class="process__feature-copy">
         <p>{t.process.feature.text}</p>

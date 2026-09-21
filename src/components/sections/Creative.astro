@@ -1,5 +1,7 @@
 ---
-const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
+import { Image } from "astro:assets";
+
+import image from "../../assets/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 ---
 
 <section class="section creative" aria-labelledby="creative-title">
@@ -9,12 +11,15 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
       <div class="creative__visual">
         <div class="creative__image-wrap">
           <div class="creative__image">
-            <img
-              src={image}
-              alt="Detalle creativo de un espacio de trabajo"
-              loading="lazy"
-              decoding="async"
-            />
+        <Image
+  src={image}
+  alt="Detalle creativo de un espacio de trabajo"
+  loading="lazy"
+  decoding="async"
+  width={800}
+  quality={75}
+  format="webp"
+/>
           </div>
         </div>
       </div>
