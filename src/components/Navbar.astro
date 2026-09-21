@@ -1,6 +1,6 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
-import { getLocale, useTranslations, type Locale } from '../i18n';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLocale, useTranslations, type Locale } from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -9,7 +9,7 @@ interface Props {
 const lang = getLocale(Astro.props.lang ?? Astro.currentLocale);
 const t = useTranslations(lang);
 
-const home = getRelativeLocaleUrl(lang, '');
+const home = getRelativeLocaleUrl(lang, "");
 
 const navLinks = [
   { href: `${home}#services`, label: t.nav.services },
@@ -21,26 +21,20 @@ const navLinks = [
 ];
 
 const languages = [
-  { code: 'es', label: 'Español', href: '/es/' },
-  { code: 'en', label: 'English', href: '/en/' },
-  { code: 'ru', label: 'Русский', href: '/ru/' },
-  { code: 'fr', label: 'Français', href: '/fr/' },
+  { code: "es", label: "Español", href: "/es/" },
+  { code: "en", label: "English", href: "/en/" },
+  { code: "ru", label: "Русский", href: "/ru/" },
+  { code: "fr", label: "Français", href: "/fr/" },
 ] as const;
 
 const currentLanguage =
-  languages.find((language) => language.code === lang) ??
-  languages[0];
+  languages.find((language) => language.code === lang) ?? languages[0];
 ---
 
 <header class="site-header">
   <div class="container site-header__inner">
-
     <!-- Logo -->
-    <a
-      href={home}
-      class="site-header__logo"
-      aria-label={t.meta.siteName}
-    >
+    <a href={home} class="site-header__logo" aria-label={t.meta.siteName}>
       <img
         class="site-header__logo-default"
         src="/images/lightBold.svg"
@@ -60,20 +54,14 @@ const currentLanguage =
     </a>
 
     <!-- Desktop navigation -->
-    <nav
-      class="site-header__nav"
-      aria-label={t.a11y.mainNavigation}
-    >
+    <nav class="site-header__nav" aria-label={t.a11y.mainNavigation}>
       {navLinks.map((link) => (
-        <a href={link.href}>
-          {link.label}
-        </a>
+        <a href={link.href}>{link.label}</a>
       ))}
     </nav>
 
     <!-- Desktop actions -->
     <div class="site-header__actions">
-
       <!-- Language selector -->
       <div class="language-selector">
         <button
@@ -89,11 +77,7 @@ const currentLanguage =
             viewBox="0 0 24 24"
             aria-hidden="true"
           >
-            <circle
-              cx="12"
-              cy="12"
-              r="9"
-            />
+            <circle cx="12" cy="12" r="9" />
             <path d="M3 12h18" />
             <path d="M12 3c2.2 2.5 3.3 5.5 3.3 9s-1.1 6.5-3.3 9" />
             <path d="M12 3c-2.2 2.5-3.3 5.5-3.3 9s1.1 6.5 3.3 9" />
@@ -112,36 +96,25 @@ const currentLanguage =
           </svg>
         </button>
 
-        <div
-          class="language-selector__menu"
-          id="language-menu"
-          role="menu"
-        >
+        <div class="language-selector__menu" id="language-menu" role="menu">
           {languages.map((language) => (
             <a
               href={language.href}
               class:list={{
-                'language-selector__option': true,
-                'is-active': language.code === lang,
+                "language-selector__option": true,
+                "is-active": language.code === lang,
               }}
               role="menuitem"
-              aria-current={
-                language.code === lang ? 'page' : undefined
-              }
+              aria-current={language.code === lang ? "page" : undefined}
             >
               <span class="language-selector__code">
                 {language.code.toUpperCase()}
               </span>
 
-              <span class="language-selector__name">
-                {language.label}
-              </span>
+              <span class="language-selector__name">{language.label}</span>
 
               {language.code === lang && (
-                <span
-                  class="language-selector__check"
-                  aria-hidden="true"
-                >
+                <span class="language-selector__check" aria-hidden="true">
                   ✓
                 </span>
               )}
@@ -151,11 +124,10 @@ const currentLanguage =
       </div>
 
       <!-- CTA -->
-    <!-- CTA desktop -->
-<a href={`${home}#contact`} class="site-header__cta">
-  {t.cta.start}
-</a>
-
+      <!-- CTA desktop -->
+      <a href={`${home}#contact`} class="site-header__cta">
+        {t.cta.start}
+      </a>
     </div>
 
     <!-- Mobile menu button -->
@@ -169,216 +141,142 @@ const currentLanguage =
       <span></span>
       <span></span>
     </button>
-
   </div>
 
   <!-- Mobile navigation -->
-  <div
-    class="site-header__mobile"
-    id="mobile-navigation"
-  >
-    <nav
-      class="site-header__mobile-nav"
-      aria-label={t.a11y.mainNavigation}
-    >
+  <div class="site-header__mobile" id="mobile-navigation">
+    <nav class="site-header__mobile-nav" aria-label={t.a11y.mainNavigation}>
       {navLinks.map((link) => (
-        <a href={link.href}>
-          {link.label}
-        </a>
+        <a href={link.href}>{link.label}</a>
       ))}
     </nav>
 
     <!-- Mobile languages -->
     <div class="site-header__mobile-language">
-
-      <p class="site-header__mobile-language-title">
-        {t.a11y.switchLanguage}
-      </p>
+      <p class="site-header__mobile-language-title">{t.a11y.switchLanguage}</p>
 
       <div class="site-header__mobile-language-list">
         {languages.map((language) => (
           <a
             href={language.href}
             class:list={{
-              'site-header__mobile-language-option': true,
-              'is-active': language.code === lang,
+              "site-header__mobile-language-option": true,
+              "is-active": language.code === lang,
             }}
-            aria-current={
-              language.code === lang ? 'page' : undefined
-            }
+            aria-current={language.code === lang ? "page" : undefined}
           >
-            <span>
-              {language.code.toUpperCase()}
-            </span>
+            <span>{language.code.toUpperCase()}</span>
 
-            <span>
-              {language.label}
-            </span>
+            <span>{language.label}</span>
 
-            {language.code === lang && (
-              <span aria-hidden="true">
-                ✓
-              </span>
-            )}
+            {language.code === lang && <span aria-hidden="true">✓</span>}
           </a>
         ))}
       </div>
-
     </div>
 
     <!-- Mobile CTA -->
 
-<a href={`${home}#contact`} class="site-header__mobile-cta">
-  {t.cta.start}
-</a>
+    <a href={`${home}#contact`} class="site-header__mobile-cta">
+      {t.cta.start}
+    </a>
   </div>
 </header>
 
 <script>
-  const header = document.querySelector('.site-header');
-  const menu = document.querySelector('.site-header__menu');
-  const mobileNav = document.querySelector('.site-header__mobile');
+  const header = document.querySelector(".site-header");
+  const menu = document.querySelector(".site-header__menu");
+  const mobileNav = document.querySelector(".site-header__mobile");
 
-  const languageSelector =
-    document.querySelector('.language-selector');
+  const languageSelector = document.querySelector(".language-selector");
 
- const languageTrigger =
-  document.querySelector<HTMLButtonElement>('.language-selector__trigger');
-
-
+  const languageTrigger = document.querySelector<HTMLButtonElement>(
+    ".language-selector__trigger",
+  );
 
   if (header) {
     const updateScrollState = () => {
-      header.classList.toggle(
-        'is-scrolled',
-        window.scrollY > 8
-      );
+      header.classList.toggle("is-scrolled", window.scrollY > 8);
     };
 
     updateScrollState();
 
-    window.addEventListener(
-      'scroll',
-      updateScrollState,
-      { passive: true }
-    );
+    window.addEventListener("scroll", updateScrollState, { passive: true });
 
-    header.addEventListener('mouseenter', () => {
-      header.classList.add('is-hovered');
+    header.addEventListener("mouseenter", () => {
+      header.classList.add("is-hovered");
     });
 
-    header.addEventListener('mouseleave', () => {
-      header.classList.remove('is-hovered');
+    header.addEventListener("mouseleave", () => {
+      header.classList.remove("is-hovered");
     });
   }
-
 
   /*
    * LANGUAGE SELECTOR
    */
 
   if (languageSelector && languageTrigger) {
-    languageTrigger.addEventListener('click', (event) => {
+    languageTrigger.addEventListener("click", (event) => {
       event.stopPropagation();
 
-      const isOpen =
-        languageSelector.classList.contains('is-open');
+      const isOpen = languageSelector.classList.contains("is-open");
 
-      languageSelector.classList.toggle(
-        'is-open',
-        !isOpen
-      );
+      languageSelector.classList.toggle("is-open", !isOpen);
 
-      languageTrigger.setAttribute(
-        'aria-expanded',
-        String(!isOpen)
-      );
+      languageTrigger.setAttribute("aria-expanded", String(!isOpen));
     });
 
-    document.addEventListener('click', (event) => {
-      if (
-        !languageSelector.contains(
-          event.target as Node
-        )
-      ) {
-        languageSelector.classList.remove(
-          'is-open'
-        );
+    document.addEventListener("click", (event) => {
+      if (!languageSelector.contains(event.target as Node)) {
+        languageSelector.classList.remove("is-open");
 
-        languageTrigger.setAttribute(
-          'aria-expanded',
-          'false'
-        );
+        languageTrigger.setAttribute("aria-expanded", "false");
       }
     });
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        languageSelector.classList.remove(
-          'is-open'
-        );
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        languageSelector.classList.remove("is-open");
 
-        languageTrigger.setAttribute(
-          'aria-expanded',
-          'false'
-        );
+        languageTrigger.setAttribute("aria-expanded", "false");
 
         languageTrigger.focus();
       }
     });
   }
 
-
   /*
    * MOBILE MENU
    */
 
   if (menu && mobileNav) {
-    menu.addEventListener('click', () => {
-      const isOpen =
-        menu.getAttribute('aria-expanded') === 'true';
+    menu.addEventListener("click", () => {
+      const isOpen = menu.getAttribute("aria-expanded") === "true";
 
-      menu.setAttribute(
-        'aria-expanded',
-        String(!isOpen)
-      );
+      menu.setAttribute("aria-expanded", String(!isOpen));
 
-      mobileNav.classList.toggle(
-        'is-open',
-        !isOpen
-      );
+      mobileNav.classList.toggle("is-open", !isOpen);
 
-      document.body.classList.toggle(
-        'menu-open',
-        !isOpen
-      );
+      document.body.classList.toggle("menu-open", !isOpen);
     });
 
-    mobileNav
-      .querySelectorAll('a')
-      .forEach((link) => {
-        link.addEventListener('click', () => {
-          menu.setAttribute(
-            'aria-expanded',
-            'false'
-          );
+    mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.setAttribute("aria-expanded", "false");
 
-          mobileNav.classList.remove(
-            'is-open'
-          );
+        mobileNav.classList.remove("is-open");
 
-          document.body.classList.remove(
-            'menu-open'
-          );
-        });
+        document.body.classList.remove("menu-open");
       });
+    });
   }
 </script>
 
 <style>
   /* ==================================================
-     HEADER
-     ================================================== */
+       HEADER
+       ================================================== */
 
   .site-header {
     position: fixed;
@@ -403,20 +301,17 @@ const currentLanguage =
   .site-header.is-hovered {
     background: rgba(255, 255, 255, 0.78);
 
-    border-bottom-color:
-      rgba(16, 17, 20, 0.08);
+    border-bottom-color: rgba(16, 17, 20, 0.08);
 
-    box-shadow:
-      0 8px 30px rgba(16, 17, 20, 0.06);
+    box-shadow: 0 8px 30px rgba(16, 17, 20, 0.06);
 
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
   }
 
-
   /* ==================================================
-     HEADER INNER
-     ================================================== */
+       HEADER INNER
+       ================================================== */
 
   .site-header__inner {
     display: flex;
@@ -425,16 +320,15 @@ const currentLanguage =
     min-height: var(--header-h);
 
     /*
-     * El espacio entre elementos se adapta
-     * progresivamente, sin saltos.
-     */
+         * El espacio entre elementos se adapta
+         * progresivamente, sin saltos.
+         */
     gap: clamp(12px, 1.8vw, 28px);
   }
 
-
   /* ==================================================
-     LOGO
-     ================================================== */
+       LOGO
+       ================================================== */
 
   .site-header__logo {
     position: relative;
@@ -442,8 +336,8 @@ const currentLanguage =
     display: block;
 
     /*
-     * Nunca crece demasiado ni se hace demasiado pequeño.
-     */
+         * Nunca crece demasiado ni se hace demasiado pequeño.
+         */
     flex: 0 1 clamp(145px, 15vw, 190px);
 
     width: clamp(145px, 15vw, 190px);
@@ -477,28 +371,21 @@ const currentLanguage =
       visibility 250ms var(--ease);
   }
 
-  .site-header.is-scrolled
-    .site-header__logo-default,
-
-  .site-header.is-hovered
-    .site-header__logo-default {
+  .site-header.is-scrolled .site-header__logo-default,
+  .site-header.is-hovered .site-header__logo-default {
     opacity: 0;
     visibility: hidden;
   }
 
-  .site-header.is-scrolled
-    .site-header__logo-scrolled,
-
-  .site-header.is-hovered
-    .site-header__logo-scrolled {
+  .site-header.is-scrolled .site-header__logo-scrolled,
+  .site-header.is-hovered .site-header__logo-scrolled {
     opacity: 1;
     visibility: visible;
   }
 
-
   /* ==================================================
-     DESKTOP NAVIGATION
-     ================================================== */
+       DESKTOP NAVIGATION
+       ================================================== */
 
   .site-header__nav {
     display: flex;
@@ -506,9 +393,9 @@ const currentLanguage =
     justify-content: center;
 
     /*
-     * IMPORTANTE:
-     * el nav puede encogerse.
-     */
+         * IMPORTANTE:
+         * el nav puede encogerse.
+         */
     flex: 1 1 auto;
 
     min-width: 0;
@@ -522,9 +409,9 @@ const currentLanguage =
     color: #fff;
 
     /*
-     * Sin saltos:
-     * 14px → 17px de forma continua.
-     */
+         * Sin saltos:
+         * 14px → 17px de forma continua.
+         */
     font-size: clamp(14px, 1.05vw, 17px);
 
     font-weight: 500;
@@ -533,15 +420,11 @@ const currentLanguage =
 
     white-space: nowrap;
 
-    transition:
-      color 250ms var(--ease);
+    transition: color 250ms var(--ease);
   }
 
-  .site-header.is-scrolled
-    .site-header__nav a,
-
-  .site-header.is-hovered
-    .site-header__nav a {
+  .site-header.is-scrolled .site-header__nav a,
+  .site-header.is-hovered .site-header__nav a {
     color: var(--ink);
   }
 
@@ -561,8 +444,7 @@ const currentLanguage =
     transform: scaleX(0);
     transform-origin: right;
 
-    transition:
-      transform 280ms var(--ease);
+    transition: transform 280ms var(--ease);
   }
 
   .site-header__nav a:hover::after {
@@ -570,10 +452,9 @@ const currentLanguage =
     transform-origin: left;
   }
 
-
   /* ==================================================
-     DESKTOP ACTIONS
-     ================================================== */
+       DESKTOP ACTIONS
+       ================================================== */
 
   .site-header__actions {
     display: flex;
@@ -587,10 +468,9 @@ const currentLanguage =
     gap: clamp(9px, 1.2vw, 18px);
   }
 
-
   /* ==================================================
-     LANGUAGE SELECTOR
-     ================================================== */
+       LANGUAGE SELECTOR
+       ================================================== */
 
   .language-selector {
     position: relative;
@@ -617,15 +497,11 @@ const currentLanguage =
 
     gap: 6px;
 
-    transition:
-      color 200ms var(--ease);
+    transition: color 200ms var(--ease);
   }
 
-  .site-header.is-scrolled
-    .language-selector__trigger,
-
-  .site-header.is-hovered
-    .language-selector__trigger {
+  .site-header.is-scrolled .language-selector__trigger,
+  .site-header.is-hovered .language-selector__trigger {
     color: var(--ink);
   }
 
@@ -644,11 +520,11 @@ const currentLanguage =
     flex: 0 0 auto;
   }
 
-.language-selector__current {
-  font-size: clamp(14px, 1.05vw, 17px);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
+  .language-selector__current {
+    font-size: clamp(14px, 1.05vw, 17px);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
 
   .language-selector__chevron {
     width: 8px;
@@ -662,19 +538,16 @@ const currentLanguage =
     stroke-linecap: round;
     stroke-linejoin: round;
 
-    transition:
-      transform 220ms var(--ease);
+    transition: transform 220ms var(--ease);
   }
 
-  .language-selector.is-open
-    .language-selector__chevron {
+  .language-selector.is-open .language-selector__chevron {
     transform: rotate(180deg);
   }
 
-
   /* ==================================================
-     LANGUAGE DROPDOWN
-     ================================================== */
+       LANGUAGE DROPDOWN
+       ================================================== */
 
   .language-selector__menu {
     position: absolute;
@@ -686,25 +559,18 @@ const currentLanguage =
 
     padding: 8px;
 
-    background:
-      rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.96);
 
-    border:
-      1px solid rgba(16, 17, 20, 0.08);
+    border: 1px solid rgba(16, 17, 20, 0.08);
 
-    box-shadow:
-      0 18px 45px
-      rgba(16, 17, 20, 0.12);
+    box-shadow: 0 18px 45px rgba(16, 17, 20, 0.12);
 
     opacity: 0;
     visibility: hidden;
 
-    transform:
-      translateY(-6px)
-      scale(0.98);
+    transform: translateY(-6px) scale(0.98);
 
-    transform-origin:
-      top right;
+    transform-origin: top right;
 
     pointer-events: none;
 
@@ -717,15 +583,12 @@ const currentLanguage =
     -webkit-backdrop-filter: blur(18px);
   }
 
-  .language-selector.is-open
-    .language-selector__menu {
+  .language-selector.is-open .language-selector__menu {
     opacity: 1;
 
     visibility: visible;
 
-    transform:
-      translateY(0)
-      scale(1);
+    transform: translateY(0) scale(1);
 
     pointer-events: auto;
   }
@@ -747,8 +610,7 @@ const currentLanguage =
 
     gap: 8px;
 
-    transition:
-      background 180ms var(--ease);
+    transition: background 180ms var(--ease);
   }
 
   .language-selector__option:hover,
@@ -778,10 +640,9 @@ const currentLanguage =
     font-weight: 600;
   }
 
-
   /* ==================================================
-     CTA
-     ================================================== */
+       CTA
+       ================================================== */
 
   .site-header__cta {
     display: inline-flex;
@@ -791,19 +652,17 @@ const currentLanguage =
     min-height: 42px;
 
     /*
-     * También se adapta de forma continua.
-     */
-    padding-inline:
-      clamp(14px, 1.5vw, 21px);
+         * También se adapta de forma continua.
+         */
+    padding-inline: clamp(14px, 1.5vw, 21px);
 
     border-radius: 999px;
 
-  background: var(--red);
+    background: var(--red);
     transition: background 220ms var(--ease);
     color: #fff;
 
-    font-size:
-      clamp(12px, 0.85vw, 13px);
+    font-size: clamp(12px, 0.85vw, 13px);
 
     font-weight: 600;
 
@@ -811,8 +670,7 @@ const currentLanguage =
 
     flex: 0 0 auto;
 
-    transition:
-      background 220ms var(--ease);
+    transition: background 220ms var(--ease);
   }
 
   .site-header__cta:hover {
@@ -821,10 +679,9 @@ const currentLanguage =
     transform: none;
   }
 
-
   /* ==================================================
-     MOBILE MENU BUTTON
-     ================================================== */
+       MOBILE MENU BUTTON
+       ================================================== */
 
   .site-header__menu {
     display: none;
@@ -845,11 +702,8 @@ const currentLanguage =
     flex: 0 0 auto;
   }
 
-  .site-header.is-scrolled
-    .site-header__menu,
-
-  .site-header.is-hovered
-    .site-header__menu {
+  .site-header.is-scrolled .site-header__menu,
+  .site-header.is-hovered .site-header__menu {
     color: var(--ink);
   }
 
@@ -870,24 +724,17 @@ const currentLanguage =
       opacity 250ms var(--ease);
   }
 
-  .site-header__menu[aria-expanded="true"]
-    span:first-child {
-    transform:
-      translateY(4.5px)
-      rotate(45deg);
+  .site-header__menu[aria-expanded="true"] span:first-child {
+    transform: translateY(4.5px) rotate(45deg);
   }
 
-  .site-header__menu[aria-expanded="true"]
-    span:last-child {
-    transform:
-      translateY(-4.5px)
-      rotate(-45deg);
+  .site-header__menu[aria-expanded="true"] span:last-child {
+    transform: translateY(-4.5px) rotate(-45deg);
   }
-
 
   /* ==================================================
-     MOBILE NAVIGATION
-     ================================================== */
+       MOBILE NAVIGATION
+       ================================================== */
 
   .site-header__mobile {
     display: block;
@@ -899,20 +746,13 @@ const currentLanguage =
 
     width: 100%;
 
-    padding:
-      30px
-      var(--pad-x)
-      34px;
+    padding: 30px var(--pad-x) 34px;
 
-    background:
-      rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.95);
 
-    border-top:
-      1px solid rgba(16, 17, 20, 0.08);
+    border-top: 1px solid rgba(16, 17, 20, 0.08);
 
-    box-shadow:
-      0 18px 40px
-      rgba(16, 17, 20, 0.08);
+    box-shadow: 0 18px 40px rgba(16, 17, 20, 0.08);
 
     opacity: 0;
     visibility: hidden;
@@ -954,17 +794,15 @@ const currentLanguage =
     font-weight: 500;
   }
 
-
   /* ==================================================
-     MOBILE LANGUAGE
-     ================================================== */
+       MOBILE LANGUAGE
+       ================================================== */
 
   .site-header__mobile-language {
     margin-top: 30px;
     padding-top: 24px;
 
-    border-top:
-      1px solid var(--line);
+    border-top: 1px solid var(--line);
   }
 
   .site-header__mobile-language-title {
@@ -982,8 +820,7 @@ const currentLanguage =
   .site-header__mobile-language-list {
     display: grid;
 
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 8px;
   }
@@ -1008,19 +845,16 @@ const currentLanguage =
     gap: 6px;
   }
 
-  .site-header__mobile-language-option
-    > span:first-child {
+  .site-header__mobile-language-option > span:first-child {
     font-size: 11px;
     font-weight: 700;
   }
 
-  .site-header__mobile-language-option
-    > span:nth-child(2) {
+  .site-header__mobile-language-option > span:nth-child(2) {
     font-size: 13px;
   }
 
-  .site-header__mobile-language-option
-    > span:last-child {
+  .site-header__mobile-language-option > span:last-child {
     color: var(--red);
 
     font-size: 13px;
@@ -1031,10 +865,9 @@ const currentLanguage =
     background: #eceeef;
   }
 
-
   /* ==================================================
-     MOBILE CTA
-     ================================================== */
+       MOBILE CTA
+       ================================================== */
 
   .site-header__mobile-cta {
     display: flex;
@@ -1047,34 +880,33 @@ const currentLanguage =
 
     border-radius: 999px;
 
-     background: var(--red);
-     transition: background 220ms var(--ease);
+    background: var(--red);
+    transition: background 220ms var(--ease);
     color: #fff;
 
     font-size: 14px;
     font-weight: 600;
   }
-.site-header__mobile-cta:hover {
-  background: var(--red-hover);
-}
+  .site-header__mobile-cta:hover {
+    background: var(--red-hover);
+  }
   /* ==================================================
-     MOBILE BREAKPOINT
-     ================================================== */
+       MOBILE BREAKPOINT
+       ================================================== */
 
   /*
-   * Aquí no reducimos tamaños.
-   *
-   * Simplemente dejamos de intentar meter:
-   *
-   * logo + navegación + idioma + CTA
-   *
-   * cuando físicamente ya no hay espacio.
-   *
-   * Así no existe un "salto" visual de tipografía.
-   */
+     * Aquí no reducimos tamaños.
+     *
+     * Simplemente dejamos de intentar meter:
+     *
+     * logo + navegación + idioma + CTA
+     *
+     * cuando físicamente ya no hay espacio.
+     *
+     * Así no existe un "salto" visual de tipografía.
+     */
 
   @media (max-width: 920px) {
-
     .site-header__nav,
     .site-header__actions {
       display: none;
@@ -1089,13 +921,11 @@ const currentLanguage =
     }
   }
 
-
   /* ==================================================
-     SMALL MOBILE
-     ================================================== */
+       SMALL MOBILE
+       ================================================== */
 
   @media (max-width: 767px) {
-
     .site-header__inner {
       min-height: 68px;
     }
@@ -1107,13 +937,11 @@ const currentLanguage =
     }
   }
 
-
   /* ==================================================
-     REDUCED MOTION
-     ================================================== */
+       REDUCED MOTION
+       ================================================== */
 
   @media (prefers-reduced-motion: reduce) {
-
     .site-header,
     .site-header__logo img,
     .site-header__nav a,

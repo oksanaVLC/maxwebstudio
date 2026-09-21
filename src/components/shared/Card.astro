@@ -1,13 +1,20 @@
 ---
-interface Props { class?: string; }
-const { class: className = '' } = Astro.props;
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
 ---
-<div class:list={['card', className]}><slot /></div>
+
+<div class:list={["card", className]}>
+  <slot />
+</div>
 
 <style>
   .card {
-    background: var(--color-surface); border: 1px solid var(--color-border);
-    border-radius: var(--radius); padding: clamp(1.25rem, 3vw, 2rem);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: clamp(1.25rem, 3vw, 2rem);
     height: 100%;
   }
 </style>

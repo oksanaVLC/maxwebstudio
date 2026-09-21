@@ -1,7 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
-import { LOCALES, getLocale } from '../../../i18n';
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from "astro:content";
+import { LOCALES, getLocale } from "../../../i18n";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({
@@ -12,13 +12,11 @@ export function getStaticPaths() {
 const lang = getLocale(Astro.params.lang);
 
 const posts = (
-  await getCollection('blog', ({ id, data }) =>
-    id.startsWith(`${lang}/`) && !data.draft
+  await getCollection(
+    "blog",
+    ({ id, data }) => id.startsWith(`${lang}/`) && !data.draft,
   )
-).sort(
-  (a, b) =>
-    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BaseLayout
@@ -34,7 +32,9 @@ const posts = (
       <div>
         {posts.map((post) => (
           <article>
-            <a href={`/${lang}/blog/${post.id.split('/').pop()?.replace(/\.md$/, '')}`}>
+            <a
+              href={`/${lang}/blog/${post.id.split("/").pop()?.replace(/\.md$/, "")}`}
+            >
               <h2>{post.data.title}</h2>
               <p>{post.data.description}</p>
             </a>

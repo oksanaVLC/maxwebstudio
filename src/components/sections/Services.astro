@@ -1,22 +1,22 @@
 ---
-import { icon } from '@fortawesome/fontawesome-svg-core';
+import { icon } from "@fortawesome/fontawesome-svg-core";
 import {
-faCartShopping,
-faCode,
-faMagnifyingGlassChart,
-faPalette,
-} from '@fortawesome/free-solid-svg-icons';
+  faCartShopping,
+  faCode,
+  faMagnifyingGlassChart,
+  faPalette,
+} from "@fortawesome/free-solid-svg-icons";
 
-import { getLocale, useTranslations } from '../../i18n';
+import { getLocale, useTranslations } from "../../i18n";
 
 const lang = getLocale(Astro.currentLocale);
 const t = useTranslations(lang);
 
 const icons = {
-  design: icon(faPalette).html.join(''),
-  development: icon(faCode).html.join(''),
-  ecommerce: icon(faCartShopping).html.join(''),
-  growth: icon(faMagnifyingGlassChart).html.join(''),
+  design: icon(faPalette).html.join(""),
+  development: icon(faCode).html.join(""),
+  ecommerce: icon(faCartShopping).html.join(""),
+  growth: icon(faMagnifyingGlassChart).html.join(""),
 };
 ---
 
@@ -26,24 +26,18 @@ const icons = {
   aria-labelledby="services-title"
 >
   <div class="container">
-
     <div class="services__intro">
       <p class="services__eyebrow">
         <span aria-hidden="true">✦</span>
         {t.services.eyebrow}
       </p>
 
-      <h2 id="services-title">
-        {t.services.title}
-      </h2>
+      <h2 id="services-title">{t.services.title}</h2>
 
-      <p class="services__lead">
-        {t.services.lead}
-      </p>
+      <p class="services__lead">{t.services.lead}</p>
     </div>
 
     <div class="services__grid">
-
       <article class="service-card">
         <div class="service-card__media">
           <img
@@ -58,7 +52,7 @@ const icons = {
             class="service-card__icon"
             aria-hidden="true"
             set:html={icons.design}
-          ></span>
+          />
 
           <h3>{t.services.items.design.title}</h3>
 
@@ -80,7 +74,7 @@ const icons = {
             class="service-card__icon"
             aria-hidden="true"
             set:html={icons.development}
-          ></span>
+          />
 
           <h3>{t.services.items.development.title}</h3>
 
@@ -102,7 +96,7 @@ const icons = {
             class="service-card__icon"
             aria-hidden="true"
             set:html={icons.ecommerce}
-          ></span>
+          />
 
           <h3>{t.services.items.ecommerce.title}</h3>
 
@@ -124,21 +118,20 @@ const icons = {
             class="service-card__icon"
             aria-hidden="true"
             set:html={icons.growth}
-          ></span>
+          />
 
           <h3>{t.services.items.growth.title}</h3>
 
           <p>{t.services.items.growth.description}</p>
         </div>
       </article>
-
     </div>
   </div>
 </section>
 
 <style>
   .services {
-  background: var(--surface-soft);
+    background: var(--surface-soft);
   }
 
   .services__intro {
@@ -213,9 +206,8 @@ const icons = {
   }
 
   .service-card__content {
-   padding: clamp(20px, 2.2vw, 26px)
-           clamp(20px, 2.4vw, 28px)
-           clamp(24px, 2.6vw, 32px);
+    padding: clamp(20px, 2.2vw, 26px) clamp(20px, 2.4vw, 28px)
+      clamp(24px, 2.6vw, 32px);
   }
 
   .service-card__icon {

@@ -5,7 +5,6 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 <section class="section creative" aria-labelledby="creative-title">
   <div class="container">
     <div class="creative__grid">
-
       <!-- POSTER -->
       <div class="creative__visual">
         <div class="creative__image-wrap">
@@ -22,14 +21,11 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 
       <!-- CONTENT -->
       <div class="creative__content">
-
-        <p class="creative__eyebrow">
-          Max Web Studio
-        </p>
+        <p class="creative__eyebrow">Max Web Studio</p>
 
         <p class="creative__intro">
-          Cada proyecto necesita algo más que una buena estructura.
-          Necesita personalidad, ideas y una forma propia de comunicar.
+          Cada proyecto necesita algo más que una buena estructura. Necesita
+          personalidad, ideas y una forma propia de comunicar.
         </p>
 
         <h2 id="creative-title" class="creative__title">
@@ -37,9 +33,7 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
           <span>la</span>
           <span>creatividad!</span>
         </h2>
-
       </div>
-
     </div>
   </div>
 </section>
@@ -55,7 +49,6 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
     background: var(--surface);
   }
 
-
   /* ==================================================
      GRID
      ================================================== */
@@ -69,10 +62,8 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 
     align-items: center;
 
-    gap:
-      clamp(50px, 8vw, 120px);
+    gap: clamp(50px, 8vw, 120px);
   }
-
 
   /* ==================================================
      VISUAL
@@ -81,7 +72,6 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
   .creative__visual {
     min-width: 0;
   }
-
 
   .creative__image-wrap {
     position: relative;
@@ -94,7 +84,6 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 
     overflow: visible;
   }
-
 
   /* ==================================================
      POSTER
@@ -109,22 +98,16 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 
     opacity: 0;
 
-    transform:
-      translate3d(-55px, -45px, 0)
-      rotate(-15deg)
-      scale(.55);
+    transform: translate3d(-55px, -45px, 0) rotate(-15deg) scale(0.55);
 
     transform-origin: center center;
 
-    will-change:
-      transform,
-      opacity;
+    will-change: transform, opacity;
 
     transition:
       opacity 120ms ease,
-      transform 820ms cubic-bezier(.16, 1.18, .3, 1);
+      transform 820ms cubic-bezier(0.16, 1.18, 0.3, 1);
   }
-
 
   .creative__image img {
     display: block;
@@ -138,10 +121,8 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 
     transform: scale(1.01);
 
-    box-shadow:
-      0 24px 55px rgba(16, 17, 20, .16);
+    box-shadow: 0 24px 55px rgba(16, 17, 20, 0.16);
   }
-
 
   /* ==================================================
      SWIRL + ZOOM
@@ -150,20 +131,12 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
   .creative.is-visible .creative__image {
     opacity: 1;
 
-    transform:
-      translate3d(0, 0, 0)
-      rotate(-1deg)
-      scale(1);
+    transform: translate3d(0, 0, 0) rotate(-1deg) scale(1);
   }
-
 
   .creative__image-wrap:hover .creative__image {
-    transform:
-      translate3d(0, 0, 0)
-      rotate(-2.5deg)
-      scale(1.055);
+    transform: translate3d(0, 0, 0) rotate(-2.5deg) scale(1.055);
   }
-
 
   /* ==================================================
      CONTENT
@@ -174,7 +147,6 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 
     padding-block: 20px;
   }
-
 
   /* ==================================================
      EYEBROW
@@ -191,13 +163,12 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 
     font-weight: 700;
 
-    letter-spacing: .12em;
+    letter-spacing: 0.12em;
 
     line-height: 1.2;
 
     text-transform: uppercase;
   }
-
 
   /* ==================================================
      INTRO
@@ -212,16 +183,14 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 
     font-family: var(--font-sans);
 
-    font-size:
-      clamp(18px, 2vw, 23px);
+    font-size: clamp(18px, 2vw, 23px);
 
     font-weight: 400;
 
     line-height: 1.55;
 
-    letter-spacing: -.015em;
+    letter-spacing: -0.015em;
   }
-
 
   /* ==================================================
      TITLE
@@ -236,69 +205,54 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
 
     gap: 0;
 
-    margin:
-      clamp(46px, 5vw, 70px)
-      0
-      0;
+    margin: clamp(46px, 5vw, 70px) 0 0;
 
     color: var(--ink);
 
-    font-family:
-      "Fraunces Variable",
-      Fraunces,
-      Georgia,
-      serif;
+    font-family: "Fraunces Variable", Fraunces, Georgia, serif;
 
-    font-size:
-      clamp(60px, 7.4vw, 112px);
+    font-size: clamp(60px, 7.4vw, 112px);
 
     font-weight: 600;
 
     font-style: italic;
 
-    line-height: .82;
+    line-height: 0.82;
 
-    letter-spacing: -.055em;
+    letter-spacing: -0.055em;
 
     text-wrap: balance;
 
     transform: rotate(-1deg);
   }
 
-
   .creative__title span:nth-child(1) {
     color: var(--ink);
   }
 
-
   .creative__title span:nth-child(2) {
-    margin-left: .5em;
+    margin-left: 0.5em;
     color: #03a9f4;
   }
 
-
   .creative__title span:nth-child(3) {
-    margin-left: .02em;
+    margin-left: 0.02em;
     color: #ff5757;
   }
-
 
   /* ==================================================
      TABLET
      ================================================== */
 
   @media (max-width: 900px) {
-
     .creative__grid {
       grid-template-columns: 1fr;
       gap: 70px;
     }
 
-
     .creative__visual {
       order: 1;
     }
-
 
     .creative__content {
       order: 2;
@@ -312,116 +266,87 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
       text-align: center;
     }
 
-
     .creative__intro {
       margin-inline: auto;
     }
 
-
     .creative__title {
       align-items: center;
 
-      font-size:
-        clamp(60px, 10vw, 92px);
+      font-size: clamp(60px, 10vw, 92px);
     }
-
 
     .creative__title span:nth-child(2),
     .creative__title span:nth-child(3) {
       margin-left: 0;
     }
 
-
     .creative__image-wrap:hover .creative__image {
-      transform:
-        translate3d(0, 0, 0)
-        rotate(-1deg)
-        scale(1);
+      transform: translate3d(0, 0, 0) rotate(-1deg) scale(1);
     }
   }
-
 
   /* ==================================================
      MOBILE
      ================================================== */
 
   @media (max-width: 600px) {
-
     .creative__grid {
       gap: 55px;
     }
-
 
     .creative__image-wrap {
       width: 100%;
       aspect-ratio: 4 / 5;
     }
 
-
     .creative__image {
       inset: -2%;
     }
-
 
     .creative__intro {
       font-size: 17px;
       line-height: 1.6;
     }
 
-
     .creative__title {
       margin-top: 42px;
 
-      font-size:
-        clamp(50px, 14vw, 76px);
+      font-size: clamp(50px, 14vw, 76px);
 
-      line-height: .84;
+      line-height: 0.84;
     }
-
 
     .creative__image-wrap:hover .creative__image {
-      transform:
-        translate3d(0, 0, 0)
-        rotate(-1deg)
-        scale(1);
+      transform: translate3d(0, 0, 0) rotate(-1deg) scale(1);
     }
   }
-
 
   /* ==================================================
      REDUCED MOTION
      ================================================== */
 
   @media (prefers-reduced-motion: reduce) {
-
     .creative__image {
       opacity: 1;
 
-      transform:
-        translate3d(0, 0, 0)
-        rotate(-1deg)
-        scale(1);
+      transform: translate3d(0, 0, 0) rotate(-1deg) scale(1);
 
       transition: none;
     }
 
-
     .creative__image-wrap:hover .creative__image {
-      transform:
-        translate3d(0, 0, 0)
-        rotate(-1deg)
-        scale(1);
+      transform: translate3d(0, 0, 0) rotate(-1deg) scale(1);
     }
   }
 </style>
-
 
 <script>
   const creative = document.querySelector(".creative");
 
   if (creative) {
     const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (prefersReducedMotion) {
@@ -437,7 +362,7 @@ const image = "/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
         },
         {
           threshold: 0.08,
-        }
+        },
       );
 
       observer.observe(creative);

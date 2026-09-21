@@ -1,40 +1,40 @@
 ---
 const technologies = [
   {
-    name: 'Angular',
-    slug: 'angular',
+    name: "Angular",
+    slug: "angular",
   },
   {
-    name: 'Astro',
-    slug: 'astro',
+    name: "Astro",
+    slug: "astro",
   },
   {
-    name: 'TypeScript',
-    slug: 'typescript',
+    name: "TypeScript",
+    slug: "typescript",
   },
   {
-    name: 'Node.js',
-    slug: 'nodejs',
+    name: "Node.js",
+    slug: "nodejs",
   },
   {
-    name: 'CSS',
-    slug: 'css',
+    name: "CSS",
+    slug: "css",
   },
   {
-    name: 'HTML',
-    slug: 'html',
+    name: "HTML",
+    slug: "html",
   },
   {
-    name: 'Responsive Design',
-    slug: 'responsive',
+    name: "Responsive Design",
+    slug: "responsive",
   },
   {
-    name: 'Accesibilidad',
-    slug: 'accessibility',
+    name: "Accesibilidad",
+    slug: "accessibility",
   },
   {
-    name: 'SEO técnico',
-    slug: 'seo',
+    name: "SEO técnico",
+    slug: "seo",
   },
 ];
 
@@ -52,14 +52,10 @@ const items = [...technologies, ...technologies];
         <div
           class="tech-ticker__item"
           data-tech={tech.slug}
-          aria-hidden={index >= technologies.length ? 'true' : undefined}
+          aria-hidden={index >= technologies.length ? "true" : undefined}
         >
           <span class="tech-ticker__logo" aria-hidden="true">
-            <img
-              src={`/images/tech/${tech.slug}.svg`}
-              alt=""
-              loading="lazy"
-            />
+            <img src={`/images/tech/${tech.slug}.svg`} alt="" loading="lazy" />
           </span>
 
           <span class="tech-ticker__name">{tech.name}</span>
@@ -70,9 +66,9 @@ const items = [...technologies, ...technologies];
 </section>
 
 <script>
-  const ticker = document.querySelector('.tech-ticker');
-  const viewport = ticker?.querySelector('.tech-ticker__viewport');
-  const track = ticker?.querySelector('.tech-ticker__track');
+  const ticker = document.querySelector(".tech-ticker");
+  const viewport = ticker?.querySelector(".tech-ticker__viewport");
+  const track = ticker?.querySelector(".tech-ticker__track");
 
   if (ticker && viewport && track) {
     let paused = false;
@@ -102,17 +98,17 @@ const items = [...technologies, ...technologies];
 
     requestAnimationFrame(animate);
 
-    ticker.addEventListener('mouseenter', () => {
+    ticker.addEventListener("mouseenter", () => {
       paused = true;
     });
 
-    ticker.addEventListener('mouseleave', () => {
+    ticker.addEventListener("mouseleave", () => {
       paused = false;
       lastTime = performance.now();
     });
 
     viewport.addEventListener(
-      'wheel',
+      "wheel",
       (event) => {
         if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
           event.preventDefault();
@@ -133,7 +129,7 @@ const items = [...technologies, ...technologies];
 
         track.style.transform = `translate3d(${-position}px, 0, 0)`;
       },
-      { passive: false }
+      { passive: false },
     );
   }
 </script>

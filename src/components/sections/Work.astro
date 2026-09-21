@@ -1,14 +1,15 @@
 ---
-import { projects, workLink, workTitle } from '../../data/projects';
-import { getLocale } from '../../i18n';
-import Section from '../shared/Section.astro';
+import { projects, workLink, workTitle } from "../../data/projects";
+import { getLocale } from "../../i18n";
+import Section from "../shared/Section.astro";
 const lang = getLocale(Astro.currentLocale);
 const visuals = [
-  { logo: '/images/brand-picantino.png', bg: '#fff1f0' },
-  { logo: '/images/logo-white.png',      bg: '#141414' },
-  { logo: '/images/brand-ems.png',       bg: '#eef6f2' },
+  { logo: "/images/brand-picantino.png", bg: "#fff1f0" },
+  { logo: "/images/logo-white.png", bg: "#141414" },
+  { logo: "/images/brand-ems.png", bg: "#eef6f2" },
 ];
 ---
+
 <Section id="work" title={workTitle[lang]} tint>
   <div class="work-grid">
     {projects.map((p, i) => (
@@ -24,20 +25,77 @@ const visuals = [
       </a>
     ))}
   </div>
-  <p class="work-cta"><a href="#contact">{workLink[lang]}</a></p>
+  <p class="work-cta">
+    <a href="#contact">{workLink[lang]}</a>
+  </p>
 </Section>
 
 <style>
-  .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .proj { display: flex; flex-direction: column; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; transition: transform .15s, box-shadow .15s; }
-  .proj:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -24px rgba(0,0,0,.5); }
-  .proj__panel { display: grid; place-items: center; aspect-ratio: 16/10; padding: 2rem; }
-  .proj__panel img { max-width: 72%; max-height: 82%; width: auto; height: auto; object-fit: contain; }
-  .proj__body { display: flex; flex-direction: column; gap: .25rem; padding: 1.25rem 1.5rem 1.5rem; }
-  .proj__name { font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; }
-  .proj__meta { color: var(--color-text-muted); font-size: .9rem; }
-  .proj__link { margin-top: .5rem; color: var(--color-accent); font-weight: 600; font-size: .82rem; }
-  .work-cta { margin-top: 2rem; font-family: var(--font-heading); font-weight: 600; }
-  .work-cta a:hover { color: var(--color-accent); }
-  @media (max-width: 820px) { .work-grid { grid-template-columns: 1fr; } }
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .proj {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s;
+  }
+  .proj:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.5);
+  }
+  .proj__panel {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16/10;
+    padding: 2rem;
+  }
+  .proj__panel img {
+    max-width: 72%;
+    max-height: 82%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  .proj__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+  .proj__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+  .proj__meta {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+  .proj__link {
+    margin-top: 0.5rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+  .work-cta {
+    margin-top: 2rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+  .work-cta a:hover {
+    color: var(--color-accent);
+  }
+  @media (max-width: 820px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>

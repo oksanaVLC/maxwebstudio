@@ -1,5 +1,5 @@
 ---
-import { getLocale, useTranslations } from '../../i18n';
+import { getLocale, useTranslations } from "../../i18n";
 
 const lang = getLocale(Astro.currentLocale);
 const t = useTranslations(lang);
@@ -30,7 +30,9 @@ const t = useTranslations(lang);
 
     <div class="process__steps">
       <article class="process-step">
-        <span class="process-step__number" aria-hidden="true">01</span>
+        <span class="process-step__number" aria-hidden="true">
+          01
+        </span>
 
         <div class="process-step__content">
           <h3>{t.process.steps.plan.title}</h3>
@@ -39,7 +41,9 @@ const t = useTranslations(lang);
       </article>
 
       <article class="process-step">
-        <span class="process-step__number" aria-hidden="true">02</span>
+        <span class="process-step__number" aria-hidden="true">
+          02
+        </span>
 
         <div class="process-step__content">
           <h3>{t.process.steps.design.title}</h3>
@@ -48,7 +52,9 @@ const t = useTranslations(lang);
       </article>
 
       <article class="process-step">
-        <span class="process-step__number" aria-hidden="true">03</span>
+        <span class="process-step__number" aria-hidden="true">
+          03
+        </span>
 
         <div class="process-step__content">
           <h3>{t.process.steps.launch.title}</h3>
@@ -131,7 +137,7 @@ const t = useTranslations(lang);
     background: linear-gradient(
       180deg,
       rgba(16, 17, 20, 0) 26%,
-      rgba(16, 17, 20, 0.30) 56%,
+      rgba(16, 17, 20, 0.3) 56%,
       rgba(16, 17, 20, 0.82) 100%
     );
   }

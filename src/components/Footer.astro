@@ -1,6 +1,6 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
-import { useTranslations, type Locale } from '../i18n';
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations, type Locale } from "../i18n";
 
 interface Props {
   lang: Locale;
@@ -8,7 +8,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const home = getRelativeLocaleUrl(lang, '');
+const home = getRelativeLocaleUrl(lang, "");
 
 const links = [
   { href: `${home}#services`, label: t.nav.services },
@@ -26,34 +26,29 @@ const legalLinks = [
 ];
 
 const languages = [
-  { code: 'es', href: '/es/' },
-  { code: 'en', href: '/en/' },
-  { code: 'ru', href: '/ru/' },
+  { code: "es", href: "/es/" },
+  { code: "en", href: "/en/" },
+  { code: "ru", href: "/ru/" },
 ] as const;
 ---
 
 <footer class="footer">
   <div class="container">
-
     <div class="footer__top">
-
       <div class="footer__brand">
         <a href={home} class="footer__logo" aria-label={t.meta.siteName}>
-  <img
-    src="/images/lightBold.svg"
-    alt={t.meta.siteName}
-    width="220"
-    height="auto"
-  />
-</a>
+          <img
+            src="/images/lightBold.svg"
+            alt={t.meta.siteName}
+            width="220"
+            height="auto"
+          />
+        </a>
 
-        <p>
-          {t.meta.defaultDescription}
-        </p>
+        <p>{t.meta.defaultDescription}</p>
       </div>
 
       <div class="footer__nav">
-
         <div class="footer__column">
           <p class="footer__title">{t.footer.explore}</p>
 
@@ -73,15 +68,12 @@ const languages = [
             ))}
           </nav>
         </div>
-
       </div>
     </div>
 
     <div class="footer__bottom">
-
       <p>
-        © {new Date().getFullYear()} {t.meta.siteName}.
-        {t.footer.rights}
+        © {new Date().getFullYear()} {t.meta.siteName}.{t.footer.rights}
       </p>
 
       <div class="footer__languages" aria-label={t.a11y.switchLanguage}>
@@ -89,15 +81,13 @@ const languages = [
           <a
             href={language.href}
             data-active={String(language.code === lang)}
-            aria-current={language.code === lang ? 'page' : undefined}
+            aria-current={language.code === lang ? "page" : undefined}
           >
             {language.code.toUpperCase()}
           </a>
         ))}
       </div>
-
     </div>
-
   </div>
 </footer>
 
@@ -115,8 +105,8 @@ const languages = [
   }
 
   /* --------------------------------
-     Brand
-  -------------------------------- */
+       Brand
+    -------------------------------- */
 
   .footer__brand {
     max-width: 470px;
@@ -127,11 +117,11 @@ const languages = [
     width: 170px;
   }
 
-.footer__logo img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
+  .footer__logo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 
   .footer__brand p {
     max-width: 400px;
@@ -142,8 +132,8 @@ const languages = [
   }
 
   /* --------------------------------
-     Navigation
-  -------------------------------- */
+       Navigation
+    -------------------------------- */
 
   .footer__nav {
     display: grid;
@@ -184,8 +174,8 @@ const languages = [
   }
 
   /* --------------------------------
-     Bottom
-  -------------------------------- */
+       Bottom
+    -------------------------------- */
 
   .footer__bottom {
     display: flex;
@@ -217,13 +207,13 @@ const languages = [
   }
 
   .footer__languages a:hover,
-  .footer__languages a[data-active='true'] {
+  .footer__languages a[data-active="true"] {
     color: #fff;
   }
 
   /* --------------------------------
-     Mobile
-  -------------------------------- */
+       Mobile
+    -------------------------------- */
 
   @media (max-width: 767px) {
     .footer__top {

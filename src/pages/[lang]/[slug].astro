@@ -1,10 +1,10 @@
 ---
-import { LOCALES, getLocale } from '../../i18n';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import { LOCALES, getLocale } from "../../i18n";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({
-    params: { lang, slug: 'example' },
+    params: { lang, slug: "example" },
   }));
 }
 

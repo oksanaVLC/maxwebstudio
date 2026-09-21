@@ -1,5 +1,5 @@
 ---
-import { getLocale, useTranslations } from '../../i18n';
+import { getLocale, useTranslations } from "../../i18n";
 
 const lang = getLocale(Astro.currentLocale);
 const t = useTranslations(lang);
@@ -7,7 +7,6 @@ const t = useTranslations(lang);
 
 <section class="why-us section" id="why-us" aria-labelledby="why-us-title">
   <div class="container">
-
     <div class="why-us__intro">
       <div class="why-us__intro-copy">
         <p class="why-us__eyebrow">
@@ -15,13 +14,9 @@ const t = useTranslations(lang);
           {t.whyUs.eyebrow}
         </p>
 
-        <h2 id="why-us-title">
-          {t.whyUs.title}
-        </h2>
+        <h2 id="why-us-title">{t.whyUs.title}</h2>
 
-        <p class="why-us__lead">
-          {t.whyUs.lead}
-        </p>
+        <p class="why-us__lead">{t.whyUs.lead}</p>
       </div>
 
       <div class="why-us__intro-media">
@@ -34,20 +29,19 @@ const t = useTranslations(lang);
     </div>
 
     <div class="why-us__points">
-      {
-        Object.values(t.whyUs.points).map((point) => (
-          <article class="why-us__point">
-            <span class="why-us__check" aria-hidden="true">✓</span>
+      {Object.values(t.whyUs.points).map((point) => (
+        <article class="why-us__point">
+          <span class="why-us__check" aria-hidden="true">
+            ✓
+          </span>
 
-            <div class="why-us__point-copy">
-              <h3>{point.title}</h3>
-              <p>{point.description}</p>
-            </div>
-          </article>
-        ))
-      }
+          <div class="why-us__point-copy">
+            <h3>{point.title}</h3>
+            <p>{point.description}</p>
+          </div>
+        </article>
+      ))}
     </div>
-
   </div>
 </section>
 

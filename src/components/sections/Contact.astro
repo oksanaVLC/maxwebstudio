@@ -1,17 +1,16 @@
 ---
-import { getLocale, useTranslations } from '../../i18n';
-import { getRelativeLocaleUrl } from 'astro:i18n';
-import { contactEmail, contactPhone } from '../../data/site';
-import Button from '../shared/Button.astro';
+import { getLocale, useTranslations } from "../../i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { contactEmail, contactPhone } from "../../data/site";
+import Button from "../shared/Button.astro";
 
 const lang = getLocale(Astro.currentLocale);
 const c = useTranslations(lang).contact;
-const privacyUrl = getRelativeLocaleUrl(lang, 'privacy');
+const privacyUrl = getRelativeLocaleUrl(lang, "privacy");
 ---
 
 <section id="contact" class="section section--alt">
   <div class="container">
-
     <div class="section-head">
       <h2 class="h2">{c.title}</h2>
     </div>
@@ -20,8 +19,14 @@ const privacyUrl = getRelativeLocaleUrl(lang, 'privacy');
       <div class="contact__info">
         <p class="contact__lead">{c.lead}</p>
         <ul class="contact__list">
-          <li><a href={`mailto:${contactEmail}`}>{contactEmail}</a></li>
-          <li><a href={`tel:${contactPhone.replace(/\s/g, '')}`}>{contactPhone}</a></li>
+          <li>
+            <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+          </li>
+          <li>
+            <a href={`tel:${contactPhone.replace(/\s/g, "")}`}>
+              {contactPhone}
+            </a>
+          </li>
           <li>{c.place}</li>
         </ul>
       </div>
@@ -34,7 +39,11 @@ const privacyUrl = getRelativeLocaleUrl(lang, 'privacy');
         data-netlify-honeypot="bot-field"
       >
         <input type="hidden" name="form-name" value="contact" />
-        <p class="hp"><label>Don't fill this out: <input name="bot-field" /></label></p>
+        <p class="hp">
+          <label>
+            Don't fill this out: <input name="bot-field" />
+          </label>
+        </p>
 
         <label class="field">
           <span>{c.form.name}</span>
@@ -51,38 +60,39 @@ const privacyUrl = getRelativeLocaleUrl(lang, 'privacy');
 
         <label class="consent">
           <input type="checkbox" name="consent" required />
-          <span>{c.form.consent} <a href={privacyUrl}>{c.form.privacyLink}</a>.</span>
+          <span>
+            {c.form.consent} <a href={privacyUrl}>{c.form.privacyLink}</a>.
+          </span>
         </label>
 
-       <button type="submit" class="btn btn--primary">
-  <span>{c.form.submit}</span>
-</button>
+        <button type="submit" class="btn btn--primary">
+          <span>{c.form.submit}</span>
+        </button>
         <p class="form-status" role="status" hidden data-sent={c.form.sent}></p>
       </form>
     </div>
-
   </div>
 </section>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>('.contact__form');
+  const form = document.querySelector<HTMLFormElement>(".contact__form");
   if (form) {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const status = form.querySelector<HTMLParagraphElement>('.form-status');
+      const status = form.querySelector<HTMLParagraphElement>(".form-status");
       const params = new URLSearchParams();
       new FormData(form).forEach((value, key) =>
-        params.append(key, value.toString())
+        params.append(key, value.toString()),
       );
       try {
         await fetch(location.pathname, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: params.toString(),
         });
         form.reset();
         if (status) {
-          status.textContent = status.dataset.sent ?? '';
+          status.textContent = status.dataset.sent ?? "";
           status.hidden = false;
         }
       } catch {

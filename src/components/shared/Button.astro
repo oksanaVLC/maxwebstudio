@@ -1,26 +1,58 @@
 ---
 interface Props {
   href?: string;
-  variant?: 'primary' | 'secondary';
+  variant?: "primary" | "secondary";
   class?: string;
   [key: string]: any;
 }
-const { href, variant = 'primary', class: className = '', ...rest } = Astro.props;
-const Tag = href ? 'a' : 'button';
+const {
+  href,
+  variant = "primary",
+  class: className = "",
+  ...rest
+} = Astro.props;
+const Tag = href ? "a" : "button";
 ---
-<Tag href={href} class:list={['btn', `btn--${variant}`, className]} {...rest}><slot /></Tag>
+
+<Tag href={href} class:list={["btn", `btn--${variant}`, className]} {...rest}>
+  <slot />
+</Tag>
 
 <style>
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-    font-family: var(--font-heading); font-weight: 600; font-size: 1rem;
-    padding: .8rem 1.5rem; border-radius: var(--radius);
-    border: 2px solid transparent; cursor: pointer;
-    transition: transform .12s ease, background .15s, color .15s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition:
+      transform 0.12s ease,
+      background 0.15s,
+      color 0.15s;
   }
-  .btn:hover { transform: translateY(-2px); }
-  .btn--primary { background: var(--color-accent); color: var(--color-accent-ink); }
-  .btn--primary:hover { background: color-mix(in srgb, var(--color-accent) 88%, black); }
-  .btn--secondary { background: transparent; color: var(--color-text); border-color: var(--color-text); }
-  .btn--secondary:hover { background: var(--color-text); color: var(--cream); }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn--primary {
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+  .btn--primary:hover {
+    background: color-mix(in srgb, var(--color-accent) 88%, black);
+  }
+  .btn--secondary {
+    background: transparent;
+    color: var(--color-text);
+    border-color: var(--color-text);
+  }
+  .btn--secondary:hover {
+    background: var(--color-text);
+    color: var(--cream);
+  }
 </style>

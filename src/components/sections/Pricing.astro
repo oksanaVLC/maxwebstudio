@@ -56,25 +56,19 @@ const comparisonValue = {
 
 <section id="pricing" class="pricing section" aria-labelledby="pricing-title">
   <div class="container">
-
     <!-- HEADER -->
 
     <header class="pricing__head">
       <div>
-        <p class="pricing__eyebrow">
-          {d.eyebrow}
-        </p>
+        <p class="pricing__eyebrow">{d.eyebrow}</p>
 
         <h2 id="pricing-title" class="pricing__title">
           {d.priceTitle}
         </h2>
       </div>
 
-      <p class="pricing__lead">
-        {d.priceLead}
-      </p>
+      <p class="pricing__lead">{d.priceLead}</p>
     </header>
-
 
     <!-- PLANS -->
 
@@ -85,56 +79,37 @@ const comparisonValue = {
           data-pack
           data-featured={String(index === featuredPack)}
         >
-
           {index === featuredPack && (
-            <span class="pack__flag">
-              {d.mostPicked}
-            </span>
+            <span class="pack__flag">{d.mostPicked}</span>
           )}
 
-          <span class="pack__num">
-            {String(index + 1).padStart(2, "0")}
-          </span>
+          <span class="pack__num">{String(index + 1).padStart(2, "0")}</span>
 
-          <h3 class="pack__name">
-            {p.name}
-          </h3>
+          <h3 class="pack__name">{p.name}</h3>
 
-          <p class="pack__tagline">
-            {p.tagline}
-          </p>
-
+          <p class="pack__tagline">{p.tagline}</p>
 
           <!-- PRICE -->
 
           <div class="pack__price-wrap">
-            <span class="pack__price">
-              {p.price}
-            </span>
+            <span class="pack__price">{p.price}</span>
 
-            <span class="pack__pricenote">
-              {p.priceNote}
-            </span>
+            <span class="pack__pricenote">{p.priceNote}</span>
           </div>
-
 
           <!-- DESCRIPTION -->
 
-          <p class="pack__pitch">
-            {p.pitch}
-          </p>
-
+          <p class="pack__pitch">{p.pitch}</p>
 
           <!-- FACTS -->
 
           <div class="pack__facts">
-
             <span>
               <span
                 class="pack__fact-icon"
                 aria-hidden="true"
                 set:html={icon(faBullseye).html.join("")}
-              ></span>
+              />
 
               <span>{p.ideal}</span>
             </span>
@@ -144,7 +119,7 @@ const comparisonValue = {
                 class="pack__fact-icon"
                 aria-hidden="true"
                 set:html={icon(faClock).html.join("")}
-              ></span>
+              />
 
               <span>{p.time}</span>
             </span>
@@ -154,13 +129,11 @@ const comparisonValue = {
                 class="pack__fact-icon"
                 aria-hidden="true"
                 set:html={icon(faRotate).html.join("")}
-              ></span>
+              />
 
               <span>{p.rounds}</span>
             </span>
-
           </div>
-
 
           <!-- FEATURES TOGGLE -->
 
@@ -173,31 +146,21 @@ const comparisonValue = {
             data-label-closed={d.toggleClosed}
             aria-expanded="false"
           >
-            <span data-pack-label>
-              {d.toggleClosed}
-            </span>
+            <span data-pack-label>{d.toggleClosed}</span>
 
             <span
               class="pack__chevron"
               aria-hidden="true"
               set:html={icon(faChevronDown).html.join("")}
-            ></span>
+            />
           </button>
-
 
           <!-- FEATURES -->
 
-          <ul
-            class="pack__feats"
-            data-pack-feats
-            hidden
-          >
+          <ul class="pack__feats" data-pack-feats hidden>
             {p.feats.map((feature) => (
               <li>
-                <span
-                  class="pack__feature-icon"
-                  aria-hidden="true"
-                >
+                <span class="pack__feature-icon" aria-hidden="true">
                   ✓
                 </span>
 
@@ -206,13 +169,9 @@ const comparisonValue = {
             ))}
           </ul>
 
-
           <!-- NOTE -->
 
-          <p class="pack__note">
-            {p.note}
-          </p>
-
+          <p class="pack__note">{p.note}</p>
 
           <!-- CTA -->
 
@@ -227,23 +186,18 @@ const comparisonValue = {
           >
             {p.cta}
           </a>
-
         </article>
       ))}
     </div>
-
 
     <!-- COMPARISON -->
 
     <div class="comparison">
       <div class="comparison__scroll">
-
         <table>
           <thead>
             <tr>
-              <th class="comparison__title">
-                {d.cmpTitle}
-              </th>
+              <th class="comparison__title">{d.cmpTitle}</th>
 
               {d.packs.map((p, index) => (
                 <th
@@ -258,19 +212,15 @@ const comparisonValue = {
           </thead>
 
           <tbody>
-
             <!-- PRICE -->
 
             <tr>
-              <td class="comparison__label">
-                {d.comparison.from}
-              </td>
+              <td class="comparison__label">{d.comparison.from}</td>
 
               {d.packs.map((p, index) => (
                 <td
                   class:list={{
-                    "comparison__highlight-cell":
-                      index === featuredPack,
+                    "comparison__highlight-cell": index === featuredPack,
                   }}
                 >
                   {p.price}
@@ -278,20 +228,16 @@ const comparisonValue = {
               ))}
             </tr>
 
-
             <!-- FEATURES -->
 
             {comparison.map((row) => (
               <tr>
-                <td class="comparison__label">
-                  {d.comparison[row.key]}
-                </td>
+                <td class="comparison__label">{d.comparison[row.key]}</td>
 
                 {row.values.map((value, index) => (
                   <td
                     class:list={{
-                      "comparison__highlight-cell":
-                        index === featuredPack,
+                      "comparison__highlight-cell": index === featuredPack,
                     }}
                   >
                     {comparisonValue[value]}
@@ -299,16 +245,12 @@ const comparisonValue = {
                 ))}
               </tr>
             ))}
-
           </tbody>
         </table>
-
       </div>
     </div>
-
   </div>
 </section>
-
 
 <style>
   /* ==============================================================
@@ -360,7 +302,6 @@ const comparisonValue = {
     line-height: 1.65;
   }
 
-
   /* ==============================================================
      PLANS
   ============================================================== */
@@ -370,7 +311,6 @@ const comparisonValue = {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
   }
-
 
   /* ==============================================================
      CARD
@@ -408,7 +348,6 @@ const comparisonValue = {
     border-color: var(--red);
   }
 
-
   /* ==============================================================
      FEATURED LABEL
   ============================================================== */
@@ -430,14 +369,8 @@ const comparisonValue = {
     text-transform: uppercase;
     white-space: nowrap;
 
-    clip-path: polygon(
-      14px 0,
-      100% 0,
-      100% 100%,
-      0 100%
-    );
+    clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%);
   }
-
 
   /* ==============================================================
      NUMBER / NAME
@@ -477,7 +410,6 @@ const comparisonValue = {
     line-height: 1.5;
   }
 
-
   /* ==============================================================
      PRICE
   ============================================================== */
@@ -508,7 +440,6 @@ const comparisonValue = {
     line-height: 1.4;
   }
 
-
   /* ==============================================================
      PITCH
   ============================================================== */
@@ -521,7 +452,6 @@ const comparisonValue = {
     font-size: 14px;
     line-height: 1.65;
   }
-
 
   /* ==============================================================
      FACTS
@@ -572,7 +502,6 @@ const comparisonValue = {
 
     fill: currentColor;
   }
-
 
   /* ==============================================================
      TOGGLE
@@ -638,7 +567,6 @@ const comparisonValue = {
     transform: rotate(180deg);
   }
 
-
   /* ==============================================================
      FEATURES
   ============================================================== */
@@ -677,7 +605,6 @@ const comparisonValue = {
     line-height: 1;
   }
 
-
   /* ==============================================================
      NOTE
   ============================================================== */
@@ -690,7 +617,6 @@ const comparisonValue = {
     font-size: 12px;
     line-height: 1.55;
   }
-
 
   /* ==============================================================
      CTA
@@ -725,31 +651,19 @@ const comparisonValue = {
   .pack__cta--silver {
     border: 1px solid var(--line-strong);
 
-    background:
-      linear-gradient(
-        180deg,
-        #ffffff 0%,
-        #f0f1f2 48%,
-        #d7dade 100%
-      );
+    background: linear-gradient(180deg, #ffffff 0%, #f0f1f2 48%, #d7dade 100%);
 
     color: var(--ink);
 
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.9),
-      0 5px 14px rgba(16,17,20,.06);
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 5px 14px rgba(16, 17, 20, 0.06);
   }
 
   .pack__cta--silver:hover {
     border-color: #bfc3c8;
 
-    background:
-      linear-gradient(
-        180deg,
-        #ffffff 0%,
-        #e8eaec 48%,
-        #cfd3d7 100%
-      );
+    background: linear-gradient(180deg, #ffffff 0%, #e8eaec 48%, #cfd3d7 100%);
   }
 
   /* ROJO */
@@ -760,14 +674,12 @@ const comparisonValue = {
     background: #ff5757;
     color: #fff;
 
-    box-shadow:
-      0 8px 22px rgba(255, 87, 87, .18);
+    box-shadow: 0 8px 22px rgba(255, 87, 87, 0.18);
   }
 
   .pack__cta--primary:hover {
     background: #ff5757;
   }
-
 
   /* ==============================================================
      COMPARISON
@@ -848,7 +760,6 @@ const comparisonValue = {
     background: var(--red-tint);
   }
 
-
   /* ==============================================================
      TABLET
   ============================================================== */
@@ -863,7 +774,6 @@ const comparisonValue = {
       padding: 30px 26px 26px;
     }
   }
-
 
   /* ==============================================================
      MOBILE
@@ -901,7 +811,6 @@ const comparisonValue = {
     }
   }
 
-
   /* ==============================================================
      REDUCED MOTION
   ============================================================== */
@@ -920,47 +829,30 @@ const comparisonValue = {
   }
 </style>
 
-
 <script>
-  document
-    .querySelectorAll<HTMLElement>("[data-pack]")
-    .forEach((pack) => {
-      const toggle =
-        pack.querySelector<HTMLButtonElement>(
-          "[data-pack-toggle]"
-        );
+  document.querySelectorAll<HTMLElement>("[data-pack]").forEach((pack) => {
+    const toggle = pack.querySelector<HTMLButtonElement>("[data-pack-toggle]");
 
-      const features =
-        pack.querySelector<HTMLElement>(
-          "[data-pack-feats]"
-        );
+    const features = pack.querySelector<HTMLElement>("[data-pack-feats]");
 
-      const label =
-        pack.querySelector<HTMLElement>(
-          "[data-pack-label]"
-        );
+    const label = pack.querySelector<HTMLElement>("[data-pack-label]");
 
-      if (!toggle || !features || !label) return;
+    if (!toggle || !features || !label) return;
 
-      toggle.addEventListener("click", () => {
-        const isOpen =
-          toggle.dataset.open === "true";
+    toggle.addEventListener("click", () => {
+      const isOpen = toggle.dataset.open === "true";
 
-        const nextState = !isOpen;
+      const nextState = !isOpen;
 
-        toggle.dataset.open =
-          String(nextState);
+      toggle.dataset.open = String(nextState);
 
-        toggle.setAttribute(
-          "aria-expanded",
-          String(nextState)
-        );
+      toggle.setAttribute("aria-expanded", String(nextState));
 
-        features.hidden = !nextState;
+      features.hidden = !nextState;
 
-        label.textContent = nextState
-          ? toggle.dataset.labelOpen ?? ""
-          : toggle.dataset.labelClosed ?? "";
-      });
+      label.textContent = nextState
+        ? (toggle.dataset.labelOpen ?? "")
+        : (toggle.dataset.labelClosed ?? "");
     });
+  });
 </script>

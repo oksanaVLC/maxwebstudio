@@ -4,15 +4,12 @@
 <section class="section statement" aria-label="Max Web Studio statement">
   <div class="container">
     <div class="statement__inner">
-
       <p class="statement__text">
-
         <span class="statement__line">
           <span>THE</span>
 
           <span class="statement__word statement__word--future">
             FUTURE
-
             <svg
               class="statement__underline"
               viewBox="0 0 220 24"
@@ -47,7 +44,6 @@
 
           <span class="statement__word statement__word--build">
             BUILD
-
             <svg
               class="statement__underline"
               viewBox="0 0 160 24"
@@ -72,17 +68,12 @@
 
           <span>.</span>
         </span>
-
       </p>
 
-      <p class="statement__credit">
-        — MAX WEB STUDIO
-      </p>
-
+      <p class="statement__credit">— MAX WEB STUDIO</p>
     </div>
   </div>
 </section>
-
 
 <style>
   /* ==================================================
@@ -97,7 +88,6 @@
     overflow: hidden;
   }
 
-
   /* ==================================================
      INNER
      ================================================== */
@@ -107,7 +97,6 @@
 
     margin-inline: auto;
   }
-
 
   /* ==================================================
      TEXT
@@ -120,8 +109,7 @@
 
     font-family: var(--font-sans);
 
-    font-size:
-      clamp(38px, 5.7vw, 72px);
+    font-size: clamp(38px, 5.7vw, 72px);
 
     font-weight: 300;
 
@@ -131,7 +119,6 @@
 
     text-wrap: balance;
   }
-
 
   /* ==================================================
      LINES
@@ -149,7 +136,6 @@
     row-gap: 0.05em;
   }
 
-
   /* ==================================================
      WORD
      ================================================== */
@@ -163,7 +149,6 @@
 
     margin-inline: 0.02em;
   }
-
 
   /* ==================================================
      UNDERLINE
@@ -199,36 +184,28 @@
     vector-effect: non-scaling-stroke;
   }
 
-
   /* ==================================================
      FUTURE — BLUE
      ================================================== */
 
-  .statement__word--future
-    .statement__underline path {
+  .statement__word--future .statement__underline path {
     stroke: #03a9f4;
   }
-
 
   /* ==================================================
      BUILD — RED
      ================================================== */
 
-  .statement__word--build
-    .statement__underline path {
+  .statement__word--build .statement__underline path {
     stroke: #ff5757;
   }
-
 
   /* ==================================================
      CREDIT
      ================================================== */
 
   .statement__credit {
-    margin:
-      clamp(34px, 4vw, 54px)
-      0
-      0;
+    margin: clamp(34px, 4vw, 54px) 0 0;
 
     color: var(--muted);
 
@@ -243,16 +220,13 @@
     text-transform: uppercase;
   }
 
-
   /* ==================================================
      TABLET
      ================================================== */
 
   @media (max-width: 767px) {
-
     .statement__text {
-      font-size:
-        clamp(34px, 8.5vw, 58px);
+      font-size: clamp(34px, 8.5vw, 58px);
 
       line-height: 1.02;
 
@@ -282,16 +256,13 @@
     }
   }
 
-
   /* ==================================================
      SMALL MOBILE
      ================================================== */
 
   @media (max-width: 480px) {
-
     .statement__text {
-      font-size:
-        clamp(31px, 9.5vw, 46px);
+      font-size: clamp(31px, 9.5vw, 46px);
 
       letter-spacing: -0.025em;
     }
@@ -307,13 +278,11 @@
     }
   }
 
-
   /* ==================================================
      REDUCED MOTION
      ================================================== */
 
   @media (prefers-reduced-motion: reduce) {
-
     .statement__underline {
       transition: none;
     }

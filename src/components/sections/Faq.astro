@@ -1,5 +1,5 @@
 ---
-import { getLocale, useTranslations } from '../../i18n';
+import { getLocale, useTranslations } from "../../i18n";
 
 const lang = getLocale(Astro.currentLocale);
 const c = useTranslations(lang).faq;
@@ -7,7 +7,6 @@ const c = useTranslations(lang).faq;
 
 <section id="faq" class="section">
   <div class="container">
-
     <div class="faq__head">
       <h2 class="h2">{c.title}</h2>
       <p class="lead">{c.lead}</p>
@@ -17,30 +16,31 @@ const c = useTranslations(lang).faq;
       {c.items.map((it) => (
         <details class="faq__item">
           <summary>{it.q}</summary>
-          <div class="faq__a"><p>{it.a}</p></div>
+          <div class="faq__a">
+            <p>{it.a}</p>
+          </div>
         </details>
       ))}
     </div>
-
   </div>
 </section>
 
 <style>
-.faq__head {
-  max-width: 760px;
-  margin-inline: auto;
-  margin-bottom: 46px;
-}
+  .faq__head {
+    max-width: 760px;
+    margin-inline: auto;
+    margin-bottom: 46px;
+  }
 
-.faq__head .lead {
-  max-width: 54ch;
-  margin-top: 14px;
-}
+  .faq__head .lead {
+    max-width: 54ch;
+    margin-top: 14px;
+  }
 
-.faq {
-  max-width: 760px;
-  margin-inline: auto;
-}
+  .faq {
+    max-width: 760px;
+    margin-inline: auto;
+  }
 
   .faq__item {
     border-bottom: 1px solid var(--line);
@@ -61,7 +61,7 @@ const c = useTranslations(lang).faq;
   }
 
   .faq__item summary::after {
-    content: '+';
+    content: "+";
     position: absolute;
     right: 0;
     top: 50%;
@@ -72,7 +72,7 @@ const c = useTranslations(lang).faq;
   }
 
   .faq__item[open] summary::after {
-    content: '−';
+    content: "−";
   }
 
   .faq__a {

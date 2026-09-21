@@ -107,25 +107,25 @@ const c = content[lang];
 
 <style>
   /* ==================================================
-       HERO
-       ================================================== */
+         HERO
+         ================================================== */
 
   .hero {
-  position: relative;
-  isolation: isolate;
+    position: relative;
+    isolation: isolate;
 
-  min-height: 100svh;
+    min-height: 100svh;
 
-  padding-top: var(--header-h);
+    padding-top: var(--header-h);
 
-  overflow: hidden;
+    overflow: hidden;
 
-  background: #91b8c9;
-}
+    background: #91b8c9;
+  }
 
   /* ==================================================
-       VIDEO
-       ================================================== */
+         VIDEO
+         ================================================== */
 
   .hero__video {
     position: absolute;
@@ -140,8 +140,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       OVERLAY
-       ================================================== */
+         OVERLAY
+         ================================================== */
 
   .hero__overlay {
     position: absolute;
@@ -166,8 +166,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       CONTENT
-       ================================================== */
+         CONTENT
+         ================================================== */
 
   .hero__inner {
     position: relative;
@@ -190,8 +190,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       EYEBROW
-       ================================================== */
+         EYEBROW
+         ================================================== */
 
   .hero__eyebrow {
     display: flex;
@@ -221,8 +221,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       TITLE
-       ================================================== */
+         TITLE
+         ================================================== */
 
   .hero h1 {
     max-width: 900px;
@@ -249,8 +249,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       DESCRIPTION
-       ================================================== */
+         DESCRIPTION
+         ================================================== */
 
   .hero__description {
     max-width: 650px;
@@ -269,8 +269,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       BUTTONS
-       ================================================== */
+         BUTTONS
+         ================================================== */
 
   .hero__actions {
     display: flex;
@@ -310,8 +310,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       ARROW
-       ================================================== */
+         ARROW
+         ================================================== */
 
   .hero__arrow {
     position: relative;
@@ -367,8 +367,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       PRIMARY BUTTON
-       ================================================== */
+         PRIMARY BUTTON
+         ================================================== */
 
   .hero__button--primary {
     background: var(--red);
@@ -383,8 +383,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       SECONDARY BUTTON
-       ================================================== */
+         SECONDARY BUTTON
+         ================================================== */
 
   .hero__button--secondary {
     border: 1px solid rgba(255, 255, 255, 0.65);
@@ -405,8 +405,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       SMALL NOTE
-       ================================================== */
+         SMALL NOTE
+         ================================================== */
 
   .hero__highlight {
     display: inline-flex;
@@ -434,8 +434,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       SCROLL
-       ================================================== */
+         SCROLL
+         ================================================== */
 
   .hero__scroll {
     position: absolute;
@@ -495,8 +495,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       TEXT REVEAL — INITIAL STATE
-       ================================================== */
+         TEXT REVEAL — INITIAL STATE
+         ================================================== */
 
   .hero__word {
     display: inline-block;
@@ -551,12 +551,12 @@ const c = content[lang];
   /* Si el JS no carga, mostramos todo por defecto */
   .hero:not([data-hero-ready]) [data-hero-animate] {
     /* fallback: nada visible hasta que el script corra,
-           pero solo si el script está presente. Ver script. */
+               pero solo si el script está presente. Ver script. */
   }
 
   /* ==================================================
-       TABLET / DESKTOP
-       ================================================== */
+         TABLET / DESKTOP
+         ================================================== */
 
   @media (min-width: 768px) {
     .hero__inner {
@@ -565,8 +565,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       MOBILE
-       ================================================== */
+         MOBILE
+         ================================================== */
 
   @media (max-width: 767px) {
     .hero {
@@ -593,9 +593,9 @@ const c = content[lang];
     }
 
     /* AQUÍ ESTABA EL PROBLEMA:
-           antes tenías align-items: flex-end + padding
-           enorme porque el hero ocupaba 100svh.
-           Ahora el contenido se centra en el espacio disponible. */
+               antes tenías align-items: flex-end + padding
+               enorme porque el hero ocupaba 100svh.
+               Ahora el contenido se centra en el espacio disponible. */
 
     .hero__inner {
       align-items: center;
@@ -644,8 +644,8 @@ const c = content[lang];
   }
 
   /* ==================================================
-       REDUCED MOTION
-       ================================================== */
+         REDUCED MOTION
+         ================================================== */
 
   @media (prefers-reduced-motion: reduce) {
     .hero__button,
