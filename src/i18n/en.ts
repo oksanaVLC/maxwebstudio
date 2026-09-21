@@ -184,7 +184,7 @@ export default {
     eyebrow: "The way we think",
     title: "We don't build websites to fit in. We build them to stand out.",
     lead: "Creativity, judgement and the freedom to change direction when a better idea appears. Because not everything good can be planned.",
-    footer: "Long live creativity!",
+    footer: ["Long", "live", "creativity!"],
     imageAlt: "Artistic collage of posters and graphic elements",
   },
   pricing: {

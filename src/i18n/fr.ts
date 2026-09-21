@@ -186,7 +186,7 @@ export default {
     title:
       "Nous ne créons pas des sites pour rentrer dans le moule. Nous les créons pour se démarquer.",
     lead: "Créativité, discernement et liberté de changer de direction lorsqu'une meilleure idée apparaît. Parce que tout ce qui est bon ne peut pas être planifié.",
-    footer: "Vive la créativité !",
+    footer: ["Vive", "la", "créativité !"],
     imageAlt: "Collage artistique de posters et d'éléments graphiques",
   },
   pricing: {

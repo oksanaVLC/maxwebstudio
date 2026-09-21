@@ -184,7 +184,7 @@ export default {
     eyebrow: "Nuestra forma de pensar",
     title: "No hacemos webs para encajar. Las hacemos para destacar.",
     lead: "Creatividad, criterio y libertad para cambiar de dirección cuando aparece una idea mejor. Porque no todo lo bueno se puede planificar.",
-    footer: "¡Viva la creatividad!",
+    footer: ["¡Viva", "la", "creatividad!"],
     imageAlt: "Collage artístico de pósters y elementos gráficos",
   },
   pricing: {
