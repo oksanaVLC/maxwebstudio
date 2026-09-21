@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content';
+import { getLocale } from '../../../i18n';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+
+  return posts
+    .filter((post) => !post.data.draft)
+    .map((post) => {
+      const [lang, ...slugParts] = post.id.split('/');
+      const slug = slugParts.join('/').replace(/\.md$/, '');
+
+      return {
+        params: {
+          lang,
+          slug,
+        },
+        props: {
+          post,
+        },
+      };
+    });
+}
+
+const lang = getLocale(Astro.params.lang);
+const { post } = Astro.props;
+
+const { Content } = await render(post);
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+>
+  <article class="section">
+    <div class="container">
+      <header>
+        <p>{post.data.pubDate.toLocaleDateString(lang)}</p>
+        <h1>{post.data.title}</h1>
+        <p>{post.data.description}</p>
+      </header>
+
+      <div>
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

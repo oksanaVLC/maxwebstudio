@@ -1,0 +1,662 @@
+---
+const video = "/videos/valencia.mp4";
+const imacMockup = "/images/imac-mockup.webp";
+const projectImage = "/images/poster-type.jpg";
+---
+
+<section
+  id="inspiration"
+  class="inspiration"
+  aria-labelledby="inspiration-title"
+>
+  <!-- ================================================
+       VALENCIA VIDEO
+       ================================================ -->
+
+  <div class="inspiration__video-wrap">
+    <video
+      src={video}
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      class="inspiration__video"
+      aria-hidden="true"
+    ></video>
+
+    <div class="inspiration__video-overlay"></div>
+  </div>
+
+
+  <!-- ================================================
+       CONTENT
+       ================================================ -->
+
+  <div class="container">
+    <div class="inspiration__grid">
+
+      <!-- TEXT -->
+
+      <div class="inspiration__text">
+
+        <p class="inspiration__eyebrow">
+          De dónde sacamos la inspiración
+        </p>
+
+        <h2
+          id="inspiration-title"
+          class="inspiration__title"
+          data-fall
+        >
+          Diseñamos desde Valencia
+        </h2>
+
+        <div class="inspiration__copy">
+
+          <p class="inspiration__lead">
+            Nuestro estudio de diseño y desarrollo web está en Valencia:
+            una ciudad de color, de mucha luz, donde la tradición y la
+            modernidad conviven sin pedirse permiso.
+          </p>
+
+          <p>
+            Aquí un mercado modernista de principios de siglo está a diez
+            minutos de la arquitectura más experimental del Mediterráneo.
+            Esa mezcla enseña algo que aplicamos a cada web: lo nuevo
+            funciona mejor cuando respeta lo que ya había, y lo clásico
+            se sostiene cuando se cuida el detalle.
+          </p>
+
+          <p>
+            De la luz del Mediterráneo aprendimos a trabajar con espacio
+            y claridad; de la cerámica y los azulejos, el color y el
+            patrón; de las fiestas populares, que una idea bien hecha
+            se recuerda durante años. Eso es lo que intentamos meter
+            en cada proyecto.
+          </p>
+
+        </div>
+
+
+        <!-- INSPIRATION TAGS -->
+
+        <div class="inspiration__tags" aria-label="Inspiración">
+
+          <span>Luz mediterránea</span>
+
+          <span>Arquitectura experimental</span>
+
+          <span>Color y cerámica</span>
+
+          <span>Tradición viva</span>
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================================
+           MOCKUPS
+           ================================================ -->
+
+      <div class="inspiration__devices">
+
+        <div class="mockup">
+
+          <!-- iMac -->
+
+          <div class="mockup__imac">
+
+            <img
+              src={imacMockup}
+              alt=""
+              class="mockup__frame"
+              decoding="async"
+            />
+
+            <div class="mockup__screen">
+              <img
+                src={projectImage}
+                alt="Proyecto web de Max Web Studio"
+                decoding="async"
+              />
+            </div>
+
+          </div>
+
+
+          <!-- PHONE -->
+
+          <div class="mockup__phone">
+
+            <div class="mockup__phone-screen">
+              <img
+                src={projectImage}
+                alt=""
+                decoding="async"
+              />
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <span class="inspiration__caption">
+          Webs 100 % responsive
+        </span>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<style>
+  /* ==================================================
+     INSPIRATION
+     ================================================== */
+
+  .inspiration {
+    position: relative;
+
+    background: var(--surface);
+
+    overflow: hidden;
+  }
+
+
+  /* ==================================================
+     VIDEO
+     ================================================== */
+
+  .inspiration__video-wrap {
+    position: relative;
+
+    width: 100%;
+
+    height:
+      clamp(300px, 48vw, 620px);
+
+    overflow: hidden;
+
+    background: #dceff2;
+  }
+
+
+  .inspiration__video {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+  }
+
+
+  /*
+   * Muy ligero tratamiento para que el vídeo
+   * no compita demasiado con el contenido posterior.
+   */
+
+  .inspiration__video-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, .02) 0%,
+        rgba(255, 255, 255, 0) 60%,
+        rgba(16, 17, 20, .08) 100%
+      );
+  }
+
+
+  /* ==================================================
+     GRID
+     ================================================== */
+
+  .inspiration__grid {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.35fr)
+      minmax(320px, .85fr);
+
+    align-items: center;
+
+    gap:
+      clamp(60px, 8vw, 120px);
+
+    padding-block:
+      clamp(80px, 9vw, 120px);
+  }
+
+
+  /* ==================================================
+     TEXT
+     ================================================== */
+
+  .inspiration__text {
+    max-width: 720px;
+  }
+
+
+  .inspiration__eyebrow {
+    margin: 0 0 18px;
+
+    color: var(--muted);
+
+    font-family: var(--font-sans);
+
+    font-size: var(--fs-small);
+
+    font-weight: 500;
+
+    letter-spacing: .02em;
+  }
+
+
+  .inspiration__title {
+    max-width: 720px;
+
+    margin: 0 0 30px;
+
+    color: var(--ink);
+
+    font-family: var(--font-sans);
+
+    font-size:
+      clamp(38px, 5vw, 62px);
+
+    font-weight: 300;
+
+    line-height: 1.05;
+
+    letter-spacing: -.045em;
+  }
+
+
+  /* ==================================================
+     COPY
+     ================================================== */
+
+  .inspiration__copy p {
+    margin: 0 0 20px;
+
+    color: var(--ink-soft);
+
+    font-family: var(--font-sans);
+
+    font-size: var(--fs-body);
+
+    font-weight: 400;
+
+    line-height: 1.72;
+  }
+
+
+  .inspiration__copy .inspiration__lead {
+    margin-bottom: 22px;
+
+    color: var(--ink-body);
+
+    font-size: var(--fs-lead);
+
+    line-height: 1.65;
+  }
+
+
+  .inspiration__copy p:last-child {
+    margin-bottom: 0;
+  }
+
+
+  /* ==================================================
+     TAGS
+     ================================================== */
+
+  .inspiration__tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    margin-top: 34px;
+  }
+
+
+  .inspiration__tags span {
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 36px;
+
+    padding:
+      8px 13px;
+
+    border:
+      1px solid var(--line);
+
+    background: var(--surface-alt);
+
+    color: var(--ink-soft);
+
+    font-family: var(--font-sans);
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    letter-spacing: .01em;
+  }
+
+
+  /* ==================================================
+     DEVICES
+     ================================================== */
+
+  .inspiration__devices {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 14px;
+
+    width: 100%;
+  }
+
+
+  .mockup {
+    position: relative;
+
+    width: min(100%, 420px);
+  }
+
+
+  /* ==================================================
+     iMAC
+     ================================================== */
+
+  .mockup__imac {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1000 / 1159;
+  }
+
+
+  .mockup__frame {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+  }
+
+
+  .mockup__screen {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    overflow: hidden;
+
+    background: var(--screen-dark);
+
+    clip-path:
+      polygon(
+        23% 27%,
+        86% 16.6%,
+        79% 66.1%,
+        14.2% 68%
+      );
+  }
+
+
+  .mockup__screen img {
+    position: absolute;
+
+    left: 8%;
+    top: 8%;
+
+    width: 84%;
+    height: 68%;
+
+    max-width: none;
+
+    object-fit: cover;
+
+    transform:
+      skewY(-10.8deg);
+
+    transform-origin: center;
+  }
+
+
+  /* ==================================================
+     PHONE
+     ================================================== */
+
+  .mockup__phone {
+    position: absolute;
+
+    left: -6%;
+    bottom: 2%;
+
+    z-index: 3;
+
+    width: 19%;
+
+    aspect-ratio: 9 / 18.5;
+
+    padding: 3px;
+
+    background:
+      linear-gradient(
+        160deg,
+        #33363b 0%,
+        #101114 64%
+      );
+
+    border-radius: 9px;
+
+    box-shadow:
+      -12px 16px 30px
+      rgba(16, 17, 20, .28);
+
+    transform:
+      perspective(620px)
+      rotateY(22deg)
+      rotateX(5deg)
+      rotateZ(-3deg);
+
+    transform-origin: bottom right;
+  }
+
+
+  .mockup__phone-screen {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 7px;
+
+    background: var(--screen-dark);
+  }
+
+
+  .mockup__phone-screen img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+
+
+  /* ==================================================
+     CAPTION
+     ================================================== */
+
+  .inspiration__caption {
+    color: var(--muted);
+
+    font-family: var(--font-sans);
+
+    font-size: var(--fs-small);
+
+    letter-spacing: .02em;
+  }
+
+
+  /* ==================================================
+     TABLET
+     ================================================== */
+
+  @media (max-width: 1023px) {
+
+    .inspiration__grid {
+      grid-template-columns: 1fr;
+
+      gap: 70px;
+    }
+
+
+    .inspiration__text {
+      max-width: 760px;
+    }
+
+
+    .inspiration__devices {
+      max-width: 480px;
+
+      margin-inline: auto;
+    }
+  }
+
+
+  /* ==================================================
+     MOBILE
+     ================================================== */
+
+  @media (max-width: 767px) {
+
+    .inspiration__video-wrap {
+      height: 360px;
+    }
+
+
+    .inspiration__grid {
+      padding-block: 72px;
+
+      gap: 60px;
+    }
+
+
+    .inspiration__title {
+      font-size:
+        clamp(36px, 10vw, 52px);
+    }
+
+
+    .inspiration__copy p {
+      font-size: 15px;
+
+      line-height: 1.68;
+    }
+
+
+    .inspiration__copy .inspiration__lead {
+      font-size: 17px;
+    }
+
+
+    .inspiration__tags {
+      gap: 8px;
+    }
+
+
+    .inspiration__tags span {
+      font-size: 11.5px;
+    }
+  }
+
+
+  /* ==================================================
+     REDUCED MOTION
+     ================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .inspiration__video {
+      animation: none;
+    }
+  }
+</style>
+
+
+<script>
+  const inspiration = document.querySelector(".inspiration");
+
+  if (inspiration) {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      inspiration
+        .querySelectorAll("[data-fall]")
+        .forEach((element) => {
+          element.setAttribute("data-fall", "in");
+        });
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            entry.target
+              .querySelectorAll("[data-fall]")
+              .forEach((element) => {
+                element.setAttribute("data-fall", "in");
+              });
+
+            observer.unobserve(entry.target);
+          });
+        },
+        {
+          threshold: 0.12,
+        }
+      );
+
+      observer.observe(inspiration);
+    }
+  }
+</script>

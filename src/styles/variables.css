@@ -1,0 +1,164 @@
+/* ===========================================================
+   Max Web Studio — Design Tokens
+   =========================================================== */
+
+:root {
+  /* =========================================================
+     COLORS — INK
+     ========================================================= */
+
+  --ink: #101114;
+  --ink-soft: #47494f;
+  --ink-body: #4d5057;
+  --muted: #6f747c;
+  --muted-soft: #8c9299;
+  --faint: #b6bbc2;
+
+  /* =========================================================
+     COLORS — SURFACES
+     ========================================================= */
+
+  --surface: #ffffff;
+  --surface-alt: #fbfbfc;
+  --surface-soft: #f4f7f8;
+  --surface-dark: #101114;
+  --screen-dark: #16171a;
+
+  /* =========================================================
+     COLORS — BORDERS / LINES
+     ========================================================= */
+
+  --line: #e6e8ea;
+  --line-soft: #eceef0;
+  --line-softer: #f0f1f2;
+  --line-faint: #f4f5f6;
+  --line-input: #dfe1e4;
+  --line-strong: #d9dcdf;
+
+  /* =========================================================
+     BRAND
+     ========================================================= */
+
+  --red: #ff5757;
+  --red-hover: #f03d3d;
+  --red-tint: #fdf5f6;
+  --star: #f5b301;
+
+  /* =========================================================
+     DECORATIVE GRADIENTS
+     ========================================================= */
+
+  --red-corner: linear-gradient(135deg, #c01423 0%, #8d0b17 100%);
+
+  --silver: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #eceef0 44%,
+    #c2c7cd 72%,
+    #f6f7f8 100%
+  );
+
+  --silver-corner: linear-gradient(135deg, #b9bec5 0%, #8e949c 100%);
+
+  --avatar: linear-gradient(180deg, #f4f5f6 0%, #dfe2e5 60%, #c1c6cc 100%);
+
+  /* =========================================================
+     TYPOGRAPHY
+     ========================================================= */
+
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Headings */
+
+  --fs-h1: clamp(42px, 6vw, 90px);
+
+  --fs-h2: clamp(28px, 4vw, 42px);
+
+  --fs-h3: clamp(17px, 1.35vw, 19px);
+
+  /* Body */
+
+  --fs-lead: clamp(16px, 1.15vw, 17.5px);
+
+  --fs-body: clamp(14px, 1vw, 15px);
+
+  --fs-small: clamp(12px, 0.9vw, 13.5px);
+
+  --fs-micro: clamp(10px, 0.75vw, 11px);
+
+  /* Line heights */
+
+  --lh-body: 1.6;
+  --lh-heading: 1.1;
+
+  /* =========================================================
+     LAYOUT
+     ========================================================= */
+
+  --container: 1240px;
+
+  /*
+    Horizontal breathing room.
+
+    Mobile:
+    ~20px
+
+    Desktop:
+    ~40px
+  */
+
+  --pad-x: clamp(18px, 2.2vw, 40px);
+
+  /*
+    Kept as a separate desktop token for components
+    that explicitly need the medium breakpoint value.
+  */
+
+  --pad-x-md: clamp(32px, 3.2vw, 40px);
+
+  /*
+    Vertical spacing between sections.
+
+    Mobile:
+    ~64px
+
+    Desktop:
+    up to 92px
+  */
+
+  --section-y: clamp(64px, 7vw, 92px);
+
+  /*
+    Header height is intentionally stable.
+    It is used by viewport calculations and anchors.
+  */
+
+  --header-h: 76px;
+
+  /* =========================================================
+     SHAPES
+     ========================================================= */
+
+  --notch: clamp(12px, 1.2vw, 15px);
+
+  --notch-sm: clamp(10px, 1vw, 13px);
+
+  --notch-card: clamp(18px, 1.9vw, 24px);
+
+  /* =========================================================
+     SHADOWS
+     ========================================================= */
+
+  --shadow-card: 0 clamp(6px, 0.8vw, 10px) clamp(14px, 1.8vw, 22px)
+    rgba(16, 17, 20, 0.14);
+
+  --shadow-pop: 0 clamp(12px, 1.5vw, 18px) clamp(32px, 4vw, 50px)
+    rgba(16, 17, 20, 0.14);
+
+  /* =========================================================
+     MOTION
+     ========================================================= */
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}

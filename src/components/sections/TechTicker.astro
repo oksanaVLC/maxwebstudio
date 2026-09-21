@@ -1,0 +1,277 @@
+---
+const technologies = [
+  {
+    name: 'Angular',
+    slug: 'angular',
+  },
+  {
+    name: 'Astro',
+    slug: 'astro',
+  },
+  {
+    name: 'TypeScript',
+    slug: 'typescript',
+  },
+  {
+    name: 'Node.js',
+    slug: 'nodejs',
+  },
+  {
+    name: 'CSS',
+    slug: 'css',
+  },
+  {
+    name: 'HTML',
+    slug: 'html',
+  },
+  {
+    name: 'Responsive Design',
+    slug: 'responsive',
+  },
+  {
+    name: 'Accesibilidad',
+    slug: 'accessibility',
+  },
+  {
+    name: 'SEO técnico',
+    slug: 'seo',
+  },
+];
+
+const items = [...technologies, ...technologies];
+---
+
+<section class="tech-ticker" aria-labelledby="tech-title">
+  <h2 id="tech-title" class="sr-only">
+    Tecnologías y especialidades
+  </h2>
+
+  <div class="tech-ticker__viewport">
+    <div class="tech-ticker__track">
+      {items.map((tech, index) => (
+        <div
+          class="tech-ticker__item"
+          data-tech={tech.slug}
+          aria-hidden={index >= technologies.length ? 'true' : undefined}
+        >
+          <span class="tech-ticker__logo" aria-hidden="true">
+            <img
+              src={`/images/tech/${tech.slug}.svg`}
+              alt=""
+              loading="lazy"
+            />
+          </span>
+
+          <span class="tech-ticker__name">{tech.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const ticker = document.querySelector('.tech-ticker');
+  const viewport = ticker?.querySelector('.tech-ticker__viewport');
+  const track = ticker?.querySelector('.tech-ticker__track');
+
+  if (ticker && viewport && track) {
+    let paused = false;
+    let position = 0;
+    let lastTime = performance.now();
+
+    const speed = 28;
+
+    const animate = (time: number) => {
+      const delta = (time - lastTime) / 1000;
+      lastTime = time;
+
+      if (!paused && viewport.scrollWidth > viewport.clientWidth) {
+        position += speed * delta;
+
+        const halfWidth = track.scrollWidth / 2;
+
+        if (position >= halfWidth) {
+          position -= halfWidth;
+        }
+
+        track.style.transform = `translate3d(${-position}px, 0, 0)`;
+      }
+
+      requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+
+    ticker.addEventListener('mouseenter', () => {
+      paused = true;
+    });
+
+    ticker.addEventListener('mouseleave', () => {
+      paused = false;
+      lastTime = performance.now();
+    });
+
+    viewport.addEventListener(
+      'wheel',
+      (event) => {
+        if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+          event.preventDefault();
+          position += event.deltaY;
+        } else {
+          position += event.deltaX;
+        }
+
+        const halfWidth = track.scrollWidth / 2;
+
+        if (position < 0) {
+          position += halfWidth;
+        }
+
+        if (position >= halfWidth) {
+          position -= halfWidth;
+        }
+
+        track.style.transform = `translate3d(${-position}px, 0, 0)`;
+      },
+      { passive: false }
+    );
+  }
+</script>
+
+<style>
+  .tech-ticker {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .tech-ticker__viewport {
+    width: 100%;
+    overflow: hidden;
+    touch-action: pan-x;
+    cursor: default;
+  }
+
+  .tech-ticker__track {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    will-change: transform;
+  }
+
+  .tech-ticker__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 104px;
+    padding-inline: 32px;
+    color: var(--muted-soft);
+    white-space: nowrap;
+    transition: color 250ms ease;
+  }
+
+  .tech-ticker__logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+  }
+
+  .tech-ticker__logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.38;
+    filter: grayscale(1);
+    transition:
+      opacity 250ms ease,
+      filter 250ms ease,
+      transform 250ms ease;
+  }
+
+  .tech-ticker__name {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /*
+   * Al hacer hover mostramos el SVG real
+   * con sus colores originales.
+   */
+  .tech-ticker__item:hover {
+    color: var(--ink);
+  }
+
+  .tech-ticker__item:hover .tech-ticker__logo img {
+    opacity: 1;
+    filter: none;
+    transform: scale(1.08);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 767px) {
+    .tech-ticker__viewport {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .tech-ticker__viewport::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tech-ticker__track {
+      transform: none !important;
+    }
+
+    .tech-ticker__item {
+      min-height: 88px;
+      padding-inline: 22px;
+    }
+
+    .tech-ticker__item:hover {
+      color: var(--muted-soft);
+    }
+
+    .tech-ticker__item:hover .tech-ticker__logo img {
+      opacity: 0.38;
+      filter: grayscale(1);
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tech-ticker__track {
+      transform: none !important;
+    }
+
+    .tech-ticker__viewport {
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tech-ticker__viewport::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tech-ticker__item:hover .tech-ticker__logo img {
+      transform: none;
+    }
+  }
+</style>

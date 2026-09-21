@@ -1,0 +1,534 @@
+/* ===========================================================
+   Max Web Studio — Global Styles
+   =========================================================== */
+
+@import "./variables.css";
+@import "./animations.css";
+
+@import "@fontsource/plus-jakarta-sans/300.css";
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/plus-jakarta-sans/800.css";
+
+@import "@fontsource-variable/fraunces";
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+main {
+  min-width: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
+img,
+picture,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: inherit;
+}
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  margin: 0;
+}
+
+button {
+  border: 0;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: var(--lh-heading);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+strong {
+  font-weight: 700;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--red);
+  color: var(--surface);
+}
+
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 8px;
+  z-index: 1000;
+
+  padding: 8px 14px;
+
+  background: var(--ink);
+  color: var(--surface);
+
+  border-radius: 4px;
+
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+/* =========================================================
+   LAYOUT — CONTAINER
+   ========================================================= */
+
+/*
+  The page itself stays full-width.
+
+  Horizontal spacing belongs to the container so that sections
+  can still have full-width backgrounds, borders and graphics.
+*/
+
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + (var(--pad-x) * 2));
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: calc(var(--container) + (var(--pad-x-md) * 2));
+    padding-inline: var(--pad-x-md);
+  }
+}
+
+/* =========================================================
+   LAYOUT — SECTIONS
+   ========================================================= */
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.section--alt {
+  background: var(--surface-alt);
+  border-top: 1px solid var(--line-softer);
+  border-bottom: 1px solid var(--line-softer);
+}
+
+.section--top {
+  border-top: 1px solid var(--line-softer);
+}
+
+/* =========================================================
+   SECTION HEAD
+   ========================================================= */
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  margin-bottom: 46px;
+}
+
+.h2 {
+  margin: 0;
+
+  font-size: var(--fs-h2);
+  font-weight: 800;
+}
+
+.lead {
+  max-width: 400px;
+
+  margin: 0;
+
+  color: var(--muted);
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+}
+
+.eyebrow {
+  color: var(--muted);
+
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  line-height: 1.4;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   BUTTONS — CUT CORNER
+   ========================================================= */
+
+.btn {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 54px;
+  padding-inline: 30px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s var(--ease),
+    filter 0.2s ease;
+
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--notch)),
+    calc(100% - var(--notch)) 100%,
+    0 100%
+  );
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn::after {
+  content: "";
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  width: var(--notch);
+  height: var(--notch);
+
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.btn > span {
+  position: relative;
+
+  font-size: var(--fs-body);
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Primary */
+
+.btn--primary {
+  background: var(--red);
+}
+
+.btn--primary::after {
+  background: var(--red-corner);
+}
+
+.btn--primary > span {
+  color: var(--surface);
+}
+
+/* Silver */
+
+.btn--silver {
+  background: var(--silver);
+}
+
+.btn--silver::after {
+  background: var(--silver-corner);
+}
+
+.btn--silver > span {
+  color: var(--ink);
+}
+
+/* Small */
+
+.btn--sm {
+  --notch: var(--notch-sm);
+
+  min-height: 44px;
+  padding-inline: 22px;
+}
+
+.btn--sm > span {
+  font-size: 14px;
+}
+
+/* Full width */
+
+.btn--block {
+  width: 100%;
+  padding-inline: 0;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--notch-card)) 0,
+    100% var(--notch-card),
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Bottom-right clipped corner */
+
+.clip-br {
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
+}
+
+/* =========================================================
+   GRIDS
+   ========================================================= */
+
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.grid--2,
+.grid--3,
+.grid--4 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* =========================================================
+   SIMPLE UTILITIES
+   ========================================================= */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row--wrap {
+  flex-wrap: wrap;
+}
+
+.only-desktop {
+  display: none;
+}
+
+.only-mobile {
+  display: block;
+}
+
+/* =========================================================
+   HERO ANIMATIONS
+   ========================================================= */
+
+@keyframes triIn {
+  0% {
+    opacity: 0;
+    transform: rotateY(90deg) rotateZ(-35deg) scale(0.35);
+  }
+
+  62% {
+    opacity: 1;
+    transform: rotateY(0deg) rotateZ(4deg) scale(1.06);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateY(0deg) rotateZ(0deg) scale(1);
+  }
+}
+
+@keyframes triDrift {
+  0%,
+  100% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (min-width: 640px) {
+  .grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — DESKTOP
+   ========================================================= */
+
+@media (min-width: 768px) {
+  .section-head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .grid--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .only-desktop {
+    display: block;
+  }
+
+  .only-mobile {
+    display: none;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1024px) {
+  .grid--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

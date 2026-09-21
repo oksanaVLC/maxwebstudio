@@ -1,0 +1,21 @@
+---
+import { LOCALES, getLocale } from '../../i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({
+    params: { lang, slug: 'example' },
+  }));
+}
+
+const lang = getLocale(Astro.params.lang);
+const slug = Astro.params.slug;
+---
+
+<BaseLayout>
+  <section class="section">
+    <div class="container">
+      <h1>{slug}</h1>
+    </div>
+  </section>
+</BaseLayout>

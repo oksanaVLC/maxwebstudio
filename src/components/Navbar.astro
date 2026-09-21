@@ -1,0 +1,1129 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLocale, useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  lang?: Locale;
+}
+
+const lang = getLocale(Astro.props.lang ?? Astro.currentLocale);
+const t = useTranslations(lang);
+
+const home = getRelativeLocaleUrl(lang, '');
+
+const navLinks = [
+  { href: `${home}#services`, label: t.nav.services },
+  { href: `${home}#process`, label: t.nav.process },
+  { href: `${home}#work`, label: t.nav.work },
+  { href: `${home}#pricing`, label: t.nav.pricing },
+  { href: `${home}#faq`, label: t.nav.faq },
+  { href: `${home}blog/`, label: t.nav.blog },
+];
+
+const languages = [
+  { code: 'es', label: 'Español', href: '/es/' },
+  { code: 'en', label: 'English', href: '/en/' },
+  { code: 'ru', label: 'Русский', href: '/ru/' },
+  { code: 'fr', label: 'Français', href: '/fr/' },
+] as const;
+
+const currentLanguage =
+  languages.find((language) => language.code === lang) ??
+  languages[0];
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+
+    <!-- Logo -->
+    <a
+      href={home}
+      class="site-header__logo"
+      aria-label={t.meta.siteName}
+    >
+      <img
+        class="site-header__logo-default"
+        src="/images/lightBold.svg"
+        alt={t.meta.siteName}
+        width="220"
+        height="auto"
+      />
+
+      <img
+        class="site-header__logo-scrolled"
+        src="/images/MAXWEBstudioDARK.svg"
+        alt=""
+        width="220"
+        height="auto"
+        aria-hidden="true"
+      />
+    </a>
+
+    <!-- Desktop navigation -->
+    <nav
+      class="site-header__nav"
+      aria-label={t.a11y.mainNavigation}
+    >
+      {navLinks.map((link) => (
+        <a href={link.href}>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Desktop actions -->
+    <div class="site-header__actions">
+
+      <!-- Language selector -->
+      <div class="language-selector">
+        <button
+          class="language-selector__trigger"
+          type="button"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-controls="language-menu"
+          aria-label={t.a11y.switchLanguage}
+        >
+          <svg
+            class="language-selector__globe"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="9"
+            />
+            <path d="M3 12h18" />
+            <path d="M12 3c2.2 2.5 3.3 5.5 3.3 9s-1.1 6.5-3.3 9" />
+            <path d="M12 3c-2.2 2.5-3.3 5.5-3.3 9s1.1 6.5 3.3 9" />
+          </svg>
+
+          <span class="language-selector__current">
+            {currentLanguage.code.toUpperCase()}
+          </span>
+
+          <svg
+            class="language-selector__chevron"
+            viewBox="0 0 12 7"
+            aria-hidden="true"
+          >
+            <path d="M1 1l5 5 5-5" />
+          </svg>
+        </button>
+
+        <div
+          class="language-selector__menu"
+          id="language-menu"
+          role="menu"
+        >
+          {languages.map((language) => (
+            <a
+              href={language.href}
+              class:list={{
+                'language-selector__option': true,
+                'is-active': language.code === lang,
+              }}
+              role="menuitem"
+              aria-current={
+                language.code === lang ? 'page' : undefined
+              }
+            >
+              <span class="language-selector__code">
+                {language.code.toUpperCase()}
+              </span>
+
+              <span class="language-selector__name">
+                {language.label}
+              </span>
+
+              {language.code === lang && (
+                <span
+                  class="language-selector__check"
+                  aria-hidden="true"
+                >
+                  ✓
+                </span>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA -->
+    <!-- CTA desktop -->
+<a href={`${home}#contact`} class="site-header__cta">
+  {t.cta.start}
+</a>
+
+    </div>
+
+    <!-- Mobile menu button -->
+    <button
+      class="site-header__menu"
+      type="button"
+      aria-label={t.a11y.openMenu}
+      aria-expanded="false"
+      aria-controls="mobile-navigation"
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <!-- Mobile navigation -->
+  <div
+    class="site-header__mobile"
+    id="mobile-navigation"
+  >
+    <nav
+      class="site-header__mobile-nav"
+      aria-label={t.a11y.mainNavigation}
+    >
+      {navLinks.map((link) => (
+        <a href={link.href}>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Mobile languages -->
+    <div class="site-header__mobile-language">
+
+      <p class="site-header__mobile-language-title">
+        {t.a11y.switchLanguage}
+      </p>
+
+      <div class="site-header__mobile-language-list">
+        {languages.map((language) => (
+          <a
+            href={language.href}
+            class:list={{
+              'site-header__mobile-language-option': true,
+              'is-active': language.code === lang,
+            }}
+            aria-current={
+              language.code === lang ? 'page' : undefined
+            }
+          >
+            <span>
+              {language.code.toUpperCase()}
+            </span>
+
+            <span>
+              {language.label}
+            </span>
+
+            {language.code === lang && (
+              <span aria-hidden="true">
+                ✓
+              </span>
+            )}
+          </a>
+        ))}
+      </div>
+
+    </div>
+
+    <!-- Mobile CTA -->
+
+<a href={`${home}#contact`} class="site-header__mobile-cta">
+  {t.cta.start}
+</a>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('.site-header');
+  const menu = document.querySelector('.site-header__menu');
+  const mobileNav = document.querySelector('.site-header__mobile');
+
+  const languageSelector =
+    document.querySelector('.language-selector');
+
+ const languageTrigger =
+  document.querySelector<HTMLButtonElement>('.language-selector__trigger');
+
+
+
+  if (header) {
+    const updateScrollState = () => {
+      header.classList.toggle(
+        'is-scrolled',
+        window.scrollY > 8
+      );
+    };
+
+    updateScrollState();
+
+    window.addEventListener(
+      'scroll',
+      updateScrollState,
+      { passive: true }
+    );
+
+    header.addEventListener('mouseenter', () => {
+      header.classList.add('is-hovered');
+    });
+
+    header.addEventListener('mouseleave', () => {
+      header.classList.remove('is-hovered');
+    });
+  }
+
+
+  /*
+   * LANGUAGE SELECTOR
+   */
+
+  if (languageSelector && languageTrigger) {
+    languageTrigger.addEventListener('click', (event) => {
+      event.stopPropagation();
+
+      const isOpen =
+        languageSelector.classList.contains('is-open');
+
+      languageSelector.classList.toggle(
+        'is-open',
+        !isOpen
+      );
+
+      languageTrigger.setAttribute(
+        'aria-expanded',
+        String(!isOpen)
+      );
+    });
+
+    document.addEventListener('click', (event) => {
+      if (
+        !languageSelector.contains(
+          event.target as Node
+        )
+      ) {
+        languageSelector.classList.remove(
+          'is-open'
+        );
+
+        languageTrigger.setAttribute(
+          'aria-expanded',
+          'false'
+        );
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        languageSelector.classList.remove(
+          'is-open'
+        );
+
+        languageTrigger.setAttribute(
+          'aria-expanded',
+          'false'
+        );
+
+        languageTrigger.focus();
+      }
+    });
+  }
+
+
+  /*
+   * MOBILE MENU
+   */
+
+  if (menu && mobileNav) {
+    menu.addEventListener('click', () => {
+      const isOpen =
+        menu.getAttribute('aria-expanded') === 'true';
+
+      menu.setAttribute(
+        'aria-expanded',
+        String(!isOpen)
+      );
+
+      mobileNav.classList.toggle(
+        'is-open',
+        !isOpen
+      );
+
+      document.body.classList.toggle(
+        'menu-open',
+        !isOpen
+      );
+    });
+
+    mobileNav
+      .querySelectorAll('a')
+      .forEach((link) => {
+        link.addEventListener('click', () => {
+          menu.setAttribute(
+            'aria-expanded',
+            'false'
+          );
+
+          mobileNav.classList.remove(
+            'is-open'
+          );
+
+          document.body.classList.remove(
+            'menu-open'
+          );
+        });
+      });
+  }
+</script>
+
+<style>
+  /* ==================================================
+     HEADER
+     ================================================== */
+
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    width: 100%;
+
+    background: transparent;
+    border-bottom: 1px solid transparent;
+
+    transition:
+      background 300ms var(--ease),
+      border-color 300ms var(--ease),
+      box-shadow 300ms var(--ease),
+      backdrop-filter 300ms var(--ease),
+      -webkit-backdrop-filter 300ms var(--ease);
+  }
+
+  .site-header.is-scrolled,
+  .site-header.is-hovered {
+    background: rgba(255, 255, 255, 0.78);
+
+    border-bottom-color:
+      rgba(16, 17, 20, 0.08);
+
+    box-shadow:
+      0 8px 30px rgba(16, 17, 20, 0.06);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+
+  /* ==================================================
+     HEADER INNER
+     ================================================== */
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+
+    min-height: var(--header-h);
+
+    /*
+     * El espacio entre elementos se adapta
+     * progresivamente, sin saltos.
+     */
+    gap: clamp(12px, 1.8vw, 28px);
+  }
+
+
+  /* ==================================================
+     LOGO
+     ================================================== */
+
+  .site-header__logo {
+    position: relative;
+
+    display: block;
+
+    /*
+     * Nunca crece demasiado ni se hace demasiado pequeño.
+     */
+    flex: 0 1 clamp(145px, 15vw, 190px);
+
+    width: clamp(145px, 15vw, 190px);
+
+    min-width: 145px;
+
+    line-height: 0;
+  }
+
+  .site-header__logo img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+  }
+
+  .site-header__logo-scrolled {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: auto;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+      opacity 250ms var(--ease),
+      visibility 250ms var(--ease);
+  }
+
+  .site-header.is-scrolled
+    .site-header__logo-default,
+
+  .site-header.is-hovered
+    .site-header__logo-default {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .site-header.is-scrolled
+    .site-header__logo-scrolled,
+
+  .site-header.is-hovered
+    .site-header__logo-scrolled {
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+  /* ==================================================
+     DESKTOP NAVIGATION
+     ================================================== */
+
+  .site-header__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /*
+     * IMPORTANTE:
+     * el nav puede encogerse.
+     */
+    flex: 1 1 auto;
+
+    min-width: 0;
+
+    gap: clamp(8px, 1.25vw, 22px);
+  }
+
+  .site-header__nav a {
+    position: relative;
+
+    color: #fff;
+
+    /*
+     * Sin saltos:
+     * 14px → 17px de forma continua.
+     */
+    font-size: clamp(14px, 1.05vw, 17px);
+
+    font-weight: 500;
+
+    line-height: 1.2;
+
+    white-space: nowrap;
+
+    transition:
+      color 250ms var(--ease);
+  }
+
+  .site-header.is-scrolled
+    .site-header__nav a,
+
+  .site-header.is-hovered
+    .site-header__nav a {
+    color: var(--ink);
+  }
+
+  .site-header__nav a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -6px;
+
+    height: 1px;
+
+    background: currentColor;
+
+    transform: scaleX(0);
+    transform-origin: right;
+
+    transition:
+      transform 280ms var(--ease);
+  }
+
+  .site-header__nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+
+  /* ==================================================
+     DESKTOP ACTIONS
+     ================================================== */
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    flex: 0 1 auto;
+
+    min-width: 0;
+
+    gap: clamp(9px, 1.2vw, 18px);
+  }
+
+
+  /* ==================================================
+     LANGUAGE SELECTOR
+     ================================================== */
+
+  .language-selector {
+    position: relative;
+
+    flex: 0 0 auto;
+  }
+
+  .language-selector__trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    gap: 6px;
+
+    transition:
+      color 200ms var(--ease);
+  }
+
+  .site-header.is-scrolled
+    .language-selector__trigger,
+
+  .site-header.is-hovered
+    .language-selector__trigger {
+    color: var(--ink);
+  }
+
+  .language-selector__globe {
+    width: 20px;
+    height: 20px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 1.4;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    flex: 0 0 auto;
+  }
+
+.language-selector__current {
+  font-size: clamp(14px, 1.05vw, 17px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+  .language-selector__chevron {
+    width: 8px;
+    height: 5px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 1.4;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    transition:
+      transform 220ms var(--ease);
+  }
+
+  .language-selector.is-open
+    .language-selector__chevron {
+    transform: rotate(180deg);
+  }
+
+
+  /* ==================================================
+     LANGUAGE DROPDOWN
+     ================================================== */
+
+  .language-selector__menu {
+    position: absolute;
+
+    top: calc(100% + 12px);
+    right: 0;
+
+    width: 190px;
+
+    padding: 8px;
+
+    background:
+      rgba(255, 255, 255, 0.96);
+
+    border:
+      1px solid rgba(16, 17, 20, 0.08);
+
+    box-shadow:
+      0 18px 45px
+      rgba(16, 17, 20, 0.12);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+      translateY(-6px)
+      scale(0.98);
+
+    transform-origin:
+      top right;
+
+    pointer-events: none;
+
+    transition:
+      opacity 180ms var(--ease),
+      transform 180ms var(--ease),
+      visibility 180ms var(--ease);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .language-selector.is-open
+    .language-selector__menu {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    pointer-events: auto;
+  }
+
+  .language-selector__option {
+    display: grid;
+
+    grid-template-columns: 34px 1fr auto;
+
+    align-items: center;
+
+    min-height: 42px;
+
+    padding: 0 10px;
+
+    border-radius: 7px;
+
+    color: var(--ink);
+
+    gap: 8px;
+
+    transition:
+      background 180ms var(--ease);
+  }
+
+  .language-selector__option:hover,
+  .language-selector__option.is-active {
+    background: #f4f5f6;
+  }
+
+  .language-selector__code {
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
+  }
+
+  .language-selector__name {
+    font-size: 13px;
+
+    font-weight: 400;
+
+    color: var(--ink-soft);
+  }
+
+  .language-selector__check {
+    color: var(--red);
+
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+
+  /* ==================================================
+     CTA
+     ================================================== */
+
+  .site-header__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    /*
+     * También se adapta de forma continua.
+     */
+    padding-inline:
+      clamp(14px, 1.5vw, 21px);
+
+    border-radius: 999px;
+
+  background: var(--red);
+    transition: background 220ms var(--ease);
+    color: #fff;
+
+    font-size:
+      clamp(12px, 0.85vw, 13px);
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    flex: 0 0 auto;
+
+    transition:
+      background 220ms var(--ease);
+  }
+
+  .site-header__cta:hover {
+    background: var(--red-hover);
+
+    transform: none;
+  }
+
+
+  /* ==================================================
+     MOBILE MENU BUTTON
+     ================================================== */
+
+  .site-header__menu {
+    display: none;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    flex: 0 0 auto;
+  }
+
+  .site-header.is-scrolled
+    .site-header__menu,
+
+  .site-header.is-hovered
+    .site-header__menu {
+    color: var(--ink);
+  }
+
+  .site-header__menu span {
+    display: block;
+
+    width: 30px;
+    height: 2px;
+
+    margin: 7px auto;
+
+    border-radius: 999px;
+
+    background: currentColor;
+
+    transition:
+      transform 250ms var(--ease),
+      opacity 250ms var(--ease);
+  }
+
+  .site-header__menu[aria-expanded="true"]
+    span:first-child {
+    transform:
+      translateY(4.5px)
+      rotate(45deg);
+  }
+
+  .site-header__menu[aria-expanded="true"]
+    span:last-child {
+    transform:
+      translateY(-4.5px)
+      rotate(-45deg);
+  }
+
+
+  /* ==================================================
+     MOBILE NAVIGATION
+     ================================================== */
+
+  .site-header__mobile {
+    display: block;
+
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+
+    padding:
+      30px
+      var(--pad-x)
+      34px;
+
+    background:
+      rgba(255, 255, 255, 0.95);
+
+    border-top:
+      1px solid rgba(16, 17, 20, 0.08);
+
+    box-shadow:
+      0 18px 40px
+      rgba(16, 17, 20, 0.08);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-8px);
+
+    pointer-events: none;
+
+    transition:
+      opacity 250ms var(--ease),
+      transform 250ms var(--ease),
+      visibility 250ms var(--ease);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .site-header__mobile.is-open {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+  }
+
+  .site-header__mobile-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .site-header__mobile-nav a {
+    color: var(--ink);
+
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+
+  /* ==================================================
+     MOBILE LANGUAGE
+     ================================================== */
+
+  .site-header__mobile-language {
+    margin-top: 30px;
+    padding-top: 24px;
+
+    border-top:
+      1px solid var(--line);
+  }
+
+  .site-header__mobile-language-title {
+    margin: 0 0 14px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .site-header__mobile-language-list {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+  }
+
+  .site-header__mobile-language-option {
+    display: grid;
+
+    grid-template-columns: 32px 1fr auto;
+
+    align-items: center;
+
+    min-height: 42px;
+
+    padding: 0 10px;
+
+    border-radius: 7px;
+
+    background: #f5f6f7;
+
+    color: var(--ink);
+
+    gap: 6px;
+  }
+
+  .site-header__mobile-language-option
+    > span:first-child {
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .site-header__mobile-language-option
+    > span:nth-child(2) {
+    font-size: 13px;
+  }
+
+  .site-header__mobile-language-option
+    > span:last-child {
+    color: var(--red);
+
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .site-header__mobile-language-option.is-active {
+    background: #eceeef;
+  }
+
+
+  /* ==================================================
+     MOBILE CTA
+     ================================================== */
+
+  .site-header__mobile-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+
+    margin-top: 24px;
+
+    border-radius: 999px;
+
+     background: var(--red);
+     transition: background 220ms var(--ease);
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+  }
+.site-header__mobile-cta:hover {
+  background: var(--red-hover);
+}
+  /* ==================================================
+     MOBILE BREAKPOINT
+     ================================================== */
+
+  /*
+   * Aquí no reducimos tamaños.
+   *
+   * Simplemente dejamos de intentar meter:
+   *
+   * logo + navegación + idioma + CTA
+   *
+   * cuando físicamente ya no hay espacio.
+   *
+   * Así no existe un "salto" visual de tipografía.
+   */
+
+  @media (max-width: 920px) {
+
+    .site-header__nav,
+    .site-header__actions {
+      display: none;
+    }
+
+    .site-header__inner {
+      justify-content: space-between;
+    }
+
+    .site-header__menu {
+      display: block;
+    }
+  }
+
+
+  /* ==================================================
+     SMALL MOBILE
+     ================================================== */
+
+  @media (max-width: 767px) {
+
+    .site-header__inner {
+      min-height: 68px;
+    }
+
+    .site-header__logo {
+      flex-basis: clamp(145px, 55vw, 180px);
+
+      width: clamp(145px, 55vw, 180px);
+    }
+  }
+
+
+  /* ==================================================
+     REDUCED MOTION
+     ================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .site-header,
+    .site-header__logo img,
+    .site-header__nav a,
+    .site-header__nav a::after,
+    .site-header__cta,
+    .site-header__menu span,
+    .site-header__mobile,
+    .language-selector__menu,
+    .language-selector__chevron {
+      transition: none;
+    }
+  }
+</style>

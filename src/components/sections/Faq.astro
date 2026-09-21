@@ -1,0 +1,84 @@
+---
+import { getLocale, useTranslations } from '../../i18n';
+
+const lang = getLocale(Astro.currentLocale);
+const c = useTranslations(lang).faq;
+---
+
+<section id="faq" class="section">
+  <div class="container">
+
+    <div class="faq__head">
+      <h2 class="h2">{c.title}</h2>
+      <p class="lead">{c.lead}</p>
+    </div>
+
+    <div class="faq">
+      {c.items.map((it) => (
+        <details class="faq__item">
+          <summary>{it.q}</summary>
+          <div class="faq__a"><p>{it.a}</p></div>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+.faq__head {
+  max-width: 760px;
+  margin-inline: auto;
+  margin-bottom: 46px;
+}
+
+.faq__head .lead {
+  max-width: 54ch;
+  margin-top: 14px;
+}
+
+.faq {
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+  .faq__item {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .faq__item summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 1.15rem 2rem 1.15rem 0;
+    position: relative;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__item summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--red);
+    transition: transform 0.2s;
+  }
+
+  .faq__item[open] summary::after {
+    content: '−';
+  }
+
+  .faq__a {
+    padding: 0 0 1.25rem;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 62ch;
+  }
+</style>

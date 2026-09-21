@@ -1,0 +1,785 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLocale } from "../../i18n";
+
+const lang = getLocale(Astro.currentLocale);
+const home = getRelativeLocaleUrl(lang, "");
+
+const content = {
+  es: {
+    eyebrow: "Estudio de diseño y desarrollo web",
+    title: "Una web escalable, la clave del éxito",
+    description:
+      "Tu web crece con el negocio — nuevos idiomas, páginas, secciones, servicios o funcionalidades sin rehacerla desde cero.",
+
+    quote: "Pedir presupuesto",
+    projects: "Ver proyectos",
+  },
+
+  en: {
+    eyebrow: "Web design & development studio",
+    title: "A scalable website, the key to success",
+    description:
+      "Your website grows with your business — new languages, pages, sections, services or functionality without rebuilding it from scratch.",
+
+    quote: "Request a quote",
+    projects: "View projects",
+  },
+
+  ru: {
+    eyebrow: "Студия веб-дизайна и разработки",
+    title: "Масштабируемый сайт — ключ к успеху",
+    description:
+      "Ваш сайт растёт вместе с бизнесом — новые языки, страницы, разделы, услуги и функциональность без необходимости создавать его заново.",
+
+    quote: "Получить предложение",
+    projects: "Смотреть проекты",
+  },
+};
+
+const c = content[lang];
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <video
+    class="hero__video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    aria-hidden="true"
+  >
+    <source src="/videos/hero3.mp4" type="video/mp4" />
+  </video>
+
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <div class="hero__content">
+      <p class="hero__eyebrow" data-hero-animate>
+        <span class="hero__star" aria-hidden="true">
+          ✦
+        </span>
+        <span>{c.eyebrow}</span>
+      </p>
+
+      <h1 id="hero-title" data-hero-animate>
+        {c.title}
+      </h1>
+
+      <p class="hero__description" data-hero-animate>
+        {c.description}
+      </p>
+
+      <div class="hero__actions" data-hero-animate>
+        <a class="hero__button hero__button--primary" href={`${home}#contact`}>
+          <span>{c.quote}</span>
+          <span class="hero__arrow" aria-hidden="true">
+            <span class="hero__arrow-line"></span>
+            <span class="hero__arrow-head"></span>
+          </span>
+        </a>
+
+        <a class="hero__button hero__button--secondary" href={`${home}#work`}>
+          <span>{c.projects}</span>
+          <span class="hero__arrow" aria-hidden="true">
+            <span class="hero__arrow-line"></span>
+            <span class="hero__arrow-head"></span>
+          </span>
+        </a>
+      </div>
+
+      <div class="hero__highlight" data-hero-animate>
+        <span class="hero__highlight-star" aria-hidden="true">
+          ✦
+        </span>
+        <span>{c.highlight}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <span class="hero__scroll-line" data-motion="scroll-line"></span>
+  </div>
+</section>
+
+<style>
+  /* ==================================================
+       HERO
+       ================================================== */
+
+  .hero {
+    position: relative;
+    isolation: isolate;
+
+    min-height: calc(100svh - var(--header-h));
+
+    overflow: hidden;
+
+    background: #91b8c9;
+  }
+
+  /* ==================================================
+       VIDEO
+       ================================================== */
+
+  .hero__video {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* ==================================================
+       OVERLAY
+       ================================================== */
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+
+    pointer-events: none;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(3, 169, 244, 0.16) 0%,
+        rgba(3, 169, 244, 0.07) 42%,
+        rgba(3, 169, 244, 0.14) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.04) 0%,
+        rgba(255, 255, 255, 0.02) 45%,
+        rgba(7, 45, 62, 0.16) 100%
+      );
+  }
+
+  /* ==================================================
+       CONTENT
+       ================================================== */
+
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+
+    min-height: calc(100svh - var(--header-h));
+
+    width: min(calc(100% - (var(--pad-x) * 2)), var(--container));
+
+    margin-inline: auto;
+
+    padding-block: clamp(32px, 5vw, 90px);
+  }
+
+  .hero__content {
+    width: min(900px, 100%);
+  }
+
+  /* ==================================================
+       EYEBROW
+       ================================================== */
+
+  .hero__eyebrow {
+    display: flex;
+    align-items: center;
+
+    gap: clamp(7px, 0.6vw, 12px);
+
+    margin: 0 0 clamp(16px, 1.7vw, 30px);
+
+    color: #fff;
+
+    font-size: clamp(11px, 1.05vw, 20px);
+
+    font-weight: 500;
+
+    letter-spacing: 0.02em;
+
+    line-height: 1.4;
+  }
+
+  .hero__star {
+    color: #fff;
+
+    font-size: clamp(12px, 1.1vw, 22px);
+
+    line-height: 1;
+  }
+
+  /* ==================================================
+       TITLE
+       ================================================== */
+
+  .hero h1 {
+    max-width: 900px;
+
+    margin: 0;
+
+    color: #fff;
+
+    font-family: var(--font-sans);
+
+    font-size: clamp(46px, 7.1vw, 100px);
+
+    font-weight: 300;
+
+    letter-spacing: -0.065em;
+
+    line-height: 0.96;
+
+    text-wrap: balance;
+
+    text-shadow:
+      0 1px 1px rgba(255, 255, 255, 0.18),
+      0 8px 30px rgba(255, 255, 255, 0.08);
+  }
+
+  /* ==================================================
+       DESCRIPTION
+       ================================================== */
+
+  .hero__description {
+    max-width: 650px;
+
+    margin: clamp(20px, 2vw, 30px) 0 0;
+
+    color: #fff;
+
+    font-size: clamp(15px, 1.35vw, 22px);
+
+    font-weight: 400;
+
+    line-height: 1.65;
+
+    text-wrap: pretty;
+  }
+
+  /* ==================================================
+       BUTTONS
+       ================================================== */
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: clamp(8px, 0.8vw, 14px);
+
+    margin-top: clamp(24px, 2.4vw, 38px);
+  }
+
+  .hero__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: clamp(9px, 0.8vw, 13px);
+
+    min-height: clamp(44px, 3.5vw, 56px);
+
+    padding-inline: clamp(18px, 1.6vw, 28px);
+
+    border-radius: 999px;
+
+    font-size: clamp(12px, 0.95vw, 17px);
+
+    font-weight: 600;
+
+    transition:
+      transform 280ms var(--ease),
+      background-color 280ms var(--ease),
+      color 280ms var(--ease),
+      border-color 280ms var(--ease);
+  }
+
+  .hero__button:hover {
+    transform: translateY(-2px);
+  }
+
+  /* ==================================================
+       ARROW
+       ================================================== */
+
+  .hero__arrow {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    width: clamp(20px, 1.7vw, 28px);
+
+    height: 12px;
+
+    flex: 0 0 clamp(20px, 1.7vw, 28px);
+
+    transition:
+      width 400ms var(--ease),
+      flex-basis 400ms var(--ease);
+  }
+
+  .hero__arrow-line {
+    display: block;
+
+    width: clamp(14px, 1.2vw, 20px);
+
+    height: 1px;
+
+    background: currentColor;
+
+    transition: width 400ms var(--ease);
+  }
+
+  .hero__arrow-head {
+    position: absolute;
+    right: 0;
+
+    width: clamp(6px, 0.55vw, 8px);
+
+    height: clamp(6px, 0.55vw, 8px);
+
+    border-top: 1px solid currentColor;
+    border-right: 1px solid currentColor;
+
+    transform: rotate(45deg);
+  }
+
+  .hero__button:hover .hero__arrow {
+    width: clamp(30px, 2.5vw, 40px);
+
+    flex-basis: clamp(30px, 2.5vw, 40px);
+  }
+
+  .hero__button:hover .hero__arrow-line {
+    width: clamp(24px, 2vw, 32px);
+  }
+
+  /* ==================================================
+       PRIMARY BUTTON
+       ================================================== */
+
+  .hero__button--primary {
+    background: var(--red);
+
+    color: var(--surface);
+
+    box-shadow: 0 8px 25px rgba(225, 29, 47, 0.18);
+  }
+
+  .hero__button--primary:hover {
+    background: var(--red-hover);
+  }
+
+  /* ==================================================
+       SECONDARY BUTTON
+       ================================================== */
+
+  .hero__button--secondary {
+    border: 1px solid rgba(255, 255, 255, 0.65);
+
+    background: rgba(255, 255, 255, 0.72);
+
+    color: var(--ink);
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .hero__button--secondary:hover {
+    border-color: rgba(255, 255, 255, 0.9);
+
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  /* ==================================================
+       SMALL NOTE
+       ================================================== */
+
+  .hero__highlight {
+    display: inline-flex;
+    align-items: center;
+
+    gap: clamp(6px, 0.6vw, 10px);
+
+    margin-top: clamp(18px, 1.8vw, 28px);
+
+    color: rgba(25, 41, 48, 0.68);
+
+    font-size: clamp(10px, 0.9vw, 18px);
+
+    font-weight: 500;
+
+    letter-spacing: 0.01em;
+
+    line-height: 1.4;
+  }
+
+  .hero__highlight-star {
+    color: rgba(92, 105, 112, 0.75);
+
+    font-size: clamp(10px, 0.9vw, 18px);
+  }
+
+  /* ==================================================
+       SCROLL
+       ================================================== */
+
+  .hero__scroll {
+    position: absolute;
+    z-index: 3;
+
+    right: clamp(18px, 2vw, 32px);
+
+    bottom: clamp(22px, 2vw, 32px);
+
+    display: flex;
+    align-items: center;
+
+    gap: clamp(8px, 0.8vw, 14px);
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: clamp(9px, 0.75vw, 14px);
+
+    font-weight: 600;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+    writing-mode: vertical-rl;
+  }
+
+  .hero__scroll-line {
+    width: 1px;
+
+    height: clamp(38px, 3.2vw, 52px);
+
+    background: rgba(255, 255, 255, 0.55);
+
+    transform-origin: top center;
+
+    animation: heroScrollDown 2.2s ease-in-out infinite;
+  }
+  @keyframes heroScrollDown {
+    0% {
+      transform: scaleY(0.35);
+      transform-origin: top center;
+      opacity: 0.35;
+    }
+
+    50% {
+      transform: scaleY(1);
+      transform-origin: top center;
+      opacity: 0.9;
+    }
+
+    100% {
+      transform: scaleY(0.35);
+      transform-origin: top center;
+      opacity: 0.35;
+    }
+  }
+
+  /* ==================================================
+       TEXT REVEAL — INITIAL STATE
+       ================================================== */
+
+  .hero__word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+
+    /* evita que se corten tildes y descendentes */
+    padding-bottom: 0.12em;
+    margin-bottom: -0.12em;
+  }
+
+  .hero__word-inner {
+    display: inline-block;
+
+    transform: translateY(115%);
+    opacity: 0;
+
+    will-change: transform, opacity;
+
+    transition:
+      transform 1000ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 800ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* Bloques sin split de palabras (botones, highlight) */
+  .hero__actions,
+  .hero__highlight {
+    transform: translateY(16px);
+    opacity: 0;
+
+    transition:
+      transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* Estado activo — el script añade .is-ready al padre */
+  .is-ready .hero__word-inner {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .is-ready.hero__actions,
+  .is-ready.hero__highlight {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Si el JS no carga, mostramos todo por defecto */
+  .hero:not([data-hero-ready]) [data-hero-animate] {
+    /* fallback: nada visible hasta que el script corra,
+           pero solo si el script está presente. Ver script. */
+  }
+
+  /* ==================================================
+       TABLET / DESKTOP
+       ================================================== */
+
+  @media (min-width: 768px) {
+    .hero__inner {
+      width: min(calc(100% - (var(--pad-x-md) * 2)), var(--container));
+    }
+  }
+
+  /* ==================================================
+       MOBILE
+       ================================================== */
+
+  @media (max-width: 767px) {
+    .hero {
+      min-height: calc(100svh - var(--header-h));
+    }
+
+    .hero__video {
+      object-position: center;
+    }
+
+    .hero__overlay {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(3, 169, 244, 0.2) 0%,
+          rgba(3, 169, 244, 0.08) 55%,
+          rgba(3, 169, 244, 0.17) 100%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(7, 45, 62, 0.18)
+        );
+    }
+
+    /* AQUÍ ESTABA EL PROBLEMA:
+           antes tenías align-items: flex-end + padding
+           enorme porque el hero ocupaba 100svh.
+           Ahora el contenido se centra en el espacio disponible. */
+
+    .hero__inner {
+      align-items: center;
+      justify-content: center;
+
+      padding-block: 28px 40px;
+    }
+
+    .hero__content {
+      width: 100%;
+    }
+
+    .hero__eyebrow {
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      line-height: 1;
+    }
+
+    .hero__description {
+      margin-top: 18px;
+
+      line-height: 1.55;
+    }
+
+    .hero__actions {
+      margin-top: 22px;
+
+      gap: 9px;
+    }
+
+    .hero__button {
+      min-height: 46px;
+
+      padding-inline: 19px;
+    }
+
+    .hero__highlight {
+      margin-top: 16px;
+    }
+
+    .hero__scroll {
+      display: none;
+    }
+  }
+
+  /* ==================================================
+       REDUCED MOTION
+       ================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__button,
+    .hero__arrow,
+    .hero__arrow-line .hero__scroll-line {
+      transition: none;
+      animation: none;
+    }
+    .hero__button:hover {
+      transform: none;
+    }
+
+    .hero__word-inner,
+    .hero__actions,
+    .hero__highlight {
+      transition: none;
+      transform: none;
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  type AnimEl = HTMLElement;
+
+  function splitWords(el: AnimEl) {
+    if (el.dataset.split === "true") return;
+
+    // Guardamos el HTML original por si hay spans internos (ej: la estrella)
+    // pero solo dividimos si es texto plano. Para el eyebrow preservamos
+    // el icono como primer hijo.
+    const hasStar = el.querySelector(".hero__star");
+
+    const originalText = el.textContent?.trim() ?? "";
+    if (!originalText) return;
+
+    // Limpiamos manteniendo el posible icono
+    if (hasStar) {
+      // Reconstruimos: estrella + texto dividido
+      el.innerHTML = "";
+      el.appendChild(hasStar);
+
+      const textNode = document.createTextNode(" ");
+      el.appendChild(textNode);
+
+      const words = originalText.replace("✦", "").trim().split(/\s+/);
+
+      words.forEach((word, i) => {
+        const wrap = document.createElement("span");
+        wrap.className = "hero__word";
+
+        const inner = document.createElement("span");
+        inner.className = "hero__word-inner";
+        inner.textContent = word;
+        inner.style.setProperty("--reveal-delay", `${i * 70}ms`);
+
+        wrap.appendChild(inner);
+        el.appendChild(wrap);
+
+        if (i < words.length - 1) {
+          el.appendChild(document.createTextNode(" "));
+        }
+      });
+    } else {
+      const words = originalText.split(/\s+/);
+      el.textContent = "";
+
+      words.forEach((word, i) => {
+        const wrap = document.createElement("span");
+        wrap.className = "hero__word";
+
+        const inner = document.createElement("span");
+        inner.className = "hero__word-inner";
+        inner.textContent = word;
+        inner.style.setProperty("--reveal-delay", `${i * 70}ms`);
+
+        wrap.appendChild(inner);
+        el.appendChild(wrap);
+
+        if (i < words.length - 1) {
+          el.appendChild(document.createTextNode(" "));
+        }
+      });
+    }
+
+    el.dataset.split = "true";
+  }
+
+  function initHeroAnimation() {
+    const hero = document.querySelector<HTMLElement>(".hero");
+    if (!hero) return;
+
+    // Si el usuario prefiere menos movimiento, mostramos todo directamente
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    hero.setAttribute("data-hero-ready", "true");
+
+    const h1 = hero.querySelector<AnimEl>("#hero-title");
+    const eyebrow = hero.querySelector<AnimEl>(".hero__eyebrow");
+    const description = hero.querySelector<AnimEl>(".hero__description");
+    const actions = hero.querySelector<AnimEl>(".hero__actions");
+    const highlight = hero.querySelector<AnimEl>(".hero__highlight");
+
+    if (prefersReduced) {
+      [h1, eyebrow, description, actions, highlight].forEach((el) =>
+        el?.classList.add("is-ready"),
+      );
+      return;
+    }
+
+    if (h1) splitWords(h1);
+    if (description) splitWords(description);
+    if (eyebrow) splitWords(eyebrow);
+
+    // Delays escalonados por bloque
+    h1?.style.setProperty("--reveal-delay", "0ms");
+    eyebrow?.style.setProperty("--reveal-delay", "0ms");
+    description?.style.setProperty("--reveal-delay", "350ms");
+    actions?.style.setProperty("--reveal-delay", "520ms");
+    highlight?.style.setProperty("--reveal-delay", "680ms");
+
+    // Doble rAF para garantizar que el navegador pinte el estado inicial
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        [h1, eyebrow, description, actions, highlight].forEach((el) =>
+          el?.classList.add("is-ready"),
+        );
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initHeroAnimation);
+  } else {
+    initHeroAnimation();
+  }
+</script>

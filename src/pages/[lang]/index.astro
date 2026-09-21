@@ -1,0 +1,37 @@
+---
+import Contact from '../../components/sections/Contact.astro';
+import Creative from '../../components/sections/Creative.astro';
+import Faq from '../../components/sections/Faq.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Inspiration from '../../components/sections/Inspiration.astro';
+import Pricing from '../../components/sections/Pricing.astro';
+import Process from '../../components/sections/Process.astro';
+import Services from '../../components/sections/Services.astro';
+import Statement from '../../components/sections/Statement.astro';
+import TechTicker from '../../components/sections/TechTicker.astro';
+import WhyUs from '../../components/sections/WhyUs.astro';
+import { LOCALES } from '../../i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({
+    params: { lang },
+  }));
+}
+---
+
+<BaseLayout>
+  <Hero />
+  <Services />
+  <TechTicker />
+  <Process />
+  <WhyUs />
+  <Faq />
+   <Inspiration />
+   <Pricing />
+  <Statement />
+  <Creative />
+  <Contact />
+
+</BaseLayout>

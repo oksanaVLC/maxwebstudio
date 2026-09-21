@@ -1,0 +1,254 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { useTranslations, type Locale } from '../i18n';
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const home = getRelativeLocaleUrl(lang, '');
+
+const links = [
+  { href: `${home}#services`, label: t.nav.services },
+  { href: `${home}#process`, label: t.nav.process },
+  { href: `${home}#work`, label: t.nav.work },
+  { href: `${home}#pricing`, label: t.nav.pricing },
+  { href: `${home}#faq`, label: t.nav.faq },
+  { href: `${home}blog/`, label: t.nav.blog },
+];
+
+const legalLinks = [
+  { href: `${home}legal/`, label: t.footer.legal },
+  { href: `${home}privacy/`, label: t.footer.privacy },
+  { href: `${home}cookies/`, label: t.footer.cookies },
+];
+
+const languages = [
+  { code: 'es', href: '/es/' },
+  { code: 'en', href: '/en/' },
+  { code: 'ru', href: '/ru/' },
+] as const;
+---
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="footer__top">
+
+      <div class="footer__brand">
+        <a href={home} class="footer__logo" aria-label={t.meta.siteName}>
+  <img
+    src="/images/lightBold.svg"
+    alt={t.meta.siteName}
+    width="220"
+    height="auto"
+  />
+</a>
+
+        <p>
+          {t.meta.defaultDescription}
+        </p>
+      </div>
+
+      <div class="footer__nav">
+
+        <div class="footer__column">
+          <p class="footer__title">{t.footer.explore}</p>
+
+          <nav aria-label={t.footer.explore}>
+            {links.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))}
+          </nav>
+        </div>
+
+        <div class="footer__column">
+          <p class="footer__title">{t.footer.legalTitle}</p>
+
+          <nav aria-label={t.footer.legalTitle}>
+            {legalLinks.map((link) => (
+              <a href={link.href}>{link.label}</a>
+            ))}
+          </nav>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+
+      <p>
+        © {new Date().getFullYear()} {t.meta.siteName}.
+        {t.footer.rights}
+      </p>
+
+      <div class="footer__languages" aria-label={t.a11y.switchLanguage}>
+        {languages.map((language) => (
+          <a
+            href={language.href}
+            data-active={String(language.code === lang)}
+            aria-current={language.code === lang ? 'page' : undefined}
+          >
+            {language.code.toUpperCase()}
+          </a>
+        ))}
+      </div>
+
+    </div>
+
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--surface-dark);
+    color: #fff;
+  }
+
+  .footer__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+    gap: 80px;
+    padding-block: 86px 72px;
+  }
+
+  /* --------------------------------
+     Brand
+  -------------------------------- */
+
+  .footer__brand {
+    max-width: 470px;
+  }
+
+  .footer__logo {
+    display: inline-block;
+    width: 170px;
+  }
+
+.footer__logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+  .footer__brand p {
+    max-width: 400px;
+    margin-top: 28px;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: var(--fs-body);
+    line-height: 1.65;
+  }
+
+  /* --------------------------------
+     Navigation
+  -------------------------------- */
+
+  .footer__nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 50px;
+  }
+
+  .footer__title {
+    margin-bottom: 18px;
+    color: rgba(255, 255, 255, 0.38);
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .footer__column nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+  }
+
+  .footer__column a {
+    position: relative;
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    transition:
+      color 250ms var(--ease),
+      transform 250ms var(--ease);
+  }
+
+  .footer__column a:hover {
+    color: #fff;
+    transform: translateX(4px);
+  }
+
+  /* --------------------------------
+     Bottom
+  -------------------------------- */
+
+  .footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding-block: 22px 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .footer__bottom p {
+    color: rgba(255, 255, 255, 0.38);
+    font-size: var(--fs-micro);
+    line-height: 1.5;
+  }
+
+  .footer__languages {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer__languages a {
+    color: rgba(255, 255, 255, 0.38);
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: color 200ms var(--ease);
+  }
+
+  .footer__languages a:hover,
+  .footer__languages a[data-active='true'] {
+    color: #fff;
+  }
+
+  /* --------------------------------
+     Mobile
+  -------------------------------- */
+
+  @media (max-width: 767px) {
+    .footer__top {
+      grid-template-columns: 1fr;
+      gap: 58px;
+      padding-block: 68px 54px;
+    }
+
+    .footer__logo {
+      width: 155px;
+    }
+
+    .footer__brand p {
+      margin-top: 22px;
+    }
+
+    .footer__nav {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 30px;
+    }
+
+    .footer__bottom {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 18px;
+    }
+  }
+</style>

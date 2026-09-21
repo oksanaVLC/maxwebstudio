@@ -1,0 +1,321 @@
+---
+---
+
+<section class="section statement" aria-label="Max Web Studio statement">
+  <div class="container">
+    <div class="statement__inner">
+
+      <p class="statement__text">
+
+        <span class="statement__line">
+          <span>THE</span>
+
+          <span class="statement__word statement__word--future">
+            FUTURE
+
+            <svg
+              class="statement__underline"
+              viewBox="0 0 220 24"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 14
+                   C31 9, 55 18, 82 13
+                   C109 8, 133 17, 157 12
+                   C179 8, 199 14, 216 10"
+              />
+
+              <path
+                d="M7 18
+                   C35 13, 57 21, 84 17
+                   C112 12, 137 20, 160 16
+                   C183 12, 201 17, 213 14"
+              />
+            </svg>
+          </span>
+
+          <span>OF THE WEB</span>
+        </span>
+
+        <span class="statement__line">
+          <span>ISN'T SOMETHING TO PREDICT.</span>
+        </span>
+
+        <span class="statement__line">
+          <span>IT'S SOMETHING TO</span>
+
+          <span class="statement__word statement__word--build">
+            BUILD
+
+            <svg
+              class="statement__underline"
+              viewBox="0 0 160 24"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 14
+                   C23 9, 43 18, 63 13
+                   C82 8, 101 17, 121 12
+                   C137 9, 149 14, 157 11"
+              />
+
+              <path
+                d="M6 18
+                   C27 13, 45 21, 66 17
+                   C86 12, 105 20, 123 16
+                   C139 12, 150 17, 155 14"
+              />
+            </svg>
+          </span>
+
+          <span>.</span>
+        </span>
+
+      </p>
+
+      <p class="statement__credit">
+        — MAX WEB STUDIO
+      </p>
+
+    </div>
+  </div>
+</section>
+
+
+<style>
+  /* ==================================================
+     STATEMENT
+     ================================================== */
+
+  .statement {
+    position: relative;
+
+    background: var(--surface);
+
+    overflow: hidden;
+  }
+
+
+  /* ==================================================
+     INNER
+     ================================================== */
+
+  .statement__inner {
+    width: min(100%, 1120px);
+
+    margin-inline: auto;
+  }
+
+
+  /* ==================================================
+     TEXT
+     ================================================== */
+
+  .statement__text {
+    margin: 0;
+
+    color: var(--ink);
+
+    font-family: var(--font-sans);
+
+    font-size:
+      clamp(38px, 5.7vw, 72px);
+
+    font-weight: 300;
+
+    line-height: 1.03;
+
+    letter-spacing: -0.035em;
+
+    text-wrap: balance;
+  }
+
+
+  /* ==================================================
+     LINES
+     ================================================== */
+
+  .statement__line {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: baseline;
+
+    column-gap: 0.28em;
+
+    row-gap: 0.05em;
+  }
+
+
+  /* ==================================================
+     WORD
+     ================================================== */
+
+  .statement__word {
+    position: relative;
+
+    display: inline-block;
+
+    isolation: isolate;
+
+    margin-inline: 0.02em;
+  }
+
+
+  /* ==================================================
+     UNDERLINE
+     ================================================== */
+
+  .statement__underline {
+    position: absolute;
+
+    left: -3%;
+
+    bottom: -0.08em;
+
+    width: 106%;
+
+    height: 0.28em;
+
+    overflow: visible;
+
+    z-index: -1;
+
+    pointer-events: none;
+  }
+
+  .statement__underline path {
+    fill: none;
+
+    stroke-width: 7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+    vector-effect: non-scaling-stroke;
+  }
+
+
+  /* ==================================================
+     FUTURE — BLUE
+     ================================================== */
+
+  .statement__word--future
+    .statement__underline path {
+    stroke: #03a9f4;
+  }
+
+
+  /* ==================================================
+     BUILD — RED
+     ================================================== */
+
+  .statement__word--build
+    .statement__underline path {
+    stroke: #ff5757;
+  }
+
+
+  /* ==================================================
+     CREDIT
+     ================================================== */
+
+  .statement__credit {
+    margin:
+      clamp(34px, 4vw, 54px)
+      0
+      0;
+
+    color: var(--muted);
+
+    font-family: var(--font-sans);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+  }
+
+
+  /* ==================================================
+     TABLET
+     ================================================== */
+
+  @media (max-width: 767px) {
+
+    .statement__text {
+      font-size:
+        clamp(34px, 8.5vw, 58px);
+
+      line-height: 1.02;
+
+      letter-spacing: -0.03em;
+    }
+
+    .statement__line {
+      column-gap: 0.24em;
+
+      row-gap: 0.04em;
+    }
+
+    .statement__underline {
+      bottom: -0.06em;
+
+      height: 0.3em;
+    }
+
+    .statement__underline path {
+      stroke-width: 6;
+    }
+
+    .statement__credit {
+      margin-top: 32px;
+
+      font-size: 11px;
+    }
+  }
+
+
+  /* ==================================================
+     SMALL MOBILE
+     ================================================== */
+
+  @media (max-width: 480px) {
+
+    .statement__text {
+      font-size:
+        clamp(31px, 9.5vw, 46px);
+
+      letter-spacing: -0.025em;
+    }
+
+    .statement__line {
+      column-gap: 0.22em;
+    }
+
+    .statement__underline {
+      left: -2%;
+
+      width: 104%;
+    }
+  }
+
+
+  /* ==================================================
+     REDUCED MOTION
+     ================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+
+    .statement__underline {
+      transition: none;
+    }
+  }
+</style>

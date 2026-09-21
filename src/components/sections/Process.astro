@@ -1,0 +1,288 @@
+---
+import { getLocale, useTranslations } from '../../i18n';
+
+const lang = getLocale(Astro.currentLocale);
+const t = useTranslations(lang);
+---
+
+<section class="process section" id="process" aria-labelledby="process-title">
+  <div class="container">
+    <div class="process__intro">
+      <p class="process__eyebrow">
+        <span aria-hidden="true">✦</span>
+        {t.process.eyebrow}
+      </p>
+
+      <h2 id="process-title">{t.process.title}</h2>
+    </div>
+
+    <div class="process__feature">
+      <img
+        src="/images/team.jpg"
+        alt={t.process.feature.imageAlt}
+        loading="lazy"
+      />
+
+      <div class="process__feature-copy">
+        <p>{t.process.feature.text}</p>
+      </div>
+    </div>
+
+    <div class="process__steps">
+      <article class="process-step">
+        <span class="process-step__number" aria-hidden="true">01</span>
+
+        <div class="process-step__content">
+          <h3>{t.process.steps.plan.title}</h3>
+          <p>{t.process.steps.plan.description}</p>
+        </div>
+      </article>
+
+      <article class="process-step">
+        <span class="process-step__number" aria-hidden="true">02</span>
+
+        <div class="process-step__content">
+          <h3>{t.process.steps.design.title}</h3>
+          <p>{t.process.steps.design.description}</p>
+        </div>
+      </article>
+
+      <article class="process-step">
+        <span class="process-step__number" aria-hidden="true">03</span>
+
+        <div class="process-step__content">
+          <h3>{t.process.steps.launch.title}</h3>
+          <p>{t.process.steps.launch.description}</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process {
+    background: var(--surface);
+  }
+
+  .process__intro {
+    max-width: 850px;
+    margin-bottom: 64px;
+  }
+
+  .process__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: var(--muted);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  .process__eyebrow span {
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  .process__intro h2 {
+    max-width: 780px;
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 300;
+    letter-spacing: -0.055em;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  /* --------------------------------
+     Imagen principal
+  -------------------------------- */
+
+  .process__feature {
+    position: relative;
+    width: 100%;
+    height: clamp(480px, 58vw, 720px);
+    margin-bottom: 88px;
+    overflow: hidden;
+    background: var(--screen-dark);
+  }
+
+  .process__feature > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /*
+    Degradado sobre TODA la fotografía.
+    Transparente arriba → oscuro abajo.
+  */
+
+  .process__feature::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(16, 17, 20, 0) 26%,
+      rgba(16, 17, 20, 0.30) 56%,
+      rgba(16, 17, 20, 0.82) 100%
+    );
+  }
+
+  /* --------------------------------
+     Texto sobre la fotografía
+  -------------------------------- */
+
+  .process__feature-copy {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: clamp(28px, 5vw, 58px);
+    color: #fff;
+  }
+
+  .process__feature-copy p {
+    max-width: 680px;
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: clamp(20px, 2.2vw, 29px);
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    line-height: 1.28;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.18);
+  }
+
+  /* --------------------------------
+     Pasos
+  -------------------------------- */
+
+  .process__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px;
+  }
+
+  .process-step {
+    min-width: 0;
+  }
+
+  .process-step__number {
+    display: block;
+    margin-bottom: 28px;
+    color: var(--line-strong);
+    font-family: var(--font-sans);
+    font-size: clamp(58px, 7vw, 92px);
+    font-weight: 300;
+    letter-spacing: -0.07em;
+    line-height: 0.85;
+  }
+
+  .process-step__content {
+    max-width: 330px;
+  }
+
+  .process-step h3 {
+    margin: 0 0 12px;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  .process-step p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: var(--fs-body);
+    line-height: 1.65;
+  }
+
+  /* --------------------------------
+     Tablet
+  -------------------------------- */
+
+  @media (max-width: 900px) {
+    .process__steps {
+      gap: 32px;
+    }
+
+    .process-step__content {
+      max-width: none;
+    }
+  }
+
+  /* --------------------------------
+     Mobile
+  -------------------------------- */
+
+  @media (max-width: 767px) {
+    .process__intro {
+      margin-bottom: 44px;
+    }
+
+    .process__intro h2 {
+      font-size: clamp(38px, 11vw, 52px);
+    }
+
+    .process__feature {
+      width: calc(100% + (var(--pad-x) * 2));
+      height: 520px;
+      margin-inline: calc(var(--pad-x) * -1);
+      margin-bottom: 64px;
+    }
+
+    .process__feature::after {
+      background: linear-gradient(
+        180deg,
+        rgba(16, 17, 20, 0) 20%,
+        rgba(16, 17, 20, 0.28) 48%,
+        rgba(16, 17, 20, 0.88) 100%
+      );
+    }
+
+    .process__feature-copy {
+      padding: 28px 24px;
+    }
+
+    .process__feature-copy p {
+      max-width: 560px;
+      font-size: 20px;
+      line-height: 1.32;
+    }
+
+    .process__steps {
+      grid-template-columns: 1fr;
+      gap: 54px;
+    }
+
+    .process-step__number {
+      margin-bottom: 22px;
+      font-size: 68px;
+    }
+
+    .process-step__content {
+      max-width: 500px;
+    }
+  }
+
+  /* --------------------------------
+     Accesibilidad
+  -------------------------------- */
+
+  @media (prefers-reduced-motion: reduce) {
+    .process__feature > img {
+      transition: none;
+    }
+  }
+</style>
