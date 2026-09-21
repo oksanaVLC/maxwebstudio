@@ -363,7 +363,7 @@ export default {
   contact: {
     title: "Cuéntanos tu proyecto",
     lead: "Escríbenos unas líneas sobre lo que necesitas. Recibirás un presupuesto cerrado en dos días laborables.",
-    place: "En remoto · con base en Valencia",
+    place: "Valencia, España",
     form: {
       name: "Nombre",
       email: "Email",

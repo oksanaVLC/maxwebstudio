@@ -26,9 +26,10 @@ const legalLinks = [
 ];
 
 const languages = [
-  { code: "es", href: "/es/" },
-  { code: "en", href: "/en/" },
-  { code: "ru", href: "/ru/" },
+  { code: "es", href: getRelativeLocaleUrl("es", "") },
+  { code: "en", href: getRelativeLocaleUrl("en", "") },
+  { code: "ru", href: getRelativeLocaleUrl("ru", "") },
+  { code: "fr", href: getRelativeLocaleUrl("fr", "") },
 ] as const;
 ---
 

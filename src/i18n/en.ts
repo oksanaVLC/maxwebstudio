@@ -362,7 +362,7 @@ export default {
   contact: {
     title: "Tell us about your project",
     lead: "Send a few lines about what you need. You get a fixed quote within two working days.",
-    place: "Remote · based in Valencia",
+    place: "Valencia, Spain",
     form: {
       name: "Name",
       email: "Email",

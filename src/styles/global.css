@@ -246,7 +246,7 @@ strong {
 .lead {
   max-width: 400px;
 
-  margin: 0;
+  margin: 24px 0 0;
 
   color: var(--muted);
   font-size: var(--fs-lead);
