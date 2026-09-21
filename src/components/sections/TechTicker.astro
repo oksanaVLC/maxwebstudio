@@ -1,136 +1,238 @@
 ---
-const technologies = [
-  {
-    name: "Angular",
-    slug: "angular",
-  },
-  {
-    name: "Astro",
-    slug: "astro",
-  },
-  {
-    name: "TypeScript",
-    slug: "typescript",
-  },
-  {
-    name: "Node.js",
-    slug: "nodejs",
-  },
-  {
-    name: "CSS",
-    slug: "css",
-  },
-  {
-    name: "HTML",
-    slug: "html",
-  },
-  {
-    name: "Responsive Design",
-    slug: "responsive",
-  },
-  {
-    name: "Accesibilidad",
-    slug: "accessibility",
-  },
-  {
-    name: "SEO técnico",
-    slug: "seo",
-  },
-];
+import {
+  siAngular,
+  siAstro,
+  siTypescript,
+  siNodedotjs,
+  siCss,
+  siHtml5,
+} from "simple-icons";
 
-const items = [...technologies, ...technologies];
+import { icon } from "@fortawesome/fontawesome-svg-core";
+import {
+  faMobileScreenButton,
+  faUniversalAccess,
+  faMagnifyingGlassChart,
+} from "@fortawesome/free-solid-svg-icons";
+
+const technologies = [
+  { name: "Angular", icon: siAngular, type: "simple" },
+  { name: "Astro", icon: siAstro, type: "simple" },
+  { name: "TypeScript", icon: siTypescript, type: "simple" },
+  { name: "Node.js", icon: siNodedotjs, type: "simple" },
+  { name: "CSS", icon: siCss, type: "simple" },
+  { name: "HTML", icon: siHtml5, type: "simple" },
+  { name: "Responsive Design", icon: faMobileScreenButton, type: "fontawesome" },
+  { name: "Accesibilidad", icon: faUniversalAccess, type: "fontawesome" },
+  { name: "SEO técnico", icon: faMagnifyingGlassChart, type: "fontawesome" },
+];
 ---
 
 <section class="tech-ticker" aria-labelledby="tech-title">
-  <h2 id="tech-title" class="sr-only">
-    Tecnologías y especialidades
-  </h2>
+  <h2 id="tech-title" class="sr-only">Tecnologías y especialidades</h2>
 
   <div class="tech-ticker__viewport">
     <div class="tech-ticker__track">
-      {items.map((tech, index) => (
-        <div
-          class="tech-ticker__item"
-          data-tech={tech.slug}
-          aria-hidden={index >= technologies.length ? "true" : undefined}
-        >
-          <span class="tech-ticker__logo" aria-hidden="true">
-            <img src={`/images/tech/${tech.slug}.svg`} alt="" loading="lazy" />
-          </span>
-
-          <span class="tech-ticker__name">{tech.name}</span>
-        </div>
-      ))}
+      <!-- Un único grupo real. El script clona los necesarios para llenar la pantalla. -->
+      <div class="tech-ticker__group">
+        {
+          technologies.map((tech) => (
+            <div class="tech-ticker__item" data-tech={tech.name}>
+              <span class="tech-ticker__logo" aria-hidden="true">
+                {tech.type === "simple" ? (
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d={tech.icon.path} />
+                  </svg>
+                ) : (
+                  <span
+                    class="tech-ticker__fontawesome"
+                    set:html={icon(tech.icon).html.join("")}
+                  />
+                )}
+              </span>
+              <span class="tech-ticker__name">{tech.name}</span>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-  const ticker = document.querySelector(".tech-ticker");
-  const viewport = ticker?.querySelector(".tech-ticker__viewport");
-  const track = ticker?.querySelector(".tech-ticker__track");
+  const ticker = document.querySelector<HTMLElement>(".tech-ticker");
+  const viewport = ticker?.querySelector<HTMLElement>(".tech-ticker__viewport");
+  const track = ticker?.querySelector<HTMLElement>(".tech-ticker__track");
+  const baseGroup = ticker?.querySelector<HTMLElement>(".tech-ticker__group");
 
-  if (ticker && viewport && track) {
-    let paused = false;
+  if (ticker && viewport && track && baseGroup) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
     let position = 0;
     let lastTime = performance.now();
+    let paused = false;
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartPos = 0;
+    let ready = false;
 
-    const speed = 28;
+    const speed = 35; // px por segundo
 
-    const animate = (time: number) => {
-      const delta = (time - lastTime) / 1000;
-      lastTime = time;
+    const groupWidth = () => baseGroup.offsetWidth;
+    const active = () => !reduceMotion.matches;
 
-      if (!paused && viewport.scrollWidth > viewport.clientWidth) {
-        position += speed * delta;
+    // Clona el grupo hasta que el track mida, como mínimo, viewport + un grupo.
+    // Así siempre hay contenido tapando el salto del loop, en cualquier ancho.
+    const fillViewport = (): boolean => {
+      const gw = groupWidth();
+      if (gw <= 0) return false;
 
-        const halfWidth = track.scrollWidth / 2;
-
-        if (position >= halfWidth) {
-          position -= halfWidth;
-        }
-
-        track.style.transform = `translate3d(${-position}px, 0, 0)`;
+      const needed = viewport.clientWidth + gw;
+      let guard = 0;
+      while (track.scrollWidth < needed && guard < 50) {
+        const clone = baseGroup.cloneNode(true) as HTMLElement;
+        clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
+        guard++;
       }
-
-      requestAnimationFrame(animate);
+      return true;
     };
 
-    requestAnimationFrame(animate);
+    // Mantiene position dentro de [0, anchoDeUnGrupo). El reset es invisible
+    // porque el grupo siguiente es idéntico al primero.
+    const wrap = () => {
+      const gw = groupWidth();
+      if (gw <= 0) return;
+      position = ((position % gw) + gw) % gw;
+    };
 
+    const render = () => {
+      track.style.transform = `translate3d(${-position}px, 0, 0)`;
+    };
+
+    const start = () => {
+      if (ready) return;
+      if (!fillViewport()) return; // aún no hay ancho medible
+      ready = true;
+      wrap();
+      render();
+      lastTime = performance.now();
+    };
+
+    const tick = (time: number) => {
+      const dt = (time - lastTime) / 1000;
+      lastTime = time;
+
+      if (ready && active() && !paused && !dragging) {
+        position += speed * dt;
+        wrap();
+        render();
+      }
+      requestAnimationFrame(tick);
+    };
+
+    // Arranca en cuanto el grupo tiene ancho; re-rellena al cambiar tamaño.
+    const ro = new ResizeObserver(() => {
+      if (!ready) start();
+      else {
+        fillViewport();
+        wrap();
+        render();
+      }
+    });
+    ro.observe(baseGroup);
+    ro.observe(viewport);
+
+    start();
+
+    // Las fuentes cambian el ancho de los nombres al cargar: re-medir.
+    document.fonts?.ready.then(() => {
+      if (!ready) start();
+      else {
+        fillViewport();
+        render();
+      }
+    });
+
+    // ---- Pausa al pasar el ratón (desktop) ----
     ticker.addEventListener("mouseenter", () => {
       paused = true;
     });
-
     ticker.addEventListener("mouseleave", () => {
       paused = false;
       lastTime = performance.now();
     });
 
+    // ---- Rueda: solo secuestra el gesto HORIZONTAL; el vertical scrollea la página ----
     viewport.addEventListener(
       "wheel",
       (event) => {
-        if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-          event.preventDefault();
-          position += event.deltaY;
-        } else {
-          position += event.deltaX;
-        }
-
-        const halfWidth = track.scrollWidth / 2;
-
-        if (position < 0) {
-          position += halfWidth;
-        }
-
-        if (position >= halfWidth) {
-          position -= halfWidth;
-        }
-
-        track.style.transform = `translate3d(${-position}px, 0, 0)`;
+        if (!ready || !active()) return;
+        if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+        event.preventDefault();
+        position += event.deltaX;
+        wrap();
+        render();
       },
       { passive: false },
     );
+
+    // ---- Arrastre unificado (ratón + táctil) ----
+    const onDown = (x: number) => {
+      dragging = true;
+      dragStartX = x;
+      dragStartPos = position;
+    };
+    const onMove = (x: number) => {
+      if (!dragging) return;
+      position = dragStartPos - (x - dragStartX);
+      wrap();
+      render();
+    };
+    const onUp = () => {
+      if (!dragging) return;
+      dragging = false;
+      lastTime = performance.now();
+    };
+
+    // Ratón
+    viewport.addEventListener("mousedown", (event) => {
+      if (!ready || !active()) return;
+      event.preventDefault();
+      viewport.style.cursor = "grabbing";
+      onDown(event.clientX);
+    });
+    window.addEventListener("mousemove", (event) => onMove(event.clientX));
+    window.addEventListener("mouseup", () => {
+      viewport.style.cursor = "";
+      onUp();
+    });
+
+    // Táctil: pausa + arrastre horizontal. Pasivo, para no bloquear el
+    // scroll vertical de la página (eso lo gestiona touch-action: pan-y).
+    viewport.addEventListener(
+      "touchstart",
+      (event) => {
+        paused = true;
+        if (ready && active()) onDown(event.touches[0].clientX);
+      },
+      { passive: true },
+    );
+    viewport.addEventListener(
+      "touchmove",
+      (event) => onMove(event.touches[0].clientX),
+      { passive: true },
+    );
+    viewport.addEventListener(
+      "touchend",
+      () => {
+        paused = false;
+        onUp();
+      },
+      { passive: true },
+    );
+
+    requestAnimationFrame(tick);
   }
 </script>
 
@@ -146,8 +248,9 @@ const items = [...technologies, ...technologies];
   .tech-ticker__viewport {
     width: 100%;
     overflow: hidden;
-    touch-action: pan-x;
-    cursor: default;
+    /* El scroll vertical de la página se conserva; lo horizontal lo maneja el JS. */
+    touch-action: pan-y;
+    cursor: grab;
   }
 
   .tech-ticker__track {
@@ -155,6 +258,12 @@ const items = [...technologies, ...technologies];
     width: max-content;
     align-items: center;
     will-change: transform;
+  }
+
+  .tech-ticker__group {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
   }
 
   .tech-ticker__item {
@@ -177,16 +286,34 @@ const items = [...technologies, ...technologies];
     flex: 0 0 27px;
   }
 
-  .tech-ticker__logo img {
+  .tech-ticker__logo svg {
+    display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    fill: currentColor;
     opacity: 0.38;
-    filter: grayscale(1);
     transition:
       opacity 250ms ease,
-      filter 250ms ease,
       transform 250ms ease;
+  }
+
+  .tech-ticker__fontawesome {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    opacity: 0.38;
+    transition:
+      opacity 250ms ease,
+      transform 250ms ease;
+  }
+
+  .tech-ticker__fontawesome svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
   }
 
   .tech-ticker__name {
@@ -195,17 +322,13 @@ const items = [...technologies, ...technologies];
     letter-spacing: -0.01em;
   }
 
-  /*
-   * Al hacer hover mostramos el SVG real
-   * con sus colores originales.
-   */
   .tech-ticker__item:hover {
     color: var(--ink);
   }
 
-  .tech-ticker__item:hover .tech-ticker__logo img {
+  .tech-ticker__item:hover .tech-ticker__logo svg,
+  .tech-ticker__item:hover .tech-ticker__fontawesome {
     opacity: 1;
-    filter: none;
     transform: scale(1.08);
   }
 
@@ -222,37 +345,25 @@ const items = [...technologies, ...technologies];
   }
 
   @media (max-width: 767px) {
-    .tech-ticker__viewport {
-      overflow-x: auto;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .tech-ticker__viewport::-webkit-scrollbar {
-      display: none;
-    }
-
-    .tech-ticker__track {
-      transform: none !important;
-    }
-
     .tech-ticker__item {
       min-height: 88px;
       padding-inline: 22px;
     }
 
+    /* En móvil no hay hover real: neutraliza el estado hover. */
     .tech-ticker__item:hover {
       color: var(--muted-soft);
     }
 
-    .tech-ticker__item:hover .tech-ticker__logo img {
+    .tech-ticker__item:hover .tech-ticker__logo svg,
+    .tech-ticker__item:hover .tech-ticker__fontawesome {
       opacity: 0.38;
-      filter: grayscale(1);
       transform: none;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
+    /* Sin animación: tira estática que el usuario puede desplazar a mano. */
     .tech-ticker__track {
       transform: none !important;
     }
@@ -260,13 +371,15 @@ const items = [...technologies, ...technologies];
     .tech-ticker__viewport {
       overflow-x: auto;
       scrollbar-width: none;
+      cursor: default;
     }
 
     .tech-ticker__viewport::-webkit-scrollbar {
       display: none;
     }
 
-    .tech-ticker__item:hover .tech-ticker__logo img {
+    .tech-ticker__item:hover .tech-ticker__logo svg,
+    .tech-ticker__item:hover .tech-ticker__fontawesome {
       transform: none;
     }
   }
