@@ -1,0 +1,37 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="blog-callout" data-reveal="up">
+  <span class="blog-callout__line" aria-hidden="true"></span>
+
+  <p>
+    {text}
+  </p>
+</div>
+
+<style>
+  .blog-callout {
+    display: grid;
+    grid-template-columns: 4px minmax(0, 1fr);
+    gap: 24px;
+    margin: clamp(50px, 8vw, 100px) 0;
+  }
+
+  .blog-callout__line {
+    background: var(--red);
+  }
+
+  .blog-callout p {
+    max-width: 900px;
+    color: var(--ink);
+    font-size: clamp(26px, 3.5vw, 48px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+  }
+</style>

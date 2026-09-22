@@ -10,7 +10,10 @@ export async function getStaticPaths() {
     .filter((post) => !post.data.draft)
     .map((post) => {
       const [lang, ...slugParts] = post.id.split("/");
-      const slug = slugParts.join("/").replace(/\.md$/, "");
+
+      const slug = slugParts
+        .join("/")
+        .replace(/\.mdx?$/, "");
 
       return {
         params: {
@@ -30,18 +33,59 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
-  <article class="section">
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+>
+  <article class="section blog-article">
     <div class="container">
-      <header>
-        <p>{post.data.pubDate.toLocaleDateString(lang)}</p>
-        <h1>{post.data.title}</h1>
-        <p>{post.data.description}</p>
+
+      <header class="blog-article__meta">
+        <time datetime={post.data.pubDate.toISOString()}>
+          {post.data.pubDate.toLocaleDateString(lang, {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          })}
+        </time>
+
+        {post.data.tags.length > 0 && (
+          <span>
+            {post.data.tags[0]}
+          </span>
+        )}
       </header>
 
-      <div>
+      <div class="blog-article__content">
         <Content />
       </div>
+
     </div>
   </article>
 </BaseLayout>
+
+<style>
+  .blog-article__meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 40px;
+
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .blog-article__meta span::before {
+    content: "·";
+    margin-right: 14px;
+    color: var(--faint);
+  }
+
+  .blog-article__content {
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+</style>

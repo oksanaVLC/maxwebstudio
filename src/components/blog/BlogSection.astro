@@ -1,0 +1,98 @@
+---
+interface Props {
+  number: string;
+  title: string;
+}
+
+const { number, title } = Astro.props;
+---
+
+<section class="blog-section">
+  <div class="blog-section__number" aria-hidden="true">
+    {number}
+  </div>
+
+  <div class="blog-section__content">
+    <p class="blog-section__label">
+      {number}
+    </p>
+
+    <h2 data-reveal="up">
+      {title}
+    </h2>
+
+    <div class="blog-section__body">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .blog-section {
+    display: grid;
+    grid-template-columns: minmax(100px, 0.28fr) minmax(0, 0.72fr);
+    gap: clamp(30px, 6vw, 90px);
+    padding-block: clamp(70px, 10vw, 140px);
+    border-top: 1px solid var(--line);
+  }
+
+  .blog-section__number {
+    color: var(--faint);
+    font-size: clamp(64px, 10vw, 150px);
+    font-weight: 300;
+    line-height: 0.8;
+    letter-spacing: -0.08em;
+  }
+
+  .blog-section__label {
+    display: none;
+  }
+
+  .blog-section h2 {
+    max-width: 800px;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(32px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+  }
+
+  .blog-section__body {
+    max-width: 720px;
+    margin-top: 32px;
+    color: var(--ink-soft);
+    font-size: var(--fs-lead);
+    line-height: 1.75;
+  }
+
+  .blog-section__body :global(p + p) {
+    margin-top: 24px;
+  }
+
+  .blog-section__body :global(strong) {
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .blog-section__body :global(em) {
+    color: var(--ink);
+  }
+
+  @media (max-width: 767px) {
+    .blog-section {
+      grid-template-columns: 1fr;
+      gap: 22px;
+      padding-block: 72px;
+    }
+
+    .blog-section__number {
+      font-size: 72px;
+    }
+
+    .blog-section__body {
+      margin-top: 24px;
+    }
+  }
+</style>

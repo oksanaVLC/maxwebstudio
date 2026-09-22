@@ -7,14 +7,18 @@ const blog = defineCollection({
     pattern: "**/[^_]*.{md,mdx}",
     base: "./src/content/blog",
   }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    pubDate: z.coerce.date(),
-    updatedDate: z.coerce.date().optional(),
-    translationKey: z.string().optional(),
-    draft: z.boolean().default(false),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      pubDate: z.coerce.date(),
+      updatedDate: z.coerce.date().optional(),
+      translationKey: z.string().optional(),
+      draft: z.boolean().default(false),
+      image: image().optional(),
+      imageAlt: z.string().optional(),
+      tags: z.array(z.string()).default([]),
+    }),
 });
 
 // Files in src/content/policies/{es,en,ru,fr}/{legal,privacy,cookies}.md

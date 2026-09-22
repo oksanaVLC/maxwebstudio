@@ -2,6 +2,8 @@
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 
+import mdx from "@astrojs/mdx";
+
 export default defineConfig({
   site: "https://maxwebstudio.com",
 
@@ -13,16 +15,14 @@ export default defineConfig({
     },
   },
 
-  integrations: [
-    sitemap({
-      i18n: {
-        defaultLocale: "es",
-        locales: {
-          es: "es-ES",
-          en: "en-US",
-          ru: "ru-RU",
-        },
+  integrations: [sitemap({
+    i18n: {
+      defaultLocale: "es",
+      locales: {
+        es: "es-ES",
+        en: "en-US",
+        ru: "ru-RU",
       },
-    }),
-  ],
+    },
+  }), mdx()],
 });

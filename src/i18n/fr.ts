@@ -377,4 +377,121 @@ export default {
       sent: "Merci, nous vous répondrons sous deux jours ouvrés.",
     },
   },
+  projects: {
+    eyebrow: "Projets sélectionnés",
+    title: "Des projets qui parlent d'eux-mêmes.",
+    intro:
+      "Une sélection de projets digitaux conçus pour transformer stratégie, identité et expérience en résultats.",
+    viewProject: "Voir le projet",
+
+    items: [
+      {
+        number: "01",
+        title: "Deluxe Design",
+        category: "Architecture",
+        description:
+          "Un site pour un studio d'architecture qui souhaitait transformer son portfolio en une expérience visuelle aussi précise que ses réalisations.",
+        image:
+          "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1800&q=85",
+        alt: "Deluxe Design — studio d'architecture",
+        href: "#",
+
+        points: [
+          "Portfolio organisé par projet, processus et réalisations terminées",
+          "Photographies pleine largeur et galeries respectant le cadrage original",
+          "Structure prête à accueillir de nouveaux projets sans refonte",
+          "Version multilingue pour les concours et les clients internationaux",
+        ],
+      },
+
+      {
+        number: "02",
+        title: "Mountain Supply",
+        category: "E-commerce",
+        description:
+          "Une boutique en ligne pour une marque spécialisée dans les vêtements de sport et l'équipement de montagne.",
+        image:
+          "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1800&q=85",
+        alt: "Mountain Supply — boutique de vêtements et équipement de montagne",
+        href: "#",
+
+        points: [
+          "Catalogue conçu pour les collections et les saisons",
+          "Navigation rapide par activité, catégorie et produit",
+          "Fiches produits pensées pour faciliter la décision d'achat",
+          "Expérience optimisée pour mobile et achat rapide",
+        ],
+      },
+
+      {
+        number: "03",
+        title: "Z1",
+        category: "Site corporate",
+        description:
+          "Une présence digitale pour une entreprise qui souhaitait communiquer technologie, expertise et identité corporate avec clarté.",
+        image:
+          "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=85",
+        alt: "Z1 — site corporate",
+        href: "#",
+
+        points: [
+          "Architecture de contenu claire et évolutive",
+          "Hiérarchie visuelle centrée sur les services et les expertises",
+          "Structure prête pour de nouvelles pages et de nouveaux contenus",
+          "Expérience responsive pour les clients et les équipes commerciales",
+        ],
+      },
+
+      {
+        number: "04",
+        title: "Soul Catering",
+        category: "Gastronomie et événements",
+        description:
+          "Une expérience digitale pour une entreprise de catering qui souhaitait transmettre son univers, ses produits et sa personnalité.",
+        image:
+          "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1800&q=85",
+        alt: "Soul Catering — catering et événements",
+        href: "#",
+
+        points: [
+          "Présentation visuelle des menus et des propositions gastronomiques",
+          "Galeries pensées pour transmettre l'ambiance et l'expérience",
+          "Structure orientée vers les demandes de devis",
+          "Contenus adaptés aux événements privés et professionnels",
+        ],
+      },
+    ],
+  },
+  designTrends: {
+    eyebrow: "Tendances design",
+    title: "Des idées qui font la différence.",
+    intro:
+      "Nous explorons de nouvelles façons de combiner design, technologie et direction artistique pour créer des expériences digitales avec du caractère.",
+
+    heading: "Le design digital évolue en permanence.",
+    description:
+      "Il ne s'agit pas de suivre chaque tendance, mais de comprendre ce qui change et de l'utiliser lorsqu'elle apporte une réelle valeur à l'expérience.",
+
+    points: [
+      "Des directions visuelles qui transforment le web",
+      "Des interactions plus expressives sans sacrifier la clarté",
+      "Typographie, mouvement et image réunis dans un même système",
+      "Des idées capables de devenir de vraies solutions digitales",
+    ],
+
+    link: "Explorer les tendances",
+
+    imageAlt:
+      "Composition éditoriale contemporaine représentant les nouvelles tendances du design digital",
+  },
+  blog: {
+    eyebrow: "Journal",
+    title: "Idées, design et technologie.",
+    intro:
+      "Réflexions sur le design web, le développement, le mouvement, le SEO et les expériences digitales.",
+    readMore: "Lire l’article",
+    metaTitle: "Blog | Max Web Studio",
+    metaDescription:
+      "Articles sur le design web, le développement, le SEO et la technologie digitale.",
+  },
 } as const;

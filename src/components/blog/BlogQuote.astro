@@ -1,0 +1,41 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<blockquote class="blog-quote" data-reveal="up">
+  <span class="blog-quote__mark" aria-hidden="true">“</span>
+
+  <p>{text}</p>
+</blockquote>
+
+<style>
+  .blog-quote {
+    position: relative;
+    margin: clamp(60px, 9vw, 120px) 0;
+    padding: clamp(30px, 5vw, 60px) 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .blog-quote__mark {
+    display: block;
+    color: var(--red);
+    font-size: 64px;
+    font-weight: 300;
+    line-height: 0.7;
+  }
+
+  .blog-quote p {
+    max-width: 900px;
+    margin-top: 20px;
+    color: var(--ink);
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+  }
+</style>

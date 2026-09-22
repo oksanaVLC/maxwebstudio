@@ -1,0 +1,245 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  lang: string;
+  readMore: string;
+}
+
+const { post, lang, readMore } = Astro.props;
+
+const {
+  title,
+  description,
+  pubDate,
+  image,
+  imageAlt,
+  tags,
+} = post.data;
+
+const slug = post.id
+  .replace(`${lang}/`, "")
+  .replace(/\.mdx?$/, "");
+
+const href = `/${lang}/blog/${slug}`;
+
+const formattedDate = pubDate.toLocaleDateString(lang, {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+});
+---
+
+<article class="blog-card">
+  <a href={href} class="blog-card__link">
+    {
+      image && (
+        <div class="blog-card__media">
+          <Image
+            src={image}
+            alt={imageAlt || title}
+            width={1000}
+            height={700}
+            loading="lazy"
+            decoding="async"
+          />
+
+          <span class="blog-card__arrow" aria-hidden="true">
+            →
+          </span>
+        </div>
+      )
+    }
+
+    <div class="blog-card__body">
+      <div class="blog-card__meta">
+        <time datetime={pubDate.toISOString()}>
+          {formattedDate}
+        </time>
+
+        {tags.length > 0 && (
+          <span class="blog-card__tag">
+            {tags[0]}
+          </span>
+        )}
+      </div>
+
+      <h2 class="blog-card__title">
+        {title}
+      </h2>
+
+      <p class="blog-card__description">
+        {description}
+      </p>
+
+      <span class="blog-card__read">
+        {readMore}
+        <span aria-hidden="true">→</span>
+      </span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .blog-card {
+    min-width: 0;
+  }
+
+  .blog-card__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .blog-card__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1.35 / 1;
+    background: var(--surface-alt);
+  }
+
+  .blog-card__media :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--motion-ease);
+  }
+
+  .blog-card__arrow {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    border: 1px solid rgb(255 255 255 / 60%);
+    border-radius: 50%;
+
+    background: rgb(255 255 255 / 78%);
+    color: var(--ink);
+
+    font-size: 18px;
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition:
+      transform 500ms var(--motion-ease),
+      background-color 300ms ease;
+  }
+
+  .blog-card__body {
+    padding-top: 22px;
+  }
+
+  .blog-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .blog-card__tag::before {
+    content: "·";
+    margin-right: 12px;
+    color: var(--faint);
+  }
+
+  .blog-card__title {
+    max-width: 620px;
+    margin: 12px 0 0;
+
+    color: var(--ink);
+    font-size: clamp(22px, 2.2vw, 30px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .blog-card__description {
+    max-width: 600px;
+    margin: 12px 0 0;
+
+    color: var(--ink-soft);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+  }
+
+  .blog-card__read {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 18px;
+
+    color: var(--ink);
+    font-size: var(--fs-small);
+    font-weight: 700;
+  }
+
+  .blog-card__read span {
+    color: var(--red);
+    transition: transform 400ms var(--motion-ease);
+  }
+
+  .blog-card__link:hover .blog-card__media img {
+    transform: scale(1.045);
+  }
+
+  .blog-card__link:hover .blog-card__arrow {
+    transform: translate(3px, -3px);
+    background: rgb(255 255 255 / 92%);
+  }
+
+  .blog-card__link:hover .blog-card__read span {
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 767px) {
+    .blog-card__media {
+      aspect-ratio: 1.15 / 1;
+    }
+
+    .blog-card__media :global(img) {
+      transition: none;
+    }
+
+    .blog-card__arrow {
+      right: 14px;
+      bottom: 14px;
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blog-card__media :global(img),
+    .blog-card__arrow,
+    .blog-card__read span {
+      transition: none;
+    }
+
+    .blog-card__link:hover .blog-card__media img {
+      transform: none;
+    }
+
+    .blog-card__link:hover .blog-card__arrow,
+    .blog-card__link:hover .blog-card__read span {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,150 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+}
+
+import { Image } from "astro:assets";
+
+const {
+  eyebrow,
+  title,
+  description,
+  image,
+  imageAlt = "",
+} = Astro.props;
+---
+
+<header class="blog-hero">
+  <div class="blog-hero__content">
+    <p class="blog-hero__eyebrow" data-reveal="text">
+      {eyebrow}
+    </p>
+
+    <h1 class="blog-hero__title" data-reveal="up">
+      {title}
+    </h1>
+
+    <p class="blog-hero__description" data-reveal="text">
+      {description}
+    </p>
+  </div>
+
+  {
+    image && (
+      <div class="blog-hero__visual" data-reveal="image">
+        <Image
+          src={image}
+          alt={imageAlt}
+          width={1600}
+          height={1000}
+          loading="eager"
+          fetchpriority="high"
+        />
+
+        <div class="blog-hero__overlay" aria-hidden="true">
+          <span>EXPRESSION</span>
+          <span>×</span>
+          <span>RESTRAINT</span>
+        </div>
+      </div>
+    )
+  }
+</header>
+
+<style>
+  .blog-hero {
+    display: grid;
+    gap: clamp(42px, 6vw, 80px);
+  }
+
+  .blog-hero__content {
+    max-width: 900px;
+  }
+
+  .blog-hero__eyebrow {
+    margin: 0 0 20px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .blog-hero__title {
+    max-width: 900px;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(46px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 0.96;
+    letter-spacing: -0.06em;
+    text-wrap: balance;
+  }
+
+  .blog-hero__description {
+    max-width: 680px;
+    margin-top: 30px;
+    color: var(--ink-soft);
+    font-size: var(--fs-lead);
+    line-height: 1.6;
+  }
+
+  .blog-hero__visual {
+    position: relative;
+    overflow: hidden;
+    min-height: 420px;
+    background: var(--surface-soft);
+  }
+
+  .blog-hero__visual :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+  }
+
+  .blog-hero__overlay {
+    position: absolute;
+    right: clamp(18px, 4vw, 60px);
+    bottom: clamp(18px, 4vw, 60px);
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 16px;
+
+    background: rgb(255 255 255 / 78%);
+    color: var(--ink);
+
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.12em;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .blog-hero__overlay span:nth-child(2) {
+    color: var(--red);
+  }
+
+  @media (max-width: 767px) {
+    .blog-hero__visual,
+    .blog-hero__visual :global(img) {
+      min-height: 320px;
+    }
+
+    .blog-hero__overlay {
+      left: 18px;
+      right: auto;
+      bottom: 18px;
+      flex-wrap: wrap;
+    }
+  }
+</style>
