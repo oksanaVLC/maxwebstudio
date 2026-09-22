@@ -2,6 +2,7 @@
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
 import { getLocale, useTranslations, type Locale } from "../i18n";
+
 import "../styles/global.css";
 
 interface Props {
@@ -72,5 +73,9 @@ const htmlLang = lang === "es" ? "es-ES" : lang === "en" ? "en-US" : "ru-RU";
     </main>
 
     <Footer lang={lang} />
+
+    <script>
+      import "../scripts/animations";
+    </script>
   </body>
 </html>

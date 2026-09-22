@@ -9,9 +9,7 @@ const projectImage = "/images/poster-type.jpg";
   class="inspiration"
   aria-labelledby="inspiration-title"
 >
-  <!-- ================================================
-       VALENCIA VIDEO
-       ================================================ -->
+  <!-- VIDEO -->
 
   <div class="inspiration__video-wrap">
     <video
@@ -28,23 +26,27 @@ const projectImage = "/images/poster-type.jpg";
     <div class="inspiration__video-overlay"></div>
   </div>
 
-  <!-- ================================================
-       CONTENT
-       ================================================ -->
+  <!-- CONTENT -->
 
   <div class="container">
     <div class="inspiration__grid">
       <!-- TEXT -->
 
       <div class="inspiration__text">
-        <p class="inspiration__eyebrow">De dónde sacamos la inspiración</p>
+        <p class="inspiration__eyebrow">
+          De dónde sacamos la inspiración
+        </p>
 
-        <h2 id="inspiration-title" class="inspiration__title" data-fall>
+        <h2
+          id="inspiration-title"
+          class="inspiration__title"
+          data-reveal="up"
+        >
           Diseñamos desde Valencia
         </h2>
 
         <div class="inspiration__copy">
-          <p class="inspiration__lead">
+          <p class="inspiration__lead" data-reveal="text">
             Nuestro estudio de diseño y desarrollo web está en Valencia: una
             ciudad de color, de mucha luz, donde la tradición y la modernidad
             conviven sin pedirse permiso.
@@ -53,9 +55,9 @@ const projectImage = "/images/poster-type.jpg";
           <p>
             Aquí un mercado modernista de principios de siglo está a diez
             minutos de la arquitectura más experimental del Mediterráneo. Esa
-            mezcla enseña algo que aplicamos a cada web: lo nuevo funciona mejor
-            cuando respeta lo que ya había, y lo clásico se sostiene cuando se
-            cuida el detalle.
+            mezcla enseña algo que aplicamos a cada web: lo nuevo funciona
+            mejor cuando respeta lo que ya había, y lo clásico se sostiene
+            cuando se cuida el detalle.
           </p>
 
           <p>
@@ -66,24 +68,26 @@ const projectImage = "/images/poster-type.jpg";
           </p>
         </div>
 
-        <!-- INSPIRATION TAGS -->
+        <!-- TAGS -->
 
-        <div class="inspiration__tags" aria-label="Inspiración">
-          <span>Luz mediterránea</span>
-
-          <span>Arquitectura experimental</span>
-
-          <span>Color y cerámica</span>
-
-          <span>Tradición viva</span>
+        <div
+          class="inspiration__tags"
+          data-stagger
+          aria-label="Inspiración"
+        >
+          <span data-reveal="up">Luz mediterránea</span>
+          <span data-reveal="up">Arquitectura experimental</span>
+          <span data-reveal="up">Color y cerámica</span>
+          <span data-reveal="up">Tradición viva</span>
         </div>
       </div>
 
-      <!-- ================================================
-           MOCKUPS
-           ================================================ -->
+      <!-- MOCKUPS -->
 
-      <div class="inspiration__devices">
+      <div
+        class="inspiration__devices"
+        data-reveal="image"
+      >
         <div class="mockup">
           <!-- iMac -->
 
@@ -108,12 +112,21 @@ const projectImage = "/images/poster-type.jpg";
 
           <div class="mockup__phone">
             <div class="mockup__phone-screen">
-              <img src={projectImage} alt="" decoding="async" />
+              <img
+                src={projectImage}
+                alt=""
+                decoding="async"
+              />
             </div>
           </div>
         </div>
 
-        <span class="inspiration__caption">Webs 100 % responsive</span>
+        <span
+          class="inspiration__caption"
+          data-reveal="text"
+        >
+          Webs 100 % responsive
+        </span>
       </div>
     </div>
   </div>
@@ -121,54 +134,38 @@ const projectImage = "/images/poster-type.jpg";
 
 <style>
   /* ==================================================
-       INSPIRATION
-       ================================================== */
+     INSPIRATION
+     ================================================== */
 
   .inspiration {
     position: relative;
-
-    background: var(--surface);
-
     overflow: hidden;
+    background: var(--surface);
   }
 
   /* ==================================================
-       VIDEO
-       ================================================== */
+     VIDEO
+     ================================================== */
 
   .inspiration__video-wrap {
     position: relative;
-
     width: 100%;
-
     height: clamp(300px, 48vw, 620px);
-
     overflow: hidden;
-
     background: #dceff2;
   }
 
   .inspiration__video {
     display: block;
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
     object-position: center;
   }
 
-  /*
-     * Muy ligero tratamiento para que el vídeo
-     * no compita demasiado con el contenido posterior.
-     */
-
   .inspiration__video-overlay {
     position: absolute;
-
     inset: 0;
-
     pointer-events: none;
 
     background: linear-gradient(
@@ -180,8 +177,8 @@ const projectImage = "/images/poster-type.jpg";
   }
 
   /* ==================================================
-       GRID
-       ================================================== */
+     GRID
+     ================================================== */
 
   .inspiration__grid {
     display: grid;
@@ -198,8 +195,8 @@ const projectImage = "/images/poster-type.jpg";
   }
 
   /* ==================================================
-       TEXT
-       ================================================== */
+     TEXT
+     ================================================== */
 
   .inspiration__text {
     max-width: 720px;
@@ -238,8 +235,8 @@ const projectImage = "/images/poster-type.jpg";
   }
 
   /* ==================================================
-       COPY
-       ================================================== */
+     COPY
+     ================================================== */
 
   .inspiration__copy p {
     margin: 0 0 20px;
@@ -263,6 +260,8 @@ const projectImage = "/images/poster-type.jpg";
     font-size: var(--fs-lead);
 
     line-height: 1.65;
+
+    transition-delay: 140ms;
   }
 
   .inspiration__copy p:last-child {
@@ -270,8 +269,8 @@ const projectImage = "/images/poster-type.jpg";
   }
 
   /* ==================================================
-       TAGS
-       ================================================== */
+     TAGS
+     ================================================== */
 
   .inspiration__tags {
     display: flex;
@@ -308,8 +307,8 @@ const projectImage = "/images/poster-type.jpg";
   }
 
   /* ==================================================
-       DEVICES
-       ================================================== */
+     DEVICES
+     ================================================== */
 
   .inspiration__devices {
     display: flex;
@@ -330,8 +329,8 @@ const projectImage = "/images/poster-type.jpg";
   }
 
   /* ==================================================
-       iMAC
-       ================================================== */
+     iMAC
+     ================================================== */
 
   .mockup__imac {
     position: relative;
@@ -367,7 +366,12 @@ const projectImage = "/images/poster-type.jpg";
 
     background: var(--screen-dark);
 
-    clip-path: polygon(23% 27%, 86% 16.6%, 79% 66.1%, 14.2% 68%);
+    clip-path: polygon(
+      23% 27%,
+      86% 16.6%,
+      79% 66.1%,
+      14.2% 68%
+    );
   }
 
   .mockup__screen img {
@@ -389,8 +393,8 @@ const projectImage = "/images/poster-type.jpg";
   }
 
   /* ==================================================
-       PHONE
-       ================================================== */
+     PHONE
+     ================================================== */
 
   .mockup__phone {
     position: absolute;
@@ -406,13 +410,23 @@ const projectImage = "/images/poster-type.jpg";
 
     padding: 3px;
 
-    background: linear-gradient(160deg, #33363b 0%, #101114 64%);
+    background: linear-gradient(
+      160deg,
+      #33363b 0%,
+      #101114 64%
+    );
 
     border-radius: 9px;
 
-    box-shadow: -12px 16px 30px rgba(16, 17, 20, 0.28);
+    box-shadow:
+      -12px 16px 30px
+      rgba(16, 17, 20, 0.28);
 
-    transform: perspective(620px) rotateY(22deg) rotateX(5deg) rotateZ(-3deg);
+    transform:
+      perspective(620px)
+      rotateY(22deg)
+      rotateX(5deg)
+      rotateZ(-3deg);
 
     transform-origin: bottom right;
   }
@@ -440,8 +454,8 @@ const projectImage = "/images/poster-type.jpg";
   }
 
   /* ==================================================
-       CAPTION
-       ================================================== */
+     CAPTION
+     ================================================== */
 
   .inspiration__caption {
     color: var(--muted);
@@ -451,11 +465,13 @@ const projectImage = "/images/poster-type.jpg";
     font-size: var(--fs-small);
 
     letter-spacing: 0.02em;
+
+    transition-delay: 180ms;
   }
 
   /* ==================================================
-       TABLET
-       ================================================== */
+     TABLET
+     ================================================== */
 
   @media (max-width: 1023px) {
     .inspiration__grid {
@@ -476,21 +492,22 @@ const projectImage = "/images/poster-type.jpg";
   }
 
   /* ==================================================
-       MOBILE
-       ================================================== */
+     MOBILE
+     ================================================== */
 
   @media (max-width: 767px) {
-
     .mockup {
-    width: min(100%, 360px);
-    margin-inline: auto;
-    transform: translateX(6%);
-  }
+      width: min(100%, 360px);
 
-  .mockup__phone {
-    left: 0;
-  }
-   
+      margin-inline: auto;
+
+      transform: translateX(6%);
+    }
+
+    .mockup__phone {
+      left: 0;
+    }
+
     .inspiration__video-wrap {
       height: 360px;
     }
@@ -525,8 +542,8 @@ const projectImage = "/images/poster-type.jpg";
   }
 
   /* ==================================================
-       REDUCED MOTION
-       ================================================== */
+     REDUCED MOTION
+     ================================================== */
 
   @media (prefers-reduced-motion: reduce) {
     .inspiration__video {
@@ -534,38 +551,3 @@ const projectImage = "/images/poster-type.jpg";
     }
   }
 </style>
-
-<script>
-  const inspiration = document.querySelector(".inspiration");
-
-  if (inspiration) {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReducedMotion) {
-      inspiration.querySelectorAll("[data-fall]").forEach((element) => {
-        element.setAttribute("data-fall", "in");
-      });
-    } else {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-
-            entry.target.querySelectorAll("[data-fall]").forEach((element) => {
-              element.setAttribute("data-fall", "in");
-            });
-
-            observer.unobserve(entry.target);
-          });
-        },
-        {
-          threshold: 0.12,
-        },
-      );
-
-      observer.observe(inspiration);
-    }
-  }
-</script>

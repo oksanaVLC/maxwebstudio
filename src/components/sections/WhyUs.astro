@@ -14,12 +14,16 @@ const t = useTranslations(lang);
           {t.whyUs.eyebrow}
         </p>
 
-        <h2 id="why-us-title">{t.whyUs.title}</h2>
+        <h2 id="why-us-title" data-reveal="up">
+          {t.whyUs.title}
+        </h2>
 
-        <p class="why-us__lead">{t.whyUs.lead}</p>
+        <p class="why-us__lead" data-reveal="text">
+          {t.whyUs.lead}
+        </p>
       </div>
 
-      <div class="why-us__intro-media">
+      <div class="why-us__intro-media" data-reveal="image">
         <img
           src="/images/coffee-opened-notebook-near-laptop.jpg"
           alt={t.whyUs.imageAlt}
@@ -28,19 +32,21 @@ const t = useTranslations(lang);
       </div>
     </div>
 
-    <div class="why-us__points">
-      {Object.values(t.whyUs.points).map((point) => (
-        <article class="why-us__point">
-          <span class="why-us__check" aria-hidden="true">
-            ✓
-          </span>
+    <div class="why-us__points" data-stagger>
+      {
+        Object.values(t.whyUs.points).map((point) => (
+          <article class="why-us__point" data-reveal="up">
+            <span class="why-us__check" aria-hidden="true">
+              ✓
+            </span>
 
-          <div class="why-us__point-copy">
-            <h3>{point.title}</h3>
-            <p>{point.description}</p>
-          </div>
-        </article>
-      ))}
+            <div class="why-us__point-copy">
+              <h3>{point.title}</h3>
+              <p>{point.description}</p>
+            </div>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -50,9 +56,7 @@ const t = useTranslations(lang);
     background: var(--surface-soft);
   }
 
-  /* --------------------------------
-     Intro
-  -------------------------------- */
+  /* Intro */
 
   .why-us__intro {
     display: grid;
@@ -100,6 +104,7 @@ const t = useTranslations(lang);
     color: var(--ink-soft);
     font-size: var(--fs-lead);
     line-height: 1.65;
+    transition-delay: 120ms;
   }
 
   .why-us__intro-media {
@@ -117,9 +122,7 @@ const t = useTranslations(lang);
     object-fit: cover;
   }
 
-  /* --------------------------------
-     Points
-  -------------------------------- */
+  /* Points */
 
   .why-us__points {
     display: grid;
@@ -166,9 +169,7 @@ const t = useTranslations(lang);
     line-height: 1.65;
   }
 
-  /* --------------------------------
-     Mobile
-  -------------------------------- */
+  /* Mobile */
 
   @media (max-width: 767px) {
     .why-us__intro {

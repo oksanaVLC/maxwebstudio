@@ -16,7 +16,11 @@ const lang = getLocale(Astro.currentLocale);
 const t = useTranslations(lang);
 ---
 
-<section class="process section" id="process" aria-labelledby="process-title">
+<section
+  class="process section"
+  id="process"
+  aria-labelledby="process-title"
+>
   <div class="container">
     <div class="process__intro">
       <p class="process__eyebrow">
@@ -24,35 +28,37 @@ const t = useTranslations(lang);
         {t.process.eyebrow}
       </p>
 
-      <h2 id="process-title">{t.process.title}</h2>
+      <h2 id="process-title" data-reveal="up">
+        {t.process.title}
+      </h2>
     </div>
 
-    <div class="process__feature">
-<picture>
-  <source
-    media="(max-width: 767px)"
-    srcset={weMobileOptimized.src}
-    width={weMobileOptimized.attributes.width}
-    height={weMobileOptimized.attributes.height}
-  />
+    <div class="process__feature" data-reveal="image">
+      <picture>
+        <source
+          media="(max-width: 767px)"
+          srcset={weMobileOptimized.src}
+          width={weMobileOptimized.attributes.width}
+          height={weMobileOptimized.attributes.height}
+        />
 
-<Image
-  src={we}
-  alt={t.process.feature.imageAlt}
-  loading="lazy"
-  width={1200}
-  quality={80}
-  format="webp"
-/>
-</picture>
+        <Image
+          src={we}
+          alt={t.process.feature.imageAlt}
+          loading="lazy"
+          width={1200}
+          quality={80}
+          format="webp"
+        />
+      </picture>
 
-      <div class="process__feature-copy">
+      <div class="process__feature-copy" data-reveal="text">
         <p>{t.process.feature.text}</p>
       </div>
     </div>
 
-    <div class="process__steps">
-      <article class="process-step">
+    <div class="process__steps" data-stagger>
+      <article class="process-step" data-reveal="up">
         <span class="process-step__number" aria-hidden="true">
           01
         </span>
@@ -63,7 +69,7 @@ const t = useTranslations(lang);
         </div>
       </article>
 
-      <article class="process-step">
+      <article class="process-step" data-reveal="up">
         <span class="process-step__number" aria-hidden="true">
           02
         </span>
@@ -74,7 +80,7 @@ const t = useTranslations(lang);
         </div>
       </article>
 
-      <article class="process-step">
+      <article class="process-step" data-reveal="up">
         <span class="process-step__number" aria-hidden="true">
           03
         </span>
@@ -126,9 +132,7 @@ const t = useTranslations(lang);
     text-wrap: balance;
   }
 
-  /* --------------------------------
-     Imagen principal
-  -------------------------------- */
+  /* Imagen principal */
 
   .process__feature {
     position: relative;
@@ -139,24 +143,19 @@ const t = useTranslations(lang);
     background: var(--screen-dark);
   }
 
-.process__feature picture {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+  .process__feature picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
 
-.process__feature picture img {
+  .process__feature picture img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
   }
-
-  /*
-    Degradado sobre TODA la fotografía.
-    Transparente arriba → oscuro abajo.
-  */
 
   .process__feature::after {
     content: "";
@@ -171,9 +170,7 @@ const t = useTranslations(lang);
     );
   }
 
-  /* --------------------------------
-     Texto sobre la fotografía
-  -------------------------------- */
+  /* Texto sobre la fotografía */
 
   .process__feature-copy {
     position: absolute;
@@ -183,6 +180,7 @@ const t = useTranslations(lang);
     z-index: 2;
     padding: clamp(28px, 5vw, 58px);
     color: #fff;
+    transition-delay: 180ms;
   }
 
   .process__feature-copy p {
@@ -197,9 +195,7 @@ const t = useTranslations(lang);
     text-shadow: 0 2px 18px rgba(0, 0, 0, 0.18);
   }
 
-  /* --------------------------------
-     Pasos
-  -------------------------------- */
+  /* Pasos */
 
   .process__steps {
     display: grid;
@@ -243,10 +239,6 @@ const t = useTranslations(lang);
     line-height: 1.65;
   }
 
-  /* --------------------------------
-     Tablet
-  -------------------------------- */
-
   @media (max-width: 900px) {
     .process__steps {
       gap: 32px;
@@ -256,10 +248,6 @@ const t = useTranslations(lang);
       max-width: none;
     }
   }
-
-  /* --------------------------------
-     Mobile
-  -------------------------------- */
 
   @media (max-width: 767px) {
     .process__intro {
@@ -309,15 +297,5 @@ const t = useTranslations(lang);
     .process-step__content {
       max-width: 500px;
     }
-  }
-
-  /* --------------------------------
-     Accesibilidad
-  -------------------------------- */
-
-  @media (prefers-reduced-motion: reduce) {
-   .process__feature picture img {
-  transition: none;
-}
   }
 </style>

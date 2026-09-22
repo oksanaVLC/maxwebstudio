@@ -5,22 +5,30 @@ const lang = getLocale(Astro.currentLocale);
 const c = useTranslations(lang).faq;
 ---
 
-<section id="faq" class="section">
+<section id="faq" class="section" aria-labelledby="faq-title">
   <div class="container">
     <div class="faq__head">
-      <h2 class="h2">{c.title}</h2>
-      <p class="lead">{c.lead}</p>
+      <h2 id="faq-title" class="h2" data-reveal="up">
+        {c.title}
+      </h2>
+
+      <p class="lead" data-reveal="text">
+        {c.lead}
+      </p>
     </div>
 
-    <div class="faq">
-      {c.items.map((it) => (
-        <details class="faq__item">
-          <summary>{it.q}</summary>
-          <div class="faq__a">
-            <p>{it.a}</p>
-          </div>
-        </details>
-      ))}
+    <div class="faq" data-stagger>
+      {
+        c.items.map((it) => (
+          <details class="faq__item" data-reveal="up">
+            <summary>{it.q}</summary>
+
+            <div class="faq__a">
+              <p>{it.a}</p>
+            </div>
+          </details>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -30,9 +38,10 @@ const c = useTranslations(lang).faq;
     max-width: 760px;
     margin-inline: auto;
     margin-bottom: 46px;
+    text-align: center;
   }
 
-   .faq__head h2 {
+  .faq__head h2 {
     max-width: 800px;
     margin: 0 auto;
     color: var(--ink);
@@ -42,15 +51,15 @@ const c = useTranslations(lang).faq;
     line-height: 1;
     text-wrap: balance;
   }
-    .faq__head .lead {
+
+  .faq__head .lead {
     max-width: 680px;
-    margin-top: 24px ;
+    margin: 24px auto 0;
     color: var(--ink-soft);
     font-size: var(--fs-lead);
     font-weight: 400;
     line-height: 1.6;
   }
-
 
   .faq {
     max-width: 760px;
@@ -61,14 +70,20 @@ const c = useTranslations(lang).faq;
     border-bottom: 1px solid var(--line);
   }
 
+  .faq__item:first-child {
+    border-top: 1px solid var(--line);
+  }
+
   .faq__item summary {
-    cursor: pointer;
-    list-style: none;
-    padding: 1.15rem 2rem 1.15rem 0;
     position: relative;
+    cursor: pointer;
+    padding: 1.15rem 2rem 1.15rem 0;
+    color: var(--ink);
     font-family: var(--font-sans);
-    font-weight: 600;
     font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
+    list-style: none;
   }
 
   .faq__item summary::-webkit-details-marker {
@@ -78,12 +93,14 @@ const c = useTranslations(lang).faq;
   .faq__item summary::after {
     content: "+";
     position: absolute;
-    right: 0;
     top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
+    right: 0;
     color: var(--red);
-    transition: transform 0.2s;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1;
+    transform: translateY(-50%);
+    transition: transform 180ms var(--ease);
   }
 
   .faq__item[open] summary::after {
@@ -91,9 +108,38 @@ const c = useTranslations(lang).faq;
   }
 
   .faq__a {
+    max-width: 62ch;
     padding: 0 0 1.25rem;
     color: var(--muted);
     line-height: 1.7;
-    max-width: 62ch;
+  }
+
+  .faq__a p {
+    margin: 0;
+  }
+
+  @media (max-width: 767px) {
+    .faq__head {
+      margin-bottom: 42px;
+    }
+
+    .faq__head h2 {
+      font-size: clamp(36px, 11vw, 52px);
+    }
+
+    .faq__head .lead {
+      margin-top: 20px;
+    }
+
+    .faq__item summary {
+      padding: 1.1rem 2rem 1.1rem 0;
+      font-size: var(--fs-body);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq__item summary::after {
+      transition: none;
+    }
   }
 </style>

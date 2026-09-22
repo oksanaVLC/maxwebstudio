@@ -2,7 +2,9 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { getLocale, useTranslations } from "../../i18n";
 import { contactEmail, contactPhone } from "../../data/site";
+
 import Button from "../shared/Button.astro";
+
 
 const lang = getLocale(Astro.currentLocale);
 const c = useTranslations(lang).contact;
@@ -11,26 +13,26 @@ const privacyUrl = getRelativeLocaleUrl(lang, "privacy");
 
 <section id="contact" class="section section--alt">
   <div class="container">
-    <div class="contact__intro">
+    <div class="contact__intro" data-reveal="up">
       <h2>{c.title}</h2>
     </div>
 
     <div class="contact">
       <div class="contact__info">
-        <p class="contact__lead">{c.lead}</p>
+        <p class="contact__lead" data-reveal="text">{c.lead}</p>
 
-        <ul class="contact__list">
-          <li>
+        <ul class="contact__list" data-stagger>
+          <li data-reveal="up">
             <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
           </li>
 
-          <li>
+          <li data-reveal="up">
             <a href={`tel:${contactPhone.replace(/\s/g, "")}`}>
               {contactPhone}
             </a>
           </li>
 
-          <li>{c.place}</li>
+          <li data-reveal="up">{c.place}</li>
         </ul>
       </div>
 
@@ -40,6 +42,7 @@ const privacyUrl = getRelativeLocaleUrl(lang, "privacy");
         method="POST"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
+        data-reveal="up"
       >
         <input type="hidden" name="form-name" value="contact" />
 
@@ -80,9 +83,9 @@ const privacyUrl = getRelativeLocaleUrl(lang, "privacy");
           </span>
         </label>
 
-        <button type="submit" class="btn btn--primary">
-          <span>{c.form.submit}</span>
-        </button>
+<Button variant="primary" block type="submit">
+  {c.form.submit}
+</Button>
 
         <p
           class="form-status"
@@ -313,5 +316,51 @@ const privacyUrl = getRelativeLocaleUrl(lang, "privacy");
     .contact__list a {
       transition: none;
     }
+  }
+    /* ==========================================================
+     CTA
+     ========================================================== */
+
+  .contact__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 48px;
+    margin-top: 2px;
+    padding: 0 20px;
+
+    border: 1px solid var(--red);
+    border-radius: 8px;
+
+    background: var(--red);
+    color: #fff;
+
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+
+    cursor: pointer;
+
+    box-shadow:
+      0 8px 22px rgba(255, 87, 87, 0.18);
+
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      transform 180ms var(--ease);
+  }
+
+  .contact__submit:hover {
+    background: var(--red);
+    border-color: var(--red);
+    transform: translateY(-1px);
+  }
+
+  .contact__submit:active {
+    transform: translateY(0);
   }
 </style>

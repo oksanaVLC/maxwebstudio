@@ -1,58 +1,307 @@
 ---
 interface Props {
   href?: string;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "silver" | "pill-primary" | "pill-secondary";
+  size?: "default" | "hero" | "nav";
+  arrow?: boolean;
+  block?: boolean;
   class?: string;
   [key: string]: any;
 }
+
 const {
   href,
   variant = "primary",
+  size = "default",
+  arrow = false,
+  block = false,
   class: className = "",
   ...rest
 } = Astro.props;
+
 const Tag = href ? "a" : "button";
 ---
 
-<Tag href={href} class:list={["btn", `btn--${variant}`, className]} {...rest}>
-  <slot />
+<Tag
+  href={href}
+  class:list={[
+    "btn",
+    `btn--${variant}`,
+    `btn--${size}`,
+    {
+      "btn--arrow": arrow,
+      "btn--block": block,
+    },
+    className,
+  ]}
+  {...rest}
+>
+  <span class="btn__label">
+    <slot />
+  </span>
+
+  {
+    arrow && (
+      <span class="btn__arrow" aria-hidden="true">
+        <span class="btn__arrow-line"></span>
+        <span class="btn__arrow-head"></span>
+      </span>
+    )
+  }
 </Tag>
 
 <style>
+  /* =========================================================
+     BASE
+     ========================================================= */
+
   .btn {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
     font-family: var(--font-heading);
     font-weight: 600;
-    font-size: 1rem;
-    padding: 0.8rem 1.5rem;
-    border-radius: var(--radius);
-    border: 2px solid transparent;
-    cursor: pointer;
+    line-height: 1;
+    text-align: center;
     transition:
-      transform 0.12s ease,
-      background 0.15s,
-      color 0.15s;
+      transform 180ms var(--ease),
+      background-color 180ms var(--ease),
+      border-color 180ms var(--ease),
+      color 180ms var(--ease),
+      filter 180ms ease;
   }
-  .btn:hover {
-    transform: translateY(-2px);
+
+  .btn:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
   }
+
+  .btn__label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn--block {
+    width: 100%;
+  }
+
+  /* =========================================================
+     RECTANGULAR — PRIMARY
+     Pricing / Contact
+     ========================================================= */
+
   .btn--primary {
-    background: var(--color-accent);
-    color: var(--color-accent-ink);
+    min-height: 48px;
+    padding: 0 20px;
+    border: 1px solid var(--red);
+    border-radius: 8px;
+    background: var(--red);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 8px 22px rgba(255, 87, 87, 0.18);
   }
+
   .btn--primary:hover {
-    background: color-mix(in srgb, var(--color-accent) 88%, black);
+    background: var(--red);
   }
-  .btn--secondary {
-    background: transparent;
-    color: var(--color-text);
-    border-color: var(--color-text);
+
+  .btn--primary:active {
+    transform: translateY(0);
   }
-  .btn--secondary:hover {
-    background: var(--color-text);
-    color: var(--cream);
+
+  /* =========================================================
+     RECTANGULAR — SILVER
+     Pricing
+     ========================================================= */
+
+  .btn--silver {
+    min-height: 48px;
+    padding: 0 20px;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f0f1f2 48%,
+      #d7dade 100%
+    );
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 5px 14px rgba(16, 17, 20, 0.06);
+  }
+
+  .btn--silver:hover {
+    border-color: #bfc3c8;
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e8eaec 48%,
+      #cfd3d7 100%
+    );
+  }
+
+  .btn--silver:active {
+    transform: translateY(0);
+  }
+
+  /* =========================================================
+     PILL — PRIMARY
+     Hero + Navbar
+     ========================================================= */
+
+  .btn--pill-primary {
+    min-height: 48px;
+    padding-inline: 20px;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 8px 25px rgba(225, 29, 47, 0.18);
+  }
+
+  .btn--pill-primary:hover {
+    transform: translateY(-2px);
+    background: var(--red-hover);
+  }
+
+  .btn--pill-primary:active {
+    transform: translateY(0);
+  }
+
+  /* =========================================================
+     PILL — SECONDARY
+     Hero
+     ========================================================= */
+
+  .btn--pill-secondary {
+    min-height: 48px;
+    padding-inline: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .btn--pill-secondary:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .btn--pill-secondary:active {
+    transform: translateY(0);
+  }
+
+  /* =========================================================
+     HERO SIZE
+     ========================================================= */
+
+  .btn--hero {
+    min-height: clamp(44px, 3.5vw, 56px);
+    padding-inline: clamp(18px, 1.6vw, 28px);
+    gap: clamp(9px, 0.8vw, 13px);
+    font-size: clamp(12px, 0.95vw, 17px);
+  }
+
+  /* =========================================================
+     NAVBAR SIZE
+     ========================================================= */
+
+  .btn--nav {
+    min-height: 42px;
+    padding-inline: clamp(14px, 1.5vw, 21px);
+    font-size: clamp(12px, 0.85vw, 13px);
+  }
+
+  /* =========================================================
+     ARROW
+     ========================================================= */
+
+  .btn__arrow {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: clamp(20px, 1.7vw, 28px);
+    height: 12px;
+    flex: 0 0 clamp(20px, 1.7vw, 28px);
+    transition:
+      width 400ms var(--ease),
+      flex-basis 400ms var(--ease);
+  }
+
+  .btn__arrow-line {
+    display: block;
+    width: clamp(14px, 1.2vw, 20px);
+    height: 1px;
+    background: currentColor;
+    transition: width 400ms var(--ease);
+  }
+
+  .btn__arrow-head {
+    position: absolute;
+    right: 0;
+    width: clamp(6px, 0.55vw, 8px);
+    height: clamp(6px, 0.55vw, 8px);
+    border-top: 1px solid currentColor;
+    border-right: 1px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  .btn--arrow:hover .btn__arrow {
+    width: clamp(30px, 2.5vw, 40px);
+    flex-basis: clamp(30px, 2.5vw, 40px);
+  }
+
+  .btn--arrow:hover .btn__arrow-line {
+    width: clamp(24px, 2vw, 32px);
+  }
+
+  /* =========================================================
+     MOBILE
+     ========================================================= */
+
+  @media (max-width: 768px) {
+    .btn--hero {
+      min-height: 46px;
+      padding-inline: 19px;
+    }
+
+    .btn--nav {
+      min-height: 48px;
+      padding-inline: 19px;
+      font-size: 14px;
+    }
+  }
+
+  /* =========================================================
+     REDUCED MOTION
+     ========================================================= */
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn__arrow,
+    .btn__arrow-line {
+      transition: none;
+    }
+
+    .btn:hover {
+      transform: none;
+    }
   }
 </style>
