@@ -1,12 +1,22 @@
 ---
+import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { getLocale, useTranslations, type Locale } from "../i18n";
 
 interface Props {
   lang?: Locale;
+  blogTranslationKey?: string;
 }
 
-const lang = getLocale(Astro.props.lang ?? Astro.currentLocale);
+const {
+  lang: propLang,
+  blogTranslationKey,
+} = Astro.props;
+
+const lang = getLocale(
+  propLang ?? Astro.params.lang ?? Astro.currentLocale,
+);
+
 const t = useTranslations(lang);
 
 const home = getRelativeLocaleUrl(lang, "");
@@ -21,14 +31,68 @@ const navLinks = [
 ];
 
 const languages = [
-  { code: "es", label: "Español", href: "/es/" },
-  { code: "en", label: "English", href: "/en/" },
-  { code: "ru", label: "Русский", href: "/ru/" },
-  { code: "fr", label: "Français", href: "/fr/" },
+  { code: "es", label: "Español" },
+  { code: "en", label: "English" },
+  { code: "ru", label: "Русский" },
+  { code: "fr", label: "Français" },
 ] as const;
 
 const currentLanguage =
   languages.find((language) => language.code === lang) ?? languages[0];
+
+const pathname = Astro.url.pathname.replace(/\/+$/, "");
+
+const isBlogIndex =
+  /^\/(?:es|en|ru|fr)\/blog$/.test(pathname);
+
+const languageHrefs = new Map<string, string>();
+
+const posts = blogTranslationKey
+  ? await getCollection("blog")
+  : [];
+
+for (const language of languages) {
+  // Article: find the corresponding translated post
+  if (blogTranslationKey) {
+    const translatedPost = posts.find(
+      (post) =>
+        post.data.translationKey === blogTranslationKey &&
+        post.id.startsWith(`${language.code}/`) &&
+        !post.data.draft,
+    );
+
+    if (translatedPost) {
+      const [, ...slugParts] = translatedPost.id.split("/");
+
+      const slug = slugParts
+        .join("/")
+        .replace(/\.mdx?$/, "");
+
+      languageHrefs.set(
+        language.code,
+        `/${language.code}/blog/${slug}/`,
+      );
+
+      continue;
+    }
+  }
+
+  // Blog index: keep the /blog/ path
+  if (isBlogIndex) {
+    languageHrefs.set(
+      language.code,
+      `/${language.code}/blog/`,
+    );
+
+    continue;
+  }
+
+  // Other pages: go to the localized homepage
+  languageHrefs.set(
+    language.code,
+    `/${language.code}/`,
+  );
+}
 ---
 
 <header class="site-header">
@@ -99,7 +163,7 @@ const currentLanguage =
         <div class="language-selector__menu" id="language-menu" role="menu">
           {languages.map((language) => (
             <a
-              href={language.href}
+              href={languageHrefs.get(language.code) ?? getRelativeLocaleUrl(language.code, "")}
               class:list={{
                 "language-selector__option": true,
                 "is-active": language.code === lang,
@@ -158,7 +222,7 @@ const currentLanguage =
       <div class="site-header__mobile-language-list">
         {languages.map((language) => (
           <a
-            href={language.href}
+  href={languageHrefs.get(language.code) ?? getRelativeLocaleUrl(language.code, "")}
             class:list={{
               "site-header__mobile-language-option": true,
               "is-active": language.code === lang,

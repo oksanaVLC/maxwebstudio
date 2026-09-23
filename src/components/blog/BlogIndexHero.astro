@@ -1,0 +1,120 @@
+---
+import { Image } from "astro:assets";
+
+import blogBackground from "../../assets/images/liquid-marbling-paint-texture-background-fluid-painting-abstract-texture-intensive-color-mix-wallpaper.jpg";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro: string;
+}
+
+const { eyebrow, title, intro } = Astro.props;
+---
+
+<section class="blog-index__hero">
+  <Image
+    src={blogBackground}
+    alt=""
+    aria-hidden="true"
+    class="blog-index__bg"
+    loading="eager"
+  />
+
+  <div class="container blog-index__hero-content">
+    <header class="blog-index__head">
+      <p class="blog-index__label" data-reveal="text">
+        {eyebrow}
+      </p>
+
+      <h1 data-reveal="up">
+        {title}
+      </h1>
+
+      <p class="lead" data-reveal="text">
+        {intro}
+      </p>
+    </header>
+  </div>
+</section>
+
+<style>
+  .blog-index__hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+  }
+
+  .blog-index__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .blog-index__hero-content {
+    width: 100%;
+  }
+
+  .blog-index__head {
+    max-width: 820px;
+    margin: 0;
+    padding-block: clamp(100px, 12vw, 170px);
+  }
+
+  .blog-index__head h1 {
+    max-width: 800px;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(46px, 6vw, 76px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+
+  .blog-index__head .lead {
+    max-width: 680px;
+    margin-top: 24px;
+    color: rgb(255 255 255 / 88%);
+    font-size: var(--fs-lead);
+    line-height: 1.6;
+  }
+
+  .blog-index__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 28px;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: clamp(15px, 1.2vw, 18px);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .blog-index__label::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--red);
+  }
+
+  @media (max-width: 767px) {
+    .blog-index__hero {
+      min-height: 540px;
+    }
+
+    .blog-index__head {
+      padding-block: 100px;
+    }
+  }
+</style>

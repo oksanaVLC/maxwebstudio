@@ -9,18 +9,31 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  lang?: Locale;
+  blogTranslationKey?: string;
 }
 
-const { title, description, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  noindex = false,
+  lang: propLang,
+  blogTranslationKey,
+} = Astro.props;
 
-const lang: Locale = getLocale(Astro.currentLocale);
+const lang: Locale = getLocale(
+  propLang ?? Astro.params.lang ?? Astro.currentLocale,
+);
+
 const t = useTranslations(lang);
 
 const site = "https://maxwebstudio.com";
 
 const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 
-const subpath = pathname.replace(/^\/(es|en|ru)/, "").replace(/^\/+|\/+$/g, "");
+const subpath = pathname
+  .replace(/^\/(es|en|ru|fr)/, "")
+  .replace(/^\/+|\/+$/g, "");
 
 // Opción 1: concatenación en vez de template anidado
 const localePath = (locale: Locale) =>
@@ -31,7 +44,14 @@ const canonical = localePath(lang);
 const pageTitle = title ?? t.meta.defaultTitle;
 const pageDescription = description ?? t.meta.defaultDescription;
 
-const htmlLang = lang === "es" ? "es-ES" : lang === "en" ? "en-US" : "ru-RU";
+const htmlLang =
+  lang === "es"
+    ? "es-ES"
+    : lang === "en"
+      ? "en-US"
+      : lang === "ru"
+        ? "ru-RU"
+        : "fr-FR";
 ---
 
 <!doctype html>
@@ -47,9 +67,9 @@ const htmlLang = lang === "es" ? "es-ES" : lang === "en" ? "en-US" : "ru-RU";
 
     <link rel="canonical" href={canonical} />
 
-    {(["es", "en", "ru"] as const).map((locale) => (
+  {(["es", "en", "ru", "fr"] as const).map((locale) => (
       <link rel="alternate" hreflang={locale} href={localePath(locale)} />
-    ))}
+    ))} 
 
     <link rel="alternate" hreflang="x-default" href={localePath("es")} />
 
@@ -66,7 +86,10 @@ const htmlLang = lang === "es" ? "es-ES" : lang === "en" ? "en-US" : "ru-RU";
       {t.a11y.skipToContent}
     </a>
 
-    <Navbar lang={lang} />
+  <Navbar
+  lang={lang}
+  blogTranslationKey={blogTranslationKey}
+/>
 
     <main id="main">
       <slot />

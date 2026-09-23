@@ -32,7 +32,11 @@ const formattedDate = pubDate.toLocaleDateString(lang, {
 });
 ---
 
-<article class="blog-card">
+<article
+  class="blog-card"
+  data-blog-card
+  data-tags={tags.join("|")}
+>
   <a href={href} class="blog-card__link">
     {
       image && (

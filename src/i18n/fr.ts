@@ -493,5 +493,6 @@ export default {
     metaTitle: "Blog | Max Web Studio",
     metaDescription:
       "Articles sur le design web, le développement, le SEO et la technologie digitale.",
+    filterAll: "Tous",
   },
 } as const;

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
-import { getLocale } from "../../../i18n";
+import BlogIndexHero from "../../../components/blog/BlogIndexHero.astro";
+import { getLocale, useTranslations } from "../../../i18n";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 
 export async function getStaticPaths() {
@@ -28,64 +29,91 @@ export async function getStaticPaths() {
 }
 
 const lang = getLocale(Astro.params.lang);
+const c = useTranslations(lang).blog;
 const { post } = Astro.props;
 
 const { Content } = await render(post);
 ---
 
 <BaseLayout
+  lang={lang}
   title={post.data.title}
   description={post.data.description}
+  blogTranslationKey={post.data.translationKey}
 >
-  <article class="section blog-article">
+  <BlogIndexHero
+    eyebrow={c.eyebrow}
+    title={c.title}
+    intro={c.intro}
+  />
+
+  <article class="blog-article">
     <div class="container">
+      <div class="blog-article__column">
 
-      <header class="blog-article__meta">
-        <time datetime={post.data.pubDate.toISOString()}>
-          {post.data.pubDate.toLocaleDateString(lang, {
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
-          })}
-        </time>
+        <header class="blog-article__meta">
+          <time datetime={post.data.pubDate.toISOString()}>
+            {post.data.pubDate.toLocaleDateString(lang, {
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+            })}
+          </time>
 
-        {post.data.tags.length > 0 && (
-          <span>
-            {post.data.tags[0]}
-          </span>
-        )}
-      </header>
+          {post.data.tags.length > 0 && (
+            <span class="blog-article__tag">
+              {post.data.tags[0]}
+            </span>
+          )}
+        </header>
 
-      <div class="blog-article__content">
-        <Content />
+        <div class="blog-article__content">
+          <Content />
+        </div>
+
       </div>
-
     </div>
   </article>
 </BaseLayout>
 
 <style>
+  .blog-article {
+    padding-top: 48px;
+    padding-bottom: var(--section-y);
+  }
+
+  .blog-article__column {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+
   .blog-article__meta {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 40px;
+    gap: 16px;
 
-    color: var(--muted);
-    font-family: var(--font-mono);
-    font-size: var(--fs-micro);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    margin: 0 0 20px;
+
+    color: var(--ink-soft);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    line-height: 1.4;
   }
 
-  .blog-article__meta span::before {
+  .blog-article__tag {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .blog-article__tag::before {
     content: "·";
-    margin-right: 14px;
+    margin-right: 16px;
     color: var(--faint);
   }
 
   .blog-article__content {
-    max-width: 1200px;
-    margin-inline: auto;
+    width: 100%;
   }
 </style>

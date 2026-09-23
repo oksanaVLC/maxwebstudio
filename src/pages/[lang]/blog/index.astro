@@ -28,13 +28,22 @@ const posts = (
     b.data.pubDate.valueOf() -
     a.data.pubDate.valueOf(),
 );
+
+const tags = [
+  ...new Set(
+    posts.flatMap((post) => post.data.tags),
+  ),
+].sort((a, b) => a.localeCompare(b, lang));
 ---
 
 <BaseLayout
+  lang={lang}
   title={c.metaTitle}
   description={c.metaDescription}
 >
   <section class="section blog-index">
+    <!-- HERO -->
+
     <div class="blog-index__hero">
       <Image
         src={blogBackground}
@@ -46,22 +55,48 @@ const posts = (
 
       <div class="container blog-index__hero-content">
         <header class="blog-index__head">
-  <p class="blog-index__label" data-reveal="text">
-    {c.eyebrow}
-  </p>
+          <p class="blog-index__label" data-reveal="text">
+            {c.eyebrow}
+          </p>
 
-  <h1 data-reveal="up">
-    {c.title}
-  </h1>
+          <h1 data-reveal="up">
+            {c.title}
+          </h1>
 
-  <p class="lead" data-reveal="text">
-    {c.intro}
-  </p>
-</header>
+          <p class="lead" data-reveal="text">
+            {c.intro}
+          </p>
+        </header>
       </div>
     </div>
 
+    <!-- POSTS -->
+
     <div class="container blog-index__posts">
+      <div class="blog-index__filters" data-blog-filters>
+        <button
+          type="button"
+          class="blog-index__filter is-active"
+          data-filter="all"
+          aria-pressed="true"
+        >
+          {c.filterAll}
+        </button>
+
+        {
+          tags.map((tag) => (
+            <button
+              type="button"
+              class="blog-index__filter"
+              data-filter={tag}
+              aria-pressed="false"
+            >
+              {tag}
+            </button>
+          ))
+        }
+      </div>
+
       <div class="blog-index__grid" data-stagger>
         {
           posts.map((post) => (
@@ -83,11 +118,17 @@ const posts = (
     padding-top: 0;
   }
 
+  /* =========================================================
+     HERO
+     ========================================================= */
+
   .blog-index__hero {
     position: relative;
     isolation: isolate;
     overflow: hidden;
+
     min-height: 620px;
+
     display: flex;
     align-items: center;
   }
@@ -96,8 +137,10 @@ const posts = (
     position: absolute;
     inset: 0;
     z-index: -1;
+
     width: 100%;
     height: 100%;
+
     object-fit: cover;
   }
 
@@ -111,15 +154,45 @@ const posts = (
     padding-block: clamp(100px, 12vw, 170px);
   }
 
+  .blog-index__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
 
+    margin: 0 0 28px;
+
+    color: #fff;
+
+    font-family: var(--font-mono);
+    font-size: clamp(15px, 1.2vw, 18px);
+    font-weight: 600;
+    line-height: 1;
+
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .blog-index__label::before {
+    content: "";
+
+    display: block;
+
+    width: 28px;
+    height: 1px;
+
+    background: var(--red);
+  }
 
   .blog-index__head h1 {
     max-width: 800px;
     margin: 0;
+
     color: #fff;
+
     font-size: clamp(46px, 6vw, 76px);
     font-weight: 300;
     line-height: 1;
+
     letter-spacing: -0.055em;
     text-wrap: balance;
   }
@@ -127,19 +200,81 @@ const posts = (
   .blog-index__head .lead {
     max-width: 680px;
     margin-top: 24px;
+
     color: rgb(255 255 255 / 88%);
+
     font-size: var(--fs-lead);
     line-height: 1.6;
   }
+
+  /* =========================================================
+     POSTS
+     ========================================================= */
 
   .blog-index__posts {
     padding-block: clamp(70px, 8vw, 110px);
   }
 
+  /* =========================================================
+     FILTERS
+     ========================================================= */
+
+  .blog-index__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-bottom: 56px;
+  }
+
+  .blog-index__filter {
+    appearance: none;
+
+    padding: 10px 16px;
+
+    background: var(--surface);
+    border: 1px solid var(--line);
+
+    color: var(--muted);
+
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+      color 0.25s var(--ease),
+      background 0.25s var(--ease),
+      border-color 0.25s var(--ease),
+      transform 0.25s var(--ease);
+  }
+
+  .blog-index__filter:hover {
+    color: var(--ink);
+    border-color: var(--line-strong);
+
+    transform: translateY(-1px);
+  }
+
+  .blog-index__filter.is-active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--surface);
+  }
+
+  /* =========================================================
+     GRID
+     ========================================================= */
+
   .blog-index__grid {
     display: grid;
+
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(70px, 8vw, 110px) clamp(24px, 4vw, 60px);
+
+    gap:
+      clamp(70px, 8vw, 110px)
+      clamp(24px, 4vw, 60px);
   }
 
   @media (max-width: 767px) {
@@ -156,25 +291,87 @@ const posts = (
       gap: 64px;
     }
   }
-.blog-index__label {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 0 28px;
-  color: #fff;
-  font-family: var(--font-mono);
-  font-size: clamp(15px, 1.2vw, 18px);
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.blog-index__label::before {
-  content: "";
-  display: block;
-  width: 28px;
-  height: 1px;
-  background: var(--red);
-}
 </style>
+
+<script>
+  const filters =
+    document.querySelectorAll<HTMLButtonElement>(
+      "[data-filter]",
+    );
+
+  const cards =
+    document.querySelectorAll<HTMLElement>(
+      "[data-blog-card]",
+    );
+
+  if (filters.length && cards.length) {
+    const params = new URLSearchParams(
+      window.location.search,
+    );
+
+    const initialTag = params.get("tag");
+
+    function applyFilter(tag: string) {
+      filters.forEach((button) => {
+        const active =
+          button.dataset.filter === tag;
+
+        button.classList.toggle(
+          "is-active",
+          active,
+        );
+
+        button.setAttribute(
+          "aria-pressed",
+          String(active),
+        );
+      });
+
+      cards.forEach((card) => {
+        const cardTags =
+          card.dataset.tags?.split("|") ?? [];
+
+        const visible =
+          tag === "all" ||
+          cardTags.includes(tag);
+
+        card.hidden = !visible;
+      });
+
+      const url = new URL(
+        window.location.href,
+      );
+
+      if (tag === "all") {
+        url.searchParams.delete("tag");
+      } else {
+        url.searchParams.set("tag", tag);
+      }
+
+      window.history.replaceState(
+        {},
+        "",
+        url,
+      );
+    }
+
+    filters.forEach((button) => {
+      button.addEventListener("click", () => {
+        applyFilter(
+          button.dataset.filter ?? "all",
+        );
+      });
+    });
+
+    const validTag =
+      initialTag &&
+      Array.from(filters).some(
+        (button) =>
+          button.dataset.filter === initialTag,
+      )
+        ? initialTag
+        : "all";
+
+    applyFilter(validTag);
+  }
+</script>

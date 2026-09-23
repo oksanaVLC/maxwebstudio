@@ -490,5 +490,6 @@ export default {
     metaTitle: "Блог | Max Web Studio",
     metaDescription:
       "Статьи о веб-дизайне, разработке, SEO и цифровых технологиях.",
+    filterAll: "Все",
   },
 } as const;
