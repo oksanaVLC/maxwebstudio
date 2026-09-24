@@ -24,7 +24,7 @@ Ces cookies sont exemptés de l'obligation de consentement conformément à l'ar
 
 Le formulaire de contact **n'installe aucun cookie**.
 
-Le traitement des données que vous fournissez via ce formulaire est expliqué dans la [Politique de confidentialité](/fr/privacy).
+Le traitement des données que vous fournissez via ce formulaire est expliqué dans la [Politique de confidentialité](/fr/policies/privacy/).
 
 ## 4. Comment gérer les cookies
 

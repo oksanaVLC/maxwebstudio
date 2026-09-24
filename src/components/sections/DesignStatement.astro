@@ -1,0 +1,113 @@
+---
+import halftoneWaves from "../../assets/images/halftone-ondas.svg";
+import { getLocale, useTranslations } from "../../i18n";
+
+const lang = getLocale(Astro.currentLocale);
+const c = useTranslations(lang).designStatement;
+---
+
+<section
+  class="design-statement"
+  aria-label={c.ariaLabel}
+>
+  <div class="design-statement__background" aria-hidden="true">
+    <img
+      src={halftoneWaves.src}
+      alt=""
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <div class="container design-statement__inner">
+    <div class="design-statement__words">
+      <span data-reveal="up">{c.words[0]}</span>
+      <span data-reveal="up">{c.words[1]}</span>
+      <span data-reveal="up">{c.words[2]}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .design-statement {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: clamp(280px, 30vw, 400px);
+    display: flex;
+    align-items: center;
+    background: var(--surface);
+  }
+
+  .design-statement__background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.16;
+    pointer-events: none;
+  }
+
+  .design-statement__background img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .design-statement__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .design-statement__words {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .design-statement__words span {
+    display: block;
+    color: var(--ink);
+    font-size: clamp(42px, 6vw, 78px);
+    font-weight: 300;
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+  }
+
+  .design-statement__words span:nth-child(2) {
+    margin-left: clamp(24px, 6vw, 84px);
+  }
+
+  .design-statement__words span:nth-child(3) {
+    margin-left: clamp(48px, 12vw, 170px);
+  }
+
+  @media (max-width: 767px) {
+    .design-statement {
+      min-height: 300px;
+    }
+
+    .design-statement__background {
+      opacity: 0.11;
+    }
+
+    .design-statement__words {
+      gap: 4px;
+    }
+
+    .design-statement__words span {
+      font-size: clamp(38px, 11vw, 58px);
+    }
+
+    .design-statement__words span:nth-child(2) {
+      margin-left: 18px;
+    }
+
+    .design-statement__words span:nth-child(3) {
+      margin-left: 36px;
+    }
+  }
+</style>

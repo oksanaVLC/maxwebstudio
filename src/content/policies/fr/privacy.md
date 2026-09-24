@@ -17,7 +17,7 @@ Cette politique est conforme au Règlement (UE) 2016/679 (RGPD) et à la loi org
 
 Via le formulaire de contact, nous recueillons les données que vous fournissez volontairement : **nom, adresse e-mail et contenu de votre message**.
 
-Nous pouvons également recueillir des données de navigation au moyen de cookies (voir la [Politique relative aux cookies](/fr/cookies)).
+Nous pouvons également recueillir des données de navigation au moyen de cookies (voir la [Politique relative aux cookies](/fr/policies/cookies)).
 
 ## 3. Finalité
 

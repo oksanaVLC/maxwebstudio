@@ -1,6 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { useTranslations, type Locale } from "../i18n";
+import { stripLocale, useTranslations, type Locale } from "../i18n";
 
 interface Props {
   lang: Locale;
@@ -8,36 +8,83 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+
 const home = getRelativeLocaleUrl(lang, "");
 
+/*
+ * Current route without the locale segment.
+ *
+ * Examples:
+ * /es/                -> ""
+ * /en/blog/           -> "blog/"
+ * /fr/blog/my-post/   -> "blog/my-post/"
+ * /ru/privacy/        -> "privacy/"
+ */
+const currentPath = stripLocale(Astro.url.pathname);
+
 const links = [
-  { href: `${home}#services`, label: t.nav.services },
-  { href: `${home}#process`, label: t.nav.process },
-  { href: `${home}#work`, label: t.nav.work },
-  { href: `${home}#pricing`, label: t.nav.pricing },
-  { href: `${home}#faq`, label: t.nav.faq },
-  { href: `${home}blog/`, label: t.nav.blog },
+  {
+    href: `${home}#services`,
+    label: t.nav.services,
+  },
+  {
+    href: `${home}#process`,
+    label: t.nav.process,
+  },
+  {
+    href: `${home}#work`,
+    label: t.nav.work,
+  },
+  {
+    href: `${home}#pricing`,
+    label: t.nav.pricing,
+  },
+  {
+    href: `${home}#faq`,
+    label: t.nav.faq,
+  },
+  {
+    href: getRelativeLocaleUrl(lang, "blog"),
+    label: t.nav.blog,
+  },
 ];
 
 const legalLinks = [
-  { href: `${home}legal/`, label: t.footer.legal },
-  { href: `${home}privacy/`, label: t.footer.privacy },
-  { href: `${home}cookies/`, label: t.footer.cookies },
+  {
+    href: getRelativeLocaleUrl(lang, "policies/legal"),
+    label: t.footer.legal,
+  },
+  {
+    href: getRelativeLocaleUrl(lang, "policies/privacy"),
+    label: t.footer.privacy,
+  },
+  {
+    href: getRelativeLocaleUrl(lang, "policies/cookies"),
+    label: t.footer.cookies,
+  },
 ];
 
 const languages = [
-  { code: "es", href: getRelativeLocaleUrl("es", "") },
-  { code: "en", href: getRelativeLocaleUrl("en", "") },
-  { code: "ru", href: getRelativeLocaleUrl("ru", "") },
-  { code: "fr", href: getRelativeLocaleUrl("fr", "") },
+  { code: "es", label: "ES" },
+  { code: "en", label: "EN" },
+  { code: "ru", label: "RU" },
+  { code: "fr", label: "FR" },
 ] as const;
+
+function getLanguageHref(code: Locale) {
+  return getRelativeLocaleUrl(code, currentPath);
+}
 ---
 
 <footer class="footer">
   <div class="container">
     <div class="footer__top">
       <div class="footer__brand">
-        <a href={home} class="footer__logo" aria-label={t.meta.siteName}>
+        <a
+          href={home}
+          class="footer__logo"
+          aria-label={t.meta.siteName}
+        >
           <img
             src="/images/lightBold.svg"
             alt={t.meta.siteName}
@@ -51,21 +98,29 @@ const languages = [
 
       <div class="footer__nav">
         <div class="footer__column">
-          <p class="footer__title">{t.footer.explore}</p>
+          <p class="footer__title">
+            {t.footer.explore}
+          </p>
 
           <nav aria-label={t.footer.explore}>
             {links.map((link) => (
-              <a href={link.href}>{link.label}</a>
+              <a href={link.href}>
+                {link.label}
+              </a>
             ))}
           </nav>
         </div>
 
         <div class="footer__column">
-          <p class="footer__title">{t.footer.legalTitle}</p>
+          <p class="footer__title">
+            {t.footer.legalTitle}
+          </p>
 
           <nav aria-label={t.footer.legalTitle}>
             {legalLinks.map((link) => (
-              <a href={link.href}>{link.label}</a>
+              <a href={link.href}>
+                {link.label}
+              </a>
             ))}
           </nav>
         </div>
@@ -74,20 +129,30 @@ const languages = [
 
     <div class="footer__bottom">
       <p>
-        © {new Date().getFullYear()} {t.meta.siteName}.{t.footer.rights}
+        © {new Date().getFullYear()} {t.meta.siteName}.
+        {t.footer.rights}
       </p>
 
-      <div class="footer__languages" aria-label={t.a11y.switchLanguage}>
-        {languages.map((language) => (
-          <a
-            href={language.href}
-            data-active={String(language.code === lang)}
-            aria-current={language.code === lang ? "page" : undefined}
-          >
-            {language.code.toUpperCase()}
-          </a>
-        ))}
-      </div>
+      <nav
+        class="footer__languages"
+        aria-label={t.a11y.switchLanguage}
+      >
+        {
+          languages.map((language) => {
+            const active = language.code === lang;
+
+            return (
+              <a
+                href={getLanguageHref(language.code)}
+                data-active={String(active)}
+                aria-current={active ? "page" : undefined}
+              >
+                {language.label}
+              </a>
+            );
+          })
+        }
+      </nav>
     </div>
   </div>
 </footer>
@@ -100,22 +165,24 @@ const languages = [
 
   .footer__top {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
-    gap: 80px;
-    padding-block: 86px 72px;
+    grid-template-columns:
+      minmax(0, 1.2fr)
+      minmax(320px, 0.8fr);
+    gap: clamp(60px, 7vw, 100px);
+    padding-block: 88px 76px;
   }
 
   /* --------------------------------
-       Brand
-    -------------------------------- */
+     Brand
+  -------------------------------- */
 
   .footer__brand {
-    max-width: 470px;
+    max-width: 500px;
   }
 
   .footer__logo {
     display: inline-block;
-    width: 170px;
+    width: 180px;
   }
 
   .footer__logo img {
@@ -125,29 +192,32 @@ const languages = [
   }
 
   .footer__brand p {
-    max-width: 400px;
+    max-width: 420px;
     margin-top: 28px;
-    color: rgba(255, 255, 255, 0.58);
-    font-size: var(--fs-body);
+    color: rgb(255 255 255 / 60%);
+    font-size: var(--fs-lead);
     line-height: 1.65;
   }
 
   /* --------------------------------
-       Navigation
-    -------------------------------- */
+     Navigation
+  -------------------------------- */
 
   .footer__nav {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 50px;
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+    gap: 52px;
   }
 
   .footer__title {
-    margin-bottom: 18px;
-    color: rgba(255, 255, 255, 0.38);
-    font-size: var(--fs-micro);
+    margin: 0 0 20px;
+    color: rgb(255 255 255 / 46%);
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
     font-weight: 600;
     letter-spacing: 0.08em;
+    line-height: 1.3;
     text-transform: uppercase;
   }
 
@@ -155,14 +225,15 @@ const languages = [
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 9px;
+    gap: 11px;
   }
 
   .footer__column a {
     position: relative;
     display: inline-block;
-    color: rgba(255, 255, 255, 0.82);
-    font-size: var(--fs-small);
+    color: rgb(255 255 255 / 84%);
+    font-size: var(--fs-body);
+    font-weight: 400;
     line-height: 1.5;
     transition:
       color 250ms var(--ease),
@@ -171,39 +242,41 @@ const languages = [
 
   .footer__column a:hover {
     color: #fff;
-    transform: translateX(4px);
+    transform: translateX(5px);
   }
 
   /* --------------------------------
-       Bottom
-    -------------------------------- */
+     Bottom
+  -------------------------------- */
 
   .footer__bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 30px;
-    padding-block: 22px 28px;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-block: 24px 30px;
+    border-top: 1px solid rgb(255 255 255 / 14%);
   }
 
   .footer__bottom p {
-    color: rgba(255, 255, 255, 0.38);
-    font-size: var(--fs-micro);
+    margin: 0;
+    color: rgb(255 255 255 / 48%);
+    font-size: var(--fs-small);
     line-height: 1.5;
   }
 
   .footer__languages {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
   }
 
   .footer__languages a {
-    color: rgba(255, 255, 255, 0.38);
-    font-size: var(--fs-micro);
+    color: rgb(255 255 255 / 46%);
+    font-size: var(--fs-small);
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
+    line-height: 1;
     transition: color 200ms var(--ease);
   }
 
@@ -213,33 +286,55 @@ const languages = [
   }
 
   /* --------------------------------
-       Mobile
-    -------------------------------- */
+     Mobile
+  -------------------------------- */
 
   @media (max-width: 767px) {
     .footer__top {
       grid-template-columns: 1fr;
       gap: 58px;
-      padding-block: 68px 54px;
+      padding-block: 72px 56px;
     }
 
     .footer__logo {
-      width: 155px;
+      width: 165px;
     }
 
     .footer__brand p {
       margin-top: 22px;
+      font-size: var(--fs-body);
     }
 
     .footer__nav {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 30px;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 32px;
+    }
+
+    .footer__title {
+      font-size: var(--fs-small);
+    }
+
+    .footer__column a {
+      font-size: var(--fs-body);
     }
 
     .footer__bottom {
       align-items: flex-start;
       flex-direction: column;
+      gap: 20px;
+    }
+
+    .footer__bottom p {
+      font-size: var(--fs-small);
+    }
+
+    .footer__languages {
       gap: 18px;
+    }
+
+    .footer__languages a {
+      font-size: var(--fs-small);
     }
   }
 </style>

@@ -491,4 +491,8 @@ export default {
       "Articles about web design, development, SEO and digital technology.",
     filterAll: "All",
   },
+  designStatement: {
+    ariaLabel: "Design principles",
+    words: ["Balance.", "Good taste.", "Performance."],
+  },
 } as const;

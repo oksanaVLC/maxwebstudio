@@ -19,7 +19,7 @@ Esta política se ajusta al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica
 
 A través del formulario de contacto recogemos los datos que facilitas voluntariamente: **nombre, correo electrónico y el contenido de tu mensaje**.
 
-También podemos recoger datos de navegación mediante cookies (ver la [Política de cookies](/es/cookies)).
+También podemos recoger datos de navegación mediante cookies (ver la [Política de cookies](/es/policies/cookies/)).
 
 ## 3. Finalidad
 

@@ -495,4 +495,8 @@ export default {
       "Articles sur le design web, le développement, le SEO et la technologie digitale.",
     filterAll: "Tous",
   },
+  designStatement: {
+    ariaLabel: "Principes de design",
+    words: ["Équilibre.", "Bon goût.", "Performance."],
+  },
 } as const;

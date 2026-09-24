@@ -26,7 +26,7 @@ Estas cookies están exentas del deber de consentimiento conforme al artículo 2
 
 El formulario de contacto **no instala cookies**.
 
-El tratamiento de los datos que facilitas a través de él se explica en la [Política de privacidad](/es/privacy).
+El tratamiento de los datos que facilitas a través de él se explica en la [Política de privacidad](/es/policies/privacy/).
 
 ## 4. Cómo gestionar las cookies
 

@@ -1,0 +1,238 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
+
+import { getLocale } from "../../../i18n";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+import policiesBackground from "../../../assets/images/policies.jpg";
+
+export async function getStaticPaths() {
+  const policies = await getCollection("policies");
+
+  return policies.map((policy) => {
+    const [lang, ...slugParts] = policy.id.split("/");
+    const slug = slugParts.join("/").replace(/\.md$/, "");
+
+    return {
+      params: {
+        lang,
+        slug,
+      },
+      props: {
+        policy,
+      },
+    };
+  });
+}
+
+const lang = getLocale(Astro.params.lang);
+const { policy } = Astro.props;
+const { Content } = await render(policy);
+---
+
+<BaseLayout
+  lang={lang}
+  title={policy.data.title}
+  description={policy.data.description ?? policy.data.title}
+>
+  <main class="policy-page">
+    <header class="policy-hero">
+      <Image
+        src={policiesBackground}
+        alt=""
+        aria-hidden="true"
+        class="policy-hero__background"
+        loading="eager"
+        fetchpriority="high"
+      />
+
+      <div class="policy-hero__overlay"></div>
+
+      <div class="container policy-hero__inner">
+        <div class="policy-hero__content">
+          <p class="policy-hero__eyebrow">
+            Max Web Studio
+          </p>
+
+          <h1>{policy.data.title}</h1>
+
+          <time datetime={policy.data.lastUpdated.toISOString()}>
+            {policy.data.lastUpdated.toLocaleDateString(lang, {
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+            })}
+          </time>
+        </div>
+      </div>
+    </header>
+
+    <section class="policy-content section">
+      <div class="container">
+        <article class="policy-content__article">
+          <div class="policy-content__body">
+            <Content />
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .policy-page {
+    background: var(--surface);
+  }
+
+  .policy-hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: clamp(360px, 48vw, 580px);
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .policy-hero__background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .policy-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(
+        90deg,
+        rgb(16 17 20 / 82%) 0%,
+        rgb(16 17 20 / 58%) 42%,
+        rgb(16 17 20 / 24%) 100%
+      ),
+      linear-gradient(
+        0deg,
+        rgb(16 17 20 / 58%) 0%,
+        transparent 55%
+      );
+  }
+
+  .policy-hero__inner {
+    width: 100%;
+    padding-block: clamp(96px, 11vw, 150px) 72px;
+  }
+
+  .policy-hero__content {
+    max-width: 920px;
+  }
+
+  .policy-hero__eyebrow {
+    margin: 0 0 20px;
+    color: rgb(255 255 255 / 76%);
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .policy-hero__content h1 {
+    max-width: 900px;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(42px, 6vw, 78px);
+    font-weight: 300;
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+    text-wrap: balance;
+  }
+
+  .policy-hero__content time {
+    display: block;
+    margin-top: 24px;
+    color: rgb(255 255 255 / 70%);
+    font-size: var(--fs-small);
+  }
+
+  .policy-content {
+    padding-top: clamp(56px, 7vw, 90px);
+  }
+
+  .policy-content__article {
+    max-width: 860px;
+    margin-inline: auto;
+  }
+
+  .policy-content__body {
+    max-width: 760px;
+    color: var(--ink-body);
+    font-size: var(--fs-lead);
+    line-height: 1.75;
+  }
+
+  .policy-content__body :global(h2) {
+    margin-top: 54px;
+    margin-bottom: 18px;
+    color: var(--ink);
+    font-size: var(--fs-h3);
+    line-height: 1.3;
+  }
+
+  .policy-content__body :global(h3) {
+    margin-top: 38px;
+    margin-bottom: 14px;
+    color: var(--ink);
+    font-size: var(--fs-body);
+    font-weight: 700;
+  }
+
+  .policy-content__body :global(p) {
+    margin: 0 0 20px;
+  }
+
+  .policy-content__body :global(ul),
+  .policy-content__body :global(ol) {
+    margin: 0 0 24px;
+    padding-left: 24px;
+  }
+
+  .policy-content__body :global(li) {
+    margin-bottom: 8px;
+  }
+
+  .policy-content__body :global(a) {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 767px) {
+    .policy-hero {
+      min-height: 420px;
+    }
+
+    .policy-hero__overlay {
+      background:
+        linear-gradient(
+          180deg,
+          rgb(16 17 20 / 72%) 0%,
+          rgb(16 17 20 / 66%) 100%
+        );
+    }
+
+    .policy-hero__inner {
+      padding-block: 90px 52px;
+    }
+
+    .policy-hero__content h1 {
+      font-size: clamp(40px, 11vw, 58px);
+    }
+  }
+</style>

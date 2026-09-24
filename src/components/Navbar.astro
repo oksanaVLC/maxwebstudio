@@ -1,7 +1,12 @@
 ---
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { getLocale, useTranslations, type Locale } from "../i18n";
+import {
+  getLocale,
+  stripLocale,
+  useTranslations,
+  type Locale,
+} from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -38,12 +43,13 @@ const languages = [
 ] as const;
 
 const currentLanguage =
-  languages.find((language) => language.code === lang) ?? languages[0];
+  languages.find(
+    (language) => language.code === lang,
+  ) ?? languages[0];
 
-const pathname = Astro.url.pathname.replace(/\/+$/, "");
-
-const isBlogIndex =
-  /^\/(?:es|en|ru|fr)\/blog$/.test(pathname);
+const currentPath = stripLocale(
+  Astro.url.pathname,
+);
 
 const languageHrefs = new Map<string, string>();
 
@@ -52,7 +58,11 @@ const posts = blogTranslationKey
   : [];
 
 for (const language of languages) {
-  // Article: find the corresponding translated post
+  /*
+   * Blog article:
+   * find the corresponding translated article
+   * using translationKey.
+   */
   if (blogTranslationKey) {
     const translatedPost = posts.find(
       (post) =>
@@ -62,7 +72,8 @@ for (const language of languages) {
     );
 
     if (translatedPost) {
-      const [, ...slugParts] = translatedPost.id.split("/");
+      const [, ...slugParts] =
+        translatedPost.id.split("/");
 
       const slug = slugParts
         .join("/")
@@ -77,20 +88,20 @@ for (const language of languages) {
     }
   }
 
-  // Blog index: keep the /blog/ path
-  if (isBlogIndex) {
-    languageHrefs.set(
-      language.code,
-      `/${language.code}/blog/`,
-    );
-
-    continue;
-  }
-
-  // Other pages: go to the localized homepage
+  /*
+   * All non-blog pages:
+   * preserve the current route.
+   *
+   * /es/policies/cookies/
+   *       ↓
+   * /en/policies/cookies/
+   */
   languageHrefs.set(
     language.code,
-    `/${language.code}/`,
+    getRelativeLocaleUrl(
+      language.code as Locale,
+      currentPath,
+    ),
   );
 }
 ---

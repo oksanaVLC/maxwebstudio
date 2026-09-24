@@ -1,8 +1,7 @@
 ---
 import { Image, getImage } from "astro:assets";
 
-import we from "../../assets/images/we.jpg";
-import weMobile from "../../assets/images/we_mobile.jpg";
+import { default as we, default as weMobile } from "../../assets/images/team.jpg";
 import { getLocale, useTranslations } from "../../i18n";
 
 const weMobileOptimized = await getImage({

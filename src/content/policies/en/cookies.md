@@ -26,7 +26,7 @@ These cookies are exempt from the consent requirement under Article 22.2 of the 
 
 The contact form **does not install cookies**.
 
-The processing of the data you provide through it is explained in the [Privacy Policy](/en/privacy).
+The processing of the data you provide through it is explained in the [Privacy Policy](/en/policies/privacy/).
 
 ## 4. Managing cookies
 

@@ -1,39 +1,43 @@
 ---
-title: Política de cookies
-description: Información sobre el uso de cookies en el sitio web de Max Studio.
+title: Legal Notice
+
+description: Legal information and terms of use of the Max Web Studio website.
+
 lastUpdated: 2026-09-11
 ---
 
----
+## 1. Identification details
 
-## 1. ¿Qué son las cookies?
+In compliance with Article 10 of Law 34/2002 (LSSI-CE), the following information is provided regarding the owner of this website:
 
-Las cookies son pequeños archivos que un sitio web guarda en tu dispositivo para recordar información sobre tu visita.
+- **Owner:** Oksana Golubeva
+- **Tax ID (NIE):** X9102105Q
+- **Registered address:** pl. Alquería Nova, 1, 46950 Xirivella (Valencia), Spain
+- **Email:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
+- **Website:** https://maxwebstudio.com
 
-Esta política cumple el artículo 22.2 de la Ley 34/2002 (LSSI-CE) y las directrices de la Agencia Española de Protección de Datos (AEPD).
+## 2. Purpose
 
-## 2. Cookies que utiliza este sitio
+This Legal Notice governs access to, browsing of, and use of the maxwebstudio.com website. Access to the website implies acceptance of these terms.
 
-Actualmente, **este sitio web no utiliza cookies de análisis, de publicidad ni de seguimiento**, ni propias ni de terceros.
+## 3. Terms of use
 
-Por ese motivo, no se muestra un banner de consentimiento de cookies: no hay tratamientos que requieran tu consentimiento previo.
+Users agree to use the website in accordance with the law, good faith, and public order, and to refrain from any use that could damage the website or prevent its normal operation.
 
-Únicamente podrían emplearse cookies **técnicas o necesarias** si resultan imprescindibles para el funcionamiento del sitio, por ejemplo, para recordar tu preferencia de idioma.
+## 4. Intellectual and industrial property
 
-Estas cookies están exentas del deber de consentimiento conforme al artículo 22.2 de la LSSI-CE.
+All content — including text, images, design, code, logos, and trademarks — is owned by Oksana Golubeva or by third parties who have authorised its use, and is protected by applicable intellectual and industrial property laws.
 
-## 3. Formulario de contacto
+Reproduction without express authorisation is prohibited.
 
-El formulario de contacto **no instala cookies**.
+## 5. Disclaimer
 
-El tratamiento de los datos que facilitas a través de él se explica en la [Política de privacidad](/es/privacy).
+The owner shall not be liable for any damages arising from errors in the content, the unavailability of the website, or the presence of malicious software, despite having adopted reasonable technical measures to prevent such issues.
 
-## 4. Cómo gestionar las cookies
+## 6. Links
 
-Puedes permitir, bloquear o eliminar las cookies almacenadas en tu dispositivo desde la configuración de tu navegador (Chrome, Firefox, Safari, Edge).
+The website may contain links to third-party websites. The owner assumes no responsibility for their content or policies.
 
-Desactivar las cookies técnicas podría afectar al funcionamiento del sitio.
+## 7. Applicable law and jurisdiction
 
-## 5. Cambios en esta política
-
-Si en el futuro se incorporan herramientas que utilicen cookies no esenciales, por ejemplo, analítica web, esta política se actualizará y se habilitará un sistema de consentimiento previo antes de su activación.
+These terms are governed by Spanish law. In the event of any dispute, the parties submit to the courts and tribunals of the owner's place of residence, unless otherwise required by applicable law.

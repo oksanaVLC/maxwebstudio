@@ -19,7 +19,7 @@ This policy complies with Regulation (EU) 2016/679 (GDPR) and Spanish Organic La
 
 Through the contact form, we collect the data you voluntarily provide: **name, email address and the content of your message**.
 
-We may also collect browsing data through cookies (see the [Cookie Policy](/en/cookies)).
+We may also collect browsing data through cookies (see the [Cookie Policy](/en/policies/cookies/)).
 
 ## 3. Purpose
 
