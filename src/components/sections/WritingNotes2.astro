@@ -1,0 +1,409 @@
+---
+/**
+ * WritingNotes — a pen writing notes on a sheet of paper.
+ * Pure SVG + a tiny script (no Lottie, no dependencies).
+ *
+ * - Starts when it scrolls into view, pauses when it leaves.
+ * - Loops: writes → holds → fades → writes again.
+ * - prefers-reduced-motion: shows the finished note, no pen.
+ */
+
+interface Props {
+  label?: string;
+  class?: string;
+}
+
+const { label = "", class: className } = Astro.props;
+
+// GEN-START
+type Stroke = { d: string; tone: "ink" | "red" };
+
+function rng(seed: number) {
+  let s = seed % 2147483647;
+  if (s <= 0) s += 2147483646;
+  return () => {
+    s = (s * 16807) % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
+
+const SLANT = 0.24;
+const f = (n: number) => Math.round(n * 10) / 10;
+
+/** One handwritten "word" as a single cursive path */
+function word(x0: number, base: number, width: number, xh: number, seed: number) {
+  const r = rng(seed);
+  const P = (x: number, y: number) => `${f(x + (base - y) * SLANT)} ${f(y)}`;
+  let x = x0;
+  let y = base;
+  let d = `M${P(x, y)}`;
+  const end = x0 + width;
+
+  while (x < end - 6) {
+    const k = r();
+    const jitter = (r() - 0.5) * 1.6;
+    const b = base + jitter;
+
+    if (k < 0.2) {
+      // tall loop (l, h, k, b)
+      const h = xh * (2.1 + r() * 0.5);
+      const w = 11 + r() * 3;
+      d += ` C${P(x + w * 0.55, b - h * 0.25)} ${P(x + w * 1.05, b - h * 0.8)} ${P(x + w * 0.62, b - h)}`;
+      d += ` C${P(x + w * 0.3, b - h * 1.02)} ${P(x + w * 0.22, b - h * 0.4)} ${P(x + w * 0.62, b)}`;
+      x += w * 0.62;
+    } else if (k < 0.55) {
+      // small loop (e)
+      const h = xh * (0.85 + r() * 0.25);
+      const w = 9 + r() * 3;
+      d += ` C${P(x + w * 0.6, b - h * 0.2)} ${P(x + w * 1.0, b - h * 0.9)} ${P(x + w * 0.6, b - h)}`;
+      d += ` C${P(x + w * 0.25, b - h)} ${P(x + w * 0.2, b - h * 0.2)} ${P(x + w * 0.8, b)}`;
+      x += w * 0.8;
+    } else if (k < 0.85) {
+      // arch (n, m)
+      const h = xh * (0.8 + r() * 0.3);
+      const w = 10 + r() * 4;
+      d += ` C${P(x + w * 0.05, b - h * 0.7)} ${P(x + w * 0.3, b - h)} ${P(x + w * 0.5, b - h)}`;
+      d += ` C${P(x + w * 0.72, b - h)} ${P(x + w * 0.8, b - h * 0.3)} ${P(x + w, b)}`;
+      x += w;
+    } else {
+      // cup (u, w)
+      const h = xh * (0.8 + r() * 0.25);
+      const w = 10 + r() * 3;
+      d += ` C${P(x + w * 0.1, b - h)} ${P(x + w * 0.2, b)} ${P(x + w * 0.5, b)}`;
+      d += ` C${P(x + w * 0.8, b)} ${P(x + w * 0.9, b - h)} ${P(x + w, b - h * 0.9)}`;
+      d += ` C${P(x + w * 1.05, b - h * 0.4)} ${P(x + w * 1.1, b)} ${P(x + w * 1.3, b)}`;
+      x += w * 1.3;
+    }
+    y = b;
+  }
+  // exit flick
+  d += ` C${P(x + 3, y)} ${P(x + 6, y - xh * 0.3)} ${P(x + 8, y - xh * 0.55)}`;
+  return d;
+}
+
+/** A line of 2–4 words */
+function line(x0: number, base: number, width: number, xh: number, seed: number): string[] {
+  const r = rng(seed * 7 + 3);
+  const out: string[] = [];
+  let x = x0;
+  const endX = x0 + width;
+  let i = 0;
+  while (x < endX - 30) {
+    const w = Math.min(34 + r() * 60, endX - x);
+    if (w < 22) break;
+    out.push(word(x, base, w, xh, seed * 31 + i * 11));
+    x += w + 14 + r() * 8;
+    i++;
+  }
+  return out;
+}
+
+const strokes: Stroke[] = [];
+const checks: { x: number; y: number }[] = [];
+
+// Title + red underline
+line(168, 112, 190, 13, 5).forEach((d) => strokes.push({ d, tone: "ink" }));
+strokes.push({
+  tone: "red",
+  d: "M160 128 C 210 122, 270 126, 330 121 S 380 119, 392 124",
+});
+
+// Rows with a red checkmark each
+const rows = [
+  { y: 184, w: 250 },
+  { y: 242, w: 210 },
+  { y: 300, w: 262 },
+  { y: 358, w: 190 },
+];
+
+rows.forEach((row, i) => {
+  checks.push({ x: 160, y: row.y });
+  strokes.push({
+    tone: "red",
+    d: `M${163} ${row.y - 9} L${169} ${row.y - 3} L${184} ${row.y - 22}`,
+  });
+  line(200, row.y, row.w, 11, 20 + i * 9).forEach((d) =>
+    strokes.push({ d, tone: "ink" }),
+  );
+});
+
+// Final little signature + circle around the last row
+strokes.push({
+  tone: "red",
+  d: "M150 336 C 140 360, 190 378, 300 376 S 470 368, 468 350 S 400 322, 300 326 S 170 330, 162 342",
+});
+// GEN-END
+
+const rules = [126, 184, 242, 300, 358, 416];
+---
+
+<div
+  class:list={["writing-notes", className]}
+  data-writing-notes
+  role={label ? "img" : undefined}
+  aria-label={label || undefined}
+  aria-hidden={label ? undefined : "true"}
+>
+  <svg viewBox="0 0 600 520" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <filter id="wn-shadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#101114" flood-opacity="0.16" />
+      </filter>
+      <filter id="wn-pen-shadow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" />
+      </filter>
+      <linearGradient id="wn-barrel" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#8e949c" />
+        <stop offset="0.35" stop-color="#f6f7f8" />
+        <stop offset="0.6" stop-color="#c2c7cd" />
+        <stop offset="1" stop-color="#7a8088" />
+      </linearGradient>
+      <linearGradient id="wn-grip" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#101114" />
+        <stop offset="0.4" stop-color="#3a3c42" />
+        <stop offset="1" stop-color="#101114" />
+      </linearGradient>
+    </defs>
+
+    <g transform="rotate(-3 300 260)">
+      <!-- Paper -->
+      <rect x="96" y="44" width="408" height="432" rx="6" fill="#ffffff" filter="url(#wn-shadow)" />
+
+      <!-- Ruled lines -->
+      {rules.map((y) => (
+        <line x1="96" x2="504" y1={y + 3} y2={y + 3} stroke="#e6e8ea" stroke-width="1.2" />
+      ))}
+
+      <!-- Margin -->
+      <line x1="146" x2="146" y1="44" y2="476" stroke="#ff5757" stroke-opacity="0.35" stroke-width="1.2" />
+
+      <!-- Punch holes -->
+      {[110, 260, 410].map((y) => (
+        <circle cx="118" cy={y} r="7" fill="#eceef0" stroke="#d9dcdf" stroke-width="1" />
+      ))}
+
+      <!-- Check boxes -->
+      {checks.map((c) => (
+        <rect x={c.x} y={c.y - 16} width="16" height="16" rx="2.5" fill="none" stroke="#b6bbc2" stroke-width="1.4" />
+      ))}
+
+      <!-- Handwriting -->
+      <g class="writing-notes__ink" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        {strokes.map((s) => (
+          <path d={s.d} data-stroke class:list={["writing-notes__stroke", `is-${s.tone}`]} />
+        ))}
+      </g>
+
+      <!-- Pen (tip at 0,0) -->
+      <g class="writing-notes__pen" data-pen transform="translate(462 452)">
+        <g data-pen-body>
+          <ellipse cx="46" cy="16" rx="60" ry="7" fill="#101114" opacity="0.14" filter="url(#wn-pen-shadow)" transform="rotate(-18 46 16)" />
+          <g transform="rotate(38)">
+            <path d="M0 0 L-4.5 -16 L4.5 -16 Z" fill="#c2c7cd" />
+            <path d="M0 0 L-1.6 -6 L1.6 -6 Z" fill="#101114" />
+            <rect x="-8.5" y="-62" width="17" height="47" rx="5" fill="url(#wn-grip)" />
+            <rect x="-9.5" y="-69" width="19" height="7" rx="1.5" fill="#ff5757" />
+            <rect x="-10" y="-236" width="20" height="170" rx="9" fill="url(#wn-barrel)" />
+            <rect x="7" y="-226" width="4.5" height="78" rx="2" fill="#6f747c" />
+            <rect x="-10" y="-240" width="20" height="12" rx="6" fill="#101114" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .writing-notes {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background:
+      radial-gradient(circle, rgba(255, 255, 255, 0.85) 1.4px, transparent 1.9px) 0 0 / 12px 12px,
+      linear-gradient(165deg, #e6e9ec 0%, #cdd2d7 55%, #bfc5cb 100%);
+  }
+
+  /* fade the dots away from the paper so it stays clean */
+  .writing-notes::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 42% 46% at 50% 50%,
+      #d6dade 0%,
+      #d6dade 60%,
+      rgba(214, 218, 222, 0) 100%
+    );
+    pointer-events: none;
+  }
+
+  .writing-notes svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .writing-notes__stroke {
+    stroke-width: 2.4;
+  }
+
+  .writing-notes__stroke.is-ink {
+    stroke: #1b1c20;
+  }
+
+  .writing-notes__stroke.is-red {
+    stroke: #ff5757;
+    stroke-width: 2.8;
+  }
+
+  .writing-notes__ink {
+    transition: opacity 600ms ease;
+  }
+
+  .writing-notes__ink.is-fading {
+    opacity: 0;
+  }
+
+  /* before JS runs, show the finished note (no pen) */
+  .writing-notes:not(.is-live) .writing-notes__pen {
+    display: none;
+  }
+</style>
+
+<script>
+  type Seg =
+    | { kind: "move"; dur: number; from: DOMPoint; to: DOMPoint }
+    | { kind: "draw"; dur: number; i: number }
+    | { kind: "hold"; dur: number };
+
+  const SPEED = 0.62; // svg units per ms
+  const REST = new DOMPoint(462, 452);
+
+  function setup(root: HTMLElement) {
+    if (root.dataset.ready) return;
+    root.dataset.ready = "1";
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return; // finished note, no pen
+
+    const paths = Array.from(root.querySelectorAll<SVGPathElement>("[data-stroke]"));
+    const ink = root.querySelector<SVGGElement>(".writing-notes__ink");
+    const pen = root.querySelector<SVGGElement>("[data-pen]");
+    const body = root.querySelector<SVGGElement>("[data-pen-body]");
+    if (!paths.length || !pen || !body || !ink) return;
+
+    const lens = paths.map((p) => p.getTotalLength());
+
+    const hide = () =>
+      paths.forEach((p, i) => {
+        p.style.strokeDasharray = `${lens[i]} ${lens[i]}`;
+        p.style.strokeDashoffset = `${lens[i]}`;
+      });
+
+    hide();
+    root.classList.add("is-live");
+
+    // timeline
+    const segs: Seg[] = [{ kind: "hold", dur: 700 }];
+    let at = REST;
+    paths.forEach((p, i) => {
+      const start = p.getPointAtLength(0);
+      const dist = Math.hypot(start.x - at.x, start.y - at.y);
+      segs.push({ kind: "move", dur: Math.min(520, 140 + dist * 0.9), from: at, to: start });
+      segs.push({ kind: "draw", dur: lens[i] / SPEED, i });
+      at = p.getPointAtLength(lens[i]);
+    });
+    segs.push({ kind: "move", dur: 700, from: at, to: REST });
+    segs.push({ kind: "hold", dur: 2600 });
+
+    const total = segs.reduce((s, x) => s + x.dur, 0);
+    const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+
+    const place = (x: number, y: number, lift: number, wobble: number) => {
+      pen.setAttribute("transform", `translate(${x} ${y})`);
+      body.setAttribute(
+        "transform",
+        `translate(${lift * 4} ${-lift * 10}) rotate(${wobble})`,
+      );
+    };
+
+    let clock = 0;
+    let last = 0;
+    let raf = 0;
+    let drawnUpTo = -1;
+
+    const frame = (now: number) => {
+      const dt = last ? Math.min(now - last, 64) : 16;
+      last = now;
+      clock += dt;
+
+      if (clock >= total) {
+        // loop: fade, reset, restart
+        clock = 0;
+        drawnUpTo = -1;
+        ink.classList.add("is-fading");
+        window.setTimeout(() => {
+          hide();
+          ink.classList.remove("is-fading");
+        }, 620);
+      }
+
+      let t = clock;
+      for (const s of segs) {
+        if (t > s.dur) {
+          if (s.kind === "draw" && s.i > drawnUpTo) {
+            paths[s.i].style.strokeDashoffset = "0";
+            drawnUpTo = s.i;
+          }
+          t -= s.dur;
+          continue;
+        }
+        const k = s.dur ? t / s.dur : 1;
+        if (s.kind === "move") {
+          const e = ease(k);
+          const x = s.from.x + (s.to.x - s.from.x) * e;
+          const y = s.from.y + (s.to.y - s.from.y) * e;
+          place(x, y, Math.sin(Math.PI * k), 0);
+        } else if (s.kind === "draw") {
+          const len = lens[s.i];
+          const pt = paths[s.i].getPointAtLength(len * k);
+          paths[s.i].style.strokeDashoffset = `${len * (1 - k)}`;
+          place(pt.x, pt.y, 0, Math.sin(clock / 90) * 1.5);
+        } else {
+          place(REST.x, REST.y, 0, 0);
+        }
+        break;
+      }
+
+      raf = requestAnimationFrame(frame);
+    };
+
+    place(REST.x, REST.y, 0, 0);
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          last = 0;
+          if (!raf) raf = requestAnimationFrame(frame);
+        } else if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(root);
+  }
+
+  const init = () =>
+    document.querySelectorAll<HTMLElement>("[data-writing-notes]").forEach(setup);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+  document.addEventListener("astro:page-load", init);
+</script>

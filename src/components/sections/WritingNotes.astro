@@ -1,0 +1,443 @@
+---
+/**
+ * WritingNotes — a pen writing a real, translatable checklist.
+ * SVG + a small script. No Lottie, no dependencies (except the font).
+ *
+ *   <WritingNotes
+ *     title={t.whyUs.notes.title}
+ *     items={t.whyUs.notes.items}
+ *     label={t.whyUs.imageAlt}
+ *   />
+ *
+ * - Handwriting font: Caveat (Latin + Cyrillic) → npm i @fontsource-variable/caveat
+ * - Starts when it scrolls into view, pauses when it leaves, loops.
+ * - prefers-reduced-motion / no JS: the finished note is shown, no pen.
+ * - Up to 6 items. Long words shrink automatically to fit the line.
+ */
+import "@fontsource-variable/caveat";
+
+interface Props {
+  title: string;
+  items: readonly string[];
+  label?: string;
+  class?: string;
+}
+
+const { title, items, label = "", class: className } = Astro.props;
+
+const list = items.slice(0, 6);
+const uid = `wn${Math.random().toString(36).slice(2, 8)}`;
+
+const TITLE_Y = 104;
+const FIRST_ROW = 164;
+const STEP = 50;
+const rows = list.map((text, i) => ({ text, y: FIRST_ROW + i * STEP }));
+const rules = [TITLE_Y + 16, ...rows.map((r) => r.y + 6)];
+for (let y = rules[rules.length - 1] + STEP; y < 470; y += STEP) rules.push(y);
+---
+
+<div
+  class:list={["writing-notes", className]}
+  data-writing-notes
+  role={label ? "img" : undefined}
+  aria-label={label || undefined}
+  aria-hidden={label ? undefined : "true"}
+>
+  <svg viewBox="0 0 600 520" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <filter id={`${uid}-shadow`} x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#101114" flood-opacity="0.16" />
+      </filter>
+      <filter id={`${uid}-pen-shadow`} x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="4" />
+      </filter>
+      <linearGradient id={`${uid}-barrel`} x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#8e949c" />
+        <stop offset="0.35" stop-color="#f6f7f8" />
+        <stop offset="0.6" stop-color="#c2c7cd" />
+        <stop offset="1" stop-color="#7a8088" />
+      </linearGradient>
+      <linearGradient id={`${uid}-grip`} x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#101114" />
+        <stop offset="0.4" stop-color="#3a3c42" />
+        <stop offset="1" stop-color="#101114" />
+      </linearGradient>
+
+      <!-- one reveal mask per line of text (full width = visible without JS) -->
+      <clipPath id={`${uid}-clip-title`}>
+        <rect data-clip x="150" y={TITLE_Y - 40} width="600" height="62" />
+      </clipPath>
+      {rows.map((r, i) => (
+        <clipPath id={`${uid}-clip-${i}`}>
+          <rect data-clip x="190" y={r.y - 34} width="600" height="50" />
+        </clipPath>
+      ))}
+    </defs>
+
+    <g transform="rotate(-3 300 260)">
+      <!-- Paper -->
+      <rect x="96" y="44" width="408" height="432" rx="6" fill="#ffffff" filter={`url(#${uid}-shadow)`} />
+
+      {rules.map((y) => (
+        <line x1="96" x2="504" y1={y} y2={y} stroke="#e6e8ea" stroke-width="1.2" />
+      ))}
+
+      <line x1="146" x2="146" y1="44" y2="476" stroke="#ff5757" stroke-opacity="0.35" stroke-width="1.2" />
+
+      {[110, 260, 410].map((y) => (
+        <circle cx="118" cy={y} r="7" fill="#eceef0" stroke="#d9dcdf" stroke-width="1" />
+      ))}
+
+      <!-- Title -->
+      <text
+        class="writing-notes__title"
+        x="162"
+        y={TITLE_Y}
+        clip-path={`url(#${uid}-clip-title)`}
+        data-text="title"
+        data-max="310"
+      >
+        {title}
+      </text>
+      <path class="writing-notes__stroke is-red" data-underline d="" />
+
+      <!-- Items -->
+      {rows.map((r, i) => (
+        <g>
+          <rect x="160" y={r.y - 17} width="17" height="17" rx="2.5" fill="none" stroke="#b6bbc2" stroke-width="1.4" />
+          <path
+            class="writing-notes__stroke is-red"
+            data-check
+            d={`M163 ${r.y - 9} L169.5 ${r.y - 2.5} L186 ${r.y - 23}`}
+          />
+          <text
+            class="writing-notes__item"
+            x="198"
+            y={r.y}
+            clip-path={`url(#${uid}-clip-${i})`}
+            data-text={i}
+            data-max="286"
+          >
+            {r.text}
+          </text>
+        </g>
+      ))}
+
+      <!-- Pen (tip at 0,0) -->
+      <g class="writing-notes__pen" data-pen transform="translate(470 450)">
+        <g data-pen-body>
+          <ellipse cx="46" cy="16" rx="60" ry="7" fill="#101114" opacity="0.14" filter={`url(#${uid}-pen-shadow)`} transform="rotate(-18 46 16)" />
+          <g transform="rotate(38)">
+            <path d="M0 0 L-4.5 -16 L4.5 -16 Z" fill="#c2c7cd" />
+            <path d="M0 0 L-1.6 -6 L1.6 -6 Z" fill="#101114" />
+            <rect x="-8.5" y="-62" width="17" height="47" rx="5" fill={`url(#${uid}-grip)`} />
+            <rect x="-9.5" y="-69" width="19" height="7" rx="1.5" fill="#ff5757" />
+            <rect x="-10" y="-236" width="20" height="170" rx="9" fill={`url(#${uid}-barrel)`} />
+            <rect x="7" y="-226" width="4.5" height="78" rx="2" fill="#6f747c" />
+            <rect x="-10" y="-240" width="20" height="12" rx="6" fill="#101114" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .writing-notes {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background:
+      radial-gradient(circle, rgba(255, 255, 255, 0.85) 1.4px, transparent 1.9px) 0 0 / 12px 12px,
+      linear-gradient(165deg, #e6e9ec 0%, #cdd2d7 55%, #bfc5cb 100%);
+  }
+
+  /* keep the dots away from the paper */
+  .writing-notes::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 42% 46% at 50% 50%,
+      #d6dade 0%,
+      #d6dade 60%,
+      rgba(214, 218, 222, 0) 100%
+    );
+    pointer-events: none;
+  }
+
+  .writing-notes svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .writing-notes text {
+    fill: #1b1c20;
+    font-family: "Caveat Variable", "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  }
+
+  .writing-notes__title {
+    font-size: 40px;
+    font-weight: 700;
+  }
+
+  .writing-notes__item {
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+  .writing-notes__stroke {
+    fill: none;
+    stroke: #ff5757;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .writing-notes [data-fade] {
+    transition: opacity 600ms ease;
+  }
+
+  .writing-notes.is-fading [data-fade] {
+    opacity: 0;
+  }
+
+  .writing-notes:not(.is-live) .writing-notes__pen {
+    display: none;
+  }
+</style>
+
+<script>
+  type Seg = {
+    dur: number;
+    start?: DOMPoint;
+    end?: DOMPoint;
+    kind: "move" | "draw" | "hold";
+    at?: (k: number) => { x: number; y: number };
+    apply?: (k: number) => void;
+    from?: DOMPoint;
+    to?: DOMPoint;
+  };
+
+  const PATH_SPEED = 0.55; // svg units / ms for check marks & lines
+  const TEXT_SPEED = 0.2; // svg units / ms for handwriting
+  const REST = new DOMPoint(470, 450);
+
+  function setup(root: HTMLElement) {
+    if (root.dataset.ready) return;
+    root.dataset.ready = "1";
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      fitTexts(root);
+      drawUnderline(root);
+      return;
+    }
+
+    const pen = root.querySelector<SVGGElement>("[data-pen]");
+    const body = root.querySelector<SVGGElement>("[data-pen-body]");
+    if (!pen || !body) return;
+
+    fitTexts(root);
+    const underline = drawUnderline(root);
+
+    const title = root.querySelector<SVGTextElement>('[data-text="title"]');
+    const texts = Array.from(root.querySelectorAll<SVGTextElement>("[data-text]")).filter(
+      (t) => t !== title,
+    );
+    const checks = Array.from(root.querySelectorAll<SVGPathElement>("[data-check]"));
+
+    // everything that fades between loops
+    [title, underline, ...texts, ...checks].forEach((el) => el?.setAttribute("data-fade", ""));
+
+    const resets: (() => void)[] = [];
+    const segs: Seg[] = [{ kind: "hold", dur: 700 }];
+
+    const addPath = (p: SVGPathElement) => {
+      const len = p.getTotalLength();
+      const hide = () => {
+        p.style.strokeDasharray = `${len} ${len}`;
+        p.style.strokeDashoffset = `${len}`;
+      };
+      resets.push(hide);
+      segs.push({
+        kind: "draw",
+        dur: len / PATH_SPEED,
+        start: p.getPointAtLength(0),
+        end: p.getPointAtLength(len),
+        at: (k) => p.getPointAtLength(len * k),
+        apply: (k) => (p.style.strokeDashoffset = `${len * (1 - k)}`),
+      });
+    };
+
+    const addText = (t: SVGTextElement) => {
+      const clip = root.querySelector<SVGRectElement>(
+        `${t.getAttribute("clip-path")!.slice(4, -1)} [data-clip]`,
+      );
+      if (!clip) return;
+      const x0 = Number(t.getAttribute("x"));
+      const base = Number(t.getAttribute("y"));
+      const fs = parseFloat(getComputedStyle(t).fontSize) || 30;
+      const w = t.getComputedTextLength();
+      const clipX = Number(clip.getAttribute("x"));
+      const hide = () => clip.setAttribute("width", "0");
+      resets.push(hide);
+      const at = (k: number) => ({
+        x: x0 + w * k,
+        y: base - fs * 0.3 + Math.sin(k * w * 0.42) * fs * 0.22,
+      });
+      segs.push({
+        kind: "draw",
+        dur: w / TEXT_SPEED,
+        start: new DOMPoint(at(0).x, at(0).y),
+        end: new DOMPoint(at(1).x, at(1).y),
+        at,
+        apply: (k) => clip.setAttribute("width", `${Math.max(0, x0 - clipX + w * k + 2)}`),
+      });
+    };
+
+    if (title) addText(title);
+    if (underline) addPath(underline);
+    texts.forEach((t, i) => {
+      if (checks[i]) addPath(checks[i]);
+      addText(t);
+    });
+
+    // insert pen moves between drawing segments
+    const timeline: Seg[] = [];
+    let at = REST;
+    for (const s of segs) {
+      if (s.kind === "draw" && s.start) {
+        const dist = Math.hypot(s.start.x - at.x, s.start.y - at.y);
+        timeline.push({ kind: "move", dur: Math.min(480, 120 + dist * 0.8), from: at, to: s.start });
+        at = s.end!;
+      }
+      timeline.push(s);
+    }
+    timeline.push({ kind: "move", dur: 700, from: at, to: REST });
+    timeline.push({ kind: "hold", dur: 2600 });
+
+    const total = timeline.reduce((n, s) => n + s.dur, 0);
+    const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+
+    const place = (x: number, y: number, lift: number, wobble: number) => {
+      pen.setAttribute("transform", `translate(${x} ${y})`);
+      body.setAttribute("transform", `translate(${lift * 4} ${-lift * 10}) rotate(${wobble})`);
+    };
+
+    const hideAll = () => resets.forEach((r) => r());
+    hideAll();
+    root.classList.add("is-live");
+    place(REST.x, REST.y, 0, 0);
+
+    let clock = 0;
+    let last = 0;
+    let raf = 0;
+    let done = -1;
+
+    const frame = (now: number) => {
+      const dt = last ? Math.min(now - last, 64) : 16;
+      last = now;
+      clock += dt;
+
+      if (clock >= total) {
+        clock = 0;
+        done = -1;
+        root.classList.add("is-fading");
+        window.setTimeout(() => {
+          hideAll();
+          root.classList.remove("is-fading");
+        }, 620);
+      }
+
+      let t = clock;
+      for (let i = 0; i < timeline.length; i++) {
+        const s = timeline[i];
+        if (t > s.dur) {
+          if (s.kind === "draw" && i > done) {
+            s.apply!(1);
+            done = i;
+          }
+          t -= s.dur;
+          continue;
+        }
+        const k = s.dur ? t / s.dur : 1;
+        if (s.kind === "move") {
+          const e = ease(k);
+          place(
+            s.from!.x + (s.to!.x - s.from!.x) * e,
+            s.from!.y + (s.to!.y - s.from!.y) * e,
+            Math.sin(Math.PI * k),
+            0,
+          );
+        } else if (s.kind === "draw") {
+          s.apply!(k);
+          const p = s.at!(k);
+          place(p.x, p.y, 0, Math.sin(clock / 90) * 1.5);
+        } else {
+          place(REST.x, REST.y, 0, 0);
+        }
+        break;
+      }
+
+      raf = requestAnimationFrame(frame);
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          last = 0;
+          if (!raf) raf = requestAnimationFrame(frame);
+        } else if (raf) {
+          cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(root);
+  }
+
+  /** shrink any line that is too long for the paper */
+  function fitTexts(root: HTMLElement) {
+    root.querySelectorAll<SVGTextElement>("[data-text]").forEach((t) => {
+      const max = Number(t.dataset.max) || 280;
+      const w = t.getComputedTextLength();
+      if (w > max) {
+        const fs = parseFloat(getComputedStyle(t).fontSize);
+        t.style.fontSize = `${Math.max(16, (fs * max) / w)}px`;
+      }
+    });
+  }
+
+  /** red wavy underline sized to the title */
+  function drawUnderline(root: HTMLElement) {
+    const title = root.querySelector<SVGTextElement>('[data-text="title"]');
+    const line = root.querySelector<SVGPathElement>("[data-underline]");
+    if (!title || !line) return null;
+    const x = Number(title.getAttribute("x")) - 4;
+    const y = Number(title.getAttribute("y")) + 10;
+    const w = title.getComputedTextLength() + 14;
+    line.setAttribute(
+      "d",
+      `M${x} ${y + 2} C ${x + w * 0.3} ${y - 3}, ${x + w * 0.6} ${y + 3}, ${x + w} ${y - 2}`,
+    );
+    return line;
+  }
+
+  const init = async () => {
+    try {
+      await document.fonts.ready;
+    } catch {}
+    document.querySelectorAll<HTMLElement>("[data-writing-notes]").forEach(setup);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+  document.addEventListener("astro:page-load", init);
+</script>

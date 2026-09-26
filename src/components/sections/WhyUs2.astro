@@ -1,6 +1,6 @@
 ---
 import { getLocale, useTranslations } from "../../i18n";
-import WritingNotes from "./WritingNotes.astro";
+import WritingNotes from "./WritingNotes2.astro";
 
 const lang = getLocale(Astro.currentLocale);
 const t = useTranslations(lang);
@@ -25,11 +25,7 @@ const t = useTranslations(lang);
       </div>
 
       <div class="why-us__intro-media" data-reveal="image">
-        <WritingNotes
-          title={t.whyUs.notes.title}
-          items={t.whyUs.notes.items}
-          label={t.whyUs.imageAlt}
-        />
+        <WritingNotes label={t.whyUs.imageAlt} />
       </div>
     </div>
 

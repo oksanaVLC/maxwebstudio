@@ -96,6 +96,16 @@ export default {
       "No solo hacemos tu web. Pensamos en todo lo que puede llegar a ser.",
     lead: "Escuchamos tus ideas, aportamos nuestra experiencia y construimos una presencia digital preparada para crecer contigo.",
     imageAlt: "Cuaderno y ordenador sobre una mesa de trabajo",
+    notes: {
+      title: "Ideas:",
+      items: [
+        "diseño",
+        "accesibilidad",
+        "adaptabilidad",
+        "rendimiento",
+        "optimización",
+      ],
+    },
 
     points: {
       ideas: {
