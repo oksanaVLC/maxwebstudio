@@ -1,0 +1,454 @@
+---
+title: "A Beautiful Website Isn't Enough: Why Accessibility Should Be Part of Design From the Start"
+description: "Web accessibility should not be added at the end. Design, development, and content should work together to create websites more people can use."
+pubDate: 2026-09-26
+translationKey: "web-accessibility-by-design"
+draft: false
+image: "./accessibility.jpg"
+imageAlt: "Editorial composition about accessibility and inclusive web design"
+tags:
+  - Accessibility
+  - Web Design
+  - UX
+  - WCAG
+---
+
+import BlogCallout from "../../../components/blog/BlogCallout.astro";
+import BlogDivider from "../../../components/blog/BlogDivider.astro";
+import BlogFinale from "../../../components/blog/BlogFinale.astro";
+import BlogHero from "../../../components/blog/BlogHero.astro";
+import BlogQuote from "../../../components/blog/BlogQuote.astro";
+import BlogSection from "../../../components/blog/BlogSection.astro";
+
+import heroImage from "./accessibility.jpg";
+
+<BlogHero
+  eyebrow="Web accessibility"
+  title="A Beautiful Website Isn't Enough"
+  description="Accessibility is not a layer added at the end. It should be part of the design from the very first sketch."
+  image={heroImage}
+  imageAlt="Editorial composition about accessibility and inclusive web design"
+/>
+
+<BlogQuote text="Designing for everyone does not limit creativity. It shows that we know how to use it." />
+
+<BlogSection number="01" title="Can everyone really use it?">
+
+Before publishing any website, there is a more important question than whether the hero looks impressive:
+
+**Can everyone really use it?**
+
+It is not enough to look good on mobile.
+
+It is not enough to load quickly.
+
+It is not enough to have strong art direction.
+
+And it is not enough to pass an automated audit.
+
+A website should work for someone navigating without a mouse, enlarging text, using a screen reader, dealing with reduced vision, preferring less motion, or simply using a phone in a difficult situation.
+
+That is web accessibility.
+
+And it should be part of the project from the first sketch.
+
+<BlogCallout text="Accessibility should not be a final review. It should be a design decision." />
+
+The World Health Organization estimates that more than 1.3 billion people, around 16% of the world's population, live with significant disability.
+
+But accessibility is not limited to people who identify as disabled.
+
+A temporary injury, using a phone with one hand, strong screen glare, or being somewhere where audio cannot be played can completely change how someone uses a website.
+
+The question becomes:
+
+**Are we designing for an ideal situation or for real people?**
+
+</BlogSection>
+
+<BlogDivider />
+
+<BlogSection number="02" title="The web still has many basic accessibility problems">
+
+The WebAIM Million 2026 results are revealing.
+
+In its analysis of one million homepages, **83.9%** had detectable low-contrast issues. **53.1%** had images without alternative text and **51%** had form fields without appropriate labels.
+
+These are not futuristic problems.
+
+Accessibility often fails because of very simple decisions:
+
+text without enough contrast;
+
+a button that cannot be used with a keyboard;
+
+an informative image without an alternative;
+
+a form that does not explain what it needs;
+
+an animation that ignores user preferences.
+
+The positive part is that many of these decisions are directly under our control.
+
+<BlogQuote text="Many accessibility improvements begin with extremely simple design decisions." />
+
+</BlogSection>
+
+<BlogDivider />
+
+<BlogSection number="03" title="WCAG 2.2: four questions for every project">
+
+WCAG 2.2 organizes accessibility around four principles:
+
+### Perceivable
+
+Information must be perceivable.
+
+### Operable
+
+The interface must be usable.
+
+### Understandable
+
+Information and interaction must be understandable.
+
+### Robust
+
+Content must work reliably with different browsers, devices, and assistive technologies.
+
+It may sound technical.
+
+For us, it is also an excellent design tool:
+
+**Can it be perceived?**
+
+**Can it be used?**
+
+**Can it be understood?**
+
+**Does it actually work?**
+
+<BlogCallout text="A good accessibility review is also a review of design quality." />
+
+</BlogSection>
+
+<BlogDivider />
+
+<BlogSection number="04" title="Contrast, keyboard and controls">
+
+Contrast is an accessibility issue, but it is also an art-direction decision.
+
+Light grey text on white can look elegant until someone tries to read it.
+
+WCAG 2.2 sets a minimum contrast ratio of **4.5:1** for normal text at level AA and **3:1** for large text.
+
+Gradients, transparency, images, glassmorphism, and animated backgrounds can all work, as long as important information remains readable.
+
+<BlogCallout text="Design does not lose personality because it has good contrast. It simply stops sacrificing information for appearance." />
+
+There is another extremely useful test:
+
+**unplug the mouse.**
+
+Use only Tab, Shift + Tab, Enter, Space, and the arrow keys.
+
+Can you reach every control?
+
+Do you know where you are?
+
+Can you open and close the menu?
+
+Can you complete a form?
+
+Can you close a modal?
+
+WCAG requires visible keyboard focus. WCAG 2.2 also addresses cases where focused elements can become fully hidden by content created by the page.
+
+Navigation is also design.
+
+</BlogSection>
+
+<BlogDivider />
+
+<BlogSection number="05" title="Text, images and forms">
+
+Important content should remain content.
+
+A headline turned into an image may look impressive, but real text adapts better to user preferences, can be resized and copied, and can be interpreted by assistive technologies.
+
+**Creativity should frame content, not hide it.**
+
+The same applies to images.
+
+Not every image needs a long description.
+
+An informative photograph may need useful alternative text.
+
+A decorative texture may use `alt=""`.
+
+A linked image needs a clear purpose.
+
+The question is not:
+
+> “Did we add alt?”
+
+It is:
+
+> **“What role does this image play?”**
+
+Forms require the same level of attention.
+
+Clear labels.
+
+Understandable instructions.
+
+Identifiable required fields.
+
+Useful errors.
+
+Logical order.
+
+And above all:
+
+<BlogCallout text="Ask only for the information you actually need." />
+
+A simpler interface is often a more accessible interface.
+
+</BlogSection>
+
+<BlogDivider />
+
+<BlogSection number="06" title="Responsive design, text size and touch targets">
+
+A website should not depend on one specific way of viewing it.
+
+What happens when text is enlarged?
+
+What happens when the window becomes narrow?
+
+What happens when zoom increases?
+
+What happens when the font size changes?
+
+WCAG 2.2 includes criteria for text resizing and reflow so content can adapt without losing information or functionality.
+
+It also includes **Target Size (Minimum)**, which sets a minimum pointer target size of **24 × 24 CSS pixels** in applicable cases.
+
+This is not only about compliance.
+
+It is good mobile UX.
+
+A tiny button can frustrate anyone.
+
+<BlogQuote text="The design should adapt to the user, not force the user to adapt to the design." />
+
+</BlogSection>
+
+<BlogDivider />
+
+<BlogSection number="07" title="Motion is fine. But it needs intention.">
+
+We like animation.
+
+Particles.
+
+Scroll effects.
+
+Motion when it adds rhythm, hierarchy, or personality.
+
+But more movement does not automatically mean better design.
+
+An animation can look excellent and still be uncomfortable for some people.
+
+That is why we respect `prefers-reduced-motion` when motion is not essential.
+
+The question should not only be:
+
+> “Can we animate it?”
+
+It should also be:
+
+> **“What does the animation add, and what happens when someone needs less movement?”**
+
+<BlogCallout text="The best animation is not the one you notice most. It is the one that knows why it exists." />
+
+</BlogSection>
+
+<BlogDivider />
+
+<BlogSection number="08" title="ARIA is not magic">
+
+Adding `aria-label` does not automatically make an interface accessible.
+
+ARIA can be extremely useful.
+
+But it does not replace semantic HTML, logical hierarchy, correctly built controls, or coherent navigation.
+
+First:
+
+A solid structure.
+
+Then:
+
+ARIA where it actually adds value.
+
+Accessibility is not about collecting attributes.
+
+It is about building an interface that makes sense.
+
+And automated tools should not be our only source of confidence.
+
+Audits are useful for finding problems.
+
+But the absence of automated errors does not prove that a website is accessible.
+
+Human review still matters.
+
+</BlogSection>
+
+<BlogDivider />
+
+<BlogSection number="09" title="Our goal: a 100% accessible website">
+
+This is the most important part for us.
+
+**We do not want to create beautiful websites that only work for the person who designed them.**
+
+We want to create fast, expressive, technically solid websites that can be used by different people, on different devices, in different situations.
+
+That is why accessibility is not an extra.
+
+It is part of the process.
+
+We consider it when choosing colours.
+
+When designing components.
+
+When building forms.
+
+When implementing navigation.
+
+When adding animation.
+
+When preparing images.
+
+When making the design responsive.
+
+And when reviewing the project before launch.
+
+Our goal is clear:
+
+### We are working to make our own website 100% accessible.
+
+Not as a badge.
+
+Not as a widget.
+
+Not as a one-time audit.
+
+Accessibility is an ongoing process.
+
+Every new section can introduce a problem.
+
+Every new component can lose focus.
+
+Every new animation can introduce too much motion.
+
+Every new image can require a different alternative.
+
+That is why we review, test, and improve.
+
+And we want to apply exactly the same philosophy to the projects we build for our clients.
+
+</BlogSection>
+
+<BlogDivider />
+
+<BlogSection number="10" title="Accessibility does not mean giving up design">
+
+An accessible website does not have to be boring.
+
+It can be editorial.
+
+Experimental.
+
+Animated.
+
+It can use halftones.
+
+Particles.
+
+Large typography.
+
+Gradients.
+
+Images.
+
+Motion.
+
+Strong art direction.
+
+The question is different:
+
+**Can people choose how they experience the website?**
+
+Can they read?
+
+Navigate?
+
+Understand?
+
+Interact?
+
+Use the keyboard?
+
+Enlarge the text?
+
+Reduce motion?
+
+Understand the controls?
+
+This is where design and accessibility stop being separate disciplines.
+
+They become one thing:
+
+## Good design.
+
+</BlogSection>
+
+<BlogDivider />
+
+<BlogSection number="11" title="Accessibility starts before code">
+
+The earlier we integrate accessibility, the easier it is to get right.
+
+If we wait until the end, we have already chosen colours, typography, navigation, components, forms, images, and animations.
+
+When accessibility is part of the process from the beginning, we can make better decisions from day one.
+
+We can choose sufficient contrast.
+
+Design focus states.
+
+Build keyboard-friendly components.
+
+Respect reduced motion.
+
+Prepare images correctly.
+
+And keep a strong visual identity without turning it into a barrier.
+
+<BlogQuote text="Accessibility does not limit creativity. Poor planning does." />
+
+</BlogSection>
+
+<BlogFinale
+  eyebrow="Our commitment"
+  lines={[
+    "We design for beauty.",
+    "We design for speed.",
+    "We design for personality.",
+    "And we work to make the website 100% accessible.",
+  ]}
+  closing="Because a truly well-designed website should not ask who you are before allowing you to use it. It should simply let you in."
+/>
