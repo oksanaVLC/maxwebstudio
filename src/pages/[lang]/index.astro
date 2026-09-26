@@ -17,6 +17,10 @@ import { LOCALES } from "../../i18n";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 
+import ProjectDemos from "../../components/sections/ProjectDemos.astro";
+
+
+
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({
     params: { lang },
@@ -30,6 +34,7 @@ export function getStaticPaths() {
   <TechTicker />
   <Process />
   <WhyUs />
+  <ProjectDemos />
   <Projects />
   <Faq />
   <Inspiration />

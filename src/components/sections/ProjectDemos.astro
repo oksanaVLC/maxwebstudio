@@ -1,0 +1,547 @@
+---
+import { Image } from "astro:assets";
+import geolightDemo from "../../assets/images/geolight_demo.png";
+import { getLocale, type Locale } from "../../i18n";
+
+const lang: Locale = getLocale(Astro.currentLocale);
+
+const copy = {
+  es: {
+    eyebrow: "Proyecto destacado",
+    projectType: "Web corporativa · ES / EN",
+    title: "GEOLight",
+    tagline:
+      "Infraestructura solar y energías renovables a escala global.",
+    description:
+      "Un sitio corporativo premium para una empresa especializada en energía solar a gran escala, autoconsumo industrial, almacenamiento en baterías y operación y mantenimiento.",
+    body:
+      "El proyecto combina una identidad digital propia con una experiencia clara y tecnológica: arquitectura bilingüe, dirección de arte editorial, un hero interactivo basado en canvas y una base estática optimizada para rendimiento, SEO y accesibilidad.",
+    meta: [
+      "Astro 7",
+      "ES / EN",
+      "Canvas 2D",
+      "Diseño digital",
+      "Performance",
+    ],
+    cta: "Ver proyecto",
+  },
+
+  en: {
+    eyebrow: "Featured project",
+    projectType: "Corporate website · ES / EN",
+    title: "GEOLight",
+    tagline:
+      "Solar infrastructure and renewable energy at global scale.",
+    description:
+      "A premium corporate website for a company focused on utility-scale solar, industrial self-consumption, battery storage, and operations and maintenance.",
+    body:
+      "The project combines a distinctive digital identity with a clear, technology-led experience: bilingual architecture, editorial art direction, an interactive canvas-based hero, and a static foundation optimized for performance, SEO, and accessibility.",
+    meta: [
+      "Astro 7",
+      "ES / EN",
+      "Canvas 2D",
+      "Digital design",
+      "Performance",
+    ],
+    cta: "View project",
+  },
+
+  fr: {
+    eyebrow: "Projet à la une",
+    projectType: "Site corporate · ES / EN",
+    title: "GEOLight",
+    tagline:
+      "Infrastructures solaires et énergies renouvelables à l’échelle mondiale.",
+    description:
+      "Un site corporate premium pour une entreprise spécialisée dans le solaire à grande échelle, l’autoconsommation industrielle, le stockage par batteries et la maintenance.",
+    body:
+      "Le projet associe une identité digitale distinctive à une expérience claire et technologique : architecture bilingue, direction artistique éditoriale, hero interactif en canvas et base statique optimisée pour les performances, le SEO et l’accessibilité.",
+    meta: [
+      "Astro 7",
+      "ES / EN",
+      "Canvas 2D",
+      "Design digital",
+      "Performance",
+    ],
+    cta: "Voir le projet",
+  },
+
+  ru: {
+    eyebrow: "Избранный проект",
+    projectType: "Корпоративный сайт · ES / EN",
+    title: "GEOLight",
+    tagline:
+      "Солнечная инфраструктура и возобновляемая энергетика мирового масштаба.",
+    description:
+      "Премиальный корпоративный сайт для компании, работающей с крупными солнечными проектами, промышленным собственным потреблением, аккумуляторными системами и эксплуатацией.",
+    body:
+      "Проект объединяет выразительную цифровую идентичность и понятный технологичный опыт: двуязычную архитектуру, редакционную арт-дирекцию, интерактивный hero на canvas и статическую основу, оптимизированную для скорости, SEO и доступности.",
+    meta: [
+      "Astro 7",
+      "ES / EN",
+      "Canvas 2D",
+      "Digital design",
+      "Performance",
+    ],
+    cta: "Смотреть проект",
+  },
+}[lang];
+
+const demoUrl = "https://geolight-demo.netlify.app/";
+---
+
+<section
+  class="project-demos"
+  aria-labelledby="project-demos-title"
+>
+  <div class="container">
+    <header class="project-demos__head">
+      <div>
+        <p
+          class="project-demos__eyebrow"
+          data-reveal="text"
+        >
+          <span aria-hidden="true"></span>
+          {copy.eyebrow}
+        </p>
+
+        <h2
+          id="project-demos-title"
+          data-reveal="up"
+        >
+          {copy.title}
+        </h2>
+      </div>
+
+      <p
+        class="project-demos__type"
+        data-reveal="text"
+      >
+        {copy.projectType}
+      </p>
+    </header>
+
+    <article class="project-demos__project">
+      <a
+        class="project-demos__media"
+        href={demoUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${copy.cta}: ${copy.title}`}
+        data-reveal="image"
+      >
+        <div class="project-demos__browser">
+          <div
+            class="project-demos__browser-bar"
+            aria-hidden="true"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+
+            <div class="project-demos__browser-url">
+              geolight-demo.netlify.app
+            </div>
+          </div>
+
+          <div class="project-demos__screen">
+            <Image
+              src={geolightDemo}
+              alt="GEOLight corporate website"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </a>
+
+      <div class="project-demos__content">
+        <p
+          class="project-demos__tagline"
+          data-reveal="text"
+        >
+          {copy.tagline}
+        </p>
+
+        <p
+          class="project-demos__description"
+          data-reveal="text"
+        >
+          {copy.description}
+        </p>
+
+        <p
+          class="project-demos__body"
+          data-reveal="text"
+        >
+          {copy.body}
+        </p>
+
+        <ul
+          class="project-demos__meta"
+          role="list"
+          data-stagger
+        >
+          {
+            copy.meta.map((item) => (
+              <li data-reveal="up">
+                {item}
+              </li>
+            ))
+          }
+        </ul>
+
+        <div
+          class="project-demos__footer"
+          data-reveal="text"
+        >
+          <span class="project-demos__number">
+            01
+          </span>
+
+          <span
+            class="project-demos__line"
+            aria-hidden="true"
+          ></span>
+
+          <a
+            class="project-demos__cta"
+            href={demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {copy.cta}
+
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M7 17 17 7M9 7h8v8"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .project-demos {
+    overflow: hidden;
+    padding-block: clamp(80px, 9vw, 130px);
+    background: var(--surface-alt);
+  }
+
+  .project-demos__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: clamp(46px, 6vw, 76px);
+  }
+
+  .project-demos__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 20px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .project-demos__eyebrow span {
+    width: 28px;
+    height: 1px;
+    flex: 0 0 auto;
+    background: var(--red);
+  }
+
+  .project-demos__head h2 {
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(52px, 7vw, 92px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.065em;
+    text-wrap: balance;
+  }
+
+  .project-demos__type {
+    max-width: 260px;
+    margin: 0 0 8px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    text-align: right;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .project-demos__project {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1.5fr)
+      minmax(320px, 0.8fr);
+    gap: clamp(42px, 6vw, 100px);
+    align-items: center;
+  }
+
+  .project-demos__media {
+    display: block;
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .project-demos__browser {
+    overflow: hidden;
+    background: #111;
+    border: 1px solid var(--line);
+    box-shadow:
+      0 20px 45px rgb(16 17 20 / 8%),
+      0 50px 100px rgb(16 17 20 / 10%);
+    transition:
+      transform 500ms var(--ease),
+      box-shadow 500ms var(--ease);
+  }
+
+  .project-demos__media:hover .project-demos__browser {
+    transform: translateY(-5px);
+    box-shadow:
+      0 26px 55px rgb(16 17 20 / 10%),
+      0 60px 110px rgb(16 17 20 / 12%);
+  }
+
+  .project-demos__media:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 5px;
+  }
+
+  .project-demos__browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    height: 38px;
+    padding-inline: 14px;
+    background: #f2f3f4;
+    border-bottom: 1px solid #dddfe2;
+  }
+
+  .project-demos__browser-bar > span {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #c9ccd0;
+  }
+
+  .project-demos__browser-url {
+    margin-left: 12px;
+    overflow: hidden;
+    max-width: 280px;
+    padding: 5px 18px;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid #e4e6e8;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .project-demos__screen {
+    overflow: hidden;
+    background: #0b1030;
+  }
+
+  .project-demos__screen :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .project-demos__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project-demos__tagline {
+    max-width: 510px;
+    margin: 0;
+    color: var(--ink);
+    font-size: clamp(24px, 2.6vw, 36px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .project-demos__description {
+    max-width: 540px;
+    margin: 28px 0 0;
+    color: var(--ink-soft);
+    font-size: var(--fs-lead);
+    line-height: 1.65;
+  }
+
+  .project-demos__body {
+    max-width: 540px;
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: var(--fs-body);
+    line-height: 1.7;
+  }
+
+  .project-demos__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-demos__meta li {
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    line-height: 1;
+  }
+
+  .project-demos__footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 42px;
+  }
+
+  .project-demos__number {
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.12em;
+  }
+
+  .project-demos__line {
+    width: 100%;
+    height: 1px;
+    flex: 1;
+    background: var(--line);
+  }
+
+  .project-demos__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      color 250ms var(--ease),
+      gap 250ms var(--ease);
+  }
+
+  .project-demos__cta:hover {
+    gap: 12px;
+    color: var(--red);
+  }
+
+  @media (max-width: 859px) {
+    .project-demos__head {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .project-demos__type {
+      max-width: 420px;
+      margin: 0;
+      text-align: left;
+    }
+
+    .project-demos__project {
+      grid-template-columns: 1fr;
+      gap: 42px;
+    }
+
+    .project-demos__content {
+      max-width: 760px;
+    }
+
+    .project-demos__tagline {
+      max-width: 680px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .project-demos {
+      padding-block: 72px;
+    }
+
+    .project-demos__head {
+      margin-bottom: 40px;
+    }
+
+    .project-demos__head h2 {
+      font-size: clamp(46px, 14vw, 70px);
+    }
+
+    .project-demos__browser-bar {
+      height: 32px;
+      padding-inline: 10px;
+    }
+
+    .project-demos__browser-url {
+      display: none;
+    }
+
+    .project-demos__tagline {
+      font-size: clamp(24px, 7vw, 34px);
+    }
+
+    .project-demos__meta {
+      gap: 6px;
+    }
+
+    .project-demos__footer {
+      gap: 10px;
+      margin-top: 34px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-demos__browser,
+    .project-demos__cta {
+      transition: none;
+    }
+
+    .project-demos__media:hover .project-demos__browser {
+      transform: none;
+    }
+  }
+</style>
