@@ -1,23 +1,21 @@
 ---
-import { icon } from "@fortawesome/fontawesome-svg-core";
-import {
-faCartShopping,
-faCode,
-faMagnifyingGlassChart,
-faPalette,
-} from "@fortawesome/free-solid-svg-icons";
-
 import { getLocale, useTranslations } from "../../i18n";
+
+/* SVGs limpios (sin fondo blanco, fill = currentColor) */
+import iconDesign from "../../assets/icons/services/1.svg?raw";
+import iconDevelopment from "../../assets/icons/services/2.svg?raw";
+import iconEcommerce from "../../assets/icons/services/3.svg?raw";
+import iconGrowth from "../../assets/icons/services/4.svg?raw";
 
 const lang = getLocale(Astro.currentLocale);
 const t = useTranslations(lang);
 
-const icons = {
-  design: icon(faPalette).html.join(""),
-  development: icon(faCode).html.join(""),
-  ecommerce: icon(faCartShopping).html.join(""),
-  growth: icon(faMagnifyingGlassChart).html.join(""),
-};
+const services = [
+  { key: "design", icon: iconDesign },
+  { key: "development", icon: iconDevelopment },
+  { key: "ecommerce", icon: iconEcommerce },
+  { key: "growth", icon: iconGrowth },
+] as const;
 ---
 
 <section
@@ -25,7 +23,10 @@ const icons = {
   id="services"
   aria-labelledby="services-title"
 >
-  <div class="container">
+  <div class="services__tone services__tone--fine" aria-hidden="true"></div>
+  <div class="services__tone services__tone--bold" aria-hidden="true"></div>
+
+  <div class="container services__inner">
     <div class="services__intro">
       <p class="services__eyebrow">
         <span aria-hidden="true">✦</span>
@@ -41,102 +42,106 @@ const icons = {
       </p>
     </div>
 
-    <div class="services__grid">
-      <article class="service-card">
-        <div class="service-card__media" data-reveal="image">
-          <img
-            src="/images/svc-webdesign.jpg"
-            alt={t.services.items.design.title}
-            loading="lazy"
-          />
-        </div>
+    <div class="services__grid" data-stagger>
+      {
+        services.map(({ key, icon }, i) => (
+          <article class="service-card" data-reveal="up">
+            <div class="service-card__panel">
+              <span class="service-card__tone" aria-hidden="true" />
+              <span class="service-card__line" aria-hidden="true" />
+              <span class="service-card__num" aria-hidden="true">
+                {String(i + 1).padStart(2, "0")}
+              </span>
 
-        <div class="service-card__content">
-          <span
-            class="service-card__icon"
-            aria-hidden="true"
-            set:html={icons.design}
-          />
+              <div class="service-card__disc" aria-hidden="true">
+                <span class="service-card__icon" set:html={icon} />
+              </div>
 
-          <h3>{t.services.items.design.title}</h3>
-
-          <p>{t.services.items.design.description}</p>
-        </div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-card__media" data-reveal="image">
-          <img
-            src="/images/svc-appdev.jpg"
-            alt={t.services.items.development.title}
-            loading="lazy"
-          />
-        </div>
-
-        <div class="service-card__content">
-          <span
-            class="service-card__icon"
-            aria-hidden="true"
-            set:html={icons.development}
-          />
-
-          <h3>{t.services.items.development.title}</h3>
-
-          <p>{t.services.items.development.description}</p>
-        </div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-card__media" data-reveal="image">
-          <img
-            src="/images/svc-ecommerce.jpg"
-            alt={t.services.items.ecommerce.title}
-            loading="lazy"
-          />
-        </div>
-
-        <div class="service-card__content">
-          <span
-            class="service-card__icon"
-            aria-hidden="true"
-            set:html={icons.ecommerce}
-          />
-
-          <h3>{t.services.items.ecommerce.title}</h3>
-
-          <p>{t.services.items.ecommerce.description}</p>
-        </div>
-      </article>
-
-      <article class="service-card">
-        <div class="service-card__media" data-reveal="image">
-          <img
-            src="/images/svc-growth.jpg"
-            alt={t.services.items.growth.title}
-            loading="lazy"
-          />
-        </div>
-
-        <div class="service-card__content">
-          <span
-            class="service-card__icon"
-            aria-hidden="true"
-            set:html={icons.growth}
-          />
-
-          <h3>{t.services.items.growth.title}</h3>
-
-          <p>{t.services.items.growth.description}</p>
-        </div>
-      </article>
+              <div class="service-card__body">
+                <h3>{t.services.items[key].title}</h3>
+                <p>{t.services.items[key].description}</p>
+              </div>
+            </div>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
+  /* =========================================================
+     SECTION — silver + white halftone
+     ========================================================= */
+
   .services {
-    background: var(--surface-soft);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+background: linear-gradient(
+  165deg,
+  #fafbfc 0%,
+  #f3f5f6 48%,
+  #eef0f2 78%,
+  #f7f8f9 100%
+);
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
   }
+
+  .services__tone {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* fine dots — top right */
+  .services__tone--fine {
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.9) 1.4px,
+      transparent 1.9px
+    );
+    background-size: 12px 12px;
+    -webkit-mask-image: radial-gradient(
+      ellipse 75% 85% at 100% 0%,
+      #000 0%,
+      rgba(0, 0, 0, 0.4) 45%,
+      transparent 72%
+    );
+    mask-image: radial-gradient(
+      ellipse 75% 85% at 100% 0%,
+      #000 0%,
+      rgba(0, 0, 0, 0.4) 45%,
+      transparent 72%
+    );
+  }
+
+  /* bold dots — bottom left */
+  .services__tone--bold {
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.85) 2.8px,
+      transparent 3.4px
+    );
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(
+      ellipse 60% 65% at 0% 100%,
+      #000 0%,
+      rgba(0, 0, 0, 0.45) 40%,
+      transparent 74%
+    );
+    mask-image: radial-gradient(
+      ellipse 60% 65% at 0% 100%,
+      #000 0%,
+      rgba(0, 0, 0, 0.45) 40%,
+      transparent 74%
+    );
+  }
+
+  /* =========================================================
+     INTRO
+     ========================================================= */
 
   .services__intro {
     max-width: 850px;
@@ -148,14 +153,14 @@ const icons = {
     align-items: center;
     gap: 8px;
     margin-bottom: 18px;
-    color: var(--muted);
+    color: var(--ink-soft);
     font-size: var(--fs-small);
     font-weight: 500;
     letter-spacing: 0.01em;
   }
 
   .services__eyebrow span {
-    color: var(--muted);
+    color: var(--red);
     font-size: 12px;
   }
 
@@ -179,64 +184,153 @@ const icons = {
     transition-delay: 120ms;
   }
 
+  /* =========================================================
+     GRID
+     ========================================================= */
+
   .services__grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 42px 28px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
   }
+
+  /* =========================================================
+     CARD
+     (article = reveal wrapper, panel = visuals + hover,
+      so stagger delays never slow down the hover)
+     ========================================================= */
 
   .service-card {
     min-width: 0;
-    background: var(--surface);
   }
 
-  .service-card__media {
+  .service-card__panel {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 1.45 / 1;
-    background: var(--surface-alt);
-  }
-
-  .service-card__media img {
-    display: block;
-    width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 700ms var(--ease);
-    will-change: transform;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 40px clamp(22px, 2.2vw, 32px) 36px;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow:
+      0 18px 50px rgba(16, 17, 20, 0.16),
+      0 2px 6px rgba(16, 17, 20, 0.06);
+    transition:
+      transform var(--motion-duration-fast) var(--motion-ease),
+      box-shadow var(--motion-duration-fast) var(--motion-ease);
   }
 
-  /* Hover: only the image zooms */
-  .service-card:hover .service-card__media img {
-    transform: scale(1.045);
+  .service-card:hover .service-card__panel {
+    transform: translateY(-6px);
+    box-shadow:
+      0 28px 60px rgba(16, 17, 20, 0.22),
+      0 2px 6px rgba(16, 17, 20, 0.06);
   }
 
-  .service-card__content {
-    padding: clamp(20px, 2.2vw, 26px) clamp(20px, 2.4vw, 28px)
-      clamp(24px, 2.6vw, 32px);
+  /* halftone inside the card — kept clear around the icon */
+  .service-card__tone {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(
+      circle,
+      rgba(142, 148, 156, 0.28) 1.6px,
+      transparent 2.1px
+    );
+    background-size: 11px 11px;
+    -webkit-mask-image: radial-gradient(
+      circle at 50% 118px,
+      transparent 0 120px,
+      rgba(0, 0, 0, 0.15) 150px,
+      #000 330px
+    );
+    mask-image: radial-gradient(
+      circle at 50% 118px,
+      transparent 0 120px,
+      rgba(0, 0, 0, 0.15) 150px,
+      #000 330px
+    );
+  }
+
+  .service-card__line {
+    position: absolute;
+    top: 0;
+    left: 32px;
+    right: 32px;
+    height: 2px;
+    background: var(--red);
+  }
+
+  .service-card__num {
+    position: absolute;
+    top: 22px;
+    right: 24px;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(16, 17, 20, 0.22);
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .service-card__disc {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 156px;
+    height: 156px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle at 34% 28%,
+      #ffffff 0%,
+      #f4f5f6 45%,
+      #e3e6e9 100%
+    );
+    border: 1px solid var(--line-strong);
+    box-shadow:
+      0 0 0 10px var(--surface),
+      0 0 0 11px var(--line),
+      inset 0 -6px 14px rgba(142, 148, 156, 0.18),
+      inset 0 2px 4px rgba(255, 255, 255, 0.9);
+    transition: box-shadow var(--motion-duration-fast) var(--motion-ease);
+  }
+
+  .service-card:hover .service-card__disc {
+    box-shadow:
+      0 0 0 10px var(--surface),
+      0 0 0 11px rgba(255, 87, 87, 0.5),
+      inset 0 -6px 14px rgba(142, 148, 156, 0.18),
+      inset 0 2px 4px rgba(255, 255, 255, 0.9);
   }
 
   .service-card__icon {
     display: block;
-    width: 18px;
-    height: 18px;
-    margin-bottom: 14px;
+    width: 110px;
+    height: 110px;
     color: var(--red);
   }
 
   .service-card__icon :global(svg) {
     display: block;
-    width: 18px;
-    height: 18px;
-    fill: currentColor;
+    width: 100%;
+    height: 100%;
   }
 
-  .service-card__icon :global(svg path) {
-    fill: currentColor;
+  .service-card__body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .service-card h3 {
-    margin: 0 0 9px;
+    margin: 0;
     color: var(--ink);
     font-size: 20px;
     font-weight: 600;
@@ -245,13 +339,22 @@ const icons = {
   }
 
   .service-card p {
-    max-width: 500px;
     color: var(--ink-soft);
     font-size: var(--fs-body);
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
-  @media (max-width: 767px) {
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
+
+  @media (max-width: 1099px) {
+    .services__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 639px) {
     .services__intro {
       margin-bottom: 42px;
     }
@@ -262,24 +365,12 @@ const icons = {
 
     .services__grid {
       grid-template-columns: 1fr;
-      gap: 48px;
-    }
-
-    .service-card__media img {
-      transition: none;
-    }
-
-    .service-card:hover .service-card__media img {
-      transform: none;
+      gap: 20px;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .service-card__media img {
-      transition: none;
-    }
-
-    .service-card:hover .service-card__media img {
+  @media (hover: none), (prefers-reduced-motion: reduce) {
+    .service-card:hover .service-card__panel {
       transform: none;
     }
   }

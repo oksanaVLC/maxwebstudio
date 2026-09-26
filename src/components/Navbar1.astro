@@ -111,10 +111,20 @@ for (const language of languages) {
     <!-- Logo -->
     <a href={home} class="site-header__logo" aria-label={t.meta.siteName}>
       <img
-        src="/images/MAXWEBstudioDARK.svg"
+        class="site-header__logo-default"
+        src="/images/lightBold.svg"
         alt={t.meta.siteName}
         width="220"
         height="auto"
+      />
+
+      <img
+        class="site-header__logo-scrolled"
+        src="/images/MAXWEBstudioDARK.svg"
+        alt=""
+        width="220"
+        height="auto"
+        aria-hidden="true"
       />
     </a>
 
@@ -419,6 +429,35 @@ for (const language of languages) {
     height: auto;
   }
 
+  .site-header__logo-scrolled {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: auto;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+      opacity 250ms var(--ease),
+      visibility 250ms var(--ease);
+  }
+
+  .site-header.is-scrolled .site-header__logo-default,
+  .site-header.is-hovered .site-header__logo-default {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .site-header.is-scrolled .site-header__logo-scrolled,
+  .site-header.is-hovered .site-header__logo-scrolled {
+    opacity: 1;
+    visibility: visible;
+  }
+
   /* ==================================================
        DESKTOP NAVIGATION
        ================================================== */
@@ -442,7 +481,7 @@ for (const language of languages) {
   .site-header__nav a {
     position: relative;
 
-    color: var(--ink);
+    color: #fff;
 
     /*
          * Sin saltos:
@@ -459,7 +498,8 @@ for (const language of languages) {
     transition: color 250ms var(--ease);
   }
 
-  .site-header__nav a:hover {
+  .site-header.is-scrolled .site-header__nav a,
+  .site-header.is-hovered .site-header__nav a {
     color: var(--ink);
   }
 
@@ -526,13 +566,18 @@ for (const language of languages) {
 
     background: transparent;
 
-    color: var(--ink);
+    color: #fff;
 
     cursor: pointer;
 
     gap: 6px;
 
     transition: color 200ms var(--ease);
+  }
+
+  .site-header.is-scrolled .language-selector__trigger,
+  .site-header.is-hovered .language-selector__trigger {
+    color: var(--ink);
   }
 
   .language-selector__globe {
@@ -725,11 +770,16 @@ for (const language of languages) {
 
     background: transparent;
 
-    color: var(--ink);
+    color: #fff;
 
     cursor: pointer;
 
     flex: 0 0 auto;
+  }
+
+  .site-header.is-scrolled .site-header__menu,
+  .site-header.is-hovered .site-header__menu {
+    color: var(--ink);
   }
 
   .site-header__menu span {
