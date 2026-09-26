@@ -490,6 +490,6 @@ export default {
   },
   designStatement: {
     ariaLabel: "Principios de diseño",
-    words: ["Equilibrio.", "Buen gusto.", "Rendimiento."],
+    words: ["Equilibrio.", "Accesibilidad.", "Rendimiento."],
   },
 } as const;
