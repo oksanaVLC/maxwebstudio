@@ -109,17 +109,14 @@ for (const language of languages) {
 <header class="site-header">
   <div class="container site-header__inner">
     <!-- Logo -->
- 
-
-<a
-  href={home}
-  class="site-header__logo"
-  aria-label={t.meta.siteName}
->
-  <span>Max Studio</span>
-</a>
-
-
+    <a href={home} class="site-header__logo" aria-label={t.meta.siteName}>
+      <img
+        src="/images/MAXWEBstudioDARK.svg"
+        alt={t.meta.siteName}
+        width="220"
+        height="auto"
+      />
+    </a>
 
     <!-- Desktop navigation -->
     <nav class="site-header__nav" aria-label={t.a11y.mainNavigation}>
@@ -399,19 +396,28 @@ for (const language of languages) {
        ================================================== */
 
   .site-header__logo {
-        display: flex;
+    position: relative;
 
-        align-items: center; 
+    display: block;
 
     /*
          * Nunca crece demasiado ni se hace demasiado pequeño.
          */
     flex: 0 1 clamp(145px, 15vw, 190px);
 
-  color: #000; line-height: 1; text-decoration: none; transition: none;
+    width: clamp(145px, 15vw, 190px);
+
+    min-width: 145px;
+
+    line-height: 0;
   }
 
-.site-header__logo span { font-family: "AT Mikon", sans-serif; font-size: clamp(30px, 2.4vw, 42px); font-weight: 400; line-height: 0.9; white-space: nowrap; letter-spacing: -0.02em; }
+  .site-header__logo img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+  }
 
   /* ==================================================
        DESKTOP NAVIGATION

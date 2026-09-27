@@ -92,8 +92,7 @@ export default {
   },
   whyUs: {
     eyebrow: "Por qué nosotros",
-    title:
-      "No solo hacemos tu web. Pensamos en todo lo que puede llegar a ser.",
+    title: "Porque destacamos.",
     lead: "Escuchamos tus ideas, aportamos nuestra experiencia y construimos una presencia digital preparada para crecer contigo.",
     imageAlt: "Cuaderno y ordenador sobre una mesa de trabajo",
     notes: {
@@ -386,7 +385,7 @@ export default {
   },
   projects: {
     eyebrow: "Proyectos seleccionados",
-    title: "Diseño digital con una razón para existir.",
+    title: "Nuestros proyectos.",
     intro:
       "Cada proyecto parte de una idea diferente. La web se construye alrededor de ella, no al revés.",
     viewProject: "Ver proyecto",

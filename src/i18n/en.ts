@@ -386,7 +386,7 @@ export default {
   },
   projects: {
     eyebrow: "Selected projects",
-    title: "Work that speaks for itself.",
+    title: "Our projects.",
     intro:
       "A selection of digital projects where strategy, identity and user experience come together to create meaningful results.",
     viewProject: "View project",

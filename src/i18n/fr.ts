@@ -390,7 +390,7 @@ export default {
   },
   projects: {
     eyebrow: "Projets sélectionnés",
-    title: "Des projets qui parlent d'eux-mêmes.",
+    title: "Nos projets.",
     intro:
       "Une sélection de projets digitaux conçus pour transformer stratégie, identité et expérience en résultats.",
     viewProject: "Voir le projet",
