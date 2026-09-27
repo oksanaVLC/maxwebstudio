@@ -97,6 +97,17 @@ export default {
     lead: "Nous écoutons vos idées, apportons notre expérience et construisons une présence numérique prête à évoluer avec vous.",
     imageAlt: "Carnet et ordinateur sur une table de travail",
 
+    notes: {
+      title: "Idées :",
+      items: [
+        "design",
+        "accessibilité",
+        "adaptabilité",
+        "performance",
+        "optimisation",
+      ],
+    },
+
     points: {
       ideas: {
         title: "Nous notons toutes vos idées",

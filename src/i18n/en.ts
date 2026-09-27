@@ -97,6 +97,17 @@ export default {
     lead: "We listen to your ideas, bring our experience to the table and build a digital presence designed to grow with you.",
     imageAlt: "Notebook and laptop on a work desk",
 
+    notes: {
+      title: "Ideas:",
+      items: [
+        "design",
+        "accessibility",
+        "adaptability",
+        "performance",
+        "optimization",
+      ],
+    },
+
     points: {
       ideas: {
         title: "We listen to every idea",
