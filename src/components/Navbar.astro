@@ -60,8 +60,7 @@ const posts = blogTranslationKey
 for (const language of languages) {
   /*
    * Blog article:
-   * find the corresponding translated article
-   * using translationKey.
+   * resolve the translated article by translationKey.
    */
   if (blogTranslationKey) {
     const translatedPost = posts.find(
@@ -89,12 +88,8 @@ for (const language of languages) {
   }
 
   /*
-   * All non-blog pages:
+   * All other pages:
    * preserve the current route.
-   *
-   * /es/policies/cookies/
-   *       ↓
-   * /en/policies/cookies/
    */
   languageHrefs.set(
     language.code,
@@ -109,28 +104,30 @@ for (const language of languages) {
 <header class="site-header">
   <div class="container site-header__inner">
     <!-- Logo -->
- 
-
-<a
-  href={home}
-  class="site-header__logo"
-  aria-label={t.meta.siteName}
->
-  <span>Max Studio</span>
-</a>
-
-
+    <a
+      href={home}
+      class="site-header__logo"
+      aria-label={t.meta.siteName}
+    >
+      <span>Max Studio</span>
+    </a>
 
     <!-- Desktop navigation -->
-    <nav class="site-header__nav" aria-label={t.a11y.mainNavigation}>
-      {navLinks.map((link) => (
-        <a href={link.href}>{link.label}</a>
-      ))}
+    <nav
+      class="site-header__nav"
+      aria-label={t.a11y.mainNavigation}
+    >
+      {
+        navLinks.map((link) => (
+          <a href={link.href}>
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
 
     <!-- Desktop actions -->
     <div class="site-header__actions">
-      <!-- Language selector -->
       <div class="language-selector">
         <button
           class="language-selector__trigger"
@@ -164,36 +161,61 @@ for (const language of languages) {
           </svg>
         </button>
 
-        <div class="language-selector__menu" id="language-menu" role="menu">
-          {languages.map((language) => (
-            <a
-              href={languageHrefs.get(language.code) ?? getRelativeLocaleUrl(language.code, "")}
-              class:list={{
-                "language-selector__option": true,
-                "is-active": language.code === lang,
-              }}
-              role="menuitem"
-              aria-current={language.code === lang ? "page" : undefined}
-            >
-              <span class="language-selector__code">
-                {language.code.toUpperCase()}
-              </span>
-
-              <span class="language-selector__name">{language.label}</span>
-
-              {language.code === lang && (
-                <span class="language-selector__check" aria-hidden="true">
-                  ✓
+        <div
+          class="language-selector__menu"
+          id="language-menu"
+          role="menu"
+        >
+          {
+            languages.map((language) => (
+              <a
+                href={
+                  languageHrefs.get(language.code) ??
+                  getRelativeLocaleUrl(
+                    language.code,
+                    "",
+                  )
+                }
+                class:list={{
+                  "language-selector__option": true,
+                  "is-active":
+                    language.code === lang,
+                }}
+                role="menuitem"
+                aria-current={
+                  language.code === lang
+                    ? "page"
+                    : undefined
+                }
+              >
+                <span class="language-selector__code">
+                  {language.code.toUpperCase()}
                 </span>
-              )}
-            </a>
-          ))}
+
+                <span class="language-selector__name">
+                  {language.label}
+                </span>
+
+                {
+                  language.code === lang && (
+                    <span
+                      class="language-selector__check"
+                      aria-hidden="true"
+                    >
+                      ✓
+                    </span>
+                  )
+                }
+              </a>
+            ))
+          }
         </div>
       </div>
 
-      <!-- CTA -->
-      <!-- CTA desktop -->
-      <a href={`${home}#contact`} class="site-header__cta">
+      <a
+        href={`${home}#contact`}
+        class="site-header__cta"
+      >
         {t.cta.start}
       </a>
     </div>
@@ -212,144 +234,282 @@ for (const language of languages) {
   </div>
 
   <!-- Mobile navigation -->
-  <div class="site-header__mobile" id="mobile-navigation">
-    <nav class="site-header__mobile-nav" aria-label={t.a11y.mainNavigation}>
-      {navLinks.map((link) => (
-        <a href={link.href}>{link.label}</a>
-      ))}
+  <div
+    class="site-header__mobile"
+    id="mobile-navigation"
+  >
+    <nav
+      class="site-header__mobile-nav"
+      aria-label={t.a11y.mainNavigation}
+    >
+      {
+        navLinks.map((link) => (
+          <a href={link.href}>
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
 
     <!-- Mobile languages -->
     <div class="site-header__mobile-language">
-      <p class="site-header__mobile-language-title">{t.a11y.switchLanguage}</p>
+      <p class="site-header__mobile-language-title">
+        {t.a11y.switchLanguage}
+      </p>
 
       <div class="site-header__mobile-language-list">
-        {languages.map((language) => (
-          <a
-  href={languageHrefs.get(language.code) ?? getRelativeLocaleUrl(language.code, "")}
-            class:list={{
-              "site-header__mobile-language-option": true,
-              "is-active": language.code === lang,
-            }}
-            aria-current={language.code === lang ? "page" : undefined}
-          >
-            <span>{language.code.toUpperCase()}</span>
+        {
+          languages.map((language) => (
+            <a
+              href={
+                languageHrefs.get(language.code) ??
+                getRelativeLocaleUrl(
+                  language.code,
+                  "",
+                )
+              }
+              class:list={{
+                "site-header__mobile-language-option": true,
+                "is-active":
+                  language.code === lang,
+              }}
+              aria-current={
+                language.code === lang
+                  ? "page"
+                  : undefined
+              }
+            >
+              <span>
+                {language.code.toUpperCase()}
+              </span>
 
-            <span>{language.label}</span>
+              <span>{language.label}</span>
 
-            {language.code === lang && <span aria-hidden="true">✓</span>}
-          </a>
-        ))}
+              {
+                language.code === lang && (
+                  <span aria-hidden="true">
+                    ✓
+                  </span>
+                )
+              }
+            </a>
+          ))
+        }
       </div>
     </div>
 
     <!-- Mobile CTA -->
-
-    <a href={`${home}#contact`} class="site-header__mobile-cta">
+    <a
+      href={`${home}#contact`}
+      class="site-header__mobile-cta"
+    >
       {t.cta.start}
     </a>
   </div>
 </header>
 
 <script>
-  const header = document.querySelector(".site-header");
-  const menu = document.querySelector(".site-header__menu");
-  const mobileNav = document.querySelector(".site-header__mobile");
+  const header =
+    document.querySelector<HTMLElement>(
+      ".site-header",
+    );
 
-  const languageSelector = document.querySelector(".language-selector");
+  const menu =
+    document.querySelector<HTMLButtonElement>(
+      ".site-header__menu",
+    );
 
-  const languageTrigger = document.querySelector<HTMLButtonElement>(
-    ".language-selector__trigger",
-  );
+  const mobileNav =
+    document.querySelector<HTMLElement>(
+      ".site-header__mobile",
+    );
 
+  const languageSelector =
+    document.querySelector<HTMLElement>(
+      ".language-selector",
+    );
+
+  const languageTrigger =
+    document.querySelector<HTMLButtonElement>(
+      ".language-selector__trigger",
+    );
+
+  /*
+   * HEADER SCROLL STATE
+   */
   if (header) {
     const updateScrollState = () => {
-      header.classList.toggle("is-scrolled", window.scrollY > 8);
+      header.classList.toggle(
+        "is-scrolled",
+        window.scrollY > 8,
+      );
     };
 
     updateScrollState();
 
-    window.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener(
+      "scroll",
+      updateScrollState,
+      { passive: true },
+    );
 
-    header.addEventListener("mouseenter", () => {
-      header.classList.add("is-hovered");
-    });
+    header.addEventListener(
+      "mouseenter",
+      () => {
+        header.classList.add("is-hovered");
+      },
+    );
 
-    header.addEventListener("mouseleave", () => {
-      header.classList.remove("is-hovered");
-    });
+    header.addEventListener(
+      "mouseleave",
+      () => {
+        header.classList.remove("is-hovered");
+      },
+    );
   }
 
   /*
    * LANGUAGE SELECTOR
    */
+  if (
+    languageSelector &&
+    languageTrigger
+  ) {
+    languageTrigger.addEventListener(
+      "click",
+      (event) => {
+        event.stopPropagation();
 
-  if (languageSelector && languageTrigger) {
-    languageTrigger.addEventListener("click", (event) => {
-      event.stopPropagation();
+        const isOpen =
+          languageSelector.classList.contains(
+            "is-open",
+          );
 
-      const isOpen = languageSelector.classList.contains("is-open");
+        languageSelector.classList.toggle(
+          "is-open",
+          !isOpen,
+        );
 
-      languageSelector.classList.toggle("is-open", !isOpen);
+        languageTrigger.setAttribute(
+          "aria-expanded",
+          String(!isOpen),
+        );
+      },
+    );
 
-      languageTrigger.setAttribute("aria-expanded", String(!isOpen));
-    });
+    document.addEventListener(
+      "click",
+      (event) => {
+        if (
+          !languageSelector.contains(
+            event.target as Node,
+          )
+        ) {
+          languageSelector.classList.remove(
+            "is-open",
+          );
 
-    document.addEventListener("click", (event) => {
-      if (!languageSelector.contains(event.target as Node)) {
-        languageSelector.classList.remove("is-open");
+          languageTrigger.setAttribute(
+            "aria-expanded",
+            "false",
+          );
+        }
+      },
+    );
 
-        languageTrigger.setAttribute("aria-expanded", "false");
-      }
-    });
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") {
+          languageSelector.classList.remove(
+            "is-open",
+          );
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        languageSelector.classList.remove("is-open");
+          languageTrigger.setAttribute(
+            "aria-expanded",
+            "false",
+          );
 
-        languageTrigger.setAttribute("aria-expanded", "false");
-
-        languageTrigger.focus();
-      }
-    });
+          languageTrigger.focus();
+        }
+      },
+    );
   }
 
   /*
    * MOBILE MENU
    */
+  if (menu && mobileNav && header) {
+    menu.addEventListener(
+      "click",
+      () => {
+        const isOpen =
+          menu.getAttribute(
+            "aria-expanded",
+          ) === "true";
 
-  if (menu && mobileNav) {
-    menu.addEventListener("click", () => {
-      const isOpen = menu.getAttribute("aria-expanded") === "true";
+        const nextState = !isOpen;
 
-      menu.setAttribute("aria-expanded", String(!isOpen));
+        menu.setAttribute(
+          "aria-expanded",
+          String(nextState),
+        );
 
-      mobileNav.classList.toggle("is-open", !isOpen);
+        mobileNav.classList.toggle(
+          "is-open",
+          nextState,
+        );
 
-      document.body.classList.toggle("menu-open", !isOpen);
-    });
+        header.classList.toggle(
+          "is-menu-open",
+          nextState,
+        );
 
-    mobileNav.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        menu.setAttribute("aria-expanded", "false");
+        document.body.classList.toggle(
+          "menu-open",
+          nextState,
+        );
+      },
+    );
 
-        mobileNav.classList.remove("is-open");
+    mobileNav
+      .querySelectorAll("a")
+      .forEach((link) => {
+        link.addEventListener(
+          "click",
+          () => {
+            menu.setAttribute(
+              "aria-expanded",
+              "false",
+            );
 
-        document.body.classList.remove("menu-open");
+            mobileNav.classList.remove(
+              "is-open",
+            );
+
+            header.classList.remove(
+              "is-menu-open",
+            );
+
+            document.body.classList.remove(
+              "menu-open",
+            );
+          },
+        );
       });
-    });
   }
 </script>
 
 <style>
   /* ==================================================
-       HEADER
-       ================================================== */
+     HEADER
+  ================================================== */
 
   .site-header {
     position: fixed;
     top: 0;
     left: 0;
+
     z-index: 100;
 
     width: 100%;
@@ -361,25 +521,22 @@ for (const language of languages) {
       background 300ms var(--ease),
       border-color 300ms var(--ease),
       box-shadow 300ms var(--ease),
-      backdrop-filter 300ms var(--ease),
-      -webkit-backdrop-filter 300ms var(--ease);
+      backdrop-filter 300ms var(--ease);
   }
 
   .site-header.is-scrolled,
   .site-header.is-hovered {
-    background: rgba(255, 255, 255, 0.78);
-
-    border-bottom-color: rgba(16, 17, 20, 0.08);
-
-    box-shadow: 0 8px 30px rgba(16, 17, 20, 0.06);
+    background: rgb(255 255 255 / 78%);
+    border-bottom-color: rgb(16 17 20 / 8%);
+    box-shadow: 0 8px 30px rgb(16 17 20 / 6%);
 
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
   }
 
   /* ==================================================
-       HEADER INNER
-       ================================================== */
+     INNER
+  ================================================== */
 
   .site-header__inner {
     display: flex;
@@ -387,47 +544,43 @@ for (const language of languages) {
 
     min-height: var(--header-h);
 
-    /*
-         * El espacio entre elementos se adapta
-         * progresivamente, sin saltos.
-         */
     gap: clamp(12px, 1.8vw, 28px);
   }
 
   /* ==================================================
-       LOGO
-       ================================================== */
+     LOGO
+  ================================================== */
 
   .site-header__logo {
-        display: flex;
+    display: flex;
+    align-items: center;
 
-        align-items: center; 
-
-    /*
-         * Nunca crece demasiado ni se hace demasiado pequeño.
-         */
     flex: 0 1 clamp(145px, 15vw, 190px);
 
-  color: #000; line-height: 1; text-decoration: none; transition: none;
+    color: var(--ink);
+    line-height: 1;
+    text-decoration: none;
   }
 
-.site-header__logo span { font-family: "AT Mikon", sans-serif; font-size: clamp(30px, 2.4vw, 42px); font-weight: 400; line-height: 0.9; white-space: nowrap; letter-spacing: -0.02em; }
+  .site-header__logo span {
+    font-family: "AT Mikon", sans-serif;
+    font-size: clamp(30px, 2.4vw, 42px);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
 
   /* ==================================================
-       DESKTOP NAVIGATION
-       ================================================== */
+     DESKTOP NAV
+  ================================================== */
 
   .site-header__nav {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    /*
-         * IMPORTANTE:
-         * el nav puede encogerse.
-         */
     flex: 1 1 auto;
-
     min-width: 0;
 
     gap: clamp(8px, 1.25vw, 22px);
@@ -438,14 +591,8 @@ for (const language of languages) {
 
     color: var(--ink);
 
-    /*
-         * Sin saltos:
-         * 14px → 17px de forma continua.
-         */
     font-size: clamp(14px, 1.05vw, 17px);
-
     font-weight: 500;
-
     line-height: 1.2;
 
     white-space: nowrap;
@@ -461,7 +608,6 @@ for (const language of languages) {
     content: "";
 
     position: absolute;
-
     left: 0;
     right: 0;
     bottom: -6px;
@@ -482,8 +628,8 @@ for (const language of languages) {
   }
 
   /* ==================================================
-       DESKTOP ACTIONS
-       ================================================== */
+     DESKTOP ACTIONS
+  ================================================== */
 
   .site-header__actions {
     display: flex;
@@ -491,20 +637,19 @@ for (const language of languages) {
     justify-content: flex-end;
 
     flex: 0 1 auto;
-
     min-width: 0;
 
     gap: clamp(9px, 1.2vw, 18px);
   }
 
   /* ==================================================
-       LANGUAGE SELECTOR
-       ================================================== */
+     LANGUAGE SELECTOR
+  ================================================== */
 
   .language-selector {
     position: relative;
-
     flex: 0 0 auto;
+  
   }
 
   .language-selector__trigger {
@@ -513,20 +658,15 @@ for (const language of languages) {
     justify-content: center;
 
     min-height: 42px;
-
     padding: 0;
 
     border: 0;
-
     background: transparent;
-
     color: var(--ink);
 
     cursor: pointer;
 
     gap: 6px;
-
-    transition: color 200ms var(--ease);
   }
 
   .language-selector__globe {
@@ -534,14 +674,11 @@ for (const language of languages) {
     height: 20px;
 
     fill: none;
-
     stroke: currentColor;
     stroke-width: 1.4;
 
     stroke-linecap: round;
     stroke-linejoin: round;
-
-    flex: 0 0 auto;
   }
 
   .language-selector__current {
@@ -555,7 +692,6 @@ for (const language of languages) {
     height: 5px;
 
     fill: none;
-
     stroke: currentColor;
     stroke-width: 1.4;
 
@@ -565,17 +701,17 @@ for (const language of languages) {
     transition: transform 220ms var(--ease);
   }
 
-  .language-selector.is-open .language-selector__chevron {
+  .language-selector.is-open
+    .language-selector__chevron {
     transform: rotate(180deg);
   }
 
   /* ==================================================
-       LANGUAGE DROPDOWN
-       ================================================== */
+     LANGUAGE DROPDOWN
+  ================================================== */
 
   .language-selector__menu {
     position: absolute;
-
     top: calc(100% + 12px);
     right: 0;
 
@@ -583,17 +719,15 @@ for (const language of languages) {
 
     padding: 8px;
 
-    background: rgba(255, 255, 255, 0.96);
+    background: rgb(255 255 255 / 96%);
+    border: 1px solid rgb(16 17 20 / 8%);
 
-    border: 1px solid rgba(16, 17, 20, 0.08);
-
-    box-shadow: 0 18px 45px rgba(16, 17, 20, 0.12);
+    box-shadow: 0 18px 45px rgb(16 17 20 / 12%);
 
     opacity: 0;
     visibility: hidden;
 
     transform: translateY(-6px) scale(0.98);
-
     transform-origin: top right;
 
     pointer-events: none;
@@ -607,9 +741,9 @@ for (const language of languages) {
     -webkit-backdrop-filter: blur(18px);
   }
 
-  .language-selector.is-open .language-selector__menu {
+  .language-selector.is-open
+    .language-selector__menu {
     opacity: 1;
-
     visibility: visible;
 
     transform: translateY(0) scale(1);
@@ -619,22 +753,19 @@ for (const language of languages) {
 
   .language-selector__option {
     display: grid;
-
     grid-template-columns: 34px 1fr auto;
-
     align-items: center;
 
     min-height: 42px;
-
     padding: 0 10px;
 
     border-radius: 7px;
 
     color: var(--ink);
-
     gap: 8px;
 
-    transition: background 180ms var(--ease);
+    transition:
+      background 180ms var(--ease);
   }
 
   .language-selector__option:hover,
@@ -645,28 +776,24 @@ for (const language of languages) {
   .language-selector__code {
     font-size: 11px;
     font-weight: 700;
-
     letter-spacing: 0.04em;
   }
 
   .language-selector__name {
-    font-size: 13px;
-
-    font-weight: 400;
-
     color: var(--ink-soft);
+    font-size: 13px;
+    font-weight: 400;
   }
 
   .language-selector__check {
     color: var(--red);
-
     font-size: 13px;
     font-weight: 600;
   }
 
   /* ==================================================
-       CTA
-       ================================================== */
+     CTA
+  ================================================== */
 
   .site-header__cta {
     display: inline-flex;
@@ -674,38 +801,31 @@ for (const language of languages) {
     justify-content: center;
 
     min-height: 42px;
-
-    /*
-         * También se adapta de forma continua.
-         */
     padding-inline: clamp(14px, 1.5vw, 21px);
 
     border-radius: 999px;
 
     background: var(--red);
-    transition: background 220ms var(--ease);
     color: #fff;
 
     font-size: clamp(12px, 0.85vw, 13px);
-
     font-weight: 600;
 
     white-space: nowrap;
 
     flex: 0 0 auto;
 
-    transition: background 220ms var(--ease);
+    transition:
+      background 220ms var(--ease);
   }
 
   .site-header__cta:hover {
     background: var(--red-hover);
-
-    transform: none;
   }
 
   /* ==================================================
-       MOBILE MENU BUTTON
-       ================================================== */
+     MOBILE BUTTON
+  ================================================== */
 
   .site-header__menu {
     display: none;
@@ -714,11 +834,9 @@ for (const language of languages) {
     height: 48px;
 
     padding: 0;
-
     border: 0;
 
     background: transparent;
-
     color: var(--ink);
 
     cursor: pointer;
@@ -743,35 +861,41 @@ for (const language of languages) {
       opacity 250ms var(--ease);
   }
 
-  .site-header__menu[aria-expanded="true"] span:first-child {
+  .site-header__menu[aria-expanded="true"]
+    span:first-child {
     transform: translateY(4.5px) rotate(45deg);
   }
 
-  .site-header__menu[aria-expanded="true"] span:last-child {
+  .site-header__menu[aria-expanded="true"]
+    span:last-child {
     transform: translateY(-4.5px) rotate(-45deg);
   }
 
   /* ==================================================
-       MOBILE NAVIGATION
-       ================================================== */
+     MOBILE PANEL
+  ================================================== */
 
   .site-header__mobile {
-    display: block;
-
     position: absolute;
-
     top: 100%;
     left: 0;
 
     width: 100%;
 
+    max-height: calc(100dvh - 68px);
+
+    overflow-y: auto;
+
     padding: 30px var(--pad-x) 34px;
 
-    background: rgba(255, 255, 255, 0.95);
+    /*
+     * SOLID MOBILE BACKGROUND
+     */
+    background: #fcf8f4;
 
-    border-top: 1px solid rgba(16, 17, 20, 0.08);
+    border-top: 1px solid rgb(16 17 20 / 8%);
 
-    box-shadow: 0 18px 40px rgba(16, 17, 20, 0.08);
+    box-shadow: 0 18px 40px rgb(16 17 20 / 10%);
 
     opacity: 0;
     visibility: hidden;
@@ -785,13 +909,13 @@ for (const language of languages) {
       transform 250ms var(--ease),
       visibility 250ms var(--ease);
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    /*
+     * Deliberately no transparency and no blur.
+     */
   }
 
   .site-header__mobile.is-open {
     opacity: 1;
-
     visibility: visible;
 
     transform: translateY(0);
@@ -799,29 +923,42 @@ for (const language of languages) {
     pointer-events: auto;
   }
 
+  /*
+   * When the mobile menu is open, the header itself
+   * also becomes fully opaque.
+   */
+  .site-header.is-menu-open {
+    background: #fcf8f4;
+    border-bottom-color: rgb(16 17 20 / 8%);
+    box-shadow: none;
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
   .site-header__mobile-nav {
     display: flex;
     flex-direction: column;
-
     gap: 18px;
   }
 
   .site-header__mobile-nav a {
     color: var(--ink);
 
-    font-size: 18px;
+    font-size: 19px;
     font-weight: 500;
+    line-height: 1.25;
   }
 
   /* ==================================================
-       MOBILE LANGUAGE
-       ================================================== */
+     MOBILE LANGUAGES
+  ================================================== */
 
   .site-header__mobile-language {
     margin-top: 30px;
     padding-top: 24px;
 
-    border-top: 1px solid var(--line);
+    border-top: 1px solid rgb(16 17 20 / 10%);
   }
 
   .site-header__mobile-language-title {
@@ -839,7 +976,8 @@ for (const language of languages) {
   .site-header__mobile-language-list {
     display: grid;
 
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
     gap: 8px;
   }
@@ -848,82 +986,80 @@ for (const language of languages) {
     display: grid;
 
     grid-template-columns: 32px 1fr auto;
-
     align-items: center;
 
-    min-height: 42px;
+    min-height: 44px;
 
     padding: 0 10px;
 
     border-radius: 7px;
 
-    background: #f5f6f7;
+    background: rgb(255 255 255 / 54%);
 
     color: var(--ink);
 
     gap: 6px;
+
+    transition:
+      background 180ms var(--ease);
   }
 
-  .site-header__mobile-language-option > span:first-child {
+  .site-header__mobile-language-option:hover,
+  .site-header__mobile-language-option.is-active {
+    background: #fff;
+  }
+
+  .site-header__mobile-language-option
+    > span:first-child {
     font-size: 11px;
     font-weight: 700;
   }
 
-  .site-header__mobile-language-option > span:nth-child(2) {
+  .site-header__mobile-language-option
+    > span:nth-child(2) {
     font-size: 13px;
   }
 
-  .site-header__mobile-language-option > span:last-child {
+  .site-header__mobile-language-option
+    > span:last-child {
     color: var(--red);
 
     font-size: 13px;
     font-weight: 600;
   }
 
-  .site-header__mobile-language-option.is-active {
-    background: #eceeef;
-  }
-
   /* ==================================================
-       MOBILE CTA
-       ================================================== */
+     MOBILE CTA
+  ================================================== */
 
   .site-header__mobile-cta {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    min-height: 48px;
+    min-height: 50px;
 
     margin-top: 24px;
 
     border-radius: 999px;
 
     background: var(--red);
-    transition: background 220ms var(--ease);
     color: #fff;
 
     font-size: 14px;
     font-weight: 600;
+
+    transition:
+      background 220ms var(--ease);
   }
+
   .site-header__mobile-cta:hover {
     background: var(--red-hover);
   }
-  /* ==================================================
-       MOBILE BREAKPOINT
-       ================================================== */
 
-  /*
-     * Aquí no reducimos tamaños.
-     *
-     * Simplemente dejamos de intentar meter:
-     *
-     * logo + navegación + idioma + CTA
-     *
-     * cuando físicamente ya no hay espacio.
-     *
-     * Así no existe un "salto" visual de tipografía.
-     */
+  /* ==================================================
+     DESKTOP → MOBILE
+  ================================================== */
 
   @media (max-width: 920px) {
     .site-header__nav,
@@ -940,29 +1076,27 @@ for (const language of languages) {
     }
   }
 
-  /* ==================================================
-       SMALL MOBILE
-       ================================================== */
-
   @media (max-width: 767px) {
     .site-header__inner {
       min-height: 68px;
     }
 
     .site-header__logo {
-      flex-basis: clamp(145px, 55vw, 180px);
+      flex-basis: auto;
+      width: auto;
+    }
 
-      width: clamp(145px, 55vw, 180px);
+    .site-header__logo span {
+      font-size: clamp(30px, 9vw, 40px);
     }
   }
 
   /* ==================================================
-       REDUCED MOTION
-       ================================================== */
+     REDUCED MOTION
+  ================================================== */
 
   @media (prefers-reduced-motion: reduce) {
     .site-header,
-    .site-header__logo img,
     .site-header__nav a,
     .site-header__nav a::after,
     .site-header__cta,

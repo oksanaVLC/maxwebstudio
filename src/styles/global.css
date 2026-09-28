@@ -35,14 +35,6 @@
   font-weight: 400;
   font-style: normal;
 }
-
-@font-face {
-  font-family: "Vasek";
-  src: url("../assets/fonts/Vasek Italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
 /* =========================================================
    RESET
    ========================================================= */
@@ -162,8 +154,8 @@ h1 {
 
 h2 {
   font-size: var(--fs-h2);
-  letter-spacing: 0;
 
+  font-family: "AT Mikon", sans-serif;
   font-weight: 200;
 }
 
