@@ -4,7 +4,7 @@ import { Picture } from "astro:assets";
 import { getLocale } from "../../i18n";
 
 
-import heroBg from "../../assets/images/shade-concrete-wall.jpg";
+import heroBg from "../../assets/images/mobilewindowbg.jpg";
 
 const lang = getLocale(Astro.currentLocale);
 const home = getRelativeLocaleUrl(lang, "");
@@ -213,7 +213,7 @@ const c = content[lang];
     max-width: 980px;
     margin: 0;
     color: var(--ink);
-   font-family: "AT Mikon";
+  
     font-size: clamp(64px, 7.1vw, 100px);
      font-weight: 200;
    /* letter-spacing: -0.065em;*/
