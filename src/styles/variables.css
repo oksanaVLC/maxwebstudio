@@ -71,7 +71,7 @@
 
   /* Headings */
 
-  --fs-h1: clamp(42px, 6vw, 90px);
+  --fs-h1: clamp(40px, 5vw, 72px);
 
   --fs-h2: clamp(38px, 5vw, 64px);
 
@@ -81,9 +81,9 @@
 
   --fs-lead: clamp(16px, 1.15vw, 17.5px);
 
-  --fs-body: clamp(14px, 1vw, 15px);
+  --fs-body: clamp(15px, 1vw, 16px);
 
-  --fs-small: clamp(12px, 0.9vw, 13.5px);
+  --fs-small: clamp(13px, 0.9vw, 14px);
 
   --fs-micro: clamp(10px, 0.75vw, 11px);
 

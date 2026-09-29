@@ -10,7 +10,6 @@ import projectsIcon from "../../assets/icons/icons_for_numbers/projects_done.svg
 const lang: Locale = getLocale(Astro.currentLocale);
 const c = useTranslations(lang).studioStats;
 
-
 const stats = [
   {
     value: 4,
@@ -22,7 +21,6 @@ const stats = [
     icon: projectsIcon,
     label: c.projects,
   },
-  
   {
     value: 378,
     icon: fontIcon,
@@ -60,19 +58,21 @@ const stats = [
               />
             </div>
 
-            <div class="studio-stat__number" aria-hidden="true">
-              <span
-                data-stat-number
-                data-stat-target={stat.value}
-                data-stat-delay={index * 140}
-              >
-                0
-              </span>
-            </div>
+            <div class="studio-stat__content">
+              <div class="studio-stat__number" aria-hidden="true">
+                <span
+                  data-stat-number
+                  data-stat-target={stat.value}
+                  data-stat-delay={index * 140}
+                >
+                  0
+                </span>
+              </div>
 
-            <p class="studio-stat__label">
-              {stat.label}
-            </p>
+              <p class="studio-stat__label">
+                {stat.label}
+              </p>
+            </div>
           </article>
         ))
       }
@@ -98,17 +98,20 @@ const stats = [
       maximumFractionDigits: 0,
     });
 
+    let hasStarted = false;
+    let hasUserScrolled = false;
+
     const animateNumber = (
       element: HTMLElement,
       target: number,
       delay: number
     ) => {
-      const start = () => {
-        if (reduceMotion) {
-          element.textContent = formatter.format(target);
-          return;
-        }
+      if (reduceMotion) {
+        element.textContent = formatter.format(target);
+        return;
+      }
 
+      window.setTimeout(() => {
         const duration =
           target >= 10000
             ? 1600
@@ -135,18 +138,65 @@ const stats = [
         };
 
         requestAnimationFrame(frame);
-      };
-
-      window.setTimeout(start, delay);
+      }, delay);
     };
 
-    numbers.forEach((element) => {
-      const target = Number(element.dataset.statTarget);
-      const delay = Number(element.dataset.statDelay || 0);
+    const startCounters = () => {
+      if (hasStarted) return;
 
-      if (Number.isFinite(target)) {
-        animateNumber(element, target, delay);
+      hasStarted = true;
+
+      numbers.forEach((element) => {
+        const target = Number(element.dataset.statTarget);
+        const delay = Number(element.dataset.statDelay || 0);
+
+        if (Number.isFinite(target)) {
+          animateNumber(element, target, delay);
+        }
+      });
+    };
+
+    const isSectionVisible = () => {
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      return (
+        rect.top < viewportHeight * 0.82 &&
+        rect.bottom > viewportHeight * 0.18
+      );
+    };
+
+    const handleScroll = () => {
+      hasUserScrolled = true;
+
+      if (hasUserScrolled && isSectionVisible()) {
+        startCounters();
+        window.removeEventListener("scroll", handleScroll);
       }
+    };
+
+    /*
+     * Si el usuario tiene activado "reduced motion",
+     * mostramos directamente el valor final.
+     */
+    if (reduceMotion) {
+      numbers.forEach((element) => {
+        const target = Number(element.dataset.statTarget);
+
+        if (Number.isFinite(target)) {
+          element.textContent = formatter.format(target);
+        }
+      });
+
+      return;
+    }
+
+    /*
+     * No iniciamos los contadores al cargar.
+     * Esperamos a que el usuario haga scroll.
+     */
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
     });
   });
 </script>
@@ -168,10 +218,12 @@ const stats = [
   .studio-stat {
     position: relative;
     min-height: 300px;
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
     padding: 42px clamp(22px, 2.5vw, 42px);
   }
 
@@ -182,47 +234,63 @@ const stats = [
   .studio-stat__icon {
     display: flex;
     align-items: center;
-justify-content: center;
+    justify-content: center;
+
     width: 84px;
     height: 84px;
+
     margin-bottom: 34px;
   }
 
   .studio-stat__icon :global(img) {
     display: block;
+
     width: 84px;
     height: 84px;
+
     object-fit: contain;
+
     filter: grayscale(1);
     opacity: 0.48;
   }
 
+  .studio-stat__content {
+    text-align: center;
+  }
+
   .studio-stat__number {
     color: var(--ink);
+
     font-size: clamp(48px, 5.2vw, 78px);
     font-weight: 300;
     line-height: 0.9;
     letter-spacing: -0.065em;
+
     white-space: nowrap;
   }
 
   .studio-stat__label {
     max-width: 230px;
-    margin: 20px 0 0;
-      text-align: center;
+
+    margin: 20px auto 0;
+
     color: var(--ink-soft);
-    font-size: var(--fs-body);
+
+    
     font-weight: 500;
     line-height: 1.45;
   }
 
   .studio-stat::after {
     content: "";
+
     position: absolute;
     right: 0;
     bottom: 0;
+
     width: 28px;
     height: 1px;
+
     background: var(--red);
     opacity: 0.8;
   }
@@ -243,30 +311,73 @@ justify-content: center;
   }
 
   @media (max-width: 560px) {
+    .studio-stats {
+      padding-block: clamp(56px, 14vw, 76px);
+    }
+
     .studio-stats__grid {
       grid-template-columns: 1fr;
     }
 
     .studio-stat {
-      min-height: 260px;
-      padding: 38px 24px;
+      min-height: 0;
+
+      display: grid;
+      grid-template-columns: clamp(68px, 19vw, 76px) minmax(0, 1fr);
+      align-items: center;
+      column-gap: clamp(20px, 5vw, 28px);
+
+      padding: 24px 20px;
     }
 
     .studio-stat + .studio-stat,
     .studio-stat:nth-child(3),
     .studio-stat:nth-child(4) {
-      border-left: 0;
       border-top: 1px solid var(--line);
+      border-left: 0;
     }
 
-    .studio-stat__icon,
+    .studio-stat__icon {
+      width: clamp(68px, 19vw, 76px);
+      height: clamp(68px, 19vw, 76px);
+
+      margin: 0;
+    }
+
     .studio-stat__icon :global(img) {
-      width: 76px;
-      height: 76px;
+      width: clamp(68px, 19vw, 76px);
+      height: clamp(68px, 19vw, 76px);
+    }
+
+    .studio-stat__content {
+      min-width: 0;
+      text-align: left;
     }
 
     .studio-stat__number {
-      font-size: clamp(48px, 15vw, 68px);
+      font-size: clamp(46px, 13vw, 62px);
+      line-height: 0.9;
+    }
+
+    .studio-stat__label {
+      max-width: 220px;
+
+      margin: 10px 0 0;
+
+      text-align: left;
+
+      
+      line-height: 1.4;
+    }
+
+    .studio-stat::after {
+      width: 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .studio-stat__number {
+      transition: none;
     }
   }
 </style>

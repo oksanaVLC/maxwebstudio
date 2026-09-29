@@ -24,6 +24,9 @@ const whatsappUrl =
   rel="noopener noreferrer"
   aria-label="Contactar por WhatsApp"
   title="Contactar por WhatsApp"
+  data-whatsapp-button
+  aria-hidden="true"
+  tabindex="-1"
 >
   <span class="whatsapp-button__icon">
     <img
@@ -34,10 +37,41 @@ const whatsappUrl =
   </span>
 </a>
 
+<script>
+  const buttons =
+    document.querySelectorAll<HTMLElement>("[data-whatsapp-button]");
+
+  buttons.forEach((button) => {
+    let hasShown = false;
+
+    const showButton = () => {
+      if (hasShown) return;
+
+      hasShown = true;
+
+      button.classList.add("is-visible");
+      button.removeAttribute("aria-hidden");
+      button.removeAttribute("tabindex");
+
+      window.removeEventListener("scroll", checkPosition);
+    };
+
+    const checkPosition = () => {
+      if (window.scrollY >= 40) {
+        showButton();
+      }
+    };
+
+    window.addEventListener("scroll", checkPosition, {
+      passive: true,
+    });
+  });
+</script>
+
 <style>
   .whatsapp-button {
     position: fixed;
-left: 22px;
+    right: 22px;
     bottom: 22px;
     z-index: 1000;
 
@@ -57,8 +91,30 @@ left: 22px;
 
     text-decoration: none;
 
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateY(18px) scale(0.72);
+
     transition:
-      transform 250ms var(--ease),
+      opacity 280ms ease,
+      transform 600ms var(--motion-ease-spring),
+      visibility 0s linear 600ms,
+      filter 250ms var(--ease);
+  }
+
+  .whatsapp-button.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform: translateY(0) scale(1);
+
+    transition:
+      opacity 280ms ease,
+      transform 600ms var(--motion-ease-spring),
+      visibility 0s linear 0s,
       filter 250ms var(--ease);
   }
 
@@ -73,18 +129,21 @@ left: 22px;
 
   .whatsapp-button__icon img {
     display: block;
-
     width: 100%;
     height: 100%;
-
     object-fit: contain;
   }
 
   .whatsapp-button:hover {
     transform: translateY(-4px) scale(1.06);
 
-    filter:
-      drop-shadow(0 8px 14px rgb(16 17 20 / 18%));
+    filter: drop-shadow(
+      0 8px 14px rgb(16 17 20 / 18%)
+    );
+  }
+
+  .whatsapp-button.is-visible:active {
+    transform: translateY(0) scale(0.96);
   }
 
   .whatsapp-button:focus-visible {
@@ -104,10 +163,17 @@ left: 22px;
 
   @media (prefers-reduced-motion: reduce) {
     .whatsapp-button {
-      transition: none;
+      transition: opacity 180ms ease;
+      transform: none;
     }
 
-    .whatsapp-button:hover {
+    .whatsapp-button.is-visible {
+      transition: opacity 180ms ease;
+      transform: none;
+    }
+
+    .whatsapp-button:hover,
+    .whatsapp-button.is-visible:active {
       transform: none;
     }
   }
