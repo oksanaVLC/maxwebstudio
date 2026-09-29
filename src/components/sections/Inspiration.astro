@@ -2,6 +2,12 @@
 const video = "/videos/valencia.mp4";
 const imacMockup = "/images/imac-mockup.webp";
 const projectImage = "/images/poster-type.jpg";
+
+import { getLocale, useTranslations } from "../../i18n";
+
+const lang = getLocale(Astro.currentLocale);
+const t = useTranslations(lang);
+const c = t.inspiration;
 ---
 
 <section
@@ -33,8 +39,9 @@ const projectImage = "/images/poster-type.jpg";
       <!-- TEXT -->
 
       <div class="inspiration__text">
-        <p class="inspiration__eyebrow">
-          De dónde sacamos la inspiración
+        <p class="section-eyebrow">
+          <span class="section-eyebrow__star" aria-hidden="true">✦</span>
+          <span>{c.eyebrow}</span>
         </p>
 
         <h2
@@ -42,29 +49,20 @@ const projectImage = "/images/poster-type.jpg";
           class="inspiration__title"
           data-reveal="up"
         >
-          Diseñamos desde Valencia
+          {c.title}
         </h2>
 
         <div class="inspiration__copy">
           <p class="inspiration__lead" data-reveal="text">
-            Nuestro estudio de diseño y desarrollo web está en Valencia: una
-            ciudad de color, de mucha luz, donde la tradición y la modernidad
-            conviven sin pedirse permiso.
+            {c.lead}
           </p>
 
           <p>
-            Aquí un mercado modernista de principios de siglo está a diez
-            minutos de la arquitectura más experimental del Mediterráneo. Esa
-            mezcla enseña algo que aplicamos a cada web: lo nuevo funciona
-            mejor cuando respeta lo que ya había, y lo clásico se sostiene
-            cuando se cuida el detalle.
+            {c.paragraphs.one}
           </p>
 
           <p>
-            De la luz del Mediterráneo aprendimos a trabajar con espacio y
-            claridad; de la cerámica y los azulejos, el color y el patrón; de
-            las fiestas populares, que una idea bien hecha se recuerda durante
-            años. Eso es lo que intentamos meter en cada proyecto.
+            {c.paragraphs.two}
           </p>
         </div>
 
@@ -73,12 +71,12 @@ const projectImage = "/images/poster-type.jpg";
         <div
           class="inspiration__tags"
           data-stagger
-          aria-label="Inspiración"
+          aria-label={c.tagsAriaLabel}
         >
-          <span data-reveal="up">Luz mediterránea</span>
-          <span data-reveal="up">Arquitectura experimental</span>
-          <span data-reveal="up">Color y cerámica</span>
-          <span data-reveal="up">Tradición viva</span>
+          <span data-reveal="up">{c.tags.mediterranean}</span>
+          <span data-reveal="up">{c.tags.architecture}</span>
+          <span data-reveal="up">{c.tags.color}</span>
+          <span data-reveal="up">{c.tags.tradition}</span>
         </div>
       </div>
 
@@ -102,7 +100,7 @@ const projectImage = "/images/poster-type.jpg";
             <div class="mockup__screen">
               <img
                 src={projectImage}
-                alt="Proyecto web de Max Web Studio"
+                alt={c.imageAlt}
                 decoding="async"
               />
             </div>
@@ -125,7 +123,7 @@ const projectImage = "/images/poster-type.jpg";
           class="inspiration__caption"
           data-reveal="text"
         >
-          Webs 100 % responsive
+          {c.caption}
         </span>
       </div>
     </div>
@@ -202,19 +200,7 @@ const projectImage = "/images/poster-type.jpg";
     max-width: 720px;
   }
 
-  .inspiration__eyebrow {
-    margin: 0 0 18px;
 
-    color: var(--muted);
-
-    font-family: var(--font-sans);
-
-    font-size: var(--fs-small);
-
-    font-weight: 500;
-
-    letter-spacing: 0.02em;
-  }
 
   .inspiration__title {
     max-width: 720px;
@@ -459,14 +445,11 @@ const projectImage = "/images/poster-type.jpg";
 
   .inspiration__caption {
     color: var(--muted);
-
-    font-family: var(--font-sans);
-
-    font-size: var(--fs-small);
-
-    letter-spacing: 0.02em;
-
-    transition-delay: 180ms;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  transition-delay: 180ms;
   }
 
   /* ==================================================

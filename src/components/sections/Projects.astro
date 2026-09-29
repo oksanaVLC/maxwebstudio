@@ -14,10 +14,10 @@ const c = useTranslations(lang).projects;
     <!-- HEADER -->
 
     <div class="projects__head">
-      <p class="projects__eyebrow">
-        <span aria-hidden="true">✦</span>
-        {c.eyebrow}
-      </p>
+   <p class="section-eyebrow">
+  <span class="section-eyebrow__star" aria-hidden="true">✦</span>
+  <span>{c.eyebrow}</span>
+</p>
 
       <h2 id="projects-title" class="h2" data-reveal="up">
         {c.title}
@@ -156,23 +156,7 @@ const c = useTranslations(lang).projects;
     text-wrap: balance;
   }
 
-  .projects__eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    margin-bottom: 18px;
-
-    color: var(--muted);
-    font-size: var(--fs-small);
-    font-weight: 500;
-    letter-spacing: 0.01em;
-  }
-
-  .projects__eyebrow span {
-    color: var(--muted);
-    font-size: 12px;
-  }
+ 
 
   .projects__head .lead {
     max-width: 680px;

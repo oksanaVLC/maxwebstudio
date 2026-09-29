@@ -22,10 +22,10 @@ const t = useTranslations(lang);
 >
   <div class="container">
     <div class="process__intro">
-      <p class="process__eyebrow">
-        <span aria-hidden="true">✦</span>
-        {t.process.eyebrow}
-      </p>
+<p class="section-eyebrow">
+  <span class="section-eyebrow__star" aria-hidden="true">✦</span>
+  <span>{t.process.eyebrow}</span>
+</p>  
 
       <h2 id="process-title" data-reveal="up">
         {t.process.title}
@@ -103,21 +103,7 @@ const t = useTranslations(lang);
     margin-bottom: 64px;
   }
 
-  .process__eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 18px;
-    color: var(--muted);
-    font-size: var(--fs-small);
-    font-weight: 500;
-    letter-spacing: 0.01em;
-  }
 
-  .process__eyebrow span {
-    color: var(--muted);
-    font-size: 12px;
-  }
 
  /* .process__intro h2 {
     max-width: 780px;

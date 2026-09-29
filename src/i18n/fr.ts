@@ -517,4 +517,22 @@ export default {
     fonts: "378 polices explorées",
     projects: "Projets réalisés",
   },
+  inspiration: {
+    eyebrow: "D’où vient notre inspiration",
+    title: "Nous créons depuis Valence",
+    lead: "Notre studio de design et développement web est basé à Valence : une ville de lumière et de couleurs, où tradition et modernité cohabitent naturellement.",
+    paragraphs: {
+      one: "Ici, un marché moderniste du début du XXe siècle se trouve à dix minutes de certaines des architectures les plus expérimentales de la Méditerranée. Ce mélange nous enseigne quelque chose que nous appliquons à chaque site : le nouveau fonctionne mieux lorsqu’il respecte ce qui existait déjà, et le classique reste pertinent lorsque chaque détail est soigné.",
+      two: "De la lumière méditerranéenne, nous avons appris à travailler avec l’espace et la clarté ; de la céramique et des azulejos, la couleur et le motif ; des fêtes populaires, qu’une idée bien conçue peut rester en mémoire pendant des années. C’est ce que nous essayons d’apporter à chaque projet.",
+    },
+    tagsAriaLabel: "Inspiration",
+    tags: {
+      mediterranean: "Lumière méditerranéenne",
+      architecture: "Architecture expérimentale",
+      color: "Couleur et céramique",
+      tradition: "Tradition vivante",
+    },
+    imageAlt: "Projet web de Max Web Studio",
+    caption: "Sites 100 % responsive",
+  },
 } as const;

@@ -507,4 +507,22 @@ export default {
     fonts: "Fuentes investigadas",
     projects: "Proyectos realizados",
   },
+  inspiration: {
+    eyebrow: "De dónde sacamos la inspiración",
+    title: "Diseñamos desde Valencia",
+    lead: "Nuestro estudio de diseño y desarrollo web está en Valencia: una ciudad de color, de mucha luz, donde la tradición y la modernidad conviven sin pedirse permiso.",
+    paragraphs: {
+      one: "Aquí un mercado modernista de principios de siglo está a diez minutos de la arquitectura más experimental del Mediterráneo. Esa mezcla enseña algo que aplicamos a cada web: lo nuevo funciona mejor cuando respeta lo que ya había, y lo clásico se sostiene cuando se cuida el detalle.",
+      two: "De la luz del Mediterráneo aprendimos a trabajar con espacio y claridad; de la cerámica y los azulejos, el color y el patrón; de las fiestas populares, que una idea bien hecha se recuerda durante años. Eso es lo que intentamos meter en cada proyecto.",
+    },
+    tagsAriaLabel: "Inspiración",
+    tags: {
+      mediterranean: "Luz mediterránea",
+      architecture: "Arquitectura experimental",
+      color: "Color y cerámica",
+      tradition: "Tradición viva",
+    },
+    imageAlt: "Proyecto web de Max Web Studio",
+    caption: "Webs 100 % responsive",
+  },
 } as const;

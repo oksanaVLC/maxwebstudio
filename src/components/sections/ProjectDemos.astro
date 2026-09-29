@@ -97,13 +97,13 @@ const demoUrl = "https://geolight-demo.netlify.app/";
   <div class="container">
     <header class="project-demos__head">
       <div>
-        <p
-          class="project-demos__eyebrow"
-          data-reveal="text"
-        >
-          <span aria-hidden="true"></span>
-          {copy.eyebrow}
-        </p>
+   <p
+  class="section-eyebrow"
+  data-reveal="text"
+>
+  <span class="section-eyebrow__star" aria-hidden="true">✦</span>
+  <span>{copy.eyebrow}</span>
+</p>
 
         <h2
           id="project-demos-title"
@@ -249,26 +249,7 @@ const demoUrl = "https://geolight-demo.netlify.app/";
     margin-bottom: clamp(46px, 6vw, 76px);
   }
 
-  .project-demos__eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 0 20px;
-    color: var(--muted);
-    font-family: var(--font-mono);
-    font-size: var(--fs-small);
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    line-height: 1;
-    text-transform: uppercase;
-  }
-
-  .project-demos__eyebrow span {
-    width: 28px;
-    height: 1px;
-    flex: 0 0 auto;
-    background: var(--red);
-  }
+ 
 
   .project-demos__head h2 {
     margin: 0;

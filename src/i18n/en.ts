@@ -513,4 +513,22 @@ export default {
     fonts: "378 fonts researched",
     projects: "Projects completed",
   },
+  inspiration: {
+    eyebrow: "Where we draw our inspiration",
+    title: "We design from Valencia",
+    lead: "Our web design and development studio is based in Valencia: a city full of colour and light, where tradition and modernity live side by side.",
+    paragraphs: {
+      one: "Here, a modernist market from the early twentieth century is just ten minutes away from some of the Mediterranean's most experimental architecture. That contrast teaches us something we apply to every website: new ideas work better when they respect what came before, and classic design lasts when every detail is cared for.",
+      two: "From Mediterranean light, we learned to work with space and clarity; from ceramics and tiles, colour and pattern; from local celebrations, that a well-made idea can be remembered for years. That is what we try to bring into every project.",
+    },
+    tagsAriaLabel: "Inspiration",
+    tags: {
+      mediterranean: "Mediterranean light",
+      architecture: "Experimental architecture",
+      color: "Colour and ceramics",
+      tradition: "Living tradition",
+    },
+    imageAlt: "Max Web Studio web project",
+    caption: "100% responsive websites",
+  },
 } as const;
