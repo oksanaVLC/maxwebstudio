@@ -1,0 +1,272 @@
+---
+import { Image } from "astro:assets";
+import { getLocale, useTranslations, type Locale } from "../../i18n";
+
+import languagesIcon from "../../assets/icons/icons_for_numbers/lgs.svg";
+import teaIcon from "../../assets/icons/icons_for_numbers/tea.svg";
+import fontIcon from "../../assets/icons/icons_for_numbers/font.svg";
+import projectsIcon from "../../assets/icons/icons_for_numbers/projects_done.svg";
+
+const lang: Locale = getLocale(Astro.currentLocale);
+const c = useTranslations(lang).studioStats;
+
+
+const stats = [
+  {
+    value: 4,
+    icon: languagesIcon,
+    label: c.languages,
+  },
+  {
+    value: 18,
+    icon: projectsIcon,
+    label: c.projects,
+  },
+  
+  {
+    value: 378,
+    icon: fontIcon,
+    label: c.fonts,
+  },
+  {
+    value: 1530,
+    icon: teaIcon,
+    label: c.tea,
+  },
+];
+---
+
+<section
+  class="studio-stats"
+  data-studio-stats
+  data-locale={lang}
+>
+  <div class="container">
+    <div class="studio-stats__grid">
+      {
+        stats.map((stat, index) => (
+          <article
+            class="studio-stat"
+            aria-label={`${stat.value.toLocaleString(lang)} ${stat.label}`}
+          >
+            <div class="studio-stat__icon" aria-hidden="true">
+              <Image
+                src={stat.icon}
+                alt=""
+                width={84}
+                height={84}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            <div class="studio-stat__number" aria-hidden="true">
+              <span
+                data-stat-number
+                data-stat-target={stat.value}
+                data-stat-delay={index * 140}
+              >
+                0
+              </span>
+            </div>
+
+            <p class="studio-stat__label">
+              {stat.label}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const sections =
+    document.querySelectorAll<HTMLElement>("[data-studio-stats]");
+
+  sections.forEach((section) => {
+    const locale = section.dataset.locale || "en";
+
+    const numbers =
+      section.querySelectorAll<HTMLElement>("[data-stat-number]");
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const formatter = new Intl.NumberFormat(locale, {
+      maximumFractionDigits: 0,
+    });
+
+    const animateNumber = (
+      element: HTMLElement,
+      target: number,
+      delay: number
+    ) => {
+      const start = () => {
+        if (reduceMotion) {
+          element.textContent = formatter.format(target);
+          return;
+        }
+
+        const duration =
+          target >= 10000
+            ? 1600
+            : target >= 1000
+              ? 1350
+              : 950;
+
+        const startTime = performance.now();
+
+        const frame = (time: number) => {
+          const elapsed = time - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(target * eased);
+
+          element.textContent = formatter.format(current);
+
+          if (progress < 1) {
+            requestAnimationFrame(frame);
+          } else {
+            element.textContent = formatter.format(target);
+          }
+        };
+
+        requestAnimationFrame(frame);
+      };
+
+      window.setTimeout(start, delay);
+    };
+
+    numbers.forEach((element) => {
+      const target = Number(element.dataset.statTarget);
+      const delay = Number(element.dataset.statDelay || 0);
+
+      if (Number.isFinite(target)) {
+        animateNumber(element, target, delay);
+      }
+    });
+  });
+</script>
+
+<style>
+  .studio-stats {
+    position: relative;
+    padding-block: clamp(70px, 8vw, 110px);
+    background: var(--surface);
+  }
+
+  .studio-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .studio-stat {
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 42px clamp(22px, 2.5vw, 42px);
+  }
+
+  .studio-stat + .studio-stat {
+    border-left: 1px solid var(--line);
+  }
+
+  .studio-stat__icon {
+    display: flex;
+    align-items: center;
+justify-content: center;
+    width: 84px;
+    height: 84px;
+    margin-bottom: 34px;
+  }
+
+  .studio-stat__icon :global(img) {
+    display: block;
+    width: 84px;
+    height: 84px;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.48;
+  }
+
+  .studio-stat__number {
+    color: var(--ink);
+    font-size: clamp(48px, 5.2vw, 78px);
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -0.065em;
+    white-space: nowrap;
+  }
+
+  .studio-stat__label {
+    max-width: 230px;
+    margin: 20px 0 0;
+      text-align: center;
+    color: var(--ink-soft);
+    font-size: var(--fs-body);
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .studio-stat::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 28px;
+    height: 1px;
+    background: var(--red);
+    opacity: 0.8;
+  }
+
+  @media (max-width: 980px) {
+    .studio-stats__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .studio-stat:nth-child(3),
+    .studio-stat:nth-child(4) {
+      border-top: 1px solid var(--line);
+    }
+
+    .studio-stat:nth-child(3) {
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .studio-stats__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .studio-stat {
+      min-height: 260px;
+      padding: 38px 24px;
+    }
+
+    .studio-stat + .studio-stat,
+    .studio-stat:nth-child(3),
+    .studio-stat:nth-child(4) {
+      border-left: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .studio-stat__icon,
+    .studio-stat__icon :global(img) {
+      width: 76px;
+      height: 76px;
+    }
+
+    .studio-stat__number {
+      font-size: clamp(48px, 15vw, 68px);
+    }
+  }
+</style>

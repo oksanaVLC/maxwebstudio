@@ -506,4 +506,11 @@ export default {
     ariaLabel: "Design principles",
     words: ["Balance.", "Accessibility", "Performance."],
   },
+  studioStats: {
+    title: "A few studio numbers",
+    languages: "4 languages spoken",
+    tea: "37,000 cups of tea drunk",
+    fonts: "378 fonts researched",
+    projects: "Projects completed",
+  },
 } as const;
