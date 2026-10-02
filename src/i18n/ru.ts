@@ -532,4 +532,14 @@ export default {
     imageAlt: "Веб-проект Max Web Studio",
     caption: "Сайты со 100 % адаптивностью",
   },
+  statement: {
+    line1Before: "",
+    future: "БУДУЩЕЕ",
+    line1After: "WEB",
+    line2: "НЕВОЗМОЖНО ПРЕДСКАЗАТЬ.",
+    line3Before: "ЕГО НУЖНО",
+    build: "СОЗДАВАТЬ",
+    line3After: ".",
+    credit: "MAX WEB STUDIO",
+  },
 } as const;

@@ -1,15 +1,27 @@
 ---
+import { getLocale, useTranslations, type Locale } from "../../i18n";
+
+
+const lang: Locale = getLocale(Astro.currentLocale);
+const t = useTranslations(lang);
+const d = t.statement;
 ---
 
-<section class="section statement" aria-label="Max Web Studio statement">
+<section
+  class="section statement"
+  aria-labelledby="statement-title"
+>
   <div class="container">
     <div class="statement__inner">
-      <p class="statement__text">
+      <p
+        id="statement-title"
+        class="statement__text"
+      >
         <span class="statement__line">
-          <span>THE</span>
+          <span>{d.line1Before}</span>
 
           <span class="statement__word statement__word--future">
-            FUTURE
+            {d.future}
             <svg
               class="statement__underline"
               viewBox="0 0 220 24"
@@ -22,7 +34,6 @@
                    C109 8, 133 17, 157 12
                    C179 8, 199 14, 216 10"
               />
-
               <path
                 d="M7 18
                    C35 13, 57 21, 84 17
@@ -32,18 +43,18 @@
             </svg>
           </span>
 
-          <span>OF THE WEB</span>
+          <span>{d.line1After}</span>
         </span>
 
         <span class="statement__line">
-          <span>ISN'T SOMETHING TO PREDICT.</span>
+          <span>{d.line2}</span>
         </span>
 
         <span class="statement__line">
-          <span>IT'S SOMETHING TO</span>
+          <span>{d.line3Before}</span>
 
           <span class="statement__word statement__word--build">
-            BUILD
+            {d.build}
             <svg
               class="statement__underline"
               viewBox="0 0 160 24"
@@ -56,7 +67,6 @@
                    C82 8, 101 17, 121 12
                    C137 9, 149 14, 157 11"
               />
-
               <path
                 d="M6 18
                    C27 13, 45 21, 66 17
@@ -66,11 +76,13 @@
             </svg>
           </span>
 
-          <span>.</span>
+          <span>{d.line3After}</span>
         </span>
       </p>
 
-      <p class="statement__credit">— MAX WEB STUDIO</p>
+      <p class="statement__credit">
+        — {d.credit}
+      </p>
     </div>
   </div>
 </section>
@@ -106,8 +118,8 @@
     margin: 0;
 
     color: var(--ink);
+font-family: "Caveat", cursive;
 
-    font-family: var(--font-sans);
 
     font-size: clamp(38px, 5.7vw, 72px);
 

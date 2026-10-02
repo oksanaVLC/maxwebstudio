@@ -535,4 +535,14 @@ export default {
     imageAlt: "Projet web de Max Web Studio",
     caption: "Sites 100 % responsive",
   },
+  statement: {
+    line1Before: "L'",
+    future: "AVENIR",
+    line1After: "DU WEB",
+    line2: "N'EST PAS QUELQUE CHOSE À PRÉDIRE.",
+    line3Before: "C'EST QUELQUE CHOSE À",
+    build: "CONSTRUIRE",
+    line3After: ".",
+    credit: "MAX WEB STUDIO",
+  },
 } as const;

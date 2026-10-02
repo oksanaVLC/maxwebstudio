@@ -2,6 +2,7 @@
 import { getImage } from "astro:assets";
 
 import image from "../../assets/images/heather-green-NgRfOZXiFvY-unsplash.jpg";
+import backgroundImage from "../../assets/images/v904-nunny-018-g.jpg";
 import { getLocale, useTranslations } from "../../i18n";
 
 const lang = getLocale(Astro.currentLocale);
@@ -13,9 +14,20 @@ const optimizedImage = await getImage({
   quality: 80,
   format: "webp",
 });
+
+const optimizedBackground = await getImage({
+  src: backgroundImage,
+  width: 1920,
+  quality: 80,
+  format: "webp",
+});
 ---
 
-<section class="section creative" aria-labelledby="creative-title">
+<section
+  class="section creative"
+  aria-labelledby="creative-title"
+  style={`background-image: url("${optimizedBackground.src}");`}
+>
   <div class="container">
     <div class="creative__grid">
       <!-- POSTER -->
@@ -78,11 +90,33 @@ const optimizedImage = await getImage({
      CREATIVE
      ================================================== */
 
-  .creative {
-    position: relative;
-    overflow: hidden;
-    background: var(--surface);
-  }
+.creative {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--surface);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.creative::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.35) 0%,
+      rgb(255 255 255 / 0.15) 50%,
+      rgb(255 255 255 / 0.4) 100%
+    );
+
+  filter: saturate(0.9);
+}
 
   /* ==================================================
      GRID
