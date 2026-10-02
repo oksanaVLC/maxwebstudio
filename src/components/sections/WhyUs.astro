@@ -4,6 +4,8 @@ import WritingNotes from "./WritingNotes.astro";
 
 const lang = getLocale(Astro.currentLocale);
 const t = useTranslations(lang);
+
+const points = Object.values(t.whyUs.points);
 ---
 
 <section class="why-us section" id="why-us" aria-labelledby="why-us-title">
@@ -33,9 +35,9 @@ const t = useTranslations(lang);
       </div>
     </div>
 
-    <div class="why-us__points" data-stagger>
+    <div class="why-us__points">
       {
-        Object.values(t.whyUs.points).map((point) => (
+        points.map((point) => (
           <article class="why-us__point" data-reveal="up">
             <span class="why-us__check" aria-hidden="true">
               ✓
@@ -55,6 +57,9 @@ const t = useTranslations(lang);
 <style>
   .why-us {
     background: var(--surface-soft);
+    /* Safety net: nothing animated here can create a sideways scroll.
+       `clip` (not `hidden`) keeps position: sticky working. */
+    overflow-x: clip;
   }
 
   /* Intro */
@@ -68,6 +73,7 @@ const t = useTranslations(lang);
   }
 
   .why-us__intro-copy {
+    min-width: 0;
     max-width: 600px;
   }
 
@@ -77,17 +83,14 @@ const t = useTranslations(lang);
     gap: 8px;
     margin-bottom: 18px;
     color: var(--muted);
-   
     font-weight: 500;
     letter-spacing: 0.01em;
   }
 
   .why-us__eyebrow span {
-  color: var(--red);
+    color: var(--red);
     font-size: 16px;
   }
-
- 
 
   .why-us__lead {
     max-width: 520px;
@@ -119,8 +122,24 @@ const t = useTranslations(lang);
     display: grid;
     grid-template-columns: 24px minmax(0, 1fr);
     gap: 18px;
+    min-width: 0;
     padding-block: 30px;
     border-bottom: 1px solid var(--line);
+  }
+
+  /*
+    Stagger by COLUMN, not by position in the list.
+    Each row is revealed when it scrolls into view, so the right-hand
+    item only needs a small offset from the left-hand one. A list-wide
+    stagger made lower rows wait up to ~0.5s after appearing, while
+    items 7+ had no delay at all — which read as "some animate, some don't".
+  */
+  .why-us__point {
+    transition-delay: 0ms;
+  }
+
+  .why-us__point:nth-child(even) {
+    transition-delay: var(--motion-stagger);
   }
 
   .why-us__check {
@@ -134,6 +153,10 @@ const t = useTranslations(lang);
     line-height: 1;
   }
 
+  .why-us__point-copy {
+    min-width: 0;
+  }
+
   .why-us__point-copy h3 {
     margin: 0 0 8px;
     color: var(--ink);
@@ -142,6 +165,7 @@ const t = useTranslations(lang);
     font-weight: 600;
     letter-spacing: -0.015em;
     line-height: 1.35;
+    overflow-wrap: break-word;
   }
 
   .why-us__point-copy p {
@@ -177,10 +201,13 @@ const t = useTranslations(lang);
       grid-template-columns: 1fr;
     }
 
-    .why-us__point {
+    /* One column: every item enters on its own, no delay needed */
+    .why-us__point,
+    .why-us__point:nth-child(even) {
       grid-template-columns: 22px minmax(0, 1fr);
       gap: 14px;
       padding-block: 26px;
+      transition-delay: 0ms;
     }
 
     .why-us__check {

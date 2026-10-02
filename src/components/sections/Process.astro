@@ -1,7 +1,7 @@
 ---
 import { Image, getImage } from "astro:assets";
 
-import { default as we, default as weMobile } from "../../assets/images/team.jpg";
+import { default as we, default as weMobile } from "../../assets/images/still-life-graphic-design-day.jpg";
 import { getLocale, useTranslations } from "../../i18n";
 
 const weMobileOptimized = await getImage({
@@ -25,7 +25,7 @@ const t = useTranslations(lang);
 <p class="section-eyebrow">
   <span class="section-eyebrow__star" aria-hidden="true">✦</span>
   <span>{t.process.eyebrow}</span>
-</p>  
+</p>
 
       <h2 id="process-title" data-reveal="up">
         {t.process.title}
@@ -50,6 +50,10 @@ const t = useTranslations(lang);
           format="webp"
         />
       </picture>
+
+      <!-- Capas decorativas: puntos finos + desenfoque progresivo -->
+      <span class="process__feature-dots" aria-hidden="true"></span>
+      <span class="process__feature-blur" aria-hidden="true"></span>
 
       <div class="process__feature-copy" data-reveal="text">
         <p>{t.process.feature.text}</p>
@@ -103,29 +107,23 @@ const t = useTranslations(lang);
     margin-bottom: 64px;
   }
 
-
-
- /* .process__intro h2 {
-    max-width: 780px;
-    margin: 0;
-    color: var(--ink);
-    font-family: var(--font-sans);
-    font-size: clamp(40px, 5vw, 64px);
-    font-weight: 300;
-    letter-spacing: -0.055em;
-    line-height: 1;
-    text-wrap: balance;
-  }*/
-
-  /* Imagen principal */
+  /* Imagen principal — versión clara */
 
   .process__feature {
+    /* Ajustes rápidos */
+    --veil: 0.22;           /* velo claro sobre toda la foto */
+    --dot-size: 0.7px;      /* radio de cada punto */
+    --dot-gap: 4px;         /* distancia entre puntos */
+    --dot-alpha: 0.55;      /* intensidad de los puntos */
+    --fade-to: var(--surface, #f6f3ee);
+
     position: relative;
+    isolation: isolate;
     width: 100%;
     height: clamp(480px, 58vw, 720px);
     margin-bottom: 88px;
     overflow: hidden;
-    background: var(--screen-dark);
+    background: var(--fade-to); /* sin "flash" oscuro mientras carga */
   }
 
   .process__feature picture {
@@ -140,18 +138,52 @@ const t = useTranslations(lang);
     height: 100%;
     object-fit: cover;
     object-position: center;
+    /* Más luminosa, sombras abiertas, color algo más suave */
+    filter: brightness(1.07) contrast(0.9) saturate(0.88);
   }
 
+  /* Velo claro + trama de puntos muy finos (claros, nunca oscuros) */
+  .process__feature-dots {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        circle,
+        rgb(255 255 255 / var(--dot-alpha)) var(--dot-size),
+        transparent calc(var(--dot-size) + 0.5px)
+      ) 0 0 / var(--dot-gap) var(--dot-gap),
+      rgb(255 255 255 / var(--veil));
+    /* Los puntos se notan menos arriba y más hacia el texto */
+    -webkit-mask-image: linear-gradient(180deg, rgb(0 0 0 / 0.55) 0%, #000 60%);
+            mask-image: linear-gradient(180deg, rgb(0 0 0 / 0.55) 0%, #000 60%);
+  }
+
+  /* Desenfoque progresivo: la foto se suaviza solo detrás del texto */
+  .process__feature-blur {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    -webkit-backdrop-filter: blur(14px) saturate(1.05);
+            backdrop-filter: blur(14px) saturate(1.05);
+    -webkit-mask-image: linear-gradient(180deg, transparent 48%, rgb(0 0 0 / 0.6) 70%, #000 100%);
+            mask-image: linear-gradient(180deg, transparent 48%, rgb(0 0 0 / 0.6) 70%, #000 100%);
+  }
+
+  /* Fundido claro hacia el color de la sección (en lugar del degradado negro) */
   .process__feature::after {
     content: "";
     position: absolute;
     inset: 0;
+    z-index: 3;
     pointer-events: none;
     background: linear-gradient(
       180deg,
-      rgba(16, 17, 20, 0) 26%,
-      rgba(16, 17, 20, 0.3) 56%,
-      rgba(16, 17, 20, 0.82) 100%
+      transparent 40%,
+      color-mix(in srgb, var(--fade-to) 45%, transparent) 64%,
+      color-mix(in srgb, var(--fade-to) 88%, transparent) 100%
     );
   }
 
@@ -162,22 +194,35 @@ const t = useTranslations(lang);
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 2;
+    z-index: 4;
     padding: clamp(28px, 5vw, 58px);
-    color: #fff;
+    color: var(--ink);
     transition-delay: 180ms;
   }
 
   .process__feature-copy p {
     max-width: 680px;
     margin: 0;
-    color: #fff;
+    color: var(--ink);
     font-family: var(--font-sans);
     font-size: clamp(20px, 2.2vw, 29px);
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: -0.025em;
     line-height: 1.28;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.18);
+    /* Halo claro, no sombra oscura */
+    text-shadow: 0 0 22px color-mix(in srgb, var(--fade-to) 90%, transparent);
+  }
+
+  /* Navegadores sin backdrop-filter: un poco más de fundido */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .process__feature::after {
+      background: linear-gradient(
+        180deg,
+        transparent 34%,
+        color-mix(in srgb, var(--fade-to) 60%, transparent) 62%,
+        color-mix(in srgb, var(--fade-to) 94%, transparent) 100%
+      );
+    }
   }
 
   /* Pasos */
@@ -239,21 +284,25 @@ const t = useTranslations(lang);
       margin-bottom: 44px;
     }
 
-  
-
     .process__feature {
+      --dot-gap: 3.5px;
       width: calc(100% + (var(--pad-x) * 2));
       height: 520px;
       margin-inline: calc(var(--pad-x) * -1);
       margin-bottom: 64px;
     }
 
+    .process__feature-blur {
+      -webkit-mask-image: linear-gradient(180deg, transparent 40%, rgb(0 0 0 / 0.65) 64%, #000 100%);
+              mask-image: linear-gradient(180deg, transparent 40%, rgb(0 0 0 / 0.65) 64%, #000 100%);
+    }
+
     .process__feature::after {
       background: linear-gradient(
         180deg,
-        rgba(16, 17, 20, 0) 20%,
-        rgba(16, 17, 20, 0.28) 48%,
-        rgba(16, 17, 20, 0.88) 100%
+        transparent 32%,
+        color-mix(in srgb, var(--fade-to) 55%, transparent) 58%,
+        color-mix(in srgb, var(--fade-to) 92%, transparent) 100%
       );
     }
 

@@ -90,7 +90,7 @@ export default {
       },
     },
   },
-  whyUs: {
+  /*  whyUs: {
     eyebrow: "Por qué nosotros",
     title: "Porque destacamos.",
     lead: "Escuchamos tus ideas, aportamos nuestra experiencia y construimos una presencia digital preparada para crecer contigo.",
@@ -154,7 +154,55 @@ export default {
           "El cliente tiene la última palabra, pero también estamos aquí para guiarte y ayudarte a tomar las decisiones que mejor funcionan para tu proyecto.",
       },
     },
+  },*/
+
+  whyUs: {
+    eyebrow: "Por qué nosotros",
+    title: "Porque destacamos.",
+    lead: "Escuchamos tus ideas, aportamos nuestra experiencia y construimos una presencia digital preparada para crecer contigo.",
+    imageAlt: "Cuaderno con una lista de ideas marcadas a mano",
+    notes: {
+      title: "Ideas:",
+      items: [
+        "diseño",
+        "accesibilidad",
+        "adaptabilidad",
+        "rendimiento",
+        "optimización",
+      ],
+    },
+
+    points: {
+      // ideas + architecture + ai + details
+      clarity: {
+        title: "Tus ideas, nuestro criterio",
+        description:
+          "Ordenamos todo lo que tienes en mente y lo convertimos en una web con sentido: estructura, navegación, contenido y diseño que funcionan como un todo. Usamos IA para avanzar más rápido, pero las decisiones las toman personas: te guiamos y la última palabra es tuya.",
+      },
+
+      // copywriting + translations
+      content: {
+        title: "Textos que suenan como tú, en cada idioma",
+        description:
+          "Escribimos descripciones veraces y precisas de tus servicios para que te diferencies de la competencia. Y no traducimos palabra por palabra: adaptamos cada texto al idioma, al público y a la cultura de cada mercado.",
+      },
+
+      // performance
+      performance: {
+        title: "Rápida, accesible y optimizada",
+        description:
+          "Optimizamos imágenes, vídeos y código para que la web cargue rápido y se use con facilidad en cualquier dispositivo. Menos espera y menos fricción significan más clientes que se quedan.",
+      },
+
+      // scalable
+      growth: {
+        title: "Preparada para crecer",
+        description:
+          "Pensamos más allá del lanzamiento. Construimos una base escalable para añadir, cuando lo necesites, nuevos idiomas, un blog para SEO, un CMS, páginas o servicios sin rehacer la web.",
+      },
+    },
   },
+
   faq: {
     title: "Preguntas frecuentes",
     lead: "Lo que nos preguntan antes de empezar. Si te queda alguna duda, escríbenos y te la resolvemos sin compromiso.",
