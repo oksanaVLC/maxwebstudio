@@ -140,6 +140,12 @@ for (let y = rules[rules.length - 1] + STEP; y < 470; y += STEP) rules.push(y);
       </g>
     </g>
   </svg>
+  <img
+  class="notes-logo"
+  src="/favicon.png"
+  alt=""
+  aria-hidden="true"
+/>
 </div>
 
 <style>
@@ -208,6 +214,19 @@ for (let y = rules[rules.length - 1] + STEP; y < 470; y += STEP) rules.push(y);
   .writing-notes:not(.is-live) .writing-notes__pen {
     display: none;
   }
+  .notes-logo {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+
+  width: 52px;
+  height: 52px;
+
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
 </style>
 
 <script>
