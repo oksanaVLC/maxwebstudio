@@ -90,7 +90,7 @@ const c = content[lang];
           </span>
         </a>
 
-        <a class="hero__button hero__button--secondary" href={`${home}#work`}>
+        <a class="hero__button hero__button--secondary" href={`${home}#projects`}>
           <span>{c.projects}</span>
           <span class="hero__arrow" aria-hidden="true">
             <span class="hero__arrow-line"></span>
@@ -214,7 +214,7 @@ const c = content[lang];
     margin: 0;
     color: var(--ink);
   
-    font-size: clamp(54px, 7.1vw, 100px);
+    font-size: clamp(48px, 7.1vw, 100px);
      font-weight: 200;
    /* letter-spacing: -0.065em;*/
 
@@ -245,6 +245,7 @@ const c = content[lang];
     justify-content: center;
     gap: clamp(8px, 0.8vw, 14px);
     margin-top: clamp(26px, 2.6vw, 40px);
+    
   }
 
   .hero__button {
@@ -437,6 +438,9 @@ const c = content[lang];
      ================================================== */
 
   @media (max-width: 767px) {
+     .hero__arrow{
+      display: none;
+     }
     .hero {
       min-height: calc(100svh - var(--header-h));
     }
