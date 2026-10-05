@@ -505,7 +505,7 @@ export default {
   },
   designStatement: {
     ariaLabel: "Принципы дизайна",
-    words: ["Баланс.", "Доступность.", "Производительность."],
+    words: ["Производительность.", "Доступность.", "Баланс."],
   },
   studioStats: {
     title: "Несколько цифр о студии",
@@ -534,12 +534,12 @@ export default {
   },
   statement: {
     line1Before: "",
-    future: "БУДУЩЕЕ",
-    line1After: "WEB",
-    line2: "НЕВОЗМОЖНО ПРЕДСКАЗАТЬ.",
-    line3Before: "ЕГО НУЖНО",
-    build: "СОЗДАВАТЬ",
-    line3After: ".",
-    credit: "MAX WEB STUDIO",
+    future: "Будущее",
+    line1After: "web",
+    line2: "невозможно предсказать.",
+    line3Before: "его нужно",
+    build: "создавать.",
+    //line3After: ".",
+    credit: "max web studio",
   },
 } as const;
