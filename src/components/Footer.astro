@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import logoBlanco from "../assets/images/logo-blanco.png";
 import { stripLocale, useTranslations, type Locale } from "../i18n";
 
 interface Props {
@@ -85,12 +87,13 @@ function getLanguageHref(code: Locale) {
           class="footer__logo"
           aria-label={t.meta.siteName}
         >
-          <img
-            src="/images/logo-blanco.png"
-            alt={t.meta.siteName}
-            width="220"
-            height="auto"
-          />
+        <Image
+  src={logoBlanco}
+  alt={t.meta.siteName}
+  width={220}
+  height={51}
+  class="footer__logo-image"
+/>
         </a>
 
         <p>{t.meta.defaultDescription}</p>
@@ -185,11 +188,7 @@ function getLanguageHref(code: Locale) {
     width: 180px;
   }
 
-  .footer__logo img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
+ 
 
   .footer__brand p {
     max-width: 420px;

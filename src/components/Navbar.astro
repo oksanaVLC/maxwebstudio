@@ -8,6 +8,7 @@ import {
   type Locale,
 } from "../i18n";
 import logoNegro from "../assets/images/logo-negro.png";
+import { Image } from "astro:assets";
 
 interface Props {
   lang?: Locale;
@@ -117,11 +118,13 @@ for (const language of languages) {
   class="site-header__logo"
   aria-label={t.meta.siteName}
 >
-  <img
-    src={logoNegro.src}
-    alt={t.meta.siteName}
-    class="site-header__logo-image"
-  />
+  <Image
+  src={logoNegro}
+  alt={t.meta.siteName}
+  width={254}
+  height={58}
+  class="site-header__logo-image"
+/>
 </a>
 
     <!-- Desktop navigation -->
