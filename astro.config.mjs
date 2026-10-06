@@ -5,7 +5,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 
 export default defineConfig({
-  site: "https://maxwebstudio.com",
+  site: "https://maxwebstudio.es",
 
   i18n: {
     defaultLocale: "es",
