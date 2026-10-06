@@ -1,6 +1,7 @@
 ---
 import { Image, getImage } from "astro:assets";
 
+import favicon from "../../assets/images/favicon.png";
 import { default as we, default as weMobile } from "../../assets/images/still-life-graphic-design-day.jpg";
 import { getLocale, useTranslations } from "../../i18n";
 
@@ -54,11 +55,13 @@ const t = useTranslations(lang);
       <!-- Capas decorativas: puntos finos + desenfoque progresivo -->
       <span class="process__feature-dots" aria-hidden="true"></span>
       <span class="process__feature-blur" aria-hidden="true"></span>
-      <img
+ <Image
   class="process__feature-logo"
-  src="/favicon.png"
+  src={favicon}
   alt=""
   aria-hidden="true"
+  width={76}
+  height={76}
 />
 
       <div class="process__feature-copy" data-reveal="text">

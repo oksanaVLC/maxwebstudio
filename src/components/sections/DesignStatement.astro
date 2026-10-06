@@ -78,6 +78,18 @@ const c = useTranslations(lang).designStatement;
   letter-spacing: -0.06em;
   white-space: nowrap;
 }
+@media (min-width: 768px) and (max-width: 1100px) {
+  .design-statement__words {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px 32px;
+  }
+
+  .design-statement__words span {
+    white-space: normal;
+    text-align: center;
+  }
+}
 
 @media (max-width: 767px) {
   .design-statement {
