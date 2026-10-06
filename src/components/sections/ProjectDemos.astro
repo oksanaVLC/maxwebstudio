@@ -220,12 +220,14 @@ const projects: Project[] = [
                     class="project-demos__screen"
                     style={`--screen-bg: ${project.screenBg}`}
                   >
-                    <Image
-                      src={project.image}
-                      alt={project.alt}
-                      loading="lazy"
-                      decoding="async"
-                    />
+                  <Image
+  src={project.image}
+  alt={project.alt}
+  width={project.image.width}
+  height={project.image.height}
+  loading="lazy"
+  decoding="async"
+/>
                   </div>
                 </div>
               </a>
