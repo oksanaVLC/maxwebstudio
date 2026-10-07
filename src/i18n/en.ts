@@ -504,7 +504,7 @@ export default {
   },
   designStatement: {
     ariaLabel: "Design principles",
-    words: ["Balance.", "Accessibility", "Performance."],
+    words: ["Balance.", "Accessibility.", "Performance."],
   },
   studioStats: {
     title: "A few studio numbers",
