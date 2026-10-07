@@ -14,7 +14,7 @@ In compliance with Article 10 of Law 34/2002 (LSSI-CE), the following informatio
 - **Tax ID (NIE):** X9102105Q
 - **Registered address:** pl. Alquería Nova, 1, 46950 Xirivella (Valencia), Spain
 - **Email:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
-- **Website:** https://maxwebstudio.com
+- **Website:** https://maxwebstudio.es
 
 ## 2. Purpose
 

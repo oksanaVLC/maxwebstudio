@@ -534,11 +534,9 @@ export default {
   statement: {
     line1Before: "The",
     future: "future",
-    line1After: "of the web",
-    line2: "isn't something to predict.",
-    line3Before: "it's something to",
+    line1After: "of the web isn't something to predict.",
+    line3Before: "It's something to",
     build: "build.",
-    // line3After: ".",
     credit: "max web studio",
   },
 } as const;

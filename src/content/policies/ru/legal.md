@@ -14,7 +14,7 @@ lastUpdated: 2026-09-11
 - **Идентификационный номер (NIE):** X9102105Q
 - **Адрес:** pl. Alquería Nova, 1, 46950 Xirivella (Valencia)
 - **Электронная почта:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
-- **Сайт:** https://maxwebstudio.com
+- **Сайт:** https://maxwebstudio.es
 
 ## 2. Предмет
 

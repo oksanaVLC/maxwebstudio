@@ -13,72 +13,69 @@ const d = t.statement;
 >
   <div class="container">
     <div class="statement__inner">
-      <p
-        id="statement-title" 
-        class="statement__text"
+     
+<p
+  id="statement-title"
+  class="statement__text"
+>
+  <span class="statement__line">
+    <span>{d.line1Before}</span>
+
+    <span class="statement__word statement__word--future">
+      {d.future}
+      <svg
+        class="statement__underline"
+        viewBox="0 0 220 24"
+        preserveAspectRatio="none"
+        aria-hidden="true"
       >
-        <span class="statement__line">
-          <span>{d.line1Before}</span>
+        <path
+          d="M4 14
+             C31 9, 55 18, 82 13
+             C109 8, 133 17, 157 12
+             C179 8, 199 14, 216 10"
+        />
+        <path
+          d="M7 18
+             C35 13, 57 21, 84 17
+             C112 12, 137 20, 160 16
+             C183 12, 201 17, 213 14"
+        />
+      </svg>
+    </span>
 
-          <span class="statement__word statement__word--future">
-            {d.future}
-            <svg
-              class="statement__underline"
-              viewBox="0 0 220 24"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M4 14
-                   C31 9, 55 18, 82 13
-                   C109 8, 133 17, 157 12
-                   C179 8, 199 14, 216 10"
-              />
-              <path
-                d="M7 18
-                   C35 13, 57 21, 84 17
-                   C112 12, 137 20, 160 16
-                   C183 12, 201 17, 213 14"
-              />
-            </svg>
-          </span>
+    <span>{d.line1After}</span>
+  </span>
 
-          <span>{d.line1After}</span>
-        </span>
+  <span class="statement__line">
+    <span>{d.line3Before}</span>
 
-        <span class="statement__line">
-          <span>{d.line2}</span>
-        </span>
+    <span class="statement__word statement__word--build">
+      {d.build}
+      <svg
+        class="statement__underline"
+        viewBox="0 0 160 24"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M4 14
+             C23 9, 43 18, 63 13
+             C82 8, 101 17, 121 12
+             C137 9, 149 14, 157 11"
+        />
+        <path
+          d="M6 18
+             C27 13, 45 21, 66 17
+             C86 12, 105 20, 123 16
+             C139 12, 150 17, 155 14"
+        />
+      </svg>
+    </span>
+  </span>
+</p>
 
-        <span class="statement__line">
-          <span>{d.line3Before}</span>
 
-          <span class="statement__word statement__word--build">
-            {d.build}
-            <svg
-              class="statement__underline"
-              viewBox="0 0 160 24"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M4 14
-                   C23 9, 43 18, 63 13
-                   C82 8, 101 17, 121 12
-                   C137 9, 149 14, 157 11"
-              />
-              <path
-                d="M6 18
-                   C27 13, 45 21, 66 17
-                   C86 12, 105 20, 123 16
-                   C139 12, 150 17, 155 14"
-              />
-            </svg>
-          </span>
-
-         
-        </span>
-      </p>
 
       <p class="statement__credit">
         — {d.credit}

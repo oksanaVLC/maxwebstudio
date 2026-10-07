@@ -12,7 +12,7 @@ Conformément à l'article 10 de la loi espagnole 34/2002 (LSSI-CE), les informa
 - **NIF (NIE) :** X9102105Q
 - **Adresse :** pl. Alquería Nova, 1, 46950 Xirivella (Valence)
 - **E-mail :** [newstella777@gmail.com](mailto:newstella777@gmail.com)
-- **Site web :** https://maxwebstudio.com
+- **Site web :** https://maxwebstudio.es
 
 ## 2. Objet
 
