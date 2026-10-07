@@ -1,57 +1,71 @@
 ---
 title: Politique de confidentialité
+
 description: Comment Max Studio collecte, utilise et protège vos données personnelles.
-lastUpdated: 2026-09-11
+
+lastUpdated: 2026-10-07
 ---
 
 ## 1. Responsable du traitement
 
 - **Responsable :** Oksana Golubeva
-- **NIF (NIE) :** X9102105Q
-- **Adresse :** pl. Alquería Nova, 1, 46950 Xirivella (Valence)
-- **E-mail :** [newstella777@gmail.com](mailto:newstella777@gmail.com)
+- **NIE :** X9102105Q
+- **Adresse :** pl. Alquería Nova, 1, 46950 Xirivella (Valencia), Espagne
+- **Email :** [newstella777@gmail.com](mailto:newstella777@gmail.com)
 
-Cette politique est conforme au Règlement (UE) 2016/679 (RGPD) et à la loi organique espagnole 3/2018 (LOPDGDD).
+Cette politique est conforme au règlement (UE) 2016/679 (RGPD) et à la législation espagnole applicable en matière de protection des données.
 
 ## 2. Données que nous collectons
 
-Via le formulaire de contact, nous recueillons les données que vous fournissez volontairement : **nom, adresse e-mail et contenu de votre message**.
+Via le formulaire de contact, nous collectons les données personnelles que vous fournissez volontairement : **nom, adresse e-mail et contenu de votre message**.
 
-Nous pouvons également recueillir des données de navigation au moyen de cookies (voir la [Politique relative aux cookies](/fr/policies/cookies)).
+Nous pouvons également traiter certaines informations techniques et de navigation limitées via **Cloudflare Web Analytics**, utilisé pour comprendre les visites et les performances du site. Cloudflare Web Analytics n'utilise pas de cookies pour suivre individuellement les visiteurs.
 
-## 3. Finalité
+Pour plus d'informations sur les cookies, veuillez consulter la [Politique relative aux cookies](/fr/policies/cookies/).
 
-Nous traitons vos données afin de **répondre à votre demande ou à votre demande de devis** et d'assurer le suivi des échanges qui en découlent.
+## 3. Finalités
 
-Aucune décision automatisée ni aucun profilage ne sont réalisés.
+Nous traitons vos données afin de :
+
+- **répondre à votre demande ou demande de devis** et assurer le suivi de cette communication ;
+- comprendre l'utilisation du site et améliorer ses performances et ses fonctionnalités grâce à des statistiques agrégées.
+
+Aucune prise de décision automatisée ni aucun profilage n'est effectué.
 
 ## 4. Base juridique
 
-La base juridique est votre **consentement**, donné lors de l'envoi du formulaire, ainsi que l'intérêt légitime à répondre aux communications reçues.
+La base juridique du traitement des données du formulaire de contact est **votre consentement**, donné lors de l'envoi du formulaire, ainsi que notre intérêt légitime à répondre aux communications reçues.
 
-Vous pouvez retirer votre consentement à tout moment.
+Le traitement des informations techniques et statistiques agrégées à des fins d'analyse repose sur notre **intérêt légitime à surveiller, maintenir et améliorer le site web**.
 
-## 5. Conservation
+Vous pouvez retirer votre consentement à tout moment lorsque le traitement repose sur celui-ci.
 
-Nous conservons vos données pendant le temps nécessaire au traitement de votre demande et pendant les périodes légalement requises ; elles sont ensuite supprimées de manière sécurisée.
+## 5. Conservation des données
+
+Nous conservons les données du formulaire de contact pendant le temps nécessaire au traitement de votre demande et pendant les périodes légalement requises. Elles sont ensuite supprimées de manière sécurisée.
+
+Les données d'analyse sont conservées conformément aux périodes de conservation applicables du fournisseur du service d'analyse.
 
 ## 6. Destinataires
 
-Nous ne communiquons pas vos données à des tiers, sauf obligation légale.
+Nous ne vendons pas vos données personnelles et ne les partageons pas avec des tiers, sauf lorsque la loi l'exige ou lorsque cela est nécessaire au fonctionnement du site et de ses services.
 
-Nos prestataires de services, en qualité de sous-traitants, peuvent y accéder :
+Les prestataires suivants peuvent traiter des données pour notre compte :
 
-- **Netlify, Inc.** — hébergement du site web et gestion des formulaires de contact — États-Unis.
-- **Google LLC** — service de messagerie Gmail où sont reçus les messages — États-Unis.
+- **Netlify, Inc.** — hébergement du site et gestion du formulaire de contact — États-Unis.
+- **Google LLC** — service de messagerie Gmail où les messages de contact sont reçus — États-Unis.
+- **Cloudflare, Inc.** — service Web Analytics utilisé pour mesurer les visites et les performances du site — États-Unis.
 
 ## 7. Transferts internationaux
 
-Netlify et Google sont établis aux États-Unis. Ces transferts sont encadrés par les **Clauses contractuelles types** de la Commission européenne et/ou par le **Cadre de protection des données UE-États-Unis (Data Privacy Framework)**.
+Certains prestataires utilisés par le site sont situés aux États-Unis. Lorsque des données personnelles sont transférées en dehors de l'Espace économique européen, le transfert est effectué au moyen d'un mécanisme juridique approprié conformément à la réglementation applicable, tel que les **clauses contractuelles types de la Commission européenne** ou toute autre garantie juridique applicable.
 
 ## 8. Vos droits
 
 Vous pouvez exercer vos droits d'**accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité** en écrivant à [newstella777@gmail.com](mailto:newstella777@gmail.com) et en indiquant le droit que vous souhaitez exercer.
 
+Lorsque le traitement repose sur votre consentement, vous pouvez également le retirer à tout moment. Le retrait n'affecte pas la licéité du traitement effectué avant ce retrait.
+
 ## 9. Réclamations
 
-Si vous estimez que le traitement de vos données n'est pas conforme à la réglementation, vous pouvez introduire une réclamation auprès de l'**Agence espagnole de protection des données (AEPD)** — [www.aepd.es](https://www.aepd.es).
+Si vous estimez que le traitement de vos données personnelles n'est pas conforme à la réglementation applicable, vous pouvez déposer une réclamation auprès de l'**Agence espagnole de protection des données (AEPD)** — [www.aepd.es](https://www.aepd.es).

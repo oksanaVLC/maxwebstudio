@@ -1,59 +1,71 @@
 ---
 title: Política de privacidad
-description: Cómo Max Studio recoge, usa y protege tus datos personales.
-lastUpdated: 2026-09-11
----
 
+description: Cómo Max Studio recopila, utiliza y protege tus datos personales.
+
+lastUpdated: 2026-10-07
 ---
 
 ## 1. Responsable del tratamiento
 
 - **Responsable:** Oksana Golubeva
-- **NIF (NIE):** X9102105Q
-- **Domicilio:** pl. Alquería Nova, 1, 46950 Xirivella (Valencia)
-- **Correo electrónico:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
+- **NIE:** X9102105Q
+- **Domicilio:** pl. Alquería Nova, 1, 46950 Xirivella (Valencia), España
+- **Email:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
 
-Esta política se ajusta al Reglamento (UE) 2016/679 (RGPD) y a la Ley Orgánica 3/2018 (LOPDGDD).
+Esta política cumple con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).
 
 ## 2. Datos que recopilamos
 
-A través del formulario de contacto recogemos los datos que facilitas voluntariamente: **nombre, correo electrónico y el contenido de tu mensaje**.
+A través del formulario de contacto, recopilamos los datos personales que proporcionas voluntariamente: **nombre, dirección de correo electrónico y contenido de tu mensaje**.
 
-También podemos recoger datos de navegación mediante cookies (ver la [Política de cookies](/es/policies/cookies/)).
+También podemos procesar información técnica y de navegación limitada mediante **Cloudflare Web Analytics**, que utilizamos para conocer las visitas al sitio web y mejorar su rendimiento. Cloudflare Web Analytics no utiliza cookies para realizar un seguimiento individual de los visitantes.
+
+Para más información sobre las cookies, consulta la [Política de cookies](/es/policies/cookies/).
 
 ## 3. Finalidad
 
-Tratamos tus datos para **atender tu consulta o solicitud de presupuesto** y mantener el contacto derivado de la misma.
+Tratamos tus datos para:
 
-No se realizan decisiones automatizadas ni elaboración de perfiles.
+- **responder a tu consulta o solicitud de presupuesto** y mantener la comunicación derivada de ella;
+- conocer el uso del sitio web y mejorar su rendimiento y funcionamiento mediante estadísticas agregadas.
 
-## 4. Legitimación
+No se realizan decisiones automatizadas ni perfiles de usuarios.
 
-La base jurídica es tu **consentimiento**, otorgado al enviar el formulario, y el interés legítimo en responder a las comunicaciones recibidas.
+## 4. Base jurídica
 
-Puedes retirar tu consentimiento en cualquier momento.
+La base jurídica para el tratamiento de los datos del formulario de contacto es **tu consentimiento**, prestado al enviar el formulario, junto con nuestro interés legítimo en responder a las comunicaciones recibidas.
 
-## 5. Conservación
+El tratamiento de información técnica y estadística agregada mediante analítica se basa en nuestro **interés legítimo en supervisar, mantener y mejorar el sitio web**.
 
-Conservamos tus datos el tiempo necesario para atender tu solicitud y durante los plazos legalmente exigidos; después se suprimen de forma segura.
+Puedes retirar tu consentimiento en cualquier momento cuando el tratamiento se base en él.
+
+## 5. Conservación de los datos
+
+Conservamos los datos enviados mediante el formulario de contacto durante el tiempo necesario para gestionar tu solicitud y durante los períodos exigidos legalmente. Después, se eliminan de forma segura.
+
+Los datos de analítica se conservan de acuerdo con los períodos de conservación aplicables del proveedor del servicio de analítica.
 
 ## 6. Destinatarios
 
-No cedemos tus datos a terceros salvo obligación legal.
+No vendemos tus datos personales ni los compartimos con terceros, salvo cuando sea legalmente necesario o resulte necesario para el funcionamiento del sitio web y sus servicios.
 
-Acceden a ellos, como encargados del tratamiento, nuestros proveedores:
+Los siguientes proveedores pueden tratar datos por nuestra cuenta:
 
-- **Netlify, Inc.** — alojamiento del sitio web y gestión de los formularios de contacto — EE. UU.
-- **Google LLC** — servicio de correo Gmail donde se reciben los mensajes — EE. UU.
+- **Netlify, Inc.** — alojamiento del sitio web y gestión del formulario de contacto — Estados Unidos.
+- **Google LLC** — servicio de correo electrónico Gmail donde se reciben los mensajes de contacto — Estados Unidos.
+- **Cloudflare, Inc.** — servicio de Web Analytics utilizado para medir las visitas y el rendimiento del sitio web — Estados Unidos.
 
 ## 7. Transferencias internacionales
 
-Netlify y Google están ubicados en EE. UU. Dichas transferencias se amparan en las **Cláusulas Contractuales Tipo** de la Comisión Europea y/o en el **Marco de Privacidad de Datos UE-EE. UU. (Data Privacy Framework)**.
+Algunos proveedores utilizados por el sitio web están ubicados en Estados Unidos. Cuando los datos personales se transfieren fuera del Espacio Económico Europeo, la transferencia se realiza mediante un mecanismo legal adecuado conforme a la normativa de protección de datos aplicable, como las **Cláusulas Contractuales Tipo de la Comisión Europea** u otra garantía legal aplicable.
 
 ## 8. Tus derechos
 
-Puedes ejercer los derechos de **acceso, rectificación, supresión, oposición, limitación y portabilidad** escribiendo a [newstella777@gmail.com](mailto:newstella777@gmail.com) e indicando el derecho que deseas ejercer.
+Puedes ejercer tus derechos de **acceso, rectificación, supresión, oposición, limitación y portabilidad** escribiendo a [newstella777@gmail.com](mailto:newstella777@gmail.com) e indicando el derecho que deseas ejercer.
+
+Cuando el tratamiento se base en tu consentimiento, también puedes retirarlo en cualquier momento. La retirada no afecta a la licitud del tratamiento realizado antes de dicha retirada.
 
 ## 9. Reclamaciones
 
-Si consideras que el tratamiento no se ajusta a la normativa, puedes reclamar ante la **Agencia Española de Protección de Datos (AEPD)** — [www.aepd.es](https://www.aepd.es).
+Si consideras que el tratamiento de tus datos personales no cumple con la normativa aplicable, puedes presentar una reclamación ante la **Agencia Española de Protección de Datos (AEPD)** — [www.aepd.es](https://www.aepd.es).
