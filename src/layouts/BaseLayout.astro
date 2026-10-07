@@ -53,6 +53,29 @@ const htmlLang =
       : lang === "ru"
         ? "ru-RU"
         : "fr-FR";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${site}/#business`,
+  name: "Max Web Studio",
+  url: site,
+  email: "newstella777@gmail.com",
+  telephone: "+34 697 21 10 32",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "pl. Alquería Nova, 1",
+    postalCode: "46950",
+    addressLocality: "Xirivella",
+    addressRegion: "Valencia",
+    addressCountry: "ES",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Spain",
+  },
+  availableLanguage: ["Spanish", "English", "French", "Russian"],
+};
 ---
 
 <!doctype html>
@@ -84,6 +107,13 @@ const htmlLang =
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- JSON-LD -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(structuredData)}
+    />
   </head>
 
   <body>
