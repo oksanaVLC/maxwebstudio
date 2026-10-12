@@ -13,7 +13,7 @@ lastUpdated: 2026-09-11
 - **Владелец:** Oksana Golubeva
 
 - **Адрес:** Valencia, Испания
-- **Электронная почта:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
+- **Электронная почта:** [maxwebstudiovlc@gmail.com](mailto:maxwebstudiovlc@gmail.com)
 - **Сайт:** https://maxwebstudio.es
 
 ## 2. Предмет

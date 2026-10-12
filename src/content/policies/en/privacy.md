@@ -9,7 +9,7 @@ lastUpdated: 2026-10-07
 - **Controller:** Oksana Golubeva
 
 - **Address:** Valencia, Spain
-- **Email:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
+- **Email:** [maxwebstudiovlc@gmail.com](mailto:maxwebstudiovlc@gmail.com)
 
 This policy complies with Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD).
 
@@ -60,7 +60,7 @@ Some service providers used by the website are located in the USA. Where persona
 
 ## 8. Your rights
 
-You may exercise your rights of **access, rectification, erasure, objection, restriction and portability** by writing to [newstella777@gmail.com](mailto:newstella777@gmail.com) and stating the right you wish to exercise.
+You may exercise your rights of **access, rectification, erasure, objection, restriction and portability** by writing to [maxwebstudiovlc@gmail.com](mailto:maxwebstudiovlc@gmail.com) and stating the right you wish to exercise.
 
 Where processing is based on consent, you may also withdraw your consent at any time. Withdrawal does not affect the lawfulness of processing carried out before withdrawal.
 

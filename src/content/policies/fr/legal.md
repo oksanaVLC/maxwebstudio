@@ -11,7 +11,7 @@ Conformément à l'article 10 de la loi espagnole 34/2002 (LSSI-CE), les informa
 - **Titulaire :** Oksana Golubeva
 
 - **Adresse :** Valence, Spain
-- **E-mail :** [newstella777@gmail.com](mailto:newstella777@gmail.com)
+- **E-mail :** [maxwebstudiovlc@gmail.com](mailto:maxwebstudiovlc@gmail.com)
 - **Site web :** https://maxwebstudio.es
 
 ## 2. Objet

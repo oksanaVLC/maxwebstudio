@@ -13,7 +13,7 @@ In compliance with Article 10 of Law 34/2002 (LSSI-CE), the following informatio
 - **Owner:** Oksana Golubeva
 
 - **Registered address:** Valencia, Spain
-- **Email:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
+- **Email:** [maxwebstudiovlc@gmail.com](mailto:maxwebstudiovlc@gmail.com)
 - **Website:** https://maxwebstudio.es
 
 ## 2. Purpose

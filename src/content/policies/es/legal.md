@@ -13,7 +13,7 @@ En cumplimiento del artículo 10 de la Ley 34/2002 (LSSI-CE), se facilitan los d
 - **Titular:** Oksana Golubeva
 
 - **Domicilio:** Valencia, España
-- **Correo electrónico:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
+- **Correo electrónico:** [maxwebstudiovlc@gmail.com](mailto:maxwebstudiovlc@gmail.com)
 - **Sitio web:** https://maxwebstudio.es
 
 ## 2. Objeto

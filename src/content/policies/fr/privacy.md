@@ -11,7 +11,7 @@ lastUpdated: 2026-10-07
 - **Responsable :** Oksana Golubeva
 
 - **Adresse :** Valencia, Espagne
-- **Email :** [newstella777@gmail.com](mailto:newstella777@gmail.com)
+- **Email :** [maxwebstudiovlc@gmail.com](mailto:maxwebstudiovlc@gmail.com)
 
 Cette politique est conforme au règlement (UE) 2016/679 (RGPD) et à la législation espagnole applicable en matière de protection des données.
 
@@ -62,7 +62,7 @@ Certains prestataires utilisés par le site sont situés aux États-Unis. Lorsqu
 
 ## 8. Vos droits
 
-Vous pouvez exercer vos droits d'**accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité** en écrivant à [newstella777@gmail.com](mailto:newstella777@gmail.com) et en indiquant le droit que vous souhaitez exercer.
+Vous pouvez exercer vos droits d'**accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité** en écrivant à [maxwebstudiovlc@gmail.com](mailto:maxwebstudiovlc@gmail.com) et en indiquant le droit que vous souhaitez exercer.
 
 Lorsque le traitement repose sur votre consentement, vous pouvez également le retirer à tout moment. Le retrait n'affecte pas la licéité du traitement effectué avant ce retrait.
 
