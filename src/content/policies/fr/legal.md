@@ -9,8 +9,8 @@ lastUpdated: 2026-09-11
 Conformément à l'article 10 de la loi espagnole 34/2002 (LSSI-CE), les informations concernant la titulaire de ce site web sont les suivantes :
 
 - **Titulaire :** Oksana Golubeva
-- **NIF (NIE) :** X9102105Q
-- **Adresse :** pl. Alquería Nova, 1, 46950 Xirivella (Valence)
+
+- **Adresse :** Valence, Spain
 - **E-mail :** [newstella777@gmail.com](mailto:newstella777@gmail.com)
 - **Site web :** https://maxwebstudio.es
 

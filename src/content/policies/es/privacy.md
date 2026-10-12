@@ -9,8 +9,8 @@ lastUpdated: 2026-10-07
 ## 1. Responsable del tratamiento
 
 - **Responsable:** Oksana Golubeva
-- **NIE:** X9102105Q
-- **Domicilio:** pl. Alquería Nova, 1, 46950 Xirivella (Valencia), España
+
+- **Domicilio:** Valencia, España
 - **Email:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
 
 Esta política cumple con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).

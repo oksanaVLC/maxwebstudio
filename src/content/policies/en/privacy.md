@@ -7,8 +7,8 @@ lastUpdated: 2026-10-07
 ## 1. Data controller
 
 - **Controller:** Oksana Golubeva
-- **Tax ID (NIE):** X9102105Q
-- **Address:** pl. Alquería Nova, 1, 46950 Xirivella (Valencia), Spain
+
+- **Address:** Valencia, Spain
 - **Email:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
 
 This policy complies with Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD).

@@ -11,8 +11,8 @@ lastUpdated: 2026-09-11
 In compliance with Article 10 of Law 34/2002 (LSSI-CE), the following information is provided regarding the owner of this website:
 
 - **Owner:** Oksana Golubeva
-- **Tax ID (NIE):** X9102105Q
-- **Registered address:** pl. Alquería Nova, 1, 46950 Xirivella (Valencia), Spain
+
+- **Registered address:** Valencia, Spain
 - **Email:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
 - **Website:** https://maxwebstudio.es
 

@@ -11,8 +11,8 @@ lastUpdated: 2026-09-11
 В соответствии со статьёй 10 Закона Испании 34/2002 (LSSI-CE) ниже приведены данные владельца данного сайта:
 
 - **Владелец:** Oksana Golubeva
-- **Идентификационный номер (NIE):** X9102105Q
-- **Адрес:** pl. Alquería Nova, 1, 46950 Xirivella (Valencia)
+
+- **Адрес:** Valencia, Испания
 - **Электронная почта:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
 - **Сайт:** https://maxwebstudio.es
 

@@ -9,8 +9,8 @@ lastUpdated: 2026-10-07
 ## 1. Ответственный за обработку данных
 
 - **Ответственный:** Oksana Golubeva
-- **NIE:** X9102105Q
-- **Адрес:** pl. Alquería Nova, 1, 46950 Xirivella (Valencia), Испания
+
+- **Адрес:** Valencia, Испания
 - **Email:** [newstella777@gmail.com](mailto:newstella777@gmail.com)
 
 Настоящая политика соответствует Регламенту (ЕС) 2016/679 (GDPR) и испанскому Органическому закону 3/2018 (LOPDGDD).

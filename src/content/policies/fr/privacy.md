@@ -9,8 +9,8 @@ lastUpdated: 2026-10-07
 ## 1. Responsable du traitement
 
 - **Responsable :** Oksana Golubeva
-- **NIE :** X9102105Q
-- **Adresse :** pl. Alquería Nova, 1, 46950 Xirivella (Valencia), Espagne
+
+- **Adresse :** Valencia, Espagne
 - **Email :** [newstella777@gmail.com](mailto:newstella777@gmail.com)
 
 Cette politique est conforme au règlement (UE) 2016/679 (RGPD) et à la législation espagnole applicable en matière de protection des données.
