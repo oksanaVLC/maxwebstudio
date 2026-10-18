@@ -2,7 +2,8 @@ export default {
   meta: {
     siteName: "Max Studio",
     defaultTitle: "Max Studio — Your perfect website",
-    defaultDescription: "Websites that make small brands look big.",
+    defaultDescription:
+      "We design your digital space, help it grow, and evolve alongside your business.",
   },
   nav: {
     services: "Services",

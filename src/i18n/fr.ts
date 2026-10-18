@@ -3,7 +3,7 @@ export default {
     siteName: "Max Studio",
     defaultTitle: "Max Studio — Votre site web parfait",
     defaultDescription:
-      "Des sites web qui donnent aux petites marques une allure de grandes marques.",
+      "Nous concevons votre espace numérique, le faisons grandir avec vous et évoluons au rythme de votre entreprise.",
   },
   nav: {
     services: "Services",

@@ -1,6 +1,5 @@
 ---
 import Contact from "../../components/sections/Contact.astro";
-import Creative from "../../components/sections/Creative.astro";
 import DesignStatement from "../../components/sections/DesignStatement.astro";
 //import DesignTrends from "../../components/sections/DesignTrends.astro";
 import Faq from "../../components/sections/Faq.astro";
@@ -9,18 +8,13 @@ import Inspiration from "../../components/sections/Inspiration.astro";
 import Process from "../../components/sections/Process.astro";
 
 import Services from "../../components/sections/Services.astro";
-import Statement from "../../components/sections/Statement.astro";
 import StudioStats from "../../components/sections/StudioStats.astro";
 import TechTicker from "../../components/sections/TechTicker.astro";
 import WhyUs from "../../components/sections/WhyUs.astro";
 import { LOCALES } from "../../i18n";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-
 import ProjectDemos from "../../components/sections/ProjectDemos.astro";
-
-
-
 
 export function getStaticPaths() {
   return LOCALES.map((lang) => ({
@@ -31,20 +25,21 @@ export function getStaticPaths() {
 
 <BaseLayout>
   <Hero />
- <TechTicker />
+  <TechTicker />
   <Services />
- 
+
   <Process />
   <WhyUs />
-    <StudioStats />
+  <StudioStats />
   <ProjectDemos />
- 
+
   <Faq />
   <Inspiration />
- <!---  <Pricing /> --> 
-  <Statement />
- <!---  <DesignTrends /> --> 
-  <Creative />
+  <!---  <Pricing /> -->
+
+  <!---  <DesignTrends /> -->
+  <!--- <Creative /> -->
   <Contact />
+  <!---  <Statement /> -->
   <DesignStatement />
 </BaseLayout>

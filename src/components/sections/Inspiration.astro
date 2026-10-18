@@ -16,7 +16,7 @@ const c = t.inspiration;
 
 const slides = [valencia1, valencia2, valencia3];
 
-/* Slider UI labels (move them to i18n whenever you like) */
+/* Slider UI labels (i can move them to i18n whenever I like) */
 const UI = {
   es: {
     region: "Fotografías de Valencia",
@@ -69,7 +69,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
       <div class="inspiration__text">
         <p class="section-eyebrow">
-          <span class="section-eyebrow__star" aria-hidden="true">✦</span>
+          <span class="section-eyebrow__star" aria-hidden="true">
+            ✦
+          </span>
           <span>{c.eyebrow}</span>
         </p>
 
@@ -89,7 +91,11 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
         <!-- TAGS -->
 
-        <div class="inspiration__tags" data-stagger aria-label={c.tagsAriaLabel}>
+        <div
+          class="inspiration__tags"
+          data-stagger
+          aria-label={c.tagsAriaLabel}
+        >
           <span data-reveal="up">{c.tags.mediterranean}</span>
           <span data-reveal="up">{c.tags.architecture}</span>
           <span data-reveal="up">{c.tags.color}</span>
@@ -104,7 +110,12 @@ const pad = (n: number) => String(n).padStart(2, "0");
       <div class="inspiration__devices" data-reveal="image">
         <div class="mockup">
           <div class="mockup__imac">
-            <img src={imacMockup} alt="" class="mockup__frame" decoding="async" />
+            <img
+              src={imacMockup}
+              alt=""
+              class="mockup__frame"
+              decoding="async"
+            />
 
             <div class="mockup__screen">
               <img src={projectImage} alt={c.imageAlt} decoding="async" />
@@ -126,7 +137,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
     <!-- ==================================================
          IMAGE SLIDER — mosaic transition
-         ================================================== -->
+       
 
     <div
       class="inspiration__slider"
@@ -137,35 +148,33 @@ const pad = (n: number) => String(n).padStart(2, "0");
       aria-label={ui.region}
     >
       <div class="inspiration__track" data-track aria-live="off">
-        {
-          slides.map((slide, index) => (
-            <div
-              class:list={["inspiration__slide", index === 0 && "is-active"]}
-              data-inspiration-slide
-              role="group"
-              aria-roledescription="slide"
-              aria-label={`${ui.slide} ${index + 1} ${ui.of} ${slides.length}`}
-              aria-hidden={index === 0 ? undefined : "true"}
-            >
-              <Image
-                src={slide}
-                alt=""
-                width={1600}
-                quality={82}
-                format="webp"
-                loading="lazy"
-                decoding="async"
-                sizes="(max-width: 767px) 100vw, 1240px"
-              />
-            </div>
-          ))
-        }
+        {slides.map((slide, index) => (
+          <div
+            class:list={["inspiration__slide", index === 0 && "is-active"]}
+            data-inspiration-slide
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${ui.slide} ${index + 1} ${ui.of} ${slides.length}`}
+            aria-hidden={index === 0 ? undefined : "true"}
+          >
+            <Image
+              src={slide}
+              alt=""
+              width={1600}
+              quality={82}
+              format="webp"
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 767px) 100vw, 1240px"
+            />
+          </div>
+        ))}
       </div>
 
-      <!-- tiles of the incoming photo are drawn here -->
+
       <div class="inspiration__mosaic" data-mosaic aria-hidden="true"></div>
 
-      <!-- CONTROLS -->
+    
       <div class="inspiration__controls">
         <button
           type="button"
@@ -179,21 +188,19 @@ const pad = (n: number) => String(n).padStart(2, "0");
         </button>
 
         <div class="inspiration__dots" role="group" aria-label={ui.dots}>
-          {
-            slides.map((_, index) => (
-              <button
-                type="button"
-                class:list={["inspiration__dot", index === 0 && "is-active"]}
-                data-dot={index}
-                aria-label={`${ui.slide} ${index + 1} ${ui.of} ${slides.length}`}
-                aria-current={index === 0 ? "true" : undefined}
-              >
-                <span class="inspiration__dot-bar">
-                  <span class="inspiration__dot-fill" data-fill></span>
-                </span>
-              </button>
-            ))
-          }
+          {slides.map((_, index) => (
+            <button
+              type="button"
+              class:list={["inspiration__dot", index === 0 && "is-active"]}
+              data-dot={index}
+              aria-label={`${ui.slide} ${index + 1} ${ui.of} ${slides.length}`}
+              aria-current={index === 0 ? "true" : undefined}
+            >
+              <span class="inspiration__dot-bar">
+                <span class="inspiration__dot-fill" data-fill></span>
+              </span>
+            </button>
+          ))}
         </div>
 
         <button
@@ -231,6 +238,8 @@ const pad = (n: number) => String(n).padStart(2, "0");
         <span class="inspiration__counter-total">/ {pad(slides.length)}</span>
       </p>
     </div>
+    
+  ================================================== -->
   </div>
 </section>
 
@@ -249,7 +258,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
     const slides = Array.from(
       slider.querySelectorAll<HTMLElement>("[data-inspiration-slide]"),
     );
-    const dots = Array.from(slider.querySelectorAll<HTMLButtonElement>("[data-dot]"));
+    const dots = Array.from(
+      slider.querySelectorAll<HTMLButtonElement>("[data-dot]"),
+    );
     const layer = slider.querySelector<HTMLElement>("[data-mosaic]")!;
     const track = slider.querySelector<HTMLElement>("[data-track]")!;
     const toggle = slider.querySelector<HTMLButtonElement>("[data-toggle]")!;
@@ -261,7 +272,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
       return;
     }
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const canHover = window.matchMedia("(hover: hover)").matches;
 
     slider.style.setProperty("--slide-interval", `${INTERVAL}ms`);
@@ -363,9 +376,17 @@ const pad = (n: number) => String(n).padStart(2, "0");
       const anims = tiles.map(({ el, delay }) =>
         el.animate(
           [
-            { opacity: 0, transform: `scale(0.35) rotate(${dir * -8}deg)`, borderRadius: "40%" },
+            {
+              opacity: 0,
+              transform: `scale(0.35) rotate(${dir * -8}deg)`,
+              borderRadius: "40%",
+            },
             { opacity: 1, offset: 0.55 },
-            { opacity: 1, transform: "scale(1) rotate(0deg)", borderRadius: "0%" },
+            {
+              opacity: 1,
+              transform: "scale(1) rotate(0deg)",
+              borderRadius: "0%",
+            },
           ],
           {
             duration: TILE_DURATION,
@@ -418,7 +439,11 @@ const pad = (n: number) => String(n).padStart(2, "0");
     /* autoplay is driven by the progress bar of the active dot */
     slider.addEventListener("animationend", (e) => {
       const target = e.target as HTMLElement;
-      if (target.matches("[data-fill]") && target.closest(".is-active") && playing) {
+      if (
+        target.matches("[data-fill]") &&
+        target.closest(".is-active") &&
+        playing
+      ) {
         next();
       }
     });
@@ -457,23 +482,31 @@ const pad = (n: number) => String(n).padStart(2, "0");
       slider.addEventListener("mouseleave", () => hold("hover", false));
     }
     slider.addEventListener("focusin", (e) => {
-      if ((e.target as HTMLElement).matches(":focus-visible")) hold("focus", true);
+      if ((e.target as HTMLElement).matches(":focus-visible"))
+        hold("focus", true);
     });
     slider.addEventListener("focusout", (e) => {
       if (!slider.contains(e.relatedTarget as Node)) hold("focus", false);
     });
-    document.addEventListener("visibilitychange", () => hold("hidden", document.hidden));
+    document.addEventListener("visibilitychange", () =>
+      hold("hidden", document.hidden),
+    );
 
     hold("offscreen", true);
-    new IntersectionObserver(([entry]) => hold("offscreen", !entry.isIntersecting), {
-      threshold: 0.35,
-    }).observe(slider);
+    new IntersectionObserver(
+      ([entry]) => hold("offscreen", !entry.isIntersecting),
+      {
+        threshold: 0.35,
+      },
+    ).observe(slider);
 
     setPlaying(playing);
   }
 
   const init = () =>
-    document.querySelectorAll<HTMLElement>("[data-inspiration-slider]").forEach(setup);
+    document
+      .querySelectorAll<HTMLElement>("[data-inspiration-slider]")
+      .forEach(setup);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
@@ -751,7 +784,9 @@ const pad = (n: number) => String(n).padStart(2, "0");
     background: transparent;
     border-radius: 999px;
     cursor: pointer;
-    transition: background-color 250ms ease, transform 250ms ease;
+    transition:
+      background-color 250ms ease,
+      transform 250ms ease;
   }
 
   .inspiration__btn:hover {
