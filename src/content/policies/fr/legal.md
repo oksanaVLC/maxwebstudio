@@ -16,7 +16,7 @@ Conformément à l'article 10 de la loi espagnole 34/2002 (LSSI-CE), les informa
 
 ## 2. Objet
 
-Les présentes mentions légales régissent l'accès, la navigation et l'utilisation du site web maxwebstudio.com. L'accès au site web implique l'acceptation de ces conditions.
+Les présentes mentions légales régissent l'accès, la navigation et l'utilisation du site web maxwebstudio.es. L'accès au site web implique l'acceptation de ces conditions.
 
 ## 3. Conditions d'utilisation
 

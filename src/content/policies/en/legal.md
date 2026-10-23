@@ -18,7 +18,7 @@ In compliance with Article 10 of Law 34/2002 (LSSI-CE), the following informatio
 
 ## 2. Purpose
 
-This Legal Notice governs access to, browsing of, and use of the maxwebstudio.com website. Access to the website implies acceptance of these terms.
+This Legal Notice governs access to, browsing of, and use of the maxwebstudio.es website. Access to the website implies acceptance of these terms.
 
 ## 3. Terms of use
 

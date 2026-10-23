@@ -18,7 +18,7 @@ En cumplimiento del artículo 10 de la Ley 34/2002 (LSSI-CE), se facilitan los d
 
 ## 2. Objeto
 
-Este aviso legal regula el acceso, la navegación y el uso del sitio web maxwebstudio.com. El acceso al sitio web implica la aceptación de estas condiciones.
+Este aviso legal regula el acceso, la navegación y el uso del sitio web maxwebstudio.es. El acceso al sitio web implica la aceptación de estas condiciones.
 
 ## 3. Condiciones de uso
 

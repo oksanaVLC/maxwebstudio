@@ -1,9 +1,9 @@
 export default {
   meta: {
     siteName: "Max Studio",
-    defaultTitle: "Max Studio — Tu web perfecta",
+    defaultTitle: "Diseño y desarrollo web para empresas | Max Studio",
     defaultDescription:
-      "Diseñamos tu espacio digital, lo hacemos crecer contigo y evolucionamos al ritmo de tu negocio.",
+      "Max Studio ofrece diseño y desarrollo web para autónomos, startups y pequeñas y medianas empresas, en España y a nivel internacional.",
   },
   nav: {
     services: "Servicios",
