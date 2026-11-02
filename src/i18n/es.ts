@@ -522,7 +522,7 @@ export default {
           "Servicios y precios editables desde Google Sheets",
           "Español, inglés y ruso",
         ],
-        href: "https://aurora-salon.netlify.app",
+        href: "https://aurora-beauty-salon-demo.netlify.app",
         image: "/images/projects/aurora-beauty-salon.png",
         alt: "Web de Aurora Beauty Salon en escritorio y la reserva de cita en el móvil",
       },
