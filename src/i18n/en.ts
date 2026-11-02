@@ -480,7 +480,7 @@ export default {
           "Services and prices editable in Google Sheets",
           "Spanish, English and Russian",
         ],
-        href: "https://aurora-salon.netlify.app",
+        href: "https://aurora-beauty-salon-demo.netlify.app",
         image: "/images/projects/aurora-beauty-salon.png",
         alt: "Aurora Beauty Salon website on desktop and the booking flow on mobile",
       },
