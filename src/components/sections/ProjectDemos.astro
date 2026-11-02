@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
+import auroraSalonDemo from "../../assets/images/aurora-beauty-salon.png";
 import deluxeDesignDemo from "../../assets/images/deluxe_design_demo.png";
 import geolightDemo from "../../assets/images/geolight_demo.png";
 import soulCateringDemo from "../../assets/images/soul_catering_demo.png";
@@ -273,6 +274,79 @@ const projects: Project[] = [
           "Видео на iOS и Android",
           "Доступность",
           "Арт-дирекция",
+        ],
+        cta: "Смотреть проект",
+      },
+    },
+  },
+  {
+    id: "aurora-salon",
+    title: "Aurora Beauty Salon",
+    // TODO: sustituir por la URL real cuando la demo esté publicada en Netlify
+    url: "https://aurora-salon.netlify.app/",
+    host: "aurora-salon.netlify.app",
+    image: auroraSalonDemo,
+    alt: "Aurora Beauty Salon website",
+    screenBg: "#F4F2EF",
+    copy: {
+      es: {
+        projectType: "Web de salón de belleza · ES / EN / RU",
+        tagline: "Peluquería y estética con motor de reservas propio.",
+        description:
+          "Una web premium para un salón de belleza en Valencia: servicios y precios, el equipo, el salón y contacto, con un descuento de bienvenida para clientes nuevos.",
+        body: "El corazón del proyecto es un motor de reservas en cinco pasos que solo ofrece huecos libres reales y permite cancelar con un clic desde el email. Las citas, los servicios y los horarios viven en Google Sheets mediante Apps Script: el salón lo gestiona todo desde una hoja que ya conoce, sin base de datos ni panel extra.",
+        meta: [
+          "Astro 7",
+          "ES / EN / RU",
+          "Reserva en 5 pasos",
+          "Google Sheets",
+          "Diseño UI",
+        ],
+        cta: "Ver proyecto",
+      },
+      en: {
+        projectType: "Beauty salon website · ES / EN / RU",
+        tagline: "Hair and beauty with a custom booking engine.",
+        description:
+          "A premium website for a beauty salon in Valencia: services and prices, the team, the salon and contact details, with a welcome discount for new clients.",
+        body: "At its core is a five-step booking engine that only offers genuinely free slots and lets clients cancel in one click from the email. Appointments, services and opening hours live in Google Sheets via Apps Script, so the salon manages everything from a spreadsheet it already knows, with no database or extra admin panel.",
+        meta: [
+          "Astro 7",
+          "ES / EN / RU",
+          "5-step booking",
+          "Google Sheets",
+          "UI design",
+        ],
+        cta: "View project",
+      },
+      fr: {
+        projectType: "Site de salon de beauté · ES / EN / RU",
+        tagline:
+          "Coiffure et esthétique avec un moteur de réservation sur mesure.",
+        description:
+          "Un site premium pour un salon de beauté à Valence : prestations et tarifs, l’équipe, le salon et le contact, avec une remise de bienvenue pour les nouveaux clients.",
+        body: "Le cœur du projet est un moteur de réservation en cinq étapes qui ne propose que de vrais créneaux libres et permet d’annuler en un clic depuis l’e-mail. Les rendez-vous, les prestations et les horaires sont gérés dans Google Sheets via Apps Script : le salon pilote tout depuis un tableur qu’il connaît déjà, sans base de données ni back-office supplémentaire.",
+        meta: [
+          "Astro 7",
+          "ES / EN / RU",
+          "Réservation en 5 étapes",
+          "Google Sheets",
+          "Design UI",
+        ],
+        cta: "Voir le projet",
+      },
+      ru: {
+        projectType: "Сайт салона красоты · ES / EN / RU",
+        tagline: "Парикмахерская и эстетика с собственной системой записи.",
+        description:
+          "Премиальный сайт для салона красоты в Валенсии: услуги и цены, команда, салон и контакты, а также приветственная скидка для новых клиентов.",
+        body: "Сердце проекта — онлайн-запись в пять шагов: только реально свободные окна и отмена в один клик из письма. Записи, услуги и расписание хранятся в Google Sheets через Apps Script — салон управляет всем из привычной таблицы, без базы данных и отдельной админки.",
+        meta: [
+          "Astro 7",
+          "ES / EN / RU",
+          "Запись в 5 шагов",
+          "Google Sheets",
+          "UI-дизайн",
         ],
         cta: "Смотреть проект",
       },
@@ -600,7 +674,7 @@ const projects: Project[] = [
   .project-demos__body {
     max-width: 540px;
     margin: 18px 0 0;
-    color: var(--muted);
+    color: var(--ink-soft);
     font-size: var(--fs-body);
     line-height: 1.7;
   }

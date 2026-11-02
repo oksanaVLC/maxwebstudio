@@ -468,6 +468,22 @@ export default {
           "A direct enquiry flow for requests and quotations",
         ],
       },
+      {
+        number: "05",
+        category: "Website + booking engine",
+        title: "Aurora Beauty Salon",
+        description:
+          "Multilingual website for a beauty salon in Valencia, with a custom booking engine connected to Google Sheets: the salon manages services, prices and schedule with no database or extra admin panel.",
+        points: [
+          "5-step booking with real free slots",
+          "One-click cancellation from the email",
+          "Services and prices editable in Google Sheets",
+          "Spanish, English and Russian",
+        ],
+        href: "https://aurora-salon.netlify.app",
+        image: "/images/projects/aurora-beauty-salon.png",
+        alt: "Aurora Beauty Salon website on desktop and the booking flow on mobile",
+      },
     ],
   },
   designTrends: {

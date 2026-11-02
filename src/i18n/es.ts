@@ -510,6 +510,22 @@ export default {
           "Contacto directo orientado a solicitudes y presupuestos",
         ],
       },
+      {
+        number: "05",
+        category: "Web + motor de reservas",
+        title: "Aurora Beauty Salon",
+        description:
+          "Web multilingüe para un salón de belleza en Valencia, con motor de reservas propio conectado a Google Sheets: el salón gestiona servicios, precios y agenda sin base de datos ni panel extra.",
+        points: [
+          "Reserva en 5 pasos con huecos libres reales",
+          "Cancelación en un clic desde el email",
+          "Servicios y precios editables desde Google Sheets",
+          "Español, inglés y ruso",
+        ],
+        href: "https://aurora-salon.netlify.app",
+        image: "/images/projects/aurora-beauty-salon.png",
+        alt: "Web de Aurora Beauty Salon en escritorio y la reserva de cita en el móvil",
+      },
     ],
   },
   designTrends: {

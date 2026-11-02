@@ -471,6 +471,22 @@ export default {
           "Contenus adaptés aux événements privés et professionnels",
         ],
       },
+      {
+        number: "05",
+        category: "Site web + moteur de réservation",
+        title: "Aurora Beauty Salon",
+        description:
+          "Site multilingue pour un salon de beauté à Valence, avec un moteur de réservation sur mesure connecté à Google Sheets : le salon gère ses prestations, ses tarifs et son agenda sans base de données ni panneau d’administration supplémentaire.",
+        points: [
+          "Réservation en 5 étapes avec de vrais créneaux libres",
+          "Annulation en un clic depuis l’e-mail",
+          "Prestations et tarifs modifiables dans Google Sheets",
+          "Espagnol, anglais et russe",
+        ],
+        href: "https://aurora-salon.netlify.app",
+        image: "/images/projects/aurora-beauty-salon.png",
+        alt: "Site d’Aurora Beauty Salon sur ordinateur et la prise de rendez-vous sur mobile",
+      },
     ],
   },
   designTrends: {
